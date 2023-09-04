@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:meechoke_project/screens/login_screen.dart';
+import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+
+import 'about image/x.dart';
+
+
+
+ 
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,9 +33,10 @@ class StarterWidget extends StatelessWidget {
       ),
       initialRoute: "/",
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        colorScheme:
+            ColorScheme.fromSeed(seedColor: Palette.thisBlue),
         useMaterial3: true,
-        fontFamily: 'Kanit',
+        fontFamily: 'Sarabun',
       ),
       home: const StartPage(),
     );
@@ -58,7 +65,7 @@ class _StartPageState extends State<StartPage> {
         PageTransition(
             duration: const Duration(milliseconds: 800),
             type: PageTransitionType.fade,
-            child: Login_Screen()),
+            child: HistoryPage()),
       );
     });
   }
@@ -66,7 +73,7 @@ class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Palette.thisBlue,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         //crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,7 +81,7 @@ class _StartPageState extends State<StartPage> {
           const SizedBox(height: 10),
           Center(
             child: const Text(
-              'Demo',
+              'MEECHOKE ',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,

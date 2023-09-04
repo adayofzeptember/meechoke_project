@@ -47,7 +47,7 @@ class _CarCheckScreenState extends State<CarCheckScreen> {
           padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
           child: Container(
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(5))),
             child: Padding(
@@ -55,12 +55,12 @@ class _CarCheckScreenState extends State<CarCheckScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'พขร.',
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 17),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   TextFormField(
@@ -71,9 +71,9 @@ class _CarCheckScreenState extends State<CarCheckScreen> {
                       isDense: true,
                       filled: true,
                       contentPadding:
-                          EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                          const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                       hintText: '${x}',
-                      fillColor: Color.fromARGB(255, 245, 245, 245),
+                      fillColor: const Color.fromARGB(255, 245, 245, 245),
                       border: OutlineInputBorder(
                         borderSide:
                             const BorderSide(color: Colors.white, width: 0),

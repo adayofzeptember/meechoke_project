@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:meechoke_project/seven%20main%20function%20pages/car_check_screen.dart';
 import 'package:meechoke_project/seven%20main%20function%20pages/gas/gas_fuel_screen.dart';
-import 'package:meechoke_project/seven%20main%20function%20pages/jobs_screen.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:meechoke_project/screens/jobs_screen.dart';
+ import 'package:page_transition/page_transition.dart';
 
 class MenuTable extends StatefulWidget {
   const MenuTable({super.key});
@@ -46,6 +46,40 @@ class _MenuTableState extends State<MenuTable> {
         padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
         child: Column(
           children: [
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  PageTransition(
+                      duration: const Duration(milliseconds: 500),
+                      type: PageTransitionType.rightToLeft,
+                      child: Jobs_Screen()),
+                );
+              },
+              child: Container(
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(5))),
+                padding: const EdgeInsets.all(8),
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.task,
+                      size: 80,
+                      color: Colors.teal,
+                    ),
+                    Text(
+                      "งาน",
+                      style: TextStyle(
+                          color: Colors.teal,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             GridView.count(
               primary: false,
               childAspectRatio: (w1 / h1),
@@ -56,13 +90,13 @@ class _MenuTableState extends State<MenuTable> {
               children: <Widget>[
                 InkWell(
                   onTap: () {
-                      Navigator.push(
-                    context,
-                    PageTransition(
-                        duration: const Duration(milliseconds: 500),
-                        type: PageTransitionType.rightToLeft,
-                        child: Jobs_History()),
-                  );
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                          duration: const Duration(milliseconds: 500),
+                          type: PageTransitionType.rightToLeft,
+                          child: Jobs_Screen()),
+                    );
                   },
                   child: Container(
                     decoration: const BoxDecoration(
@@ -132,11 +166,10 @@ class _MenuTableState extends State<MenuTable> {
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                Colors.white),
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
                             shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
+                                RoundedRectangleBorder>(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5),
                             ))),
                         onPressed: () {},

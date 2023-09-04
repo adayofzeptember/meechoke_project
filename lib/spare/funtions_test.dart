@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:meechoke_project/screens/menu_table.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../about image/image_camera.dart';
@@ -50,15 +49,7 @@ class _Main_Menu_PageState extends State<Main_Menu_Page> {
                 height: 30,
               ),
               ElevatedButton(
-                onPressed: () async {
-                  Navigator.push(
-                    context,
-                    PageTransition(
-                        duration: const Duration(milliseconds: 500),
-                        type: PageTransitionType.fade,
-                        child: MenuTable()),
-                  );
-                },
+                onPressed: () async {},
                 child: Text('Menu Table'),
               ),
               ElevatedButton(
