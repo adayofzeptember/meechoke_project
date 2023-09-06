@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/screens/jobs_screen.dart';
 import 'package:page_transition/page_transition.dart';
+
+import 'Jobs/jobs_screen.dart';
 
 class MainMenu_Page extends StatefulWidget {
   const MainMenu_Page({super.key});

@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/screens/login_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-
-import 'about image/x.dart';
-
-
-
- 
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,8 +28,7 @@ class StarterWidget extends StatelessWidget {
       ),
       initialRoute: "/",
       theme: ThemeData(
-        colorScheme:
-            ColorScheme.fromSeed(seedColor: Palette.thisBlue),
+        colorScheme: ColorScheme.fromSeed(seedColor: Palette.thisBlue),
         useMaterial3: true,
         fontFamily: 'Sarabun',
       ),
@@ -65,7 +59,7 @@ class _StartPageState extends State<StartPage> {
         PageTransition(
             duration: const Duration(milliseconds: 800),
             type: PageTransitionType.fade,
-            child: HistoryPage()),
+            child: Login_Screen()),
       );
     });
   }
@@ -81,7 +75,7 @@ class _StartPageState extends State<StartPage> {
           const SizedBox(height: 10),
           Center(
             child: const Text(
-              'MEECHOKE ',
+              'Meechoke',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,

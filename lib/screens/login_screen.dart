@@ -203,7 +203,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                                         context,
                                         PageTransition(
                                             duration: const Duration(
-                                                milliseconds: 820),
+                                                milliseconds: 500),
                                             type: PageTransitionType.fade,
                                             child: const MainMenu_Page()),
                                       );
