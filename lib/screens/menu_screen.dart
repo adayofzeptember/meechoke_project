@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/screens/fuel%20screens/fuel_main.dart';
 import 'package:page_transition/page_transition.dart';
 
-import 'Jobs/jobs_screen.dart';
+import 'Jobs/jobs_lists.dart';
 
 class MainMenu_Page extends StatefulWidget {
   const MainMenu_Page({super.key});
@@ -61,7 +62,7 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                     PageTransition(
                         duration: const Duration(milliseconds: 500),
                         type: PageTransitionType.fade,
-                        child: Jobs_Screen()),
+                        child: Job_Lists()),
                   );
                 },
                 child: Container(
@@ -87,7 +88,15 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                 crossAxisCount: 2,
                 children: <Widget>[
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                        Navigator.push(
+                    context,
+                    PageTransition(
+                        duration: const Duration(milliseconds: 500),
+                        type: PageTransitionType.fade,
+                        child: Fuel_Lists()),
+                  );
+                    },
                     child: Container(
                       width: double.infinity,
                       child: SvgPicture.asset(

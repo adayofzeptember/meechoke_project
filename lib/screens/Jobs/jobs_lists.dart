@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/screens/Jobs/job_wait_to_accept.dart';
+import 'package:meechoke_project/screens/Jobs/job_wait_to_accept_1.dart';
 import 'package:page_transition/page_transition.dart';
 
-class Jobs_Screen extends StatefulWidget {
+class Job_Lists extends StatefulWidget {
   @override
-  _Jobs_ScreenState createState() => _Jobs_ScreenState();
+  _Job_ListsState createState() => _Job_ListsState();
 }
 
-class _Jobs_ScreenState extends State<Jobs_Screen>
+class _Job_ListsState extends State<Job_Lists>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 

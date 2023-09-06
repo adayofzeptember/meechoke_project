@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 
-import '../screens/Jobs/jobs_screen.dart';
+import '../screens/Jobs/jobs_lists.dart';
 
 class MenuTable extends StatefulWidget {
   const MenuTable({super.key});
@@ -53,7 +53,7 @@ class _MenuTableState extends State<MenuTable> {
                     PageTransition(
                         duration: const Duration(milliseconds: 500),
                         type: PageTransitionType.rightToLeft,
-                        child: Jobs_Screen()),
+                        child: Job_Lists()),
                   );
                 },
                 child: Container(
@@ -95,7 +95,7 @@ class _MenuTableState extends State<MenuTable> {
                         PageTransition(
                             duration: const Duration(milliseconds: 500),
                             type: PageTransitionType.rightToLeft,
-                            child: Jobs_Screen()),
+                            child: Job_Lists()),
                       );
                     },
                     child: Container(

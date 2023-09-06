@@ -40,7 +40,7 @@ class _CameraImagePickerState extends State<CameraImagePicker> {
                     width: 150,
                     child: Image.file(
                       _image!,
-                      fit: BoxFit.contain,
+                      fit: BoxFit.fill,
                     ),
                   ),
           ],

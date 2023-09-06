@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../ETC/shape_painter.dart';
+import 'doing_page_2.dart';
 
 class Job_Wait_toAccept extends StatefulWidget {
   @override
@@ -552,7 +554,8 @@ class _Job_Wait_toAcceptState extends State<Job_Wait_toAccept>
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
-              child: ElevatedButton(
+              child: 
+              ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     primary: Palette.thisBlue,
                     elevation: 0,
@@ -614,7 +617,9 @@ _onAlert(context) {
       child: Center(
           child: Column(
         children: [
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
           SvgPicture.asset(
             'assets/images/warn.svg',
             fit: BoxFit.fill,
@@ -650,7 +655,13 @@ _onAlert(context) {
           "ยืนยัน",
           style: TextStyle(color: Colors.white, fontSize: 20),
         ),
-        onPressed: () => Navigator.pop(context),
+        onPressed: () => Navigator.push(
+          context,
+          PageTransition(
+              duration: const Duration(milliseconds: 500),
+              type: PageTransitionType.fade,
+              child: OnGoing()),
+        ),
         color: Color.fromARGB(255, 9, 154, 75),
       ),
     ],
