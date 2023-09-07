@@ -5,7 +5,15 @@ import 'package:meechoke_project/screens/login_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+// MediaQuery.of(context).size.width * 0.04
 
+//  Navigator.push(
+//           context,
+//           PageTransition(
+//               duration: const Duration(milliseconds: 500),
+//               type: PageTransitionType.fade,
+//               child: Job_OnGoing()),
+//         ),
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   const SystemUiOverlayStyle(statusBarColor: Colors.transparent);

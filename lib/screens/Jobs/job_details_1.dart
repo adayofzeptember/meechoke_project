@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/screens/Jobs/job_onGOing_2.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../ETC/shape_painter.dart';
-import 'doing_page_2.dart';
 
-class Job_Wait_toAccept extends StatefulWidget {
+
+class Job_Details extends StatefulWidget {
   @override
-  _Job_Wait_toAcceptState createState() => _Job_Wait_toAcceptState();
+  _Job_DetailsState createState() => _Job_DetailsState();
 }
 
-class _Job_Wait_toAcceptState extends State<Job_Wait_toAccept>
+class _Job_DetailsState extends State<Job_Details>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -655,12 +656,13 @@ _onAlert(context) {
           "ยืนยัน",
           style: TextStyle(color: Colors.white, fontSize: 20),
         ),
-        onPressed: () => Navigator.push(
+        onPressed: () => 
+        Navigator.push(
           context,
           PageTransition(
               duration: const Duration(milliseconds: 500),
               type: PageTransitionType.fade,
-              child: OnGoing()),
+              child: Job_OnGoing()),
         ),
         color: Color.fromARGB(255, 9, 154, 75),
       ),

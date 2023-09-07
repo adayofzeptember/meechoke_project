@@ -11,6 +11,12 @@ class _CameraImagePickerState extends State<CameraImagePicker> {
   File? _image;
 
   @override
+  void initState() {
+    _pickImageFromCamera();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -18,7 +24,8 @@ class _CameraImagePickerState extends State<CameraImagePicker> {
         centerTitle: true,
         title: const Text('CAMERA'),
       ),
-      body: Container(
+      body: 
+      Container(
         alignment: Alignment.center,
         child: Column(
           children: [

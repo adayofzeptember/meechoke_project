@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/screens/Jobs/job_camera_3.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-import '../../about image/image_camera.dart';
-
-class OnGoing extends StatefulWidget {
+class Job_OnGoing extends StatefulWidget {
   @override
-  _OnGoingState createState() => _OnGoingState();
+  _Job_OnGoingState createState() => _Job_OnGoingState();
 }
 
-class _OnGoingState extends State<OnGoing> {
+class _Job_OnGoingState extends State<Job_OnGoing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -162,7 +161,7 @@ class _OnGoingState extends State<OnGoing> {
                         width: double.infinity,
                         alignment: Alignment.center,
                         child: const Text(
-                          "ถึงจุดส่งสินค้า",
+                          "ถึงจุดส่งสินค้า (ถ่ายรูป)",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -231,9 +230,6 @@ _onAlert(context) {
   Alert(
     context: context,
     style: alertStyle,
-    // type: AlertType.warning,
-    // title: "RFLUTTER ALERT",
-    // desc: "ต้องการรับงานนี้",
     content: SizedBox(
       child: Center(
           child: Column(
@@ -245,11 +241,6 @@ _onAlert(context) {
             'assets/images/warn.svg',
             fit: BoxFit.fill,
           ),
-          // Icon(
-          //   Icons.warning_rounded,
-          //   size: 50,
-          //   color: Color.fromARGB(255, 97, 97, 97),
-          // ),
           SizedBox(height: 10),
           Text(
             'ถึงจุดส่งสินค้า',
@@ -281,7 +272,7 @@ _onAlert(context) {
           PageTransition(
               duration: const Duration(milliseconds: 500),
               type: PageTransitionType.fade,
-              child: CameraImagePicker()),
+              child: Job_Camera()),
         ),
         color: Color.fromARGB(255, 9, 154, 75),
       ),

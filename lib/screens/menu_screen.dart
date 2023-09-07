@@ -5,7 +5,7 @@ import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/screens/fuel%20screens/fuel_main.dart';
 import 'package:page_transition/page_transition.dart';
 
-import 'Jobs/jobs_lists.dart';
+import 'Jobs/jobs_lists_main.dart';
 
 class MainMenu_Page extends StatefulWidget {
   const MainMenu_Page({super.key});

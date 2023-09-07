@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/screens/Jobs/job_wait_to_accept_1.dart';
+import 'package:meechoke_project/screens/Jobs/job_details_1.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Job_Lists extends StatefulWidget {
@@ -86,7 +86,8 @@ class _Job_ListsState extends State<Job_Lists>
                   unselectedLabelColor: Colors.grey,
                   indicatorSize: TabBarIndicatorSize.tab,
                   indicator: BoxDecoration(
-                      gradient: LinearGradient(colors: [
+                      gradient: 
+                      LinearGradient(colors: [
                         Palette.thisBlue,
                         const Color.fromARGB(255, 214, 77, 77)
                       ]),
@@ -136,7 +137,7 @@ Widget newJobsWidget(context) {
           PageTransition(
               duration: const Duration(milliseconds: 500),
               type: PageTransitionType.fade,
-              child: Job_Wait_toAccept()),
+              child: Job_Details()),
         );
       },
       child: Container(

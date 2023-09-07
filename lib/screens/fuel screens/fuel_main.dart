@@ -1,9 +1,8 @@
-import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/screens/Jobs/job_wait_to_accept_1.dart';
+import 'package:meechoke_project/screens/fuel%20screens/fuel_details_1.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Fuel_Lists extends StatefulWidget {
@@ -116,7 +115,7 @@ class _Fuel_ListsState extends State<Fuel_Lists>
                   haventFilled(context),
 
                   //! second tab bar view widget
-                  Text('data')
+                 filledList(context),
                 ],
               ),
             ),
@@ -132,17 +131,17 @@ Widget haventFilled(context) {
     padding: const EdgeInsets.all(8.0),
     child: GestureDetector(
       onTap: () {
-        
         //!
         Navigator.push(
           context,
           PageTransition(
               duration: const Duration(milliseconds: 500),
               type: PageTransitionType.fade,
-              child: Job_Wait_toAccept()),
+              child: Fuel_Detail()),
         );
       },
-      child: Container(
+      child: 
+      Container(
         child: Column(
           children: <Widget>[
             Row(
@@ -176,7 +175,8 @@ Widget haventFilled(context) {
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Padding(
+              child: 
+              Padding(
                 padding: const EdgeInsets.fromLTRB(15, 15, 15, 20),
                 child: Column(
                   children: [
@@ -335,6 +335,130 @@ Widget haventFilled(context) {
                         ),
                       ],
                     ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Divider(),
+                    Row(
+                      children: [
+                        SizedBox(width: 130, child: Text('หมายเหตุ :')),
+                        SizedBox(
+                          width: 50,
+                        ),
+                        Text(
+                          '-',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.red),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    ),
+  );
+}
+ //*
+
+ Widget filledList(context) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: GestureDetector(
+      onTap: () {
+        //!
+      
+      },
+      child: 
+      Container(
+        child: Column(
+          children: <Widget>[
+            Row(
+              children: [
+                SvgPicture.asset(
+                  'assets/images/icon_job.svg',
+                  fit: BoxFit.contain,
+                ),
+                SizedBox(
+                  width: 3,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'วันที่สั่งเติม ',
+                      style: TextStyle(),
+                    ),
+                    Text(
+                      '10 พ.ย. 2565 08:00',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Palette.thisBlue),
+                    ),
+                  ],
+                )
+              ],
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: 
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 15, 15, 20),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'JO65/47416',
+                          style: TextStyle(
+                              color: Palette.thisBlue,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
+                            child: SizedBox(
+                              width: 130,
+                              child: Text(
+                                'เติมแล้ว',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(width: 130, child: Text('เลขที่ใบสั่งเติม :')),
+                        SizedBox(
+                          width: 50,
+                        ),
+                        Text(
+                          '111',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                  
+                    
                     SizedBox(
                       height: 8,
                     ),

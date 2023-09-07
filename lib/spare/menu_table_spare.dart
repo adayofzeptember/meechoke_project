@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 
-import '../screens/Jobs/jobs_lists.dart';
+import '../screens/Jobs/jobs_lists_main.dart';
 
 class MenuTable extends StatefulWidget {
   const MenuTable({super.key});
