@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/screens/login_screen.dart';
+import 'package:meechoke_project/test/noti.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -14,8 +15,9 @@ import 'package:responsive_framework/responsive_framework.dart';
 //               type: PageTransitionType.fade,
 //               child: Job_OnGoing()),
 //         ),
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService().init();
   const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
   runApp(const StarterWidget());
 }

@@ -51,7 +51,9 @@ class _Fuel_fillFormState extends State<Fuel_fillForm> {
       ),
       backgroundColor: const Color.fromARGB(255, 1, 44, 97),
       body: SingleChildScrollView(
-          child: Column(
+     
+          child: 
+          Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
             Padding(
@@ -65,7 +67,8 @@ class _Fuel_fillFormState extends State<Fuel_fillForm> {
                   children: [
                     Padding(
                         padding: const EdgeInsets.all(20),
-                        child: Row(
+                        child: 
+                        Row(
                           children: [
                             Icon(
                               Icons.pin_drop_outlined,
@@ -91,6 +94,7 @@ class _Fuel_fillFormState extends State<Fuel_fillForm> {
                 ),
               ),
             ),
+
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Row(
@@ -492,7 +496,6 @@ _onAlertSubdddmitFuel(context) {
           ),
           onPressed: () {
             Navigator.pop(context);
-      
           },
           color: Color.fromARGB(255, 9, 154, 75),
         ),

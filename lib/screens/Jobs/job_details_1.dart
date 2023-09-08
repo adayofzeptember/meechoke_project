@@ -3,12 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/screens/Jobs/job_onGOing_2.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../ETC/shape_painter.dart';
-
 
 class Job_Details extends StatefulWidget {
   @override
@@ -390,10 +386,34 @@ class _Job_DetailsState extends State<Job_Details>
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
-                                            Text('จุดรับ :'),
-                                            SizedBox(
-                                              height: 5,
+                                            Row(
+                                              children: [
+                                                Text('จุดรับ'),
+                                                SizedBox(width: 5,),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      color: Palette.thisBlue,
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  20))),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                        .fromLTRB(3, 3, 3, 3),
+                                                    child: Text(
+                                                      '10 พ.ย. 2023 - 08:00',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
+                                         
                                             Text(
                                               'โรงน้ำตาลครบุรี อ.ครบุรี จ.นครราชสีมา',
                                               style: TextStyle(
@@ -409,7 +429,33 @@ class _Job_DetailsState extends State<Job_Details>
                                                       .width *
                                                   0.04,
                                             ),
-                                            Text('จุดส่ง :'),
+                                            Row(
+                                              children: [
+                                                Text('จุดส่ง'),
+                                                   SizedBox(width: 5,),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      color: Palette.thisBlue,
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  20))),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                        .fromLTRB(3, 3, 3, 3),
+                                                    child: Text(
+                                                      '10 พ.ย. 2023 - 08:00',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                             SizedBox(
                                               height: 5,
                                             ),
@@ -486,7 +532,7 @@ class _Job_DetailsState extends State<Job_Details>
                                           MainAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'ๅ/ๅ',
+                                          '11.1',
                                           style: TextStyle(
                                               color: Colors.red,
                                               fontWeight: FontWeight.bold),
@@ -555,8 +601,7 @@ class _Job_DetailsState extends State<Job_Details>
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
-              child: 
-              ElevatedButton(
+              child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     primary: Palette.thisBlue,
                     elevation: 0,
@@ -565,7 +610,7 @@ class _Job_DetailsState extends State<Job_Details>
                       borderRadius: BorderRadius.circular(20),
                     )),
                 onPressed: () {
-                  _onAlert(context);
+                  // _onAlert(context);
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -588,84 +633,84 @@ class _Job_DetailsState extends State<Job_Details>
   }
 }
 
-_onAlert(context) {
-  var alertStyle = AlertStyle(
-    isCloseButton: false,
-    isOverlayTapDismiss: true,
-    descStyle: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Sarabun'),
-    animationDuration: Duration(milliseconds: 400),
-    alertBorder: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(30),
-      side: BorderSide(
-        color: Colors.grey,
-      ),
-    ),
-    titleStyle: TextStyle(
-      color: Colors.red,
-    ),
-    animationType: AnimationType.grow,
-    overlayColor: Color(0x55000000),
-    alertElevation: 0,
-  );
-  //!
-  Alert(
-    context: context,
-    style: alertStyle,
-    // type: AlertType.warning,
-    // title: "RFLUTTER ALERT",
-    // desc: "ต้องการรับงานนี้",
-    content: SizedBox(
-      child: Center(
-          child: Column(
-        children: [
-          SizedBox(
-            height: 10,
-          ),
-          SvgPicture.asset(
-            'assets/images/warn.svg',
-            fit: BoxFit.fill,
-          ),
-          // Icon(
-          //   Icons.warning_rounded,
-          //   size: 50,
-          //   color: Color.fromARGB(255, 97, 97, 97),
-          // ),
-          SizedBox(height: 10),
-          Text(
-            'ต้องการรับงานนี้หรือไม่ ?',
-            style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 97, 97, 97)),
-          ),
-        ],
-      )),
-    ),
-    buttons: [
-      DialogButton(
-        child: Text(
-          "ยกเลิก",
-          style:
-              TextStyle(color: Color.fromARGB(255, 97, 97, 97), fontSize: 20),
-        ),
-        onPressed: () => Navigator.pop(context),
-        color: Color.fromARGB(255, 237, 237, 237),
-      ),
-      DialogButton(
-        child: Text(
-          "ยืนยัน",
-          style: TextStyle(color: Colors.white, fontSize: 20),
-        ),
-        onPressed: () => 
-        Navigator.push(
-          context,
-          PageTransition(
-              duration: const Duration(milliseconds: 500),
-              type: PageTransitionType.fade,
-              child: Job_OnGoing()),
-        ),
-        color: Color.fromARGB(255, 9, 154, 75),
-      ),
-    ],
-  ).show();
-}
+// _onAlert(context) {
+//   var alertStyle = AlertStyle(
+//     isCloseButton: false,
+//     isOverlayTapDismiss: true,
+//     descStyle: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Sarabun'),
+//     animationDuration: Duration(milliseconds: 400),
+//     alertBorder: RoundedRectangleBorder(
+//       borderRadius: BorderRadius.circular(30),
+//       side: BorderSide(
+//         color: Colors.grey,
+//       ),
+//     ),
+//     titleStyle: TextStyle(
+//       color: Colors.red,
+//     ),
+//     animationType: AnimationType.grow,
+//     overlayColor: Color(0x55000000),
+//     alertElevation: 0,
+//   );
+//   //!
+//   Alert(
+//     context: context,
+//     style: alertStyle,
+//     // type: AlertType.warning,
+//     // title: "RFLUTTER ALERT",
+//     // desc: "ต้องการรับงานนี้",
+//     content: SizedBox(
+//       child: Center(
+//           child: Column(
+//         children: [
+//           SizedBox(
+//             height: 10,
+//           ),
+//           SvgPicture.asset(
+//             'assets/images/warn.svg',
+//             fit: BoxFit.fill,
+//           ),
+//           // Icon(
+//           //   Icons.warning_rounded,
+//           //   size: 50,
+//           //   color: Color.fromARGB(255, 97, 97, 97),
+//           // ),
+//           SizedBox(height: 10),
+//           Text(
+//             'ต้องการรับงานนี้หรือไม่ ?',
+//             style: TextStyle(
+//                 fontSize: 18,
+//                 fontWeight: FontWeight.bold,
+//                 color: Color.fromARGB(255, 97, 97, 97)),
+//           ),
+//         ],
+//       )),
+//     ),
+//     buttons: [
+//       DialogButton(
+//         child: Text(
+//           "ยกเลิก",
+//           style:
+//               TextStyle(color: Color.fromARGB(255, 97, 97, 97), fontSize: 20),
+//         ),
+//         onPressed: () => Navigator.pop(context),
+//         color: Color.fromARGB(255, 237, 237, 237),
+//       ),
+//       DialogButton(
+//         child: Text(
+//           "ยืนยัน",
+//           style: TextStyle(color: Colors.white, fontSize: 20),
+//         ),
+//         onPressed: () => 
+//         Navigator.push(
+//           context,
+//           PageTransition(
+//               duration: const Duration(milliseconds: 500),
+//               type: PageTransitionType.fade,
+//               child: Job_OnGoing()),
+//         ),
+//         color: Color.fromARGB(255, 9, 154, 75),
+//       ),
+//     ],
+//   ).show();
+// }

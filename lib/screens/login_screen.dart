@@ -19,6 +19,7 @@ class _Login_ScreenState extends State<Login_Screen> {
   late Future<Login_Screen> futureLogin_Screen;
   @override
   void initState() {
+    
     super.initState();
   }
 
@@ -200,6 +201,8 @@ class _Login_ScreenState extends State<Login_Screen> {
                                               BorderRadius.circular(30),
                                         )),
                                     onPressed: () {
+
+                                     // NotificationService().scheduleNotifications();
                                       Navigator.pushReplacement(
                                         context,
                                         PageTransition(
