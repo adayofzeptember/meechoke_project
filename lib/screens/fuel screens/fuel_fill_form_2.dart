@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/screens/Jobs/Job%20Processing/job_done_5.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Fuel_fillForm extends StatefulWidget {
@@ -51,14 +52,13 @@ class _Fuel_fillFormState extends State<Fuel_fillForm> {
       ),
       backgroundColor: const Color.fromARGB(255, 1, 44, 97),
       body: SingleChildScrollView(
-     
-          child: 
-          Column(
+          child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Container(
+              child: 
+              Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
                     color: Color.fromARGB(255, 88, 151, 211),
@@ -67,13 +67,10 @@ class _Fuel_fillFormState extends State<Fuel_fillForm> {
                   children: [
                     Padding(
                         padding: const EdgeInsets.all(20),
-                        child: 
-                        Row(
+                        child: Row(
                           children: [
-                            Icon(
-                              Icons.pin_drop_outlined,
-                              color: Colors.red,
-                            ),
+                            SvgPicture.asset('assets/images/petrol.svg',
+                                fit: BoxFit.contain, color: Colors.white),
                             SizedBox(
                               width: 10,
                             ),
@@ -94,7 +91,6 @@ class _Fuel_fillFormState extends State<Fuel_fillForm> {
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Row(
@@ -130,150 +126,150 @@ class _Fuel_fillFormState extends State<Fuel_fillForm> {
                       padding: const EdgeInsets.all(10.0),
                       child: Column(
                         children: [
-                          const Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              'เลขไมล์ระยะทางปัจจุบัน',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 15,
-                                  color: Colors.black),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextFormField(
-                            textAlign: TextAlign.left,
-                            autofocus: false,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'โปรดกรอกเลขไมล์ระยะทางปัจจุบัน';
-                              }
-                              return null;
-                            },
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                                hintText: 'กรอกเลขไมล์ระยะทางปัจจุบัน',
-                                labelStyle: const TextStyle(fontSize: 15),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 211, 211, 211)),
-                                    borderRadius: BorderRadius.circular(10)),
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 211, 211, 211)),
-                                    borderRadius: BorderRadius.circular(10)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 211, 211, 211)),
-                                    borderRadius: BorderRadius.circular(10))),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              'ปริมาณเติมจริง',
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextFormField(
-                            textAlign: TextAlign.left,
-                            autofocus: false,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'โปรดกรอกปริมาณเติมจริง';
-                              }
-                              return null;
-                            },
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                                hintText: 'กรอกปริมาณเติมจริง',
-                                labelStyle: const TextStyle(fontSize: 15),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 211, 211, 211)),
-                                    borderRadius: BorderRadius.circular(10)),
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 211, 211, 211)),
-                                    borderRadius: BorderRadius.circular(10)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 211, 211, 211)),
-                                    borderRadius: BorderRadius.circular(10))),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          const Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              'รวมเป็นเงิน',
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextFormField(
-                            textAlign: TextAlign.left,
-                            autofocus: false,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'โปรดกรอกเงินรวมทั้งหมด';
-                              }
-                              return null;
-                            },
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                                hintText: 'รวมเป็นเงิน',
-                                labelStyle: const TextStyle(fontSize: 15),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 211, 211, 211)),
-                                    borderRadius: BorderRadius.circular(10)),
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 211, 211, 211)),
-                                    borderRadius: BorderRadius.circular(10)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 211, 211, 211)),
-                                    borderRadius: BorderRadius.circular(10))),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
+                          // const Align(
+                          //   alignment: Alignment.bottomLeft,
+                          //   child: Text(
+                          //     'เลขไมล์ระยะทางปัจจุบัน',
+                          //     style: TextStyle(
+                          //         fontWeight: FontWeight.w900,
+                          //         fontSize: 15,
+                          //         color: Colors.black),
+                          //   ),
+                          // ),
+                          // const SizedBox(
+                          //   height: 10,
+                          // ),
+                          // TextFormField(
+                          //   textAlign: TextAlign.left,
+                          //   autofocus: false,
+                          //   style: const TextStyle(fontWeight: FontWeight.bold),
+                          //   validator: (value) {
+                          //     if (value!.isEmpty) {
+                          //       return 'โปรดกรอกเลขไมล์ระยะทางปัจจุบัน';
+                          //     }
+                          //     return null;
+                          //   },
+                          //   keyboardType: TextInputType.number,
+                          //   decoration: InputDecoration(
+                          //       hintText: 'กรอกเลขไมล์ระยะทางปัจจุบัน',
+                          //       labelStyle: const TextStyle(fontSize: 15),
+                          //       focusedBorder: OutlineInputBorder(
+                          //           borderSide: const BorderSide(
+                          //               color:
+                          //                   Color.fromARGB(255, 211, 211, 211)),
+                          //           borderRadius: BorderRadius.circular(10)),
+                          //       filled: true,
+                          //       fillColor: Colors.white,
+                          //       border: OutlineInputBorder(
+                          //           borderSide: const BorderSide(
+                          //               color:
+                          //                   Color.fromARGB(255, 211, 211, 211)),
+                          //           borderRadius: BorderRadius.circular(10)),
+                          //       enabledBorder: OutlineInputBorder(
+                          //           borderSide: const BorderSide(
+                          //               color:
+                          //                   Color.fromARGB(255, 211, 211, 211)),
+                          //           borderRadius: BorderRadius.circular(10))),
+                          // ),
+                          // const SizedBox(
+                          //   height: 10,
+                          // ),
+                          // const Align(
+                          //   alignment: Alignment.topLeft,
+                          //   child: Text(
+                          //     'ปริมาณเติมจริง',
+                          //     style: TextStyle(
+                          //         fontSize: 15,
+                          //         fontWeight: FontWeight.bold,
+                          //         color: Colors.black),
+                          //   ),
+                          // ),
+                          // const SizedBox(
+                          //   height: 10,
+                          // ),
+                          // TextFormField(
+                          //   textAlign: TextAlign.left,
+                          //   autofocus: false,
+                          //   style: const TextStyle(fontWeight: FontWeight.bold),
+                          //   validator: (value) {
+                          //     if (value!.isEmpty) {
+                          //       return 'โปรดกรอกปริมาณเติมจริง';
+                          //     }
+                          //     return null;
+                          //   },
+                          //   keyboardType: TextInputType.number,
+                          //   decoration: InputDecoration(
+                          //       hintText: 'กรอกปริมาณเติมจริง',
+                          //       labelStyle: const TextStyle(fontSize: 15),
+                          //       focusedBorder: OutlineInputBorder(
+                          //           borderSide: const BorderSide(
+                          //               color:
+                          //                   Color.fromARGB(255, 211, 211, 211)),
+                          //           borderRadius: BorderRadius.circular(10)),
+                          //       filled: true,
+                          //       fillColor: Colors.white,
+                          //       border: OutlineInputBorder(
+                          //           borderSide: const BorderSide(
+                          //               color:
+                          //                   Color.fromARGB(255, 211, 211, 211)),
+                          //           borderRadius: BorderRadius.circular(10)),
+                          //       enabledBorder: OutlineInputBorder(
+                          //           borderSide: const BorderSide(
+                          //               color:
+                          //                   Color.fromARGB(255, 211, 211, 211)),
+                          //           borderRadius: BorderRadius.circular(10))),
+                          // ),
+                          // const SizedBox(
+                          //   height: 30,
+                          // ),
+                          // const Align(
+                          //   alignment: Alignment.topLeft,
+                          //   child: Text(
+                          //     'รวมเป็นเงิน',
+                          //     style: TextStyle(
+                          //         fontSize: 15,
+                          //         fontWeight: FontWeight.bold,
+                          //         color: Colors.black),
+                          //   ),
+                          // ),
+                          // const SizedBox(
+                          //   height: 10,
+                          // ),
+                          // TextFormField(
+                          //   textAlign: TextAlign.left,
+                          //   autofocus: false,
+                          //   style: const TextStyle(fontWeight: FontWeight.bold),
+                          //   validator: (value) {
+                          //     if (value!.isEmpty) {
+                          //       return 'โปรดกรอกเงินรวมทั้งหมด';
+                          //     }
+                          //     return null;
+                          //   },
+                          //   keyboardType: TextInputType.number,
+                          //   decoration: InputDecoration(
+                          //       hintText: 'รวมเป็นเงิน',
+                          //       labelStyle: const TextStyle(fontSize: 15),
+                          //       focusedBorder: OutlineInputBorder(
+                          //           borderSide: const BorderSide(
+                          //               color:
+                          //                   Color.fromARGB(255, 211, 211, 211)),
+                          //           borderRadius: BorderRadius.circular(10)),
+                          //       filled: true,
+                          //       fillColor: Colors.white,
+                          //       border: OutlineInputBorder(
+                          //           borderSide: const BorderSide(
+                          //               color:
+                          //                   Color.fromARGB(255, 211, 211, 211)),
+                          //           borderRadius: BorderRadius.circular(10)),
+                          //       enabledBorder: OutlineInputBorder(
+                          //           borderSide: const BorderSide(
+                          //               color:
+                          //                   Color.fromARGB(255, 211, 211, 211)),
+                          //           borderRadius: BorderRadius.circular(10))),
+                          // ),
+                          // const SizedBox(
+                          //   height: 30,
+                          // ),
                           //!
                           _image == null
                               ? InkWell(
@@ -327,14 +323,15 @@ class _Fuel_fillFormState extends State<Fuel_fillForm> {
                             height: 60,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  primary: Palette.thisBlue,
+                                  primary: Colors.green,
                                   elevation: 0,
                                   // side: BorderSide(color: Colors.white),
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30),
+                                    borderRadius: BorderRadius.circular(10),
                                   )),
                               onPressed: () {
-                                _onAlertSubmitFuel(context);
+                                openAlertBox(context);
+                                //_onAlertSubmitFuel(context);
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(15.0),

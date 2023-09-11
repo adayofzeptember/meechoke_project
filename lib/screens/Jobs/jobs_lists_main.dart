@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/screens/Jobs/job_details_1.dart';
+import 'package:meechoke_project/screens/Jobs/newJob_details.dart';
 import 'package:page_transition/page_transition.dart';
-
-import 'job_work_accepted_3.dart';
-
+import 'Job Processing/job_accepted_detail_2.dart';
+ 
 class Job_Lists extends StatefulWidget {
   @override
   _Job_ListsState createState() => _Job_ListsState();

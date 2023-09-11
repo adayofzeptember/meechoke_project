@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/screens/Jobs/job_camera_3.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import '../../menu_screen.dart';
+ 
 
-class Job_OnGoing extends StatefulWidget {
+class Job_Done extends StatefulWidget {
   @override
-  _Job_OnGoingState createState() => _Job_OnGoingState();
+  _Job_DoneState createState() => _Job_DoneState();
 }
 
-class _Job_OnGoingState extends State<Job_OnGoing> {
+class _Job_DoneState extends State<Job_Done> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,48 +66,26 @@ class _Job_OnGoingState extends State<Job_OnGoing> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
-                    SvgPicture.asset(
-                      'assets/images/dest.svg',
-                    ),
+                    SvgPicture.asset('assets/images/jobdone.svg'),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Text(
-                      "จุดรับสินค้า",
+                      "งานทั้งหมดสำเร็จแล้ว",
                       style: TextStyle(
                           color: Color.fromARGB(255, 97, 97, 97),
-                          fontSize: 18,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.pin_drop,
-                          color: Colors.red,
-                        ),
-                        Text(
-                          "โรงน้ำตาลครบุรี อ.ครบุรี จ.นครราชสีมา",
-                          style: TextStyle(
-                              color: Palette.thisBlue,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
+                      height: 25,
                     ),
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 174, 210, 252),
+                          color: Color.fromARGB(255, 171, 204, 241),
                           borderRadius: BorderRadius.all(Radius.circular(20))),
                       child: Padding(
                         padding: const EdgeInsets.only(top: 8, bottom: 8),
@@ -114,7 +93,7 @@ class _Job_OnGoingState extends State<Job_OnGoing> {
                           child: Column(
                             children: [
                               Text(
-                                "ควรถึงก่อนเวลา",
+                                "เวลาทำงานทั้งหมด",
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 97, 97, 97),
                                     fontSize: 15,
@@ -124,7 +103,7 @@ class _Job_OnGoingState extends State<Job_OnGoing> {
                                 height: 5,
                               ),
                               Text(
-                                "17.00 น.",
+                                "06:25:15",
                                 style: TextStyle(
                                     color: Palette.thisBlue,
                                     fontSize: 18,
@@ -134,12 +113,16 @@ class _Job_OnGoingState extends State<Job_OnGoing> {
                           ),
                         ),
                       ),
-                    )
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
               ),
             ),
             Spacer(),
+            // if (widget.check == "fg")
             Align(
               alignment: Alignment.bottomCenter,
               child: Column(
@@ -153,7 +136,7 @@ class _Job_OnGoingState extends State<Job_OnGoing> {
                           borderRadius: BorderRadius.circular(30),
                         )),
                     onPressed: () {
-                      _onAlert(context);
+                      openAlertBox(context);
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
@@ -161,37 +144,10 @@ class _Job_OnGoingState extends State<Job_OnGoing> {
                         width: double.infinity,
                         alignment: Alignment.center,
                         child: const Text(
-                          "ถึงจุดส่งสินค้า (ถ่ายรูป)",
+                          "เสร็จงาน",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
-                              fontSize: 15),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.white,
-                        elevation: 0,
-                        // side: BorderSide(color: Colors.white),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        )),
-                    onPressed: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Container(
-                        width: double.infinity,
-                        alignment: Alignment.center,
-                        child: const Text(
-                          "กลับสู่หน้าหลัก",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Palette.thisBlue,
                               fontSize: 15),
                         ),
                       ),
@@ -207,7 +163,55 @@ class _Job_OnGoingState extends State<Job_OnGoing> {
   }
 }
 
-_onAlert(context) {
+openAlertBox(context) {
+  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          scrollable: true, // <-- Set it to true
+
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(32.0))),
+          contentPadding: EdgeInsets.only(top: 0.0),
+          content: Center(
+              child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                height: 30,
+              ),
+              SvgPicture.asset(
+                'assets/images/done.svg',
+                fit: BoxFit.fill,
+              ),
+              SizedBox(height: 10),
+              Text(
+                'บันทึกสำเร็จ',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 97, 97, 97)),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+            ],
+          )),
+        );
+      });
+
+  Future.delayed(Duration(seconds: 2), () {
+     Navigator.pushReplacement(
+          context,
+          PageTransition(
+              duration: const Duration(milliseconds: 500),
+              type: PageTransitionType.fade,
+              child: MainMenu_Page()),
+        );
+  });
+}
+
+_onAlerJobDone(context) {
   var alertStyle = AlertStyle(
     isCloseButton: false,
     isOverlayTapDismiss: true,
@@ -238,12 +242,12 @@ _onAlert(context) {
             height: 10,
           ),
           SvgPicture.asset(
-            'assets/images/warn.svg',
+            'assets/images/done.svg',
             fit: BoxFit.fill,
           ),
           SizedBox(height: 10),
           Text(
-            'ถึงจุดส่งสินค้า',
+            'บันทึกสำเร็จ',
             style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -252,30 +256,5 @@ _onAlert(context) {
         ],
       )),
     ),
-    buttons: [
-      DialogButton(
-        child: Text(
-          "ยกเลิก",
-          style:
-              TextStyle(color: Color.fromARGB(255, 97, 97, 97), fontSize: 20),
-        ),
-        onPressed: () => Navigator.pop(context),
-        color: Color.fromARGB(255, 237, 237, 237),
-      ),
-      DialogButton(
-        child: Text(
-          "ยืนยัน",
-          style: TextStyle(color: Colors.white, fontSize: 20),
-        ),
-        onPressed: () => Navigator.push(
-          context,
-          PageTransition(
-              duration: const Duration(milliseconds: 500),
-              type: PageTransitionType.fade,
-              child: Job_Camera()),
-        ),
-        color: Color.fromARGB(255, 9, 154, 75),
-      ),
-    ],
   ).show();
 }

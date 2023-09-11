@@ -86,10 +86,11 @@ class _Fuel_ListsState extends State<Fuel_Lists>
                   unselectedLabelColor: Colors.grey,
                   indicatorSize: TabBarIndicatorSize.tab,
                   indicator: BoxDecoration(
-                      gradient: LinearGradient(colors: [
-                        const Color.fromARGB(255, 226, 62, 62),
-                        Color.fromARGB(255, 219, 194, 48)
-                      ]),
+                     
+                      // gradient: LinearGradient(colors: [
+                      //   const Color.fromARGB(255, 226, 62, 62),
+                      //   Color.fromARGB(255, 219, 194, 48)
+                      // ]),
                       borderRadius: BorderRadius.circular(40),
                       color: Palette.thisBlue),
                   tabs: [
@@ -115,7 +116,7 @@ class _Fuel_ListsState extends State<Fuel_Lists>
                   haventFilled(context),
 
                   //! second tab bar view widget
-                 filledList(context),
+                  filledList(context),
                 ],
               ),
             ),
@@ -140,8 +141,7 @@ Widget haventFilled(context) {
               child: Fuel_Detail()),
         );
       },
-      child: 
-      Container(
+      child: Container(
         child: Column(
           children: <Widget>[
             Row(
@@ -175,8 +175,7 @@ Widget haventFilled(context) {
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: 
-              Padding(
+              child: Padding(
                 padding: const EdgeInsets.fromLTRB(15, 15, 15, 20),
                 child: Column(
                   children: [
@@ -303,7 +302,7 @@ Widget haventFilled(context) {
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.35,
                           child: Text(
-                            'น้ำตาลครบุรี(คร ',
+                            'น้ำตาลครบุรี',
                             overflow: TextOverflow.clip,
                             maxLines: 3,
                             style: TextStyle(
@@ -362,18 +361,16 @@ Widget haventFilled(context) {
     ),
   );
 }
- //*
+//*
 
- Widget filledList(context) {
+Widget filledList(context) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: GestureDetector(
       onTap: () {
         //!
-      
       },
-      child: 
-      Container(
+      child: Container(
         child: Column(
           children: <Widget>[
             Row(
@@ -407,8 +404,7 @@ Widget haventFilled(context) {
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: 
-              Padding(
+              child: Padding(
                 padding: const EdgeInsets.fromLTRB(15, 15, 15, 20),
                 child: Column(
                   children: [
@@ -431,7 +427,7 @@ Widget haventFilled(context) {
                             child: SizedBox(
                               width: 130,
                               child: Text(
-                                'เติมแล้ว',
+                                'เติมเสร็จสิ้น',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.white,
@@ -457,23 +453,93 @@ Widget haventFilled(context) {
                         )
                       ],
                     ),
-                  
-                    
                     SizedBox(
                       height: 8,
                     ),
                     Divider(),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 159, 206, 250),
+                          borderRadius: BorderRadius.all(Radius.circular(40))),
+                      child: Column(
+                        children: [
+                          Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset('assets/images/petrol.svg',
+                                      fit: BoxFit.contain, color: Palette.thisBlue),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.6,
+                                    child: Text(
+                                      '9686 เชลล์เขาหินซ้อน เขาหินซ้อน พนมสารคาม ฉะเชิงเทรา',
+                                      overflow: TextOverflow.clip,
+                                      maxLines: 3,
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: Palette.thisBlue,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(width: 130, child: Text('หมายเหตุ :')),
                         SizedBox(
-                          width: 50,
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            child: Text('ปริมาณสั่งเติม (ลิตร/กก.):')),
+                        SizedBox(
+                          width: 30,
                         ),
-                        Text(
-                          '-',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.red),
-                        )
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.25,
+                          child: Text(
+                            '-',
+                            overflow: TextOverflow.clip,
+                            maxLines: 3,
+                            style: TextStyle(
+                                color: Palette.thisBlue,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            child: Text('หมายเหตุ:')),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.25,
+                          child: Text(
+                            '-',
+                            overflow: TextOverflow.clip,
+                            maxLines: 3,
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
                       ],
                     ),
                   ],
