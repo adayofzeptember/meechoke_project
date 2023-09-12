@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/screens/fuel%20screens/fuel_main.dart';
+import 'package:meechoke_project/screens/history/history.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'Jobs/jobs_lists_main.dart';
@@ -19,9 +20,9 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
   Widget build(BuildContext context) {
     //*
     var size = MediaQuery.of(context).size;
-    final double h1 = (size.height - kToolbarHeight - 400) / 2;
+    final double h1 = (size.height - kToolbarHeight - 350) / 2;
     final double w1 = size.width / 2;
-    final double h = (size.height - kToolbarHeight - 520) / 2;
+    final double h = (size.height - kToolbarHeight - 500) / 2;
     final double w = size.width / 2;
     //*
     return Scaffold(
@@ -89,13 +90,13 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                 children: <Widget>[
                   InkWell(
                     onTap: () {
-                        Navigator.push(
-                    context,
-                    PageTransition(
-                        duration: const Duration(milliseconds: 500),
-                        type: PageTransitionType.fade,
-                        child: Fuel_Lists()),
-                  );
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                            duration: const Duration(milliseconds: 500),
+                            type: PageTransitionType.fade,
+                            child: Fuel_Lists()),
+                      );
                     },
                     child: Container(
                       width: double.infinity,
@@ -129,7 +130,15 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                 crossAxisCount: 2,
                 children: <Widget>[
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                        Navigator.push(
+                        context,
+                        PageTransition(
+                            duration: const Duration(milliseconds: 500),
+                            type: PageTransitionType.fade,
+                            child: History_Page()),
+                      );
+                    },
                     child: Container(
                       width: double.infinity,
                       child: SvgPicture.asset(
@@ -139,7 +148,15 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      // Navigator.push(
+                      //   context,
+                      //   PageTransition(
+                      //       duration: const Duration(milliseconds: 500),
+                      //       type: PageTransitionType.fade,
+                      //       child: History_Page()),
+                      // );
+                    },
                     child: Container(
                       width: double.infinity,
                       child: SvgPicture.asset(
@@ -215,7 +232,6 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                             fontWeight: FontWeight.bold,
                             color: Palette.thisBlue),
                       ),
-                     
                     ],
                   ),
                   SizedBox(

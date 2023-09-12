@@ -14,7 +14,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 //               duration: const Duration(milliseconds: 500),
 //               type: PageTransitionType.fade,
 //               child: Job_OnGoing()),
-//         ),
+//         );
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService().init();
