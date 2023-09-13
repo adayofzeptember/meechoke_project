@@ -6,8 +6,10 @@ import 'package:meechoke_project/test/noti.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-// MediaQuery.of(context).size.width * 0.04
 
+import 'about image/images_gridV.dart';
+import 'about image/images_toList.dart';
+// MediaQuery.of(context).size.width * 0.04
 //  Navigator.push(
 //           context,
 //           PageTransition(
@@ -15,6 +17,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 //               type: PageTransitionType.fade,
 //               child: Job_OnGoing()),
 //         );
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService().init();
@@ -69,7 +72,7 @@ class _StartPageState extends State<StartPage> {
         PageTransition(
             duration: const Duration(milliseconds: 800),
             type: PageTransitionType.fade,
-            child: Login_Screen()),
+            child: MultipleImageSelector()),
       );
     });
   }

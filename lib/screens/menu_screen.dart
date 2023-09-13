@@ -7,6 +7,7 @@ import 'package:meechoke_project/screens/history/history.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'Jobs/jobs_lists_main.dart';
+import 'financial/financial.dart';
 
 class MainMenu_Page extends StatefulWidget {
   const MainMenu_Page({super.key});
@@ -149,13 +150,13 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                   ),
                   InkWell(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   PageTransition(
-                      //       duration: const Duration(milliseconds: 500),
-                      //       type: PageTransitionType.fade,
-                      //       child: History_Page()),
-                      // );
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                            duration: const Duration(milliseconds: 500),
+                            type: PageTransitionType.fade,
+                            child: Financial_List()),
+                      );
                     },
                     child: Container(
                       width: double.infinity,

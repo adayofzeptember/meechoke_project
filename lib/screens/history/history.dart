@@ -1,11 +1,9 @@
 // ignore_for_file: camel_case_types, must_be_immutable
-
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/screens/Jobs/Job%20Processing/job_camera_4.dart';
 import 'package:meechoke_project/screens/history/history_detail.dart';
 import 'package:page_transition/page_transition.dart';
 
