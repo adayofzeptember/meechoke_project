@@ -19,7 +19,7 @@ class _MultipleImageSelectorState extends State<MultipleImageSelector> {
  
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: const Text('Images GridView'),
+        title: const Text('รูป'),
       ),
       body: Container(
         alignment: Alignment.center,
@@ -42,6 +42,18 @@ class _MultipleImageSelectorState extends State<MultipleImageSelector> {
               const SizedBox(
                 height: 10,
               ),
+                  ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.deepPurple)),
+                child: const Text(
+                  'กล้อง',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  _pickImageFromCamera();
+                },
+              ), 
               Expanded(
                 child: SizedBox(
                   width: 300,
@@ -56,8 +68,10 @@ class _MultipleImageSelectorState extends State<MultipleImageSelector> {
                             return Center(
                                 child: GestureDetector(
                               onTap: () {
-                                print(selectedImages[index].toString());
-                                print(selectedImages.length);
+                                selectedImages.removeAt(index);
+                                // print(selectedImages[index].toString());
+                              print(selectedImages.length);
+                              initState();
                               },
                               child: Container(
                                   child: Card(
@@ -81,6 +95,19 @@ class _MultipleImageSelectorState extends State<MultipleImageSelector> {
       ),
     );
   }
+
+    Future<void> _pickImageFromCamera() async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedImage != null) {
+      setState(() {
+        selectedImages.add(File(pickedImage.path));
+      });
+    }
+  }
+
+  
 
   Future getImages() async {
     final pickedFile = await picker.pickMultiImage(

@@ -6,9 +6,7 @@ import 'package:meechoke_project/test/noti.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-
-import 'about image/images_gridV.dart';
-import 'about image/images_toList.dart';
+import 'about image/images_plus.dart';
 // MediaQuery.of(context).size.width * 0.04
 //  Navigator.push(
 //           context,
@@ -72,7 +70,7 @@ class _StartPageState extends State<StartPage> {
         PageTransition(
             duration: const Duration(milliseconds: 800),
             type: PageTransitionType.fade,
-            child: MultipleImageSelector()),
+            child: Login_Screen()),
       );
     });
   }

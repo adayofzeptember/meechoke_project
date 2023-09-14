@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/screens/Checking/check_daily.dart';
 import 'package:meechoke_project/screens/fuel%20screens/fuel_main.dart';
 import 'package:meechoke_project/screens/history/history.dart';
 import 'package:page_transition/page_transition.dart';
@@ -68,7 +69,7 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                   );
                 },
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.22,
+                  height: MediaQuery.of(context).size.height * 0.2,
                   width: double.infinity,
                   child: ClipRRect(
                     borderRadius: const BorderRadius.only(
@@ -85,8 +86,8 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                 primary: false,
                 childAspectRatio: (w1 / h1),
                 shrinkWrap: true,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 10,
+                // crossAxisSpacing: 20,
+                // mainAxisSpacing: 10,
                 crossAxisCount: 2,
                 children: <Widget>[
                   InkWell(
@@ -108,7 +109,15 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                            duration: const Duration(milliseconds: 500),
+                            type: PageTransitionType.fade,
+                            child: Check_Daily()),
+                      );
+                    },
                     child: Container(
                       width: double.infinity,
                       child: SvgPicture.asset(
@@ -119,20 +128,18 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 20,
-              ),
+             //20/10
               GridView.count(
                 primary: false,
                 childAspectRatio: (w1 / h1),
                 shrinkWrap: true,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 10,
+                // crossAxisSpacing: 20,
+                // mainAxisSpacing: 10,
                 crossAxisCount: 2,
                 children: <Widget>[
                   InkWell(
                     onTap: () {
-                        Navigator.push(
+                      Navigator.push(
                         context,
                         PageTransition(
                             duration: const Duration(milliseconds: 500),
@@ -168,15 +175,15 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 15,
-              ),
+              // SizedBox(
+              //   height: 15,
+              // ),
               GridView.count(
                 primary: false,
                 childAspectRatio: (w / h),
                 shrinkWrap: true,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 10,
+                // crossAxisSpacing: 20,
+                // mainAxisSpacing: 10,
                 crossAxisCount: 2,
                 children: <Widget>[
                   InkWell(
