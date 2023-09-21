@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/screens/history/history_detail.dart';
+import 'package:meechoke_project/screens/History/history_detail.dart';
 import 'package:page_transition/page_transition.dart';
 
 class History_Page extends StatefulWidget {

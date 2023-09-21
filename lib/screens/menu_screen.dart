@@ -3,12 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/screens/Checking/check_daily.dart';
-import 'package:meechoke_project/screens/fuel%20screens/fuel_main.dart';
-import 'package:meechoke_project/screens/history/history.dart';
+import 'package:meechoke_project/screens/Fuel/fuel_main.dart';
+import 'package:meechoke_project/screens/History/history.dart';
+import 'package:meechoke_project/screens/Report/accident.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'Jobs/jobs_lists_main.dart';
-import 'financial/financial.dart';
+import 'Financial/financial.dart';
 
 class MainMenu_Page extends StatefulWidget {
   const MainMenu_Page({super.key});
@@ -197,7 +198,15 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                         Navigator.push(
+                    context,
+                    PageTransition(
+                        duration: const Duration(milliseconds: 500),
+                        type: PageTransitionType.fade,
+                        child: Report_Accident()),
+                  );
+                    },
                     child: Container(
                       width: double.infinity,
                       child: SvgPicture.asset(

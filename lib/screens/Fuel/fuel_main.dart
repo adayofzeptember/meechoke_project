@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/screens/fuel%20screens/fuel_details_1.dart';
+import 'package:meechoke_project/screens/Fuel/fuel_details_1.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Fuel_Lists extends StatefulWidget {

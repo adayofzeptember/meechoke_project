@@ -50,8 +50,9 @@ class _Fuel_fillFormState extends State<Fuel_fillForm> {
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
         ),
       ),
-      backgroundColor: Color.fromARGB(255, 1, 2, 2),
+      backgroundColor: Palette.thisBlue,
       body: SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[

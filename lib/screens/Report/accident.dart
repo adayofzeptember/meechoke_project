@@ -1,19 +1,19 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
-import 'package:meechoke_project/screens/Checking/checking_result.dart';
-import 'package:page_transition/page_transition.dart';
 
-class Check_Daily extends StatefulWidget {
+
+import '../Jobs/Job Processing/job_done_5.dart';
+
+class Report_Accident extends StatefulWidget {
   @override
-  _Check_DailyState createState() => _Check_DailyState();
+  _Report_AccidentState createState() => _Report_AccidentState();
 }
 
-class _Check_DailyState extends State<Check_Daily> {
+class _Report_AccidentState extends State<Report_Accident> {
   List<File> selectedImages = [];
   final picker = ImagePicker();
 
@@ -32,10 +32,10 @@ class _Check_DailyState extends State<Check_Daily> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const CircleAvatar(
+            icon: CircleAvatar(
               radius: 15,
               backgroundColor: Colors.white,
-              child: Icon(
+              child: const Icon(
                 Icons.person,
                 color: Palette.thisBlue,
                 size: 15,
@@ -54,27 +54,80 @@ class _Check_DailyState extends State<Check_Daily> {
           ),
         ),
         title: const Text(
-          'ตรวจเช็ครถประจำวัน',
+          'แจ้งเหตุ',
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
         ),
       ),
-      backgroundColor: const Color.fromARGB(255, 228, 237, 240),
+      backgroundColor: Color.fromARGB(255, 228, 237, 240),
       body: SingleChildScrollView(
         child: Column(children: [
           Stack(
             children: [
               CustomPaint(
                 painter: ShapesPainter(),
-                child: Container(height: 160),
+                child: Container(height: 180),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
                       width: double.infinity,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 88, 151, 211),
+                          borderRadius: BorderRadius.all(Radius.circular(50))),
+                      child: Column(
+                        children: [
+                          Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.pin_drop_outlined,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.6,
+                                    child: Text(
+                                      '9686 เชลล์เขาหินซ้อน เขาหินซ้อน พนมสารคาม ฉะเชิงเทรา',
+                                      overflow: TextOverflow.clip,
+                                      maxLines: 3,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Center(
+                      child: Text(
+                        'ข้อมูลเกี่ยวกับกรมธรรม์',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(25))),
                       child: Column(
@@ -82,16 +135,16 @@ class _Check_DailyState extends State<Check_Daily> {
                         children: [
                           Container(
                             width: double.infinity,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                                 color: Color.fromARGB(255, 238, 246, 255),
                                 borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(25),
                                     topRight: Radius.circular(25))),
-                            child: const Padding(
-                              padding: EdgeInsets.only(top: 8, bottom: 8),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 8, bottom: 8),
                               child: Center(
                                 child: Text(
-                                  'บันทึกตรวจสภาพรถประจำวัน',
+                                  'ประกันภัยรถ',
                                   style: TextStyle(
                                       fontSize: 18,
                                       color: Palette.thisBlue,
@@ -100,16 +153,17 @@ class _Check_DailyState extends State<Check_Daily> {
                               ),
                             ),
                           ),
-                          const Padding(
-                            padding: EdgeInsets.fromLTRB(20, 15, 0, 15),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
                             child: Column(
                               children: [
                                 Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     SizedBox(
-                                      width: 90,
                                       child: Text(
-                                        'ชื่อพขร. :',
+                                        'บริษัท:',
                                         style: TextStyle(
                                             fontSize: 15,
                                             color:
@@ -133,11 +187,12 @@ class _Check_DailyState extends State<Check_Daily> {
                                   height: 5,
                                 ),
                                 Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     SizedBox(
-                                      width: 90,
                                       child: Text(
-                                        'ทะเบียนแม่ :',
+                                        'เลขที่กรมธรรม์:',
                                         style: TextStyle(
                                             fontSize: 15,
                                             color:
@@ -149,7 +204,7 @@ class _Check_DailyState extends State<Check_Daily> {
                                       width: 10,
                                     ),
                                     Text(
-                                      '71-0151',
+                                      '89-0151',
                                       style: TextStyle(
                                           fontSize: 15,
                                           color: Palette.thisBlue,
@@ -161,11 +216,12 @@ class _Check_DailyState extends State<Check_Daily> {
                                   height: 5,
                                 ),
                                 Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     SizedBox(
-                                      width: 90,
                                       child: Text(
-                                        'ทะเบียนลูก :',
+                                        'เบอร์โทรติดต่อ:',
                                         style: TextStyle(
                                             fontSize: 15,
                                             color:
@@ -185,163 +241,47 @@ class _Check_DailyState extends State<Check_Daily> {
                                     ),
                                   ],
                                 ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      child: Text(
+                                        'วงเงิน:',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color:
+                                                Color.fromARGB(255, 66, 66, 66),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      '588-0152',
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          color: Palette.thisBlue,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           )
                         ],
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset('assets/images/list-check.svg'),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          const Text(
-                            'รายการตรวจเช็คเบื้องต้น',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Palette.thisBlue,
-                                fontSize: 20),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(25))),
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 130,
-                            decoration: const BoxDecoration(
-                                color: Palette.thisBlue,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(25))),
-                            child: const Center(
-                              child: Text(
-                                '1. น้ำในหม้อและสภาพหม้อน้ำ',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        primary: Palette.thisBlue,
-                                        elevation: 0,
-                                        // side: BorderSide(color: Colors.white),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        )),
-                                    onPressed: null,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Container(
-                                        width: double.infinity,
-                                        alignment: Alignment.center,
-                                        child: const Text(
-                                          "ไม่ปกติ",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.grey,
-                                              fontSize: 15),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 3,
-                                ),
-                                Expanded(
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        primary: Palette.thisBlue,
-                                        elevation: 0,
-                                        // side: BorderSide(color: Colors.white),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        )),
-                                    onPressed: null,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Container(
-                                        width: double.infinity,
-                                        alignment: Alignment.center,
-                                        child: const Text(
-                                          "ปกติ",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.grey,
-                                              fontSize: 15),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Container(
-                      decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 255, 184, 179),
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.dangerous_rounded,
-                              color: Color.fromARGB(255, 132, 2, 2),
-                            ),
-                            SizedBox(
-                              width: 3,
-                            ),
-                            Text('กรุณาถ่ายรูปรายการที่ไม่ปกติ',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromARGB(255, 132, 2, 2),
-                                ))
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
                     ),
                     Container(
                       width: double.infinity,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(25))),
                       child: Column(
@@ -349,14 +289,192 @@ class _Check_DailyState extends State<Check_Daily> {
                         children: [
                           Container(
                             width: double.infinity,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                                 color: Color.fromARGB(255, 238, 246, 255),
-                                
                                 borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(25),
                                     topRight: Radius.circular(25))),
-                            child: const Padding(
-                              padding: EdgeInsets.only(top: 8, bottom: 8),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 8, bottom: 8),
+                              child: Center(
+                                child: Text(
+                                  'ประกันภัยสินค้าเปียก',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Palette.thisBlue,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      child: Text(
+                                        'บริษัท:',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color:
+                                                Color.fromARGB(255, 66, 66, 66),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      'ทวีศักดิ์ ชยันกลาง',
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          color: Palette.thisBlue,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      child: Text(
+                                        'เลขที่กรมธรรม์:',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color:
+                                                Color.fromARGB(255, 66, 66, 66),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      '89-0151',
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          color: Palette.thisBlue,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      child: Text(
+                                        'เบอร์โทรติดต่อ:',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color:
+                                                Color.fromARGB(255, 66, 66, 66),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      '71-71-0152',
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          color: Palette.thisBlue,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      child: Text(
+                                        'วงเงิน:',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color:
+                                                Color.fromARGB(255, 66, 66, 66),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      '588-0152',
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          color: Palette.thisBlue,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'หมายเหตุ:',
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Color.fromARGB(255, 66, 66, 66),
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    TextFormField(
+                      minLines: 1,
+                      maxLines: 5,
+                      keyboardType: TextInputType.multiline,
+                      decoration: InputDecoration(
+                        hintText: 'กรอกหมายเหตุ',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(25))),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 238, 246, 255),
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(25),
+                                    topRight: Radius.circular(25))),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 8, bottom: 8),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -368,7 +486,7 @@ class _Check_DailyState extends State<Check_Daily> {
                                     width: 3,
                                   ),
                                   Text(
-                                    'ภาพประกอบ',
+                                    'รูปจุดแจ้งเหตุ',
                                     style: TextStyle(
                                         fontSize: 18,
                                         color: Colors.grey,
@@ -386,7 +504,6 @@ class _Check_DailyState extends State<Check_Daily> {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    openAlertBox(context);
                                     //_openModal();
                                     // _getGallery();
                                   },
@@ -395,11 +512,11 @@ class _Check_DailyState extends State<Check_Daily> {
                                     width: 100,
                                     decoration: BoxDecoration(
                                         color:
-                                            const Color.fromARGB(255, 238, 246, 255),
-                                                   borderRadius: const BorderRadius.all(
+                                            Color.fromARGB(255, 238, 246, 255),
+                                        borderRadius: BorderRadius.all(
                                             Radius.circular(20)),
                                         border: Border.all(color: Colors.grey)),
-                                    child: const Center(
+                                    child: Center(
                                       child: Text(
                                         '+ เพิ่มรูป',
                                         style: TextStyle(
@@ -448,7 +565,7 @@ class _Check_DailyState extends State<Check_Daily> {
                         ],
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 10,
                     ),
                     SizedBox(
@@ -462,13 +579,14 @@ class _Check_DailyState extends State<Check_Daily> {
                               borderRadius: BorderRadius.circular(10),
                             )),
                         onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            PageTransition(
-                                duration: const Duration(milliseconds: 500),
-                                type: PageTransitionType.fade,
-                                child: Check_Result()),
-                          );
+                          openAlertBox(context);
+                          // Navigator.pushReplacement(
+                          //   context,
+                          //   PageTransition(
+                          //       duration: const Duration(milliseconds: 500),
+                          //       type: PageTransitionType.fade,
+                          //       child: Check_Result()),
+                          // );
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(15.0),
@@ -493,152 +611,6 @@ class _Check_DailyState extends State<Check_Daily> {
           ),
         ]),
       ),
-    );
-  }
-
-  // _openModal() {
-  //   showModalBottomSheet(
-  //       backgroundColor: Colors.transparent,
-  //       context: context,
-  //       builder: (context) {
-  //         return Container(
-  //           height: MediaQuery.of(context).size.height * 0.2,
-  //           decoration: BoxDecoration(
-  //             color: Colors.red,
-  //             borderRadius: new BorderRadius.only(
-  //               topLeft: const Radius.circular(50),
-  //               topRight: const Radius.circular(50),
-  //             ),
-  //           ),
-  //           child: Row(
-  //             children: [
-  //               ElevatedButton(
-  //                 style: ElevatedButton.styleFrom(
-
-  //                     elevation: 0,
-  //                     // side: BorderSide(color: Colors.white),
-  //                     shape: RoundedRectangleBorder(
-  //                       borderRadius: BorderRadius.circular(10),
-  //                     )),
-  //                 onPressed: () {
-  //                   _getGallery();
-  //                 },
-  //                 child: Padding(
-  //                   padding: const EdgeInsets.all(15.0),
-  //                   child: Container(
-  //                     width: double.infinity,
-  //                     alignment: Alignment.center,
-  //                     child: const Text(
-  //                       "xxx",
-  //                       style: TextStyle(
-  //                           fontWeight: FontWeight.bold,
-  //                           color: Colors.white,
-  //                           fontSize: 15),
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         );
-  //       });
-  // }
-
-  openAlertBox(context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            scrollable: true, // <-- Set it to true
-
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(32.0))),
-            contentPadding: const EdgeInsets.all(20),
-            content: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: () {
-                    _getToCamera();
-                    Navigator.pop(context);
-                  },
-                  child: Column(
-                    children: [
-                      SvgPicture.asset('assets/images/cam.svg'),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      const Text(
-                        'ถ่ายภาพ',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  width: 25,
-                ),
-                InkWell(
-                  onTap: () {
-                    _getGallery();
-                    Navigator.pop(context);
-                  },
-                  child: Column(
-                    children: [
-                      SvgPicture.asset('assets/images/gal.svg'),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      const Text(
-                        'แกลอรี่',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          );
-        });
-
-    // Future.delayed(Duration(seconds: 2), () {
-    //    Navigator.pushReplacement(
-    //         context,
-    //         PageTransition(
-    //             duration: const Duration(milliseconds: 500),
-    //             type: PageTransitionType.fade,
-    //             child: MainMenu_Page()),
-    //       );
-    // });
-  }
-
-  Future<void> _getToCamera() async {
-    final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(source: ImageSource.camera);
-
-    if (pickedImage != null) {
-      setState(() {
-        selectedImages.add(File(pickedImage.path));
-      });
-    }
-  }
-
-  Future _getGallery() async {
-    final pickedFile = await picker.pickMultiImage(
-        imageQuality: 100, maxHeight: 1000, maxWidth: 1000);
-    List<XFile> xfilePick = pickedFile;
-
-    setState(
-      () {
-        if (xfilePick.isNotEmpty) {
-          for (var i = 0; i < xfilePick.length; i++) {
-            selectedImages.add(File(xfilePick[i].path));
-          }
-        } else {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text(' ')));
-        }
-      },
     );
   }
 }
