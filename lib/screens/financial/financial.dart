@@ -112,7 +112,7 @@ class _Financial_ListState extends State<Financial_List>
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
-                                  height: 10,
+                                  height: 20,
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(
@@ -157,6 +157,49 @@ class _Financial_ListState extends State<Financial_List>
                                   ),
                                 ),
                                 SizedBox(height: 20,),
+                                  Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'โอนเงิน',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Palette.thisBlue,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            '17,890.00',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.green,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        '15 ก.พ. 23 10:26 น.',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(height: 5),
+                                      Divider()
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(height: 50,),
                                 Container(
                                   decoration: BoxDecoration(
                                       borderRadius:

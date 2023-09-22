@@ -1,12 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 
-
-import '../Jobs/Job Processing/job_done_5.dart';
 
 class Report_Accident extends StatefulWidget {
   @override
@@ -504,6 +503,7 @@ class _Report_AccidentState extends State<Report_Accident> {
                               children: [
                                 InkWell(
                                   onTap: () {
+                                         openAlertBox(context);
                                     //_openModal();
                                     // _getGallery();
                                   },
@@ -579,7 +579,7 @@ class _Report_AccidentState extends State<Report_Accident> {
                               borderRadius: BorderRadius.circular(10),
                             )),
                         onPressed: () {
-                          openAlertBox(context);
+                          // openAlertBox(context);
                           // Navigator.pushReplacement(
                           //   context,
                           //   PageTransition(
@@ -613,4 +613,95 @@ class _Report_AccidentState extends State<Report_Accident> {
       ),
     );
   }
+
+    openAlertBox(context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            scrollable: true, // <-- Set it to true
+
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(32.0))),
+            contentPadding: const EdgeInsets.all(20),
+            content: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: () {
+                    _getToCamera();
+                    Navigator.pop(context);
+                  },
+                  child: Column(
+                    children: [
+                      SvgPicture.asset('assets/images/cam.svg'),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      const Text(
+                        'ถ่ายภาพ',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  width: 25,
+                ),
+                InkWell(
+                  onTap: () {
+                    _getGallery();
+                    Navigator.pop(context);
+                  },
+                  child: Column(
+                    children: [
+                      SvgPicture.asset('assets/images/gal.svg'),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      const Text(
+                        'แกลอรี่',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
+ 
+  }
+
+
+    Future<void> _getToCamera() async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedImage != null) {
+      setState(() {
+        selectedImages.add(File(pickedImage.path));
+      });
+    }
+  }
+
+  Future _getGallery() async {
+    final pickedFile = await picker.pickMultiImage(
+        imageQuality: 100, maxHeight: 1000, maxWidth: 1000);
+    List<XFile> xfilePick = pickedFile;
+
+    setState(
+      () {
+        if (xfilePick.isNotEmpty) {
+          for (var i = 0; i < xfilePick.length; i++) {
+            selectedImages.add(File(xfilePick[i].path));
+          }
+        } else {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(const SnackBar(content: Text(' ')));
+        }
+      },
+    );
+  }
+
 }

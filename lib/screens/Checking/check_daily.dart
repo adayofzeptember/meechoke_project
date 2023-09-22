@@ -351,7 +351,6 @@ class _Check_DailyState extends State<Check_Daily> {
                             width: double.infinity,
                             decoration: const BoxDecoration(
                                 color: Color.fromARGB(255, 238, 246, 255),
-                                
                                 borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(25),
                                     topRight: Radius.circular(25))),
@@ -394,9 +393,9 @@ class _Check_DailyState extends State<Check_Daily> {
                                     height: 100,
                                     width: 100,
                                     decoration: BoxDecoration(
-                                        color:
-                                            const Color.fromARGB(255, 238, 246, 255),
-                                                   borderRadius: const BorderRadius.all(
+                                        color: const Color.fromARGB(
+                                            255, 238, 246, 255),
+                                        borderRadius: const BorderRadius.all(
                                             Radius.circular(20)),
                                         border: Border.all(color: Colors.grey)),
                                     child: const Center(
