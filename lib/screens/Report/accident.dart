@@ -432,6 +432,157 @@ class _Report_AccidentState extends State<Report_Accident> {
                     SizedBox(
                       height: 10,
                     ),
+                            Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(25))),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 238, 246, 255),
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(25),
+                                    topRight: Radius.circular(25))),
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 8, bottom: 8),
+                              child: Center(
+                                child: Text(
+                                  'ประกันภัยสินค้าชำรุด',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Palette.thisBlue,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      child: Text(
+                                        'บริษัท:',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color:
+                                                Color.fromARGB(255, 66, 66, 66),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      'ทวีศักดิ์ ชยันกลาง',
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          color: Palette.thisBlue,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      child: Text(
+                                        'เลขที่กรมธรรม์:',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color:
+                                                Color.fromARGB(255, 66, 66, 66),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      '89-0151',
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          color: Palette.thisBlue,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      child: Text(
+                                        'เบอร์โทรติดต่อ:',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color:
+                                                Color.fromARGB(255, 66, 66, 66),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      '71-71-0152',
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          color: Palette.thisBlue,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      child: Text(
+                                        'วงเงิน:',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color:
+                                                Color.fromARGB(255, 66, 66, 66),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      '588-0152',
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          color: Palette.thisBlue,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                     Text(
                       'หมายเหตุ:',
                       style: TextStyle(
@@ -588,6 +739,7 @@ class _Report_AccidentState extends State<Report_Accident> {
                           //       child: Check_Result()),
                           // );
                         },
+                        
                         child: Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: Container(

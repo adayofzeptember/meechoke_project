@@ -4,9 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
-import 'package:meechoke_project/screens/Jobs/Job%20Processing/job_onGoing_3.dart';
-
-import 'package:page_transition/page_transition.dart';
+ 
 
 class History_Detail extends StatefulWidget {
   @override
@@ -872,42 +870,7 @@ class _History_DetailState extends State<History_Detail>
                 )
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.green,
-                    elevation: 0,
-                    // side: BorderSide(color: Colors.white),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    )),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      PageTransition(
-                          duration: const Duration(milliseconds: 500),
-                          type: PageTransitionType.fade,
-                          child: Job_OnGoing(
-                            check: true,
-                          )));
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Container(
-                    width: double.infinity,
-                    alignment: Alignment.center,
-                    child: const Text(
-                      "ออกรถ",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 15),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+         
           ]),
         ));
   }

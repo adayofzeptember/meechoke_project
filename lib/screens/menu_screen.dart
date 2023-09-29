@@ -23,9 +23,9 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
   Widget build(BuildContext context) {
     //*
     var size = MediaQuery.of(context).size;
-    final double h1 = (size.height - kToolbarHeight - 350) / 2;
+    final double h1 = (size.height - kToolbarHeight - 370) / 2;
     final double w1 = size.width / 2;
-    final double h = (size.height - kToolbarHeight - 500) / 2;
+    final double h = (size.height - kToolbarHeight - 520) / 2;
     final double w = size.width / 2;
     //*
     return Scaffold(
@@ -188,7 +188,15 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                 crossAxisCount: 2,
                 children: <Widget>[
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                              Navigator.push(
+                    context,
+                    PageTransition(
+                        duration: const Duration(milliseconds: 500),
+                        type: PageTransitionType.fade,
+                        child: Report_Accident()),
+                  );
+                    },
                     child: Container(
                       width: double.infinity,
                       child: SvgPicture.asset(
@@ -199,13 +207,13 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                   ),
                   InkWell(
                     onTap: () {
-                         Navigator.push(
-                    context,
-                    PageTransition(
-                        duration: const Duration(milliseconds: 500),
-                        type: PageTransitionType.fade,
-                        child: Report_Accident()),
-                  );
+                  //        Navigator.push(
+                  //   context,
+                  //   PageTransition(
+                  //       duration: const Duration(milliseconds: 500),
+                  //       type: PageTransitionType.fade,
+                  //       child: Report_Accident()),
+                  // );
                     },
                     child: Container(
                       width: double.infinity,

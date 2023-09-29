@@ -66,7 +66,6 @@ class _StartPageState extends State<StartPage> {
   }
 
   Future<void> _Pause_And_Go() async {
-    
     await Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
@@ -77,6 +76,7 @@ class _StartPageState extends State<StartPage> {
       );
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
