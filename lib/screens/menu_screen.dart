@@ -161,6 +161,7 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                       Navigator.push(
                         context,
                         PageTransition(
+                          
                             duration: const Duration(milliseconds: 500),
                             type: PageTransitionType.fade,
                             child: Financial_List()),

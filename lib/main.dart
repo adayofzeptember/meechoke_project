@@ -16,7 +16,6 @@ import 'package:responsive_framework/responsive_framework.dart';
 //               type: PageTransitionType.fade,
 //               child: Job_OnGoing()),
 //         );
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService().init();
@@ -53,13 +52,12 @@ class StarterWidget extends StatelessWidget {
 
 class StartPage extends StatefulWidget {
   const StartPage({super.key});
-
   @override
   State<StartPage> createState() => _StartPageState();
 }
 
 class _StartPageState extends State<StartPage> {
-  @override
+  @override 
   void initState() {
     _Pause_And_Go();
     super.initState();
@@ -76,15 +74,15 @@ class _StartPageState extends State<StartPage> {
       );
     });
   }
-
-
+  
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Palette.thisBlue,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        //crossAxisAlignment: CrossAxisAlignment.center,
+        //crossAxisAlignmen อออ ัด้ด ใt: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 10),
           Center(
