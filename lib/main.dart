@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
+import 'package:meechoke_project/bloc/login/login_bloc.dart';
 import 'package:meechoke_project/screens/login_screen.dart';
-import 'package:meechoke_project/test/noti.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -18,9 +21,9 @@ import 'package:responsive_framework/responsive_framework.dart';
 //         );
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await NotificationService().init();
+  //await NotificationService().init();
   const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
-  runApp(const StarterWidget());
+  runApp(Phoenix(child: StarterWidget()));
 }
 
 class StarterWidget extends StatelessWidget {
@@ -28,22 +31,28 @@ class StarterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      builder: (context, child) => ResponsiveBreakpoints.builder(
-        child: child!,
-        breakpoints: [
-          const Breakpoint(start: 0, end: 450, name: MOBILE),
-          const Breakpoint(start: 451, end: 800, name: TABLET),
-          const Breakpoint(start: 801, end: 1920, name: DESKTOP),
-        ],
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => LoginBloc()),
+        BlocProvider(create: (context) => ProfileBloc()),
+      ],
+      child: MaterialApp(
+        builder: (context, child) => ResponsiveBreakpoints.builder(
+          child: child!,
+          breakpoints: [
+            const Breakpoint(start: 0, end: 450, name: MOBILE),
+            const Breakpoint(start: 451, end: 800, name: TABLET),
+            const Breakpoint(start: 801, end: 1920, name: DESKTOP),
+          ],
+        ),
+        initialRoute: "/",
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Palette.thisBlue),
+          useMaterial3: true,
+          fontFamily: 'Sarabun',
+        ),
+        home: const StartPage(),
       ),
-      initialRoute: "/",
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Palette.thisBlue),
-        useMaterial3: true,
-        fontFamily: 'Sarabun',
-      ),
-      home: const StartPage(),
     );
   }
 }
@@ -57,7 +66,7 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
-  @override 
+  @override
   void initState() {
     _Pause_And_Go();
     super.initState();
@@ -74,8 +83,7 @@ class _StartPageState extends State<StartPage> {
       );
     });
   }
-  
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +95,7 @@ class _StartPageState extends State<StartPage> {
           const SizedBox(height: 10),
           Center(
             child: const Text(
-              'Meechoke',
+              'Meechoke MS',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,

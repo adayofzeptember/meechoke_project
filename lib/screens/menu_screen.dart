@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/screens/Checking/check_daily.dart';
 import 'package:meechoke_project/screens/Fuel/fuel_main.dart';
 import 'package:meechoke_project/screens/History/history.dart';
 import 'package:meechoke_project/screens/Report/accident.dart';
 import 'package:page_transition/page_transition.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Jobs/jobs_lists_main.dart';
 import 'Financial/financial.dart';
 
@@ -20,6 +23,11 @@ class MainMenu_Page extends StatefulWidget {
 
 class _MainMenu_PageState extends State<MainMenu_Page> {
   @override
+  void initState() {
+    context.read<ProfileBloc>().add(Load_Profile());
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     //*
     var size = MediaQuery.of(context).size;
@@ -129,7 +137,7 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                   ),
                 ],
               ),
-             //20/10
+              //20/10
               GridView.count(
                 primary: false,
                 childAspectRatio: (w1 / h1),
@@ -161,7 +169,6 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                       Navigator.push(
                         context,
                         PageTransition(
-                          
                             duration: const Duration(milliseconds: 500),
                             type: PageTransitionType.fade,
                             child: Financial_List()),
@@ -190,13 +197,13 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                 children: <Widget>[
                   InkWell(
                     onTap: () {
-                              Navigator.push(
-                    context,
-                    PageTransition(
-                        duration: const Duration(milliseconds: 500),
-                        type: PageTransitionType.fade,
-                        child: Report_Accident()),
-                  );
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                            duration: const Duration(milliseconds: 500),
+                            type: PageTransitionType.fade,
+                            child: Report_Accident()),
+                      );
                     },
                     child: Container(
                       width: double.infinity,
@@ -208,13 +215,13 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                   ),
                   InkWell(
                     onTap: () {
-                  //        Navigator.push(
-                  //   context,
-                  //   PageTransition(
-                  //       duration: const Duration(milliseconds: 500),
-                  //       type: PageTransitionType.fade,
-                  //       child: Report_Accident()),
-                  // );
+                      //        Navigator.push(
+                      //   context,
+                      //   PageTransition(
+                      //       duration: const Duration(milliseconds: 500),
+                      //       type: PageTransitionType.fade,
+                      //       child: Report_Accident()),
+                      // );
                     },
                     child: Container(
                       width: double.infinity,
@@ -238,178 +245,206 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (context) {
-        return AlertDialog(
-          content: Padding(
-            padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(),
-                      Text(
-                        "ข้อมูล พขร.",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Palette.thisBlue),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  CircleAvatar(
-                    radius: 60,
-                    backgroundColor: Colors.white,
-                    child: CircleAvatar(
-                      radius: 58,
-                      backgroundImage: AssetImage('assets/images/person.png'),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('ชื่อ-สกุล : ',
-                          style: TextStyle(
-                            fontSize: 18,
-                          )),
-                      Text(
-                        'ชวันธร 555',
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 255, 234, 127),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15))),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 255, 234, 127),
-                                border: Border.all(color: Colors.black),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 8, 15, 8),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    '175554',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text('ทะเบียนลูก'),
-                                ],
+        return BlocBuilder<ProfileBloc, ProfileState>(
+          builder: (context, state) {
+            if (state.loading == true) {
+              return const Center(
+                child: CircularProgressIndicator(color: Colors.red),
+              );
+            } else {
+              return AlertDialog(
+                content: Stack(
+                  children: [
+                    Positioned(
+                        top: -5,
+                        left: 240,
+                        child: GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Icon(Icons.close))),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(),
+                                Text(
+                                  "พขร. ID: ${state.profile_data.id}",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Palette.thisBlue),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            CircleAvatar(
+                              radius: 60,
+                              backgroundColor: Colors.white,
+                              child: CircleAvatar(
+                                radius: 58,
+                                backgroundImage:
+                                    AssetImage('assets/images/person.png'),
                               ),
                             ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 255, 234, 127),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15))),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 255, 234, 127),
-                                border: Border.all(color: Colors.black),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 8, 15, 8),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    '175554',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text('ทะเบียนลูก'),
-                                ],
-                              ),
+                            SizedBox(
+                              height: 15,
                             ),
-                          ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  state.profile_data.name.toString(),
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 255, 234, 127),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15))),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Color.fromARGB(
+                                              255, 255, 234, 127),
+                                          border:
+                                              Border.all(color: Colors.black),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(15))),
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            15, 8, 15, 8),
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              '175554',
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Text('ทะเบียนลูก'),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                      color: Color.fromARGB(255, 255, 234, 127),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(15))),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Color.fromARGB(
+                                              255, 255, 234, 127),
+                                          border:
+                                              Border.all(color: Colors.black),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(15))),
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            15, 8, 15, 8),
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              '175554',
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Text('ทะเบียนลูก'),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
                         ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-          ),
-          actions: <Widget>[
-            Center(
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 234, 240, 255),
-                    elevation: 0,
-                    side: BorderSide(color: Palette.thisBlue),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    )),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    width: double.infinity,
-                    alignment: Alignment.center,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.logout,
-                          color: Palette.thisBlue,
-                        ),
-                        SizedBox(
-                          width: 3,
-                        ),
-                        const Text(
-                          "ออกจากระบบ",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Palette.thisBlue,
-                              fontSize: 15),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ),
-            ),
-          ],
+                actions: <Widget>[
+                  Center(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: Color.fromARGB(255, 234, 240, 255),
+                          elevation: 0,
+                          side: BorderSide(color: Palette.thisBlue),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          )),
+                      onPressed: () async {
+                        SharedPreferences prefrences =
+                            await SharedPreferences.getInstance();
+                        prefrences.clear();
+                        Phoenix.rebirth(context);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.logout,
+                                color: Palette.thisBlue,
+                              ),
+                              SizedBox(
+                                width: 3,
+                              ),
+                              const Text(
+                                "ออกจากระบบ",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Palette.thisBlue,
+                                    fontSize: 15),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            }
+          },
         );
       },
     );
