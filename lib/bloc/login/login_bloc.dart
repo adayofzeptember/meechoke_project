@@ -13,7 +13,7 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final dio = Dio();
-  LoginBloc() : super(LoginState(loading: false)) {
+  LoginBloc() : super(LoginState(loading: false, obscurePass: true)) {
     //*---------------------------------------------------------------
     on<Login_Casual>((event, emit) async {
       try {
@@ -31,9 +31,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(state.copyWith(loading: false));
         print('auth token: ' + response.data['data']['accessToken'].toString());
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setString('userToken', response.data['data']['accessToken'].toString());
+        prefs.setString(
+            'userToken', response.data['data']['accessToken'].toString());
         Navigator.pushReplacement(
-         event.context,
+          event.context,
           PageTransition(
               duration: const Duration(milliseconds: 500),
               type: PageTransitionType.fade,
@@ -50,6 +51,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             backgroundColor: const Color.fromARGB(255, 133, 133, 133),
             textColor: Colors.white,
             fontSize: 15);
+      }
+    });
+
+    //?---------------------------------------------------------------
+    on<ShowPassword_Swap>((event, emit) {
+      if (state.obscurePass == false) {
+        emit(state.copyWith(obscurePass: true));
+      } else {
+        emit(state.copyWith(obscurePass: false));
       }
     });
   }

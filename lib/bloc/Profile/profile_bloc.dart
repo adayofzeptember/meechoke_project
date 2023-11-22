@@ -15,7 +15,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<ProfileEvent>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
-      print(tokenAuth);
+      //print(tokenAuth);
       emit(state.copyWith(loading: true));
       try {
         final response = await dio.get(

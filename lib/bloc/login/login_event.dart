@@ -8,6 +8,7 @@ abstract class LoginEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
 class Login_Casual extends LoginEvent {
   var context;
   String getUsername, getPassword;
@@ -16,4 +17,8 @@ class Login_Casual extends LoginEvent {
       {required this.getUsername,
       required this.getPassword,
       required this.context});
+}
+
+class ShowPassword_Swap extends LoginEvent {
+  
 }

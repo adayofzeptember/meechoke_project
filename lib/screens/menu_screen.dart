@@ -243,7 +243,7 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
   Future showProfile(var context) async {
     return showDialog(
       context: context,
-      barrierDismissible: false, // user must tap button!
+      barrierDismissible: true, // user must tap button!
       builder: (context) {
         return BlocBuilder<ProfileBloc, ProfileState>(
           builder: (context, state) {
@@ -307,7 +307,7 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                                   state.profile_data.name.toString(),
                                   style: TextStyle(
                                       fontSize: 18,
-                                      color: Colors.black,
+                                      color: Color.fromARGB(255, 49, 48, 48),
                                       fontWeight: FontWeight.bold),
                                 )
                               ],
@@ -340,12 +340,12 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                                         child: Column(
                                           children: [
                                             Text(
-                                              '175554',
+                                              '899599',
                                               style: TextStyle(
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold),
                                             ),
-                                            Text('ทะเบียนลูก'),
+                                            Text('ทะเบียนแม่'),
                                           ],
                                         ),
                                       ),
@@ -376,7 +376,7 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                                         child: Column(
                                           children: [
                                             Text(
-                                              '175554',
+                                              '98858',
                                               style: TextStyle(
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold),
@@ -407,10 +407,11 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                             borderRadius: BorderRadius.circular(10),
                           )),
                       onPressed: () async {
-                        SharedPreferences prefrences =
-                            await SharedPreferences.getInstance();
-                        prefrences.clear();
-                        Phoenix.rebirth(context);
+                        // SharedPreferences prefrences =
+                        //     await SharedPreferences.getInstance();
+                        // prefrences.clear();
+                        // Phoenix.rebirth(context);
+                        logoutAlert(context);
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
@@ -445,6 +446,59 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
               );
             }
           },
+        );
+      },
+    );
+  }
+
+  //?
+  Future<void> logoutAlert(
+    var context,
+  ) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(
+            'ต้องการออกจากระบบหรือไม่?',
+            style: TextStyle(
+                color: Palette.thisBlue,
+                fontSize: 15,
+                fontWeight: FontWeight.bold),
+          ),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                foregroundColor:
+                    Color.fromARGB(255, 235, 116, 108), // Splash color
+              ),
+              child: const Text(
+                'ยกเลิก',
+                style:
+                    TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                foregroundColor:
+                    const Color.fromARGB(255, 138, 206, 140), // Splash color
+              ),
+              child: const Text(
+                'ยืนยัน',
+                style:
+                    TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+              ),
+              onPressed: () async {
+                SharedPreferences prefrences = await SharedPreferences.getInstance();
+                prefrences.clear();
+                Phoenix.rebirth(context);
+              },
+            ),
+          ],
         );
       },
     );

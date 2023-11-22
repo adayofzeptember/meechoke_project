@@ -6,9 +6,11 @@ import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
 import 'package:meechoke_project/screens/login_screen.dart';
+import 'package:meechoke_project/screens/menu_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // MediaQuery.of(context).size.width * 0.04
 //  Navigator.push(
@@ -19,7 +21,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 //               type: PageTransitionType.fade,
 //               child: Job_OnGoing()),
 //         );
-void main() async {
+void main() async { 
   WidgetsFlutterBinding.ensureInitialized();
   //await NotificationService().init();
   const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
@@ -73,14 +75,27 @@ class _StartPageState extends State<StartPage> {
   }
 
   Future<void> _Pause_And_Go() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? tokenAuth = prefs.getString('userToken').toString();
+    print('stored token: ' + tokenAuth);
     await Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushReplacement(
-        context,
-        PageTransition(
-            duration: const Duration(milliseconds: 800),
-            type: PageTransitionType.fade,
-            child: Login_Screen()),
-      );
+      if (tokenAuth == '' || tokenAuth == 'null') {
+        Navigator.pushReplacement(
+          context,
+          PageTransition(
+              duration: const Duration(milliseconds: 800),
+              type: PageTransitionType.fade,
+              child: Login_Screen()),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          PageTransition(
+              duration: const Duration(milliseconds: 800),
+              type: PageTransitionType.fade,
+              child: MainMenu_Page()),
+        );
+      }
     });
   }
 
