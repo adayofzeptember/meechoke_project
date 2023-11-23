@@ -27,6 +27,7 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
     context.read<ProfileBloc>().add(Load_Profile());
     super.initState();
   }
+  
 
   Widget build(BuildContext context) {
     //*
@@ -493,6 +494,7 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                     TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
               ),
               onPressed: () async {
+                //!context.read<LoginBloc>().add(Logout_Auth(context: context));
                 SharedPreferences prefrences = await SharedPreferences.getInstance();
                 prefrences.clear();
                 Phoenix.rebirth(context);

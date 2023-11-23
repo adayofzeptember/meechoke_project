@@ -4,7 +4,6 @@ part of 'login_bloc.dart';
 
 abstract class LoginEvent extends Equatable {
   const LoginEvent();
-
   @override
   List<Object> get props => [];
 }
@@ -19,6 +18,9 @@ class Login_Casual extends LoginEvent {
       required this.context});
 }
 
-class ShowPassword_Swap extends LoginEvent {
-  
+class Logout_Auth extends LoginEvent {
+  var context;
+  Logout_Auth({required this.context});
 }
+
+class ShowPassword_Swap extends LoginEvent {}

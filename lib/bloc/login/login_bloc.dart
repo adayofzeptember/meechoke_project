@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -45,6 +46,38 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         Fluttertoast.showToast(
             msg:
                 "ไม่พบบัญชีผู้ใช้ในระบบ, สมัครบัญชีใหม่หรือตรวจสอบชื่อผู้ใช้และรหัสผ่านอีกครั้ง \n ${e.toString()}",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.SNACKBAR,
+            timeInSecForIosWeb: 2,
+            backgroundColor: const Color.fromARGB(255, 133, 133, 133),
+            textColor: Colors.white,
+            fontSize: 15);
+      }
+    });
+
+    on<Logout_Auth>((event, emit) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? tokenAuth = prefs.getString('userToken');
+      try {
+        emit(state.copyWith(loading: true));
+        final response = await dio.post(
+          api_url + "logout",
+          options: Options(
+            headers: {
+              // 'Accept': 'application/json',
+              "Authorization": "Bearer $tokenAuth",
+            },
+          ),
+        );
+        emit(state.copyWith(loading: false));
+        print('logout response: ' + response.statusMessage.toString());
+ 
+        prefs.clear();
+        Phoenix.rebirth(event.context);
+      } catch (e) {
+        emit(state.copyWith(loading: false));
+        Fluttertoast.showToast(
+            msg: "${e.toString()}",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.SNACKBAR,
             timeInSecForIosWeb: 2,
