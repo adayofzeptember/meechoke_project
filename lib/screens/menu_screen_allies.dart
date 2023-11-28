@@ -5,38 +5,24 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
-import 'package:meechoke_project/screens/Checking/check_daily.dart';
-import 'package:meechoke_project/screens/Fuel/fuel_main.dart';
-import 'package:meechoke_project/screens/History/history.dart';
-import 'package:meechoke_project/screens/Report/accident.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Jobs/jobs_lists_main.dart';
-import 'Financial/financial.dart';
 
-class MainMenu_Page extends StatefulWidget {
-  const MainMenu_Page({super.key});
+class MainMenu_Allies extends StatefulWidget {
+  const MainMenu_Allies({super.key});
 
   @override
-  State<MainMenu_Page> createState() => _MainMenu_PageState();
+  State<MainMenu_Allies> createState() => _MainMenu_AlliesState();
 }
 
-class _MainMenu_PageState extends State<MainMenu_Page> {
+class _MainMenu_AlliesState extends State<MainMenu_Allies> {
   @override
   void initState() {
     context.read<ProfileBloc>().add(Load_Profile());
     super.initState();
   }
-  
 
   Widget build(BuildContext context) {
-    //*
-    var size = MediaQuery.of(context).size;
-    final double h1 = (size.height - kToolbarHeight - 370) / 2;
-    final double w1 = size.width / 2;
-    final double h = (size.height - kToolbarHeight - 520) / 2;
-    final double w = size.width / 2;
-    //*
+   
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -57,7 +43,7 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
           ),
         ],
         title: const Text(
-          'MEECHOKE',
+          'พันธมิตรรถร่วม',
           style:
               TextStyle(color: Palette.thisBlue, fontWeight: FontWeight.bold),
         ),
@@ -70,13 +56,13 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    PageTransition(
-                        duration: const Duration(milliseconds: 500),
-                        type: PageTransitionType.fade,
-                        child: Job_Lists()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   PageTransition(
+                  //       duration: const Duration(milliseconds: 500),
+                  //       type: PageTransitionType.fade,
+                  //       child: Job_Lists()),
+                  // );
                 },
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.2,
@@ -86,153 +72,59 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
                         topLeft: Radius.circular(5),
                         topRight: Radius.circular(5)),
                     child: SvgPicture.asset(
-                      'assets/images/main_menu/works.svg',
+                      'assets/images/main_menu/car_power_report.svg',
                       fit: BoxFit.contain,
                     ),
                   ),
                 ),
               ),
-              GridView.count(
-                primary: false,
-                childAspectRatio: (w1 / h1),
-                shrinkWrap: true,
-                // crossAxisSpacing: 20,
-                // mainAxisSpacing: 10,
-                crossAxisCount: 2,
-                children: <Widget>[
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                            duration: const Duration(milliseconds: 500),
-                            type: PageTransitionType.fade,
-                            child: Fuel_Lists()),
-                      );
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      child: SvgPicture.asset(
-                        'assets/images/main_menu/fuel.svg',
-                        fit: BoxFit.fill,
-                      ),
+              GestureDetector(
+                onTap: () {
+                  // Navigator.push(
+                  //   context,
+                  //   PageTransition(
+                  //       duration: const Duration(milliseconds: 500),
+                  //       type: PageTransitionType.fade,
+                  //       child: Job_Lists()),
+                  // );
+                },
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  width: double.infinity,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(5),
+                        topRight: Radius.circular(5)),
+                    child: SvgPicture.asset(
+                      'assets/images/main_menu/getwork.svg',
+                      fit: BoxFit.contain,
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                            duration: const Duration(milliseconds: 500),
-                            type: PageTransitionType.fade,
-                            child: Check_Daily()),
-                      );
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      child: SvgPicture.asset(
-                        'assets/images/main_menu/car_check.svg',
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-              //20/10
-              GridView.count(
-                primary: false,
-                childAspectRatio: (w1 / h1),
-                shrinkWrap: true,
-                // crossAxisSpacing: 20,
-                // mainAxisSpacing: 10,
-                crossAxisCount: 2,
-                children: <Widget>[
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                            duration: const Duration(milliseconds: 500),
-                            type: PageTransitionType.fade,
-                            child: History_Page()),
-                      );
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      child: SvgPicture.asset(
-                        'assets/images/main_menu/work_history.svg',
-                        fit: BoxFit.fill,
-                      ),
+              GestureDetector(
+                onTap: () {
+                  // Navigator.push(
+                  //   context,
+                  //   PageTransition(
+                  //       duration: const Duration(milliseconds: 500),
+                  //       type: PageTransitionType.fade,
+                  //       child: Job_Lists()),
+                  //);
+                },
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  width: double.infinity,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(5),
+                        topRight: Radius.circular(5)),
+                    child: SvgPicture.asset(
+                      'assets/images/main_menu/paperwork.svg',
+                      fit: BoxFit.contain,
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                            duration: const Duration(milliseconds: 500),
-                            type: PageTransitionType.fade,
-                            child: Financial_List()),
-                      );
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      child: SvgPicture.asset(
-                        'assets/images/main_menu/financial_history.svg',
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              // SizedBox(
-              //   height: 15,
-              // ),
-              GridView.count(
-                primary: false,
-                childAspectRatio: (w / h),
-                shrinkWrap: true,
-                // crossAxisSpacing: 20,
-                // mainAxisSpacing: 10,
-                crossAxisCount: 2,
-                children: <Widget>[
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                            duration: const Duration(milliseconds: 500),
-                            type: PageTransitionType.fade,
-                            child: Report_Accident()),
-                      );
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      child: SvgPicture.asset(
-                        'assets/images/main_menu/report.svg',
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      //        Navigator.push(
-                      //   context,
-                      //   PageTransition(
-                      //       duration: const Duration(milliseconds: 500),
-                      //       type: PageTransitionType.fade,
-                      //       child: Report_Accident()),
-                      // );
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      child: SvgPicture.asset(
-                        'assets/images/main_menu/maintainance.svg',
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ],
           ),
@@ -495,7 +387,8 @@ class _MainMenu_PageState extends State<MainMenu_Page> {
               ),
               onPressed: () async {
                 //!context.read<LoginBloc>().add(Logout_Auth(context: context));
-                SharedPreferences prefrences = await SharedPreferences.getInstance();
+                SharedPreferences prefrences =
+                    await SharedPreferences.getInstance();
                 prefrences.clear();
                 Phoenix.rebirth(context);
               },

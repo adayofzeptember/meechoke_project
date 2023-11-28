@@ -8,7 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../ETC/api_url.dart';
-import '../../screens/menu_screen.dart';
+import '../../screens/menu_screen_employee.dart';
 part 'login_event.dart';
 part 'login_state.dart';
 
@@ -31,16 +31,23 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             }));
         emit(state.copyWith(loading: false));
         print('auth token: ' + response.data['data']['accessToken'].toString());
+        print('role--->: ' + response.data['loginType'].toString());
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString(
             'userToken', response.data['data']['accessToken'].toString());
-        Navigator.pushReplacement(
-          event.context,
-          PageTransition(
-              duration: const Duration(milliseconds: 500),
-              type: PageTransitionType.fade,
-              child: const MainMenu_Page()),
-        );
+        if (response.data['loginType'].toString() == 'employee') {
+          Navigator.pushReplacement(
+            event.context,
+            PageTransition(
+                duration: const Duration(milliseconds: 500),
+                type: PageTransitionType.fade,
+              //  child: const MainMenu_Allies()),
+
+            child: const MainMenu_Employee()),
+          );
+        } else {
+          print('not employee');
+        }
       } catch (e) {
         emit(state.copyWith(loading: false));
         Fluttertoast.showToast(
@@ -71,7 +78,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         );
         emit(state.copyWith(loading: false));
         print('logout response: ' + response.statusMessage.toString());
- 
+
         prefs.clear();
         Phoenix.rebirth(event.context);
       } catch (e) {

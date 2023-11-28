@@ -19,14 +19,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       emit(state.copyWith(loading: true));
       try {
         final response = await dio.get(
-          api_url_V1 + "profile",
+          api_url_V1 + "profile", 
           options: Options(headers: {
             // "Content-Type": "application/json",
             "Authorization": "Bearer $tokenAuth",
           }),
         );
-
-        // print('--------' + response.data['data']['user']['username'].toString());
 
         dynamic dataProfile =
             (state.profile_data != '') ? state.profile_data : '';
@@ -38,12 +36,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
             name: await nestedData['name'].toString(),
           );
 
-          emit(state.copyWith(
-            profile_data: dataProfile,
-            loading: false
-          ));
+          emit(state.copyWith(profile_data: dataProfile, loading: false));
 
-          print(state.profile_data.name.toString());
+         
         } else {
           emit(state.copyWith(loading: false));
           print('fail api: ${response}');

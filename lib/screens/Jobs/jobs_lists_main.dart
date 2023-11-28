@@ -37,10 +37,10 @@ class _Job_ListsState extends State<Job_Lists>
         actions: [
           IconButton(
             onPressed: () {},
-            icon: CircleAvatar(
+            icon: const CircleAvatar(
               radius: 15,
               backgroundColor: Colors.white,
-              child: const Icon(
+              child: Icon(
                 Icons.person,
                 color: Palette.thisBlue,
                 size: 15,
@@ -64,7 +64,7 @@ class _Job_ListsState extends State<Job_Lists>
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
         ),
       ),
-      backgroundColor: Color.fromARGB(255, 228, 237, 240),
+      backgroundColor: const Color.fromARGB(255, 228, 237, 240),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
         child: Column(
@@ -84,7 +84,7 @@ class _Job_ListsState extends State<Job_Lists>
                   dividerColor: Colors.transparent,
                   indicatorColor: Colors.transparent,
                   labelColor: Colors.white,
-                  labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                  labelStyle: const TextStyle(fontWeight: FontWeight.bold),
                   unselectedLabelColor: Colors.grey,
                   indicatorSize: TabBarIndicatorSize.tab,
                   indicator: BoxDecoration(
@@ -94,7 +94,7 @@ class _Job_ListsState extends State<Job_Lists>
                       // ]),
                       borderRadius: BorderRadius.circular(40),
                       color: Palette.thisBlue),
-                  tabs: [
+                  tabs: const [
                     Tab(
                       text: 'กำลังดำเนินการ',
                     ),
@@ -105,7 +105,7 @@ class _Job_ListsState extends State<Job_Lists>
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             // tab bar view here
@@ -152,10 +152,10 @@ Widget newJobsWidget(context) {
                     'assets/images/icon_job.svg',
                     fit: BoxFit.contain,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 3,
                   ),
-                  Text(
+                  const Text(
                     '10 พ.ย. 2565 08:00 - 11 พ.ย. 2565 15:00',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   )
@@ -182,20 +182,20 @@ Widget newJobsWidget(context) {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
+                              const Text(
                                 'JO65/47416',
                                 style: TextStyle(
                                     color: Palette.thisBlue,
                                     fontWeight: FontWeight.bold),
                               ),
                               Container(
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                     color: Color.fromARGB(255, 114, 57, 234),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20))),
-                                child: Padding(
+                                child: const Padding(
                                   padding:
-                                      const EdgeInsets.fromLTRB(12, 8, 12, 8),
+                                      EdgeInsets.fromLTRB(12, 8, 12, 8),
                                   child: SizedBox(
                                     width: 120,
                                     child: Text(
@@ -210,18 +210,18 @@ Widget newJobsWidget(context) {
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           DottedLine(
-                            dashGradient: [
+                            dashGradient: const [
                               Colors.red,
                               Colors.blue,
                             ],
                             dashLength: 10,
                             lineThickness: 2,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Container(
@@ -231,7 +231,7 @@ Widget newJobsWidget(context) {
                                 SvgPicture.asset(
                                   'assets/images/allpoints.svg',
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 Column(
@@ -242,19 +242,19 @@ Widget newJobsWidget(context) {
                                       children: [
                                         Row(
                                           children: [
-                                            Text('จุดรับ'),
-                                            SizedBox(
+                                            const Text('จุดรับ'),
+                                            const SizedBox(
                                               width: 5,
                                             ),
                                             Container(
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                   color: Palette.thisBlue,
                                                   borderRadius:
                                                       BorderRadius.all(
                                                           Radius.circular(20))),
-                                              child: Padding(
+                                              child: const Padding(
                                                 padding:
-                                                    const EdgeInsets.fromLTRB(
+                                                    EdgeInsets.fromLTRB(
                                                         3, 3, 3, 3),
                                                 child: Text(
                                                   '10 พ.ย. 2023 - 08:00',
@@ -270,7 +270,7 @@ Widget newJobsWidget(context) {
                                         ),
                                       ],
                                     ),
-                                    Text(
+                                    const Text(
                                       'โรงน้ำตาลครบุรี อ.ครบุรี จ.นครราชสีมา',
                                       style: TextStyle(
                                           decoration: TextDecoration.underline,
@@ -285,17 +285,17 @@ Widget newJobsWidget(context) {
                                     ),
                                     Row(
                                       children: [
-                                        Text('จุดส่ง'),
-                                        SizedBox(
+                                        const Text('จุดส่ง'),
+                                        const SizedBox(
                                           width: 5,
                                         ),
                                         Container(
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                               color: Palette.thisBlue,
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(20))),
-                                          child: Padding(
-                                            padding: const EdgeInsets.fromLTRB(
+                                          child: const Padding(
+                                            padding: EdgeInsets.fromLTRB(
                                                 3, 3, 3, 3),
                                             child: Text(
                                               '10 พ.ย. 2023 - 08:00',
@@ -308,10 +308,10 @@ Widget newJobsWidget(context) {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 5,
                                     ),
-                                    Text(
+                                    const Text(
                                       'โรงน้ำตาลครบุรี อ.ครบุรี จ.นครราชสีมา',
                                       style: TextStyle(
                                           decoration: TextDecoration.underline,
@@ -341,7 +341,7 @@ Widget newJobsWidget(context) {
 
 Widget onGoingJobWidget(context) {
   return SingleChildScrollView(
-    physics: ClampingScrollPhysics(),
+    physics: const ClampingScrollPhysics(),
     child: Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -361,10 +361,10 @@ Widget onGoingJobWidget(context) {
                           'assets/images/icon_job.svg',
                           fit: BoxFit.contain,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 3,
                         ),
-                        Text(
+                        const Text(
                           '10 พ.ย. 2565 08:00 - 11 พ.ย. 2565 15:00',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
@@ -392,19 +392,19 @@ Widget onGoingJobWidget(context) {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'JO65/47416',
                                       style: TextStyle(
                                           color: Palette.thisBlue,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Container(
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           color: Colors.blue,
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(20))),
-                                      child: Padding(
-                                        padding: const EdgeInsets.fromLTRB(
+                                      child: const Padding(
+                                        padding: EdgeInsets.fromLTRB(
                                             12, 8, 12, 8),
                                         child: SizedBox(
                                           width: 120,
@@ -420,18 +420,18 @@ Widget onGoingJobWidget(context) {
                                     ),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
                                 DottedLine(
-                                  dashGradient: [
+                                  dashGradient: const [
                                     Colors.red,
                                     Colors.blue,
                                   ],
                                   dashLength: 10,
                                   lineThickness: 2,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
                                 Container(
@@ -442,7 +442,7 @@ Widget onGoingJobWidget(context) {
                                       SvgPicture.asset(
                                         'assets/images/allpoints.svg',
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 10,
                                       ),
                                       Column(
@@ -453,20 +453,20 @@ Widget onGoingJobWidget(context) {
                                         children: [
                                           Row(
                                             children: [
-                                              Text('จุดรับ'),
-                                              SizedBox(
+                                              const Text('จุดรับ'),
+                                              const SizedBox(
                                                 width: 5,
                                               ),
                                               Container(
-                                                decoration: BoxDecoration(
+                                                decoration: const BoxDecoration(
                                                     color: Palette.thisBlue,
                                                     borderRadius:
                                                         BorderRadius.all(
                                                             Radius.circular(
                                                                 20))),
-                                                child: Padding(
+                                                child: const Padding(
                                                   padding:
-                                                      const EdgeInsets.fromLTRB(
+                                                      EdgeInsets.fromLTRB(
                                                           3, 3, 3, 3),
                                                   child: Text(
                                                     '10 พ.ย. 2023 - 08:00',
@@ -480,7 +480,7 @@ Widget onGoingJobWidget(context) {
                                               ),
                                             ],
                                           ),
-                                          Text(
+                                          const Text(
                                             'โรงน้ำตาลครบุรี อ.ครบุรี จ.นครราชสีมา',
                                             style: TextStyle(
                                                 decoration:
@@ -497,20 +497,20 @@ Widget onGoingJobWidget(context) {
                                           ),
                                           Row(
                                             children: [
-                                              Text('จุดส่ง'),
-                                              SizedBox(
+                                              const Text('จุดส่ง'),
+                                              const SizedBox(
                                                 width: 5,
                                               ),
                                               Container(
-                                                decoration: BoxDecoration(
+                                                decoration: const BoxDecoration(
                                                     color: Palette.thisBlue,
                                                     borderRadius:
                                                         BorderRadius.all(
                                                             Radius.circular(
                                                                 20))),
-                                                child: Padding(
+                                                child: const Padding(
                                                   padding:
-                                                      const EdgeInsets.fromLTRB(
+                                                      EdgeInsets.fromLTRB(
                                                           3, 3, 3, 3),
                                                   child: Text(
                                                     '10 พ.ย. 2023 - 08:00',
@@ -524,10 +524,10 @@ Widget onGoingJobWidget(context) {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 5,
                                           ),
-                                          Text(
+                                          const Text(
                                             'โรงน้ำตาลครบุรี อ.ครบุรี จ.นครราชสีมา',
                                             style: TextStyle(
                                                 decoration:
@@ -586,10 +586,10 @@ Widget onGoingJobWidget(context) {
                           'assets/images/icon_job.svg',
                           fit: BoxFit.contain,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 3,
                         ),
-                        Text(
+                        const Text(
                           '10 พ.ย. 2565 08:00 - 11 พ.ย. 2565 15:00',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
@@ -617,19 +617,19 @@ Widget onGoingJobWidget(context) {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'JO65/47416',
                                       style: TextStyle(
                                           color: Palette.thisBlue,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Container(
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           color: Colors.grey,
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(20))),
-                                      child: Padding(
-                                        padding: const EdgeInsets.fromLTRB(
+                                      child: const Padding(
+                                        padding: EdgeInsets.fromLTRB(
                                             12, 8, 12, 8),
                                         child: SizedBox(
                                           width: 120,
@@ -645,18 +645,18 @@ Widget onGoingJobWidget(context) {
                                     ),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
                                 DottedLine(
-                                  dashGradient: [
+                                  dashGradient: const [
                                     Colors.red,
                                     Colors.blue,
                                   ],
                                   dashLength: 10,
                                   lineThickness: 2,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
                                 Container(
@@ -667,7 +667,7 @@ Widget onGoingJobWidget(context) {
                                       SvgPicture.asset(
                                         'assets/images/allpoints.svg',
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 10,
                                       ),
                                       Column(
@@ -678,20 +678,20 @@ Widget onGoingJobWidget(context) {
                                         children: [
                                           Row(
                                             children: [
-                                              Text('จุดรับ'),
-                                              SizedBox(
+                                              const Text('จุดรับ'),
+                                              const SizedBox(
                                                 width: 5,
                                               ),
                                               Container(
-                                                decoration: BoxDecoration(
+                                                decoration: const BoxDecoration(
                                                     color: Palette.thisBlue,
                                                     borderRadius:
                                                         BorderRadius.all(
                                                             Radius.circular(
                                                                 20))),
-                                                child: Padding(
+                                                child: const Padding(
                                                   padding:
-                                                      const EdgeInsets.fromLTRB(
+                                                      EdgeInsets.fromLTRB(
                                                           3, 3, 3, 3),
                                                   child: Text(
                                                     '10 พ.ย. 2023 - 08:00',
@@ -705,7 +705,7 @@ Widget onGoingJobWidget(context) {
                                               ),
                                             ],
                                           ),
-                                          Text(
+                                          const Text(
                                             'โรงน้ำตาลครบุรี อ.ครบุรี จ.นครราชสีมา',
                                             style: TextStyle(
                                                 decoration:
@@ -722,20 +722,20 @@ Widget onGoingJobWidget(context) {
                                           ),
                                           Row(
                                             children: [
-                                              Text('จุดส่ง'),
-                                              SizedBox(
+                                              const Text('จุดส่ง'),
+                                              const SizedBox(
                                                 width: 5,
                                               ),
                                               Container(
-                                                decoration: BoxDecoration(
+                                                decoration: const BoxDecoration(
                                                     color: Palette.thisBlue,
                                                     borderRadius:
                                                         BorderRadius.all(
                                                             Radius.circular(
                                                                 20))),
-                                                child: Padding(
+                                                child: const Padding(
                                                   padding:
-                                                      const EdgeInsets.fromLTRB(
+                                                      EdgeInsets.fromLTRB(
                                                           3, 3, 3, 3),
                                                   child: Text(
                                                     '10 พ.ย. 2023 - 08:00',
@@ -749,10 +749,10 @@ Widget onGoingJobWidget(context) {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 5,
                                           ),
-                                          Text(
+                                          const Text(
                                             'โรงน้ำตาลครบุรี อ.ครบุรี จ.นครราชสีมา',
                                             style: TextStyle(
                                                 decoration:

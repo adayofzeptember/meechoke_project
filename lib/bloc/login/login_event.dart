@@ -11,7 +11,6 @@ abstract class LoginEvent extends Equatable {
 class Login_Casual extends LoginEvent {
   var context;
   String getUsername, getPassword;
-
   Login_Casual(
       {required this.getUsername,
       required this.getPassword,

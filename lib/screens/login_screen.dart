@@ -50,6 +50,7 @@ class Login_Screen extends StatelessWidget {
                     ),
                     child: Container(
                       decoration: BoxDecoration(
+                        
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(40),
                       ),
