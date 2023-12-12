@@ -27,7 +27,6 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
     context.read<ProfileBloc>().add(Load_Profile());
     super.initState();
   }
-  
 
   Widget build(BuildContext context) {
     //*
@@ -185,9 +184,6 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                   ),
                 ],
               ),
-              // SizedBox(
-              //   height: 15,
-              // ),
               GridView.count(
                 primary: false,
                 childAspectRatio: (w / h),
@@ -244,7 +240,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
   Future showProfile(var context) async {
     return showDialog(
       context: context,
-      barrierDismissible: true, // user must tap button!
+      barrierDismissible: true, //* user must tap button!
       builder: (context) {
         return BlocBuilder<ProfileBloc, ProfileState>(
           builder: (context, state) {
@@ -258,35 +254,35 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                   children: [
                     Positioned(
                         top: -5,
-                        left: 240,
+                        left: 230,
                         child: GestureDetector(
                             onTap: () {
                               Navigator.pop(context);
                             },
                             child: Icon(Icons.close))),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
+                      padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
                       child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(),
-                                Text(
-                                  "พขร. ID: ${state.profile_data.id}",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Palette.thisBlue),
-                                ),
-                              ],
-                            ),
+                            // Row(
+                            //   crossAxisAlignment: CrossAxisAlignment.center,
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     Container(),
+                            //     Text(
+                            //       "พขร. ID: ${state.profile_data.id}",
+                            //       style: TextStyle(
+                            //           fontSize: 20,
+                            //           fontWeight: FontWeight.bold,
+                            //           color: Palette.thisBlue),
+                            //     ),
+                            //   ],
+                            // ),
                             SizedBox(
-                              height: 15,
+                              height: 10,
                             ),
                             CircleAvatar(
                               radius: 60,
@@ -314,81 +310,113 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                               ],
                             ),
                             SizedBox(
-                              height: 15,
+                              height: 20,
                             ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 255, 234, 127),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(15))),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: Container(
+                                Column(
+                                  children: [
+                                    Text(
+                                      'ทะเบียนลูก',
+                                      style: TextStyle(
+                                          color: const Color.fromARGB(
+                                              255, 131, 131, 131),
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Container(
                                       decoration: BoxDecoration(
                                           color: Color.fromARGB(
                                               255, 255, 234, 127),
-                                          border:
-                                              Border.all(color: Colors.black),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(15))),
                                       child: Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            15, 8, 15, 8),
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              '899599',
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold),
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color: Color.fromARGB(
+                                                  255, 255, 234, 127),
+                                              border: Border.all(
+                                                  color: Colors.black),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(15))),
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                15, 8, 15, 8),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  '899599',
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Text('นครราชสีมา'),
+                                              ],
                                             ),
-                                            Text('ทะเบียนแม่'),
-                                          ],
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ),
                                 SizedBox(
-                                  width: 15,
+                                  width: 5,
                                 ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 255, 234, 127),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(15))),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: Container(
+                                Column(
+                                  children: [
+                                    Text(
+                                      'ทะเบียนลูก',
+                                      style: TextStyle(
+                                          color: const Color.fromARGB(
+                                              255, 131, 131, 131),
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Container(
                                       decoration: BoxDecoration(
                                           color: Color.fromARGB(
                                               255, 255, 234, 127),
-                                          border:
-                                              Border.all(color: Colors.black),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(15))),
                                       child: Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            15, 8, 15, 8),
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              '98858',
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold),
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color: Color.fromARGB(
+                                                  255, 255, 234, 127),
+                                              border: Border.all(
+                                                  color: Colors.black),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(15))),
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                15, 8, 15, 8),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  '899599',
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Text('นครราชสีมา'),
+                                              ],
                                             ),
-                                            Text('ทะเบียนลูก'),
-                                          ],
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                )
+                                  ],
+                                ),
                               ],
                             )
                           ],
@@ -495,7 +523,8 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
               ),
               onPressed: () async {
                 //!context.read<LoginBloc>().add(Logout_Auth(context: context));
-                SharedPreferences prefrences = await SharedPreferences.getInstance();
+                SharedPreferences prefrences =
+                    await SharedPreferences.getInstance();
                 prefrences.clear();
                 Phoenix.rebirth(context);
               },

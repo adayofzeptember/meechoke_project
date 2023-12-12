@@ -33,9 +33,9 @@ class _MainMenu_AlliesState extends State<MainMenu_Allies> {
             onPressed: () {
               showProfile(context);
             },
-            icon: CircleAvatar(
+            icon: const CircleAvatar(
               backgroundColor: Palette.thisBlue,
-              child: const Icon(
+              child: Icon(
                 Icons.person,
                 color: Colors.white,
               ),
@@ -112,6 +112,7 @@ class _MainMenu_AlliesState extends State<MainMenu_Allies> {
                   //       child: Job_Lists()),
                   //);
                 },
+               
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.2,
                   width: double.infinity,
@@ -132,8 +133,7 @@ class _MainMenu_AlliesState extends State<MainMenu_Allies> {
       ),
     );
   }
-
-  Future showProfile(var context) async {
+Future showProfile(var context) async {
     return showDialog(
       context: context,
       barrierDismissible: true, // user must tap button!
@@ -150,37 +150,38 @@ class _MainMenu_AlliesState extends State<MainMenu_Allies> {
                   children: [
                     Positioned(
                         top: -5,
-                        left: 240,
+                        left: 230,
                         child: GestureDetector(
                             onTap: () {
                               Navigator.pop(context);
                             },
-                            child: Icon(Icons.close))),
+                            child: const Icon(Icons.close))),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
+                      padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
                       child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(),
-                                Text(
-                                  "พขร. ID: ${state.profile_data.id}",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Palette.thisBlue),
-                                ),
-                              ],
+                            // Row(
+                            //   crossAxisAlignment: CrossAxisAlignment.center,
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     Container(),
+                            //     Text(
+                            //       "พขร. ID: ${state.profile_data.id}",
+                            //       style: TextStyle(
+                            //           fontSize: 20,
+                            
+                            //           fontWeight: FontWeight.bold,
+                            //           color: Palette.thisBlue),
+                            //     ),
+                            //   ],
+                            // ),
+                            const SizedBox(
+                              height: 10,
                             ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            CircleAvatar(
+                            const CircleAvatar(
                               radius: 60,
                               backgroundColor: Colors.white,
                               child: CircleAvatar(
@@ -189,7 +190,7 @@ class _MainMenu_AlliesState extends State<MainMenu_Allies> {
                                     AssetImage('assets/images/person.png'),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 15,
                             ),
                             Row(
@@ -198,89 +199,121 @@ class _MainMenu_AlliesState extends State<MainMenu_Allies> {
                               children: [
                                 Text(
                                   state.profile_data.name.toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 18,
                                       color: Color.fromARGB(255, 49, 48, 48),
                                       fontWeight: FontWeight.bold),
                                 )
                               ],
                             ),
-                            SizedBox(
-                              height: 15,
+                            const SizedBox(
+                              height: 20,
                             ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 255, 234, 127),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(15))),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: Container(
-                                      decoration: BoxDecoration(
+                                Column(
+                                  children: [
+                                    const Text(
+                                      'ทะเบียนลูก',
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 131, 131, 131),
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Container(
+                                      decoration: const BoxDecoration(
                                           color: Color.fromARGB(
                                               255, 255, 234, 127),
-                                          border:
-                                              Border.all(color: Colors.black),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(15))),
                                       child: Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            15, 8, 15, 8),
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              '899599',
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold),
+
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color: const Color.fromARGB(
+                                                  255, 255, 234, 127),
+                                              border: Border.all(
+                                                  color: Colors.black),
+                                              borderRadius: const BorderRadius.all(
+                                                  Radius.circular(15))),
+                                          child: const Padding(
+                                            padding: EdgeInsets.fromLTRB(
+                                                15, 8, 15, 8),
+                                            child: 
+                                            Column(
+                                              children: [
+                                                const Text(
+                                                  '899599',
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Text('นครราชสีมา'),
+                                              ],
                                             ),
-                                            Text('ทะเบียนแม่'),
-                                          ],
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                                SizedBox(
-                                  width: 15,
+                                const SizedBox(
+                                  width: 5,
                                 ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 255, 234, 127),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(15))),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: Container(
-                                      decoration: BoxDecoration(
+                                Column(
+                                  children: [
+                                    const Text(
+                                      'ทะเบียนลูก',
+                                      style: TextStyle(
+                                                                    color: Color.fromARGB(255, 131, 131, 131),
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Container(
+                                      decoration:   BoxDecoration(
                                           color: Color.fromARGB(
                                               255, 255, 234, 127),
-                                          border:
-                                              Border.all(color: Colors.black),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(15))),
                                       child: Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            15, 8, 15, 8),
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              '98858',
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold),
+                                        padding:  EdgeInsets.all(5.0),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color:  Color.fromARGB(
+                                                  255, 255, 234, 127),
+                                              border: Border.all(
+                                                  color: Colors.black),
+                                              borderRadius: const BorderRadius.all(
+                                                  Radius.circular(15))),
+                                          child: const Padding(
+                                            padding: EdgeInsets.fromLTRB(
+                                                15, 8, 15, 8),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  '899599',
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                             Text('นครราชสีมา'),
+                                              ],
                                             ),
-                                            Text('ทะเบียนลูก'),
-                                          ],
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                )
+                                  ],
+                                ),
                               ],
                             )
                           ],
@@ -293,9 +326,9 @@ class _MainMenu_AlliesState extends State<MainMenu_Allies> {
                   Center(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 234, 240, 255),
+                          primary: const Color.fromARGB(255, 234, 240, 255),
                           elevation: 0,
-                          side: BorderSide(color: Palette.thisBlue),
+                          side: const BorderSide(color: Palette.thisBlue),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           )),
@@ -311,7 +344,7 @@ class _MainMenu_AlliesState extends State<MainMenu_Allies> {
                         child: Container(
                           width: double.infinity,
                           alignment: Alignment.center,
-                          child: Row(
+                          child: const Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -322,7 +355,7 @@ class _MainMenu_AlliesState extends State<MainMenu_Allies> {
                               SizedBox(
                                 width: 3,
                               ),
-                              const Text(
+                              Text(
                                 "ออกจากระบบ",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -364,7 +397,7 @@ class _MainMenu_AlliesState extends State<MainMenu_Allies> {
             TextButton(
               style: TextButton.styleFrom(
                 foregroundColor:
-                    Color.fromARGB(255, 235, 116, 108), // Splash color
+                    const Color.fromARGB(255, 235, 116, 108), // Splash color
               ),
               child: const Text(
                 'ยกเลิก',
@@ -398,4 +431,4 @@ class _MainMenu_AlliesState extends State<MainMenu_Allies> {
       },
     );
   }
-}
+} 
