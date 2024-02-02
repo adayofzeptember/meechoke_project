@@ -1,4 +1,4 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
@@ -33,10 +33,10 @@ class _Financial_ListState extends State<Financial_List>
           actions: [
             IconButton(
               onPressed: () {},
-              icon: CircleAvatar(
+              icon: const CircleAvatar(
                 radius: 15,
                 backgroundColor: Colors.white,
-                child: const Icon(
+                child: Icon(
                   Icons.person,
                   color: Palette.thisBlue,
                   size: 15,
@@ -60,7 +60,7 @@ class _Financial_ListState extends State<Financial_List>
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
           ),
         ),
-        backgroundColor: Color.fromARGB(255, 228, 237, 240),
+        backgroundColor: const Color.fromARGB(255, 228, 237, 240),
         body: SingleChildScrollView(
           child: Column(children: [
             Stack(
@@ -73,30 +73,30 @@ class _Financial_ListState extends State<Financial_List>
                   padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
                   child: Column(
                     children: [
-                      Text(
+                      const Text(
                         'ยอดเงินรับ',
                         style: TextStyle(
-                            color: const Color.fromARGB(255, 180, 180, 180),
+                            color: Color.fromARGB(255, 180, 180, 180),
                             fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Text(
+                      const Text(
                         '4,252.00',
                         style: TextStyle(
                             fontSize: 25,
                             color: Colors.white,
                             fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
                           width: double.infinity,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               color: Colors.white,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(25))),
@@ -104,19 +104,62 @@ class _Financial_ListState extends State<Financial_List>
                             padding: const EdgeInsets.all(15),
                             child: Column(
                               children: [
-                                Text(
+                                const Text(
                                   'รายการประวัติการเงิน',
                                   style: TextStyle(
                                       fontSize: 20,
                                       color: Color.fromARGB(255, 131, 131, 131),
                                       fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 10, right: 10),
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 10, right: 10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'โอนเงิน',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Palette.thisBlue,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            '17,890.00',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.green,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        '15 ก.พ. 23 10:26 น.',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(height: 5),
+                                      const Divider()
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 10, right: 10),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -156,71 +199,30 @@ class _Financial_ListState extends State<Financial_List>
                                     ],
                                   ),
                                 ),
-                                SizedBox(height: 20,),
-                                  Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 10, right: 10),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'โอนเงิน',
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                color: Palette.thisBlue,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Text(
-                                            '17,890.00',
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                color: Colors.green,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        '15 ก.พ. 23 10:26 น.',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color: Colors.grey,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      SizedBox(height: 5),
-                                      Divider()
-                                    ],
-                                  ),
+                                const SizedBox(
+                                  height: 50,
                                 ),
-                                SizedBox(height: 50,),
                                 Container(
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(25)),
                                       color:
                                           Color.fromARGB(255, 236, 212, 212)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10),
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(10),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          'หมายเหตุ: ',
+                                         Text(
+                                          'หมายเหตุ: ', 
                                           style: TextStyle(
                                               fontSize: 13,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 5,
                                         ),
                                         Text(
@@ -230,7 +232,7 @@ class _Financial_ListState extends State<Financial_List>
                                               color: Colors.red,
                                               fontWeight: FontWeight.bold),
                                         )
-                                      ],
+                                      ], 
                                     ),
                                   ),
                                 )

@@ -200,9 +200,7 @@ class _History_DetailState extends State<History_Detail>
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
+                     
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -586,7 +584,7 @@ class _History_DetailState extends State<History_Detail>
                                                     .width *
                                                 0.25,
                                             child: Text(
-                                              'นำตาครบุรี',
+                                              'น้ำตาลครบุรี',
                                               overflow: TextOverflow.clip,
                                               maxLines: 3,
                                               style: TextStyle(

@@ -25,6 +25,8 @@ class _Job_DetailsState extends State<Job_Details>
   void dispose() {
     super.dispose();
     _tabController.dispose();
+
+
   }
 
   @override

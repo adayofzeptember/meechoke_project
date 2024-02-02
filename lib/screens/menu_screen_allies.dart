@@ -20,9 +20,8 @@ class _MainMenu_AlliesState extends State<MainMenu_Allies> {
     context.read<ProfileBloc>().add(Load_Profile());
     super.initState();
   }
-
+  
   Widget build(BuildContext context) {
-   
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,

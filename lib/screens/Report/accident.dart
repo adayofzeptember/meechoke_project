@@ -1,11 +1,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 
+import '../../bloc/ReportAccident/report_accident_bloc.dart';
 
 class Report_Accident extends StatefulWidget {
   @override
@@ -28,20 +30,20 @@ class _Report_AccidentState extends State<Report_Accident> {
         elevation: 0,
         backgroundColor: Palette.thisBlue,
         automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: CircleAvatar(
-              radius: 15,
-              backgroundColor: Colors.white,
-              child: const Icon(
-                Icons.person,
-                color: Palette.thisBlue,
-                size: 15,
-              ),
-            ),
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {},
+        //     icon: CircleAvatar(
+        //       radius: 20,
+        //       backgroundColor: Colors.white,
+        //       child: const Icon(
+        //         Icons.person,
+        //         color: Palette.thisBlue,
+        //         size: 20,
+        //       ),
+        //     ),
+        //   ),
+        // ],
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -53,720 +55,660 @@ class _Report_AccidentState extends State<Report_Accident> {
           ),
         ),
         title: const Text(
-          'แจ้งเหตุ',
+          'แจ้งเหตุ/ข้อมูลเกี่ยวกับกรมธรรม์',
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
         ),
       ),
       backgroundColor: Color.fromARGB(255, 228, 237, 240),
       body: SingleChildScrollView(
-        child: Column(children: [
-          Stack(
-            children: [
-              CustomPaint(
-                painter: ShapesPainter(),
-                child: Container(height: 180),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 88, 151, 211),
-                          borderRadius: BorderRadius.all(Radius.circular(50))),
-                      child: Column(
-                        children: [
-                          Padding(
-                              padding: const EdgeInsets.all(20),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.pin_drop_outlined,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.6,
-                                    child: Text(
-                                      '9686 เชลล์เขาหินซ้อน เขาหินซ้อน พนมสารคาม ฉะเชิงเทรา',
-                                      overflow: TextOverflow.clip,
-                                      maxLines: 3,
-                                      style: TextStyle(
+        child: BlocBuilder<ReportAccidentBloc, ReportAccidentState>(
+          builder: (context, state) {
+            return Column(children: [
+              Stack(
+                children: [
+                  CustomPaint(
+                    painter: ShapesPainter(),
+                    child: Container(height: 100),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(40))),
+                          child: Column(
+                            children: [
+                              Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.pin_drop_outlined,
+                                        color: Palette.thisBlue,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.6,
+                                        child: Text(
+                                          '9686 เชลล์เขาหินซ้อน เขาหินซ้อน พนมสารคาม ฉะเชิงเทรา',
+                                          overflow: TextOverflow.clip,
+                                          maxLines: 3,
+                                          style: TextStyle(
+                                              color: Palette.thisBlue,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          height: 300,
+                          child: Column(
+                            children: [
+                              ListView.builder(
+                                itemCount: state.vehicle_Docs.length,
+                                shrinkWrap: true,
+                                physics: const ClampingScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(bottom: 10),
+                                    child: Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
                                           color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ],
-                              )),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Center(
-                      child: Text(
-                        'ข้อมูลเกี่ยวกับกรมธรรม์',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(25))),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 238, 246, 255),
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(25),
-                                    topRight: Radius.circular(25))),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 8, bottom: 8),
-                              child: Center(
-                                child: Text(
-                                  'ประกันภัยรถ',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Palette.thisBlue,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      child: Text(
-                                        'บริษัท:',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color:
-                                                Color.fromARGB(255, 66, 66, 66),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      'ทวีศักดิ์ ชยันกลาง',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Palette.thisBlue,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      child: Text(
-                                        'เลขที่กรมธรรม์:',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color:
-                                                Color.fromARGB(255, 66, 66, 66),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      '89-0151',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Palette.thisBlue,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      child: Text(
-                                        'เบอร์โทรติดต่อ:',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color:
-                                                Color.fromARGB(255, 66, 66, 66),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      '71-71-0152',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Palette.thisBlue,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      child: Text(
-                                        'วงเงิน:',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color:
-                                                Color.fromARGB(255, 66, 66, 66),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      '588-0152',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Palette.thisBlue,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(25))),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 238, 246, 255),
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(25),
-                                    topRight: Radius.circular(25))),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 8, bottom: 8),
-                              child: Center(
-                                child: Text(
-                                  'ประกันภัยสินค้าเปียก',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Palette.thisBlue,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      child: Text(
-                                        'บริษัท:',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color:
-                                                Color.fromARGB(255, 66, 66, 66),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      'ทวีศักดิ์ ชยันกลาง',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Palette.thisBlue,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      child: Text(
-                                        'เลขที่กรมธรรม์:',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color:
-                                                Color.fromARGB(255, 66, 66, 66),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      '89-0151',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Palette.thisBlue,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      child: Text(
-                                        'เบอร์โทรติดต่อ:',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color:
-                                                Color.fromARGB(255, 66, 66, 66),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      '71-71-0152',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Palette.thisBlue,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      child: Text(
-                                        'วงเงิน:',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color:
-                                                Color.fromARGB(255, 66, 66, 66),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      '588-0152',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Palette.thisBlue,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                            Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(25))),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 238, 246, 255),
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(25),
-                                    topRight: Radius.circular(25))),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 8, bottom: 8),
-                              child: Center(
-                                child: Text(
-                                  'ประกันภัยสินค้าชำรุด',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Palette.thisBlue,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      child: Text(
-                                        'บริษัท:',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color:
-                                                Color.fromARGB(255, 66, 66, 66),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      'ทวีศักดิ์ ชยันกลาง',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Palette.thisBlue,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      child: Text(
-                                        'เลขที่กรมธรรม์:',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color:
-                                                Color.fromARGB(255, 66, 66, 66),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      '89-0151',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Palette.thisBlue,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      child: Text(
-                                        'เบอร์โทรติดต่อ:',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color:
-                                                Color.fromARGB(255, 66, 66, 66),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      '71-71-0152',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Palette.thisBlue,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      child: Text(
-                                        'วงเงิน:',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color:
-                                                Color.fromARGB(255, 66, 66, 66),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      '588-0152',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Palette.thisBlue,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Text(
-                      'หมายเหตุ:',
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Color.fromARGB(255, 66, 66, 66),
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    TextFormField(
-                      minLines: 1,
-                      maxLines: 5,
-                      keyboardType: TextInputType.multiline,
-                      decoration: InputDecoration(
-                        hintText: 'กรอกหมายเหตุ',
-                        hintStyle: TextStyle(color: Colors.grey),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(25))),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 238, 246, 255),
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(25),
-                                    topRight: Radius.circular(25))),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 8, bottom: 8),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.image,
-                                    color: Colors.grey,
-                                  ),
-                                  SizedBox(
-                                    width: 3,
-                                  ),
-                                  Text(
-                                    'รูปจุดแจ้งเหตุ',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 10, 0, 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                         openAlertBox(context);
-                                    //_openModal();
-                                    // _getGallery();
-                                  },
-                                  child: Container(
-                                    height: 100,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                        color:
-                                            Color.fromARGB(255, 238, 246, 255),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20)),
-                                        border: Border.all(color: Colors.grey)),
-                                    child: Center(
-                                      child: Text(
-                                        '+ เพิ่มรูป',
-                                        style: TextStyle(
-                                            color: Colors.grey,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: SizedBox(
-                                    child: selectedImages.isEmpty
-                                        ? const Text(' ')
-                                        : GridView.builder(
-                                            shrinkWrap: true,
-                                            itemCount: selectedImages.length,
-                                            gridDelegate:
-                                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                                    crossAxisCount: 3),
-                                            itemBuilder: (BuildContext context,
-                                                int index) {
-                                              return Center(
-                                                  child: GestureDetector(
-                                                onTap: () {
-                                                  print(index);
-                                                },
-                                                child: Container(
-                                                    child: Card(
-                                                  child: SizedBox(
-                                                    height: 100,
-                                                    width: 100,
-                                                    child: Image.file(
-                                                      selectedImages[index],
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                                )),
-                                              ));
-                                            },
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(25))),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                                color: Color.fromARGB(
+                                                    255, 238, 246, 255),
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(25),
+                                                    topRight:
+                                                        Radius.circular(25))),
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 8, bottom: 8),
+                                              child: Center(
+                                                child: Text(
+                                                  state.vehicle_Docs[index]
+                                                      .docType
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: Palette.thisBlue,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                            ),
                                           ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      height: 60,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.green,
-                            elevation: 0,
-                            // side: BorderSide(color: Colors.white),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            )),
-                        onPressed: () {
-                          // openAlertBox(context);
-                          // Navigator.pushReplacement(
-                          //   context,
-                          //   PageTransition(
-                          //       duration: const Duration(milliseconds: 500),
-                          //       type: PageTransitionType.fade,
-                          //       child: Check_Result()),
-                          // );
-                        },
-                        
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Container(
-                            width: double.infinity,
-                            alignment: Alignment.center,
-                            child: const Text(
-                              "บันทึก",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: 15),
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                20, 15, 20, 15),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    SizedBox(
+                                                      child: Text(
+                                                        'บริษัท:',
+                                                        style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Color.fromARGB(
+                                                              255, 66, 66, 66),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Text(
+                                                      state.vehicle_Docs[index]
+                                                          .company
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Color.fromARGB(
+                                                              255, 66, 66, 66),
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    SizedBox(
+                                                      child: Text(
+                                                        'เลขที่กรมธรรม์:',
+                                                        style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Color.fromARGB(
+                                                              255, 66, 66, 66),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Text(
+                                                      state.vehicle_Docs[index]
+                                                          .docNumber
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Color.fromARGB(
+                                                              255, 66, 66, 66),
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    SizedBox(
+                                                      child: Text(
+                                                        'เบอร์โทรติดต่อ:',
+                                                        style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Color.fromARGB(
+                                                              255, 66, 66, 66),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Text(
+                                                      state.vehicle_Docs[index]
+                                                          .contact
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Color.fromARGB(
+                                                              255, 66, 66, 66),
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    SizedBox(
+                                                      child: Text(
+                                                        'วงเงิน:',
+                                                        style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Color.fromARGB(
+                                                              255, 66, 66, 66),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Text(
+                                                      state.vehicle_Docs[index]
+                                                          .creditLimit
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Color.fromARGB(
+                                                              255, 66, 66, 66),
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                              ListView.builder(
+                                itemCount: state.productIns_Docs.length,
+                                shrinkWrap: true,
+                                physics: const ClampingScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(bottom: 10),
+                                    child: Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(25))),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                                color: Color.fromARGB(
+                                                    255, 238, 246, 255),
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(25),
+                                                    topRight:
+                                                        Radius.circular(25))),
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 8, bottom: 8),
+                                              child: Center(
+                                                child: Text(
+                                                  state.productIns_Docs[index]
+                                                      .docType
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: Palette.thisBlue,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                20, 15, 20, 15),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    SizedBox(
+                                                      child: Text(
+                                                        'บริษัท:',
+                                                        style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Color.fromARGB(
+                                                              255, 66, 66, 66),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Text(
+                                                      state.productIns_Docs[index]
+                                                          .company
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Color.fromARGB(
+                                                              255, 66, 66, 66),
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    SizedBox(
+                                                      child: Text(
+                                                        'เลขที่กรมธรรม์:',
+                                                        style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Color.fromARGB(
+                                                              255, 66, 66, 66),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Text(
+                                                      state.productIns_Docs[index]
+                                                          .docNumber
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Color.fromARGB(
+                                                              255, 66, 66, 66),
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    SizedBox(
+                                                      child: Text(
+                                                        'เบอร์โทรติดต่อ:',
+                                                        style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Color.fromARGB(
+                                                              255, 66, 66, 66),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Text(
+                                                      state.productIns_Docs[index]
+                                                          .contact
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Color.fromARGB(
+                                                              255, 66, 66, 66),
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    SizedBox(
+                                                      child: Text(
+                                                        'วงเงิน:',
+                                                        style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Color.fromARGB(
+                                                              255, 66, 66, 66),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Text(
+                                                      state.productIns_Docs[index]
+                                                          .creditLimit
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Color.fromARGB(
+                                                              255, 66, 66, 66),
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          'หมายเหตุ:',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Color.fromARGB(255, 66, 66, 66),
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0))),
+                          child: TextFormField(
+                            minLines: 1,
+                            maxLines: 6,
+                            autofocus: false,
+                            keyboardType: TextInputType.multiline,
+                            decoration: InputDecoration(
+                              hintText: 'กรอกหมายเหตุ',
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25))),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 238, 246, 255),
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(25),
+                                        topRight: Radius.circular(25))),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 8, bottom: 8),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.image,
+                                        color: Palette.thisBlue,
+                                      ),
+                                      SizedBox(
+                                        width: 3,
+                                      ),
+                                      Text(
+                                        'รูปภาพจุดแจ้งเหตุ',
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: Palette.thisBlue,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(10, 10, 0, 10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        openAlertBox(context);
+                                        //_openModal();
+                                        // _getGallery();
+                                      },
+                                      child: Container(
+                                        height: 100,
+                                        width: 100,
+                                        decoration: BoxDecoration(
+                                            color: Color.fromARGB(
+                                                255, 238, 246, 255),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(20)),
+                                            border:
+                                                Border.all(color: Colors.grey)),
+                                        child: Center(
+                                          child: Text(
+                                            '+ เพิ่มรูป',
+                                            style: TextStyle(
+                                                color: Colors.grey,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: SizedBox(
+                                        child: selectedImages.isEmpty
+                                            ? const Text(' ')
+                                            : GridView.builder(
+                                                shrinkWrap: true,
+                                                itemCount:
+                                                    selectedImages.length,
+                                                gridDelegate:
+                                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                                        crossAxisCount: 3),
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  return Center(
+                                                      child: GestureDetector(
+                                                    onTap: () {
+                                                      print(index);
+                                                    },
+                                                    child: Container(
+                                                        child: Card(
+                                                      child: SizedBox(
+                                                        height: 100,
+                                                        width: 100,
+                                                        child: Image.file(
+                                                          selectedImages[index],
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                    )),
+                                                  ));
+                                                },
+                                              ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          height: 60,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.green,
+                                elevation: 0,
+                                // side: BorderSide(color: Colors.white),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                )),
+                            onPressed: () {
+                              // openAlertBox(context);
+                              // Navigator.pushReplacement(
+                              //   context,
+                              //   PageTransition(
+                              //       duration: const Duration(milliseconds: 500),
+                              //       type: PageTransitionType.fade,
+                              //       child: Check_Result()),
+                              // );
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Container(
+                                width: double.infinity,
+                                alignment: Alignment.center,
+                                child: const Text(
+                                  "บันทึก",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      fontSize: 15),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ]),
+                  )
+                ],
+              ),
+            ]);
+          },
+        ),
       ),
     );
   }
 
-    openAlertBox(context) {
+  openAlertBox(context) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -822,11 +764,9 @@ class _Report_AccidentState extends State<Report_Accident> {
             ),
           );
         });
- 
   }
 
-
-    Future<void> _getToCamera() async {
+  Future<void> _getToCamera() async {
     final picker = ImagePicker();
     final pickedImage = await picker.pickImage(source: ImageSource.camera);
 
@@ -855,5 +795,4 @@ class _Report_AccidentState extends State<Report_Accident> {
       },
     );
   }
-
 }

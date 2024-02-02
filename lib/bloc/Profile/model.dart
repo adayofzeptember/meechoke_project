@@ -1,7 +1,8 @@
 class Profile_Data {
-  String? id;
+  String? province;
+  String? plateNumber;
+  String? trailerPlateNumber;
   String? name;
-  String? username;
 
-  Profile_Data({this.id, this.username, this.name});
+  Profile_Data({this.province, this.plateNumber, this.trailerPlateNumber, this.name});
 }

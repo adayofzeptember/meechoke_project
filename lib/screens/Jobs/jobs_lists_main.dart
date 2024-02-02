@@ -34,20 +34,20 @@ class _Job_ListsState extends State<Job_Lists>
       appBar: AppBar(
         backgroundColor: Palette.thisBlue,
         automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const CircleAvatar(
-              radius: 15,
-              backgroundColor: Colors.white,
-              child: Icon(
-                Icons.person,
-                color: Palette.thisBlue,
-                size: 15,
-              ),
-            ),
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {},
+        //     icon: const CircleAvatar(
+        //       radius: 15,
+        //       backgroundColor: Colors.white,
+        //       child: Icon(
+        //         Icons.person,
+        //         color: Palette.thisBlue,
+        //         size: 15,
+        //       ),
+        //     ),
+        //   ),
+        // ],
         centerTitle: true,
         leading: IconButton(
           onPressed: () {

@@ -20,6 +20,7 @@ class Login_Casual extends LoginEvent {
 class Logout_Auth extends LoginEvent {
   var context;
   Logout_Auth({required this.context});
+  
 }
 
 class ShowPassword_Swap extends LoginEvent {}

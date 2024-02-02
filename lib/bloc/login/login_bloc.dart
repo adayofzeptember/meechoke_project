@@ -31,7 +31,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             }));
         emit(state.copyWith(loading: false));
         print('auth token: ' + response.data['data']['accessToken'].toString());
-        print('role--->: ' + response.data['loginType'].toString());
+  
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString(
             'userToken', response.data['data']['accessToken'].toString());
@@ -41,9 +41,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             PageTransition(
                 duration: const Duration(milliseconds: 500),
                 type: PageTransitionType.fade,
-              //  child: const MainMenu_Allies()),
+                //  child: const MainMenu_Allies()),
 
-            child: const MainMenu_Employee()),
+                child: const MainMenu_Employee()),
           );
         } else {
           print('not employee');

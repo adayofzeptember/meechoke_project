@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:intl/intl.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
+import 'package:meechoke_project/bloc/ReportAccident/report_accident_bloc.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
 import 'package:meechoke_project/screens/login_screen.dart';
 import 'package:meechoke_project/screens/menu_screen_employee.dart';
@@ -18,7 +20,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 //                   ]),
 
 // MediaQuery.of(context).size.width * 0.04
-
 //  Navigator.push(
 //           context,
 //           PageTransition(
@@ -28,11 +29,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 //               child: Job_OnGoing()),
 //         );
 
+
+
+
+
+
 void main() async {
+  Intl.defaultLocale = 'th';
   WidgetsFlutterBinding.ensureInitialized();
-  //await NotificationService().init();
   const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
-  runApp(Phoenix(child: StarterWidget()));
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
+    (value) => runApp(
+      Phoenix(
+        child: StarterWidget(),
+      ),
+    ),
+  );
 }
 
 class StarterWidget extends StatelessWidget {
@@ -42,8 +54,10 @@ class StarterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        //BLoC
         BlocProvider(create: (context) => LoginBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
+        BlocProvider(create: (context) => ReportAccidentBloc()),
       ],
       child: MaterialApp(
         builder: (context, child) => ResponsiveBreakpoints.builder(
@@ -85,6 +99,7 @@ class _StartPageState extends State<StartPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? tokenAuth = prefs.getString('userToken').toString();
     print('stored token: ' + tokenAuth);
+
     await Future.delayed(const Duration(seconds: 2), () {
       if (tokenAuth == '' || tokenAuth == 'null') {
         Navigator.pushReplacement(
@@ -112,6 +127,7 @@ class _StartPageState extends State<StartPage> {
       backgroundColor: Palette.thisBlue,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+
         //crossAxisAlignmen อออ ัด้ด ใt: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 10),

@@ -29,20 +29,20 @@ class _Check_DailyState extends State<Check_Daily> {
         elevation: 0,
         backgroundColor: Palette.thisBlue,
         automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const CircleAvatar(
-              radius: 15,
-              backgroundColor: Colors.white,
-              child: Icon(
-                Icons.person,
-                color: Palette.thisBlue,
-                size: 15,
-              ),
-            ),
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {},
+        //     icon: const CircleAvatar(
+        //       radius: 15,
+        //       backgroundColor: Colors.white,
+        //       child: Icon(
+        //         Icons.person,
+        //         color: Palette.thisBlue,
+        //         size: 15,
+        //       ),
+        //     ),
+        //   ),
+        // ],
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
