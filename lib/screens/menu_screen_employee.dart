@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/ETC/sdf.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/screens/Checking/check_daily.dart';
 import 'package:meechoke_project/screens/Fuel/fuel_main.dart';
@@ -25,7 +24,6 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
   @override
   void initState() {
     context.read<ProfileBloc>().add(Load_Profile());
-
 
     super.initState();
   }
@@ -149,11 +147,11 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                 crossAxisCount: 2,
                 children: <Widget>[
                   InkWell(
-                    onTap: () async{
-                           SharedPreferences prefrences =
-                            await SharedPreferences.getInstance();
-                        prefrences.clear();
-                        Phoenix.rebirth(context);
+                    onTap: () async {
+                      SharedPreferences prefrences =
+                          await SharedPreferences.getInstance();
+                      prefrences.clear();
+                      Phoenix.rebirth(context);
                       // Navigator.push(
                       //   context,
                       //   PageTransition(
@@ -217,28 +215,28 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                     ),
                   ),
                   InkWell(
-                    onTap: () async {
-                                 Navigator.push(
-                        context,
-                        PageTransition(
-                            duration: const Duration(milliseconds: 500),
-                            type: PageTransitionType.fade,
-                            child: MyApp()),
-                      );
-                      // // context
-                      // //     .read<LoginBloc>()
-                      // //     .add(Logout_Auth(context: context));
-                      // SharedPreferences prefrences =
-                      //     await SharedPreferences.getInstance();
-                      // prefrences.clear();
-                      // Phoenix.rebirth(context);
-                      // //        Navigator.push(
-                      // //   context,
-                      // //   PageTransition(
-                      // //       duration: const Duration(milliseconds: 500),
-                      // //       type: PageTransitionType.fade,
-                      // //       child: Report_Accident()),
-                      // // );
+                    onTap: () {
+                      //            Navigator.push(
+                      //   context,
+                      //   PageTransition(
+                      //       duration: const Duration(milliseconds: 500),
+                      //       type: PageTransitionType.fade,
+                      //       child: MyApp()),
+                      // );
+                      // // // context
+                      // // //     .read<LoginBloc>()
+                      // // //     .add(Logout_Auth(context: context));
+                      // // SharedPreferences prefrences =
+                      // //     await SharedPreferences.getInstance();
+                      // // prefrences.clear();
+                      // // Phoenix.rebirth(context);
+                      // // //        Navigator.push(
+                      // // //   context,
+                      // // //   PageTransition(
+                      // // //       duration: const Duration(milliseconds: 500),
+                      // // //       type: PageTransitionType.fade,
+                      // // //       child: Report_Accident()),
+                      // // // );
                     },
                     child: Container(
                       width: double.infinity,

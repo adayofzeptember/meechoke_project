@@ -13,7 +13,7 @@ class Load_VehicleDocs extends ReportAccidentEvent {}
 
 class Upload_Pics extends ReportAccidentEvent {
   String type, collection;
-  File? files;
+  List<File>? files;
   Upload_Pics(
       {required this.type, required this.collection, required this.files});
 }

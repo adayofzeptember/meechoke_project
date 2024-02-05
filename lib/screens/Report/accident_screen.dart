@@ -544,6 +544,12 @@ class _Report_AccidentState extends State<Report_Accident> {
                           height: 10,
                         ),
                         Container(
+                          height: (selectedImages.isEmpty)
+
+                          ? 200
+
+
+                          : null,
                           width: double.infinity,
                           decoration: BoxDecoration(
                               color: Colors.white,
@@ -583,78 +589,65 @@ class _Report_AccidentState extends State<Report_Accident> {
                                   ),
                                 ),
                               ),
+                              SizedBox(height: 10,),
                               Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10, 10, 0, 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        openAlertBox(context);
-                                        //_openModal();
-                                        // _getGallery();
-                                      },
-                                      child: Container(
-                                        height: 100,
-                                        width: 100,
-                                        decoration: BoxDecoration(
-                                            color: Color.fromARGB(
-                                                255, 238, 246, 255),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20)),
-                                            border:
-                                                Border.all(color: Colors.grey)),
-                                        child: Center(
-                                          child: Text(
-                                            '+ เพิ่มรูป',
-                                            style: TextStyle(
-                                                color: Colors.grey,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
+                                padding: const EdgeInsets.all(5.0),
+                                child: InkWell(
+                                  onTap: () {
+                                    openAlertBox(context);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(255, 238, 246, 255),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10)),
+                                        border: Border.all(color: Colors.grey)),
+                                    child: Center(
+                                      child: Text(
+                                        '+ เพิ่มรูป',
+                                        style: TextStyle(
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
-                                    Expanded(
-                                      child: SizedBox(
-                                        child: selectedImages.isEmpty
-                                            ? const Text(' ')
-                                            : GridView.builder(
-                                                shrinkWrap: true,
-                                                itemCount:
-                                                    selectedImages.length,
-                                                gridDelegate:
-                                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                                        crossAxisCount: 3),
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
-                                                  return Center(
-                                                      child: GestureDetector(
-                                                    onTap: () {
-                                                      print(
-                                                          selectedImages[index]
-                                                              .path);
-                                                    },
-                                                    child: Card(
-                                                      child: SizedBox(
-                                                        height: 100,
-                                                        width: 100,
-                                                        child: Image.file(
-                                                          selectedImages[index],
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ));
-                                                },
-                                              ),
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
-                              )
+                              ),
+                              SizedBox(
+                                child: selectedImages.isEmpty
+                                    ? const Text(' ')
+                                    : GridView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: selectedImages.length,
+                                        gridDelegate:
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 3),
+                                        itemBuilder: (BuildContext context,
+                                            int index) {
+                                          return Center(
+                                              child: GestureDetector(
+                                            onTap: () {
+                                              print(
+                                                  selectedImages[index].path);
+                                            },
+                                            child: Card(
+                                              child: SizedBox(
+                                                height: 100,
+                                                width: 100,
+                                                child: Image.file(
+                                                  selectedImages[index],
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ));
+                                        },
+                                      ),
+                              ),
+                             
                             ],
                           ),
                         ),
@@ -676,7 +669,7 @@ class _Report_AccidentState extends State<Report_Accident> {
                                   Upload_Pics(
                                       type: 'image',
                                       collection: 'true',
-                                      files: selectedImages[0]));
+                                      files: selectedImages));
 
                               // openAlertBox(context);
                               // Navigator.pushReplacement(

@@ -118,14 +118,25 @@ class ReportAccidentBloc
     on<Upload_Pics>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
-  
+      List<MultipartFile> multipleImages = [];
+      //!
+      for (final imageFiles in event.files!) {
+        String fileName = imageFiles.path.split('/').last;
 
+        print("image(s) -->: " + imageFiles.path);
+        MultipartFile file =
+            await MultipartFile.fromFile(imageFiles.path, filename: fileName);
+        multipleImages.add(file);
+      }
+      print("image(s) count: " + multipleImages.length.toString());
+      //!
       final formData;
       formData = FormData.fromMap({
         "type": event.type,
         "collection": event.collection,
-        "files[issueReportImage][]":
-            await MultipartFile.fromFile(event.files!.path)
+        "files[issueReportImage][]": multipleImages
+        // await MultipartFile.fromFile(event.files![1].path
+        // )
       });
 
       try {
