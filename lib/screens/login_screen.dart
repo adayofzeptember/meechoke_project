@@ -218,7 +218,7 @@ class Login_Screen extends StatelessWidget {
                                       context.read<LoginBloc>().add(
                                           Login_Casual(
                                               context: context,
-                                              getUsername: 'compattana',
+                                              getUsername: 'ukeidkhwamsukh',
                                               getPassword: 'password'));
                                       //NotificationService().scheduleNotifications();
                                     },

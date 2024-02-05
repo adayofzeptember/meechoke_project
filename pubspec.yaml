@@ -26,6 +26,9 @@ dependencies:
   quiver: ^3.2.1
   expandable: ^5.0.1
   intl: ^0.18.0
+  http: ^1.0.0 
+
+
 
 dev_dependencies:
   flutter_test:

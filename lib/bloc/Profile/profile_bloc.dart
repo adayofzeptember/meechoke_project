@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:meechoke_project/ETC/api_url.dart';
 import 'package:meechoke_project/bloc/Profile/model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,13 +16,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<Load_Profile>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
-      //print(tokenAuth);
+    
       emit(state.copyWith(loading: true));
       try {
         final response = await dio.get(
-          "http://192.168.0.109:8080/api/v1/mobile/get-vehicle-data",
+          api_url_v1+"get-vehicle-data",
           options: Options(headers: {
-            "Content-Type": "application/json",
+       
             "Authorization": "Bearer $tokenAuth",
           }),
         );

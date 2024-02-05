@@ -29,11 +29,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 //               child: Job_OnGoing()),
 //         );
 
-
-
-
-
-
 void main() async {
   Intl.defaultLocale = 'th';
   WidgetsFlutterBinding.ensureInitialized();

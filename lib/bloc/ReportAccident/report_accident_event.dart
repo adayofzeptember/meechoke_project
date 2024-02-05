@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'report_accident_bloc.dart';
 
 sealed class ReportAccidentEvent extends Equatable {
@@ -8,3 +10,10 @@ sealed class ReportAccidentEvent extends Equatable {
 }
 
 class Load_VehicleDocs extends ReportAccidentEvent {}
+
+class Upload_Pics extends ReportAccidentEvent {
+  String type, collection;
+  File? files;
+  Upload_Pics(
+      {required this.type, required this.collection, required this.files});
+}

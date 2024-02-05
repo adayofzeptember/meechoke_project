@@ -4,12 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/ETC/sdf.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
-import 'package:meechoke_project/bloc/ReportAccident/report_accident_bloc.dart';
 import 'package:meechoke_project/screens/Checking/check_daily.dart';
 import 'package:meechoke_project/screens/Fuel/fuel_main.dart';
-import 'package:meechoke_project/screens/History/history.dart';
-import 'package:meechoke_project/screens/Report/accident.dart';
+import 'package:meechoke_project/screens/Report/accident_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Jobs/jobs_lists_main.dart';
@@ -26,7 +25,8 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
   @override
   void initState() {
     context.read<ProfileBloc>().add(Load_Profile());
-    context.read<ReportAccidentBloc>().add(Load_VehicleDocs());
+
+
     super.initState();
   }
 
@@ -149,14 +149,18 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                 crossAxisCount: 2,
                 children: <Widget>[
                   InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                            duration: const Duration(milliseconds: 500),
-                            type: PageTransitionType.fade,
-                            child: History_Page()),
-                      );
+                    onTap: () async{
+                           SharedPreferences prefrences =
+                            await SharedPreferences.getInstance();
+                        prefrences.clear();
+                        Phoenix.rebirth(context);
+                      // Navigator.push(
+                      //   context,
+                      //   PageTransition(
+                      //       duration: const Duration(milliseconds: 500),
+                      //       type: PageTransitionType.fade,
+                      //       child: History_Page()),
+                      // );
                     },
                     child: Container(
                       width: double.infinity,
@@ -214,17 +218,27 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                   ),
                   InkWell(
                     onTap: () async {
-                      SharedPreferences prefrences =
-                          await SharedPreferences.getInstance();
-                      prefrences.clear();
-                      Phoenix.rebirth(context);
-                      //        Navigator.push(
-                      //   context,
-                      //   PageTransition(
-                      //       duration: const Duration(milliseconds: 500),
-                      //       type: PageTransitionType.fade,
-                      //       child: Report_Accident()),
-                      // );
+                                 Navigator.push(
+                        context,
+                        PageTransition(
+                            duration: const Duration(milliseconds: 500),
+                            type: PageTransitionType.fade,
+                            child: MyApp()),
+                      );
+                      // // context
+                      // //     .read<LoginBloc>()
+                      // //     .add(Logout_Auth(context: context));
+                      // SharedPreferences prefrences =
+                      //     await SharedPreferences.getInstance();
+                      // prefrences.clear();
+                      // Phoenix.rebirth(context);
+                      // //        Navigator.push(
+                      // //   context,
+                      // //   PageTransition(
+                      // //       duration: const Duration(milliseconds: 500),
+                      // //       type: PageTransitionType.fade,
+                      // //       child: Report_Accident()),
+                      // // );
                     },
                     child: Container(
                       width: double.infinity,
@@ -517,7 +531,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                     TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
               ),
               onPressed: () async {
-                //!context.read<LoginBloc>().add(Logout_Auth(context: context));
+                //context.read<LoginBloc>().add(Logout_Auth(context: context));
                 SharedPreferences prefrences =
                     await SharedPreferences.getInstance();
                 prefrences.clear();
