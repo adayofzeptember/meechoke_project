@@ -7,9 +7,10 @@ import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/screens/Checking/check_daily.dart';
 import 'package:meechoke_project/screens/Fuel/fuel_main.dart';
-import 'package:meechoke_project/screens/Report/accident_screen.dart';
+import 'package:meechoke_project/screens/Report/report_docs_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../bloc/ReportAccident/report_accident_bloc.dart';
 import 'Jobs/jobs_lists_main.dart';
 import 'Financial/financial.dart';
 
@@ -24,7 +25,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
   @override
   void initState() {
     context.read<ProfileBloc>().add(Load_Profile());
-
+    context.read<ReportAccidentBloc>().add(Load_VehicleDocs());
     super.initState();
   }
 
@@ -342,6 +343,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                                   width: 10,
                                 ),
                                 Container(
+                                  width: 150,
                                   decoration: const BoxDecoration(
                                       color: Color.fromARGB(255, 255, 234, 127),
                                       borderRadius: BorderRadius.all(
@@ -391,6 +393,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                                   width: 10,
                                 ),
                                 Container(
+                                  width: 150,
                                   decoration: const BoxDecoration(
                                       color: Color.fromARGB(255, 255, 234, 127),
                                       borderRadius: BorderRadius.all(

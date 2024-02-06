@@ -20,13 +20,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       try {
         emit(state.copyWith(loading: true));
 
-
-
-
-
-
-        final response = await dio.post(
-            api_url+"authenticate",
+        final response = await dio.post(api_url + "authenticate",
             options: Options(
               headers: {
                 'Accept': 'application/json',
@@ -37,10 +31,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
               "password": event.getPassword,
             }));
 
-
-
-
-
         print(
             response.statusCode.toString() + response.statusMessage.toString());
         emit(state.copyWith(loading: false));
@@ -49,7 +39,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString(
             'userToken', response.data['data']['accessToken'].toString());
-        if (response.data['loginType'].toString() == 'employee' || response.data['loginType'].toString() == 'registered-driver') {
+        if (response.data['loginType'].toString() == 'employee' ||
+            response.data['loginType'].toString() == 'registered-driver') {
           Navigator.pushReplacement(
             event.context,
             PageTransition(

@@ -11,9 +11,22 @@ sealed class ReportAccidentEvent extends Equatable {
 
 class Load_VehicleDocs extends ReportAccidentEvent {}
 
-class Upload_Pics extends ReportAccidentEvent {
+class EmitLatLng extends ReportAccidentEvent {
+  double? getLat, getLong;
+  EmitLatLng({required this.getLat, required this.getLong});
+}
+
+class Upload_Pics_andReport extends ReportAccidentEvent {
   String type, collection;
+  var context;
   List<File>? files;
-  Upload_Pics(
-      {required this.type, required this.collection, required this.files});
+  String? getRemark;
+
+  Upload_Pics_andReport(
+      {required this.type,
+      required this.collection,
+      required this.files,
+      required this.context,
+      this.getRemark,
+   });
 }

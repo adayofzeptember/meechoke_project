@@ -334,3 +334,34 @@
 //         });
 //   }
 // }
+
+
+// Map<String, dynamic> nestedJsonData = {
+//   'key1': 'value1',
+//   'key2': 'value2',
+//   'nestedKey': {
+//     'nestedKey1': 'nestedValue1',
+//     'nestedKey2': 'nestedValue2',
+//   },
+// };
+// Replace the keys and values with your actual data.
+
+// Make the POST request with Dio:
+
+// dart
+// Copy code
+// Future<void> postData() async {
+//   try {
+//     // Make the POST request with nested JSON data
+//     Response response = await dio.post(
+//       'YOUR_API_ENDPOINT',
+//       data: nestedJsonData,
+//     );
+
+//     // Handle the response as needed
+//     print(response.data);
+//   } catch (e) {
+//     // Handle errors
+//     print(e.toString());
+//   }
+// }

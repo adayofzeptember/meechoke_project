@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
@@ -10,6 +12,7 @@ import 'package:meechoke_project/bloc/login/login_bloc.dart';
 import 'package:meechoke_project/screens/login_screen.dart';
 import 'package:meechoke_project/screens/menu_screen_employee.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,6 +34,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   Intl.defaultLocale = 'th';
+  GeolocatorPlatform.instance;
   WidgetsFlutterBinding.ensureInitialized();
   const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
@@ -86,8 +90,24 @@ class StartPage extends StatefulWidget {
 class _StartPageState extends State<StartPage> {
   @override
   void initState() {
+    _Permission();
     _Pause_And_Go();
     super.initState();
+  }
+
+  Future<void> _Permission() async {
+    var status = await Permission.location.request();
+    if (status == PermissionStatus.granted) {
+    } else {
+      Fluttertoast.showToast(
+          msg: "โปรดอนุญาติการให้แอปเข้าถึงตำแหน่งพื้นที่",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.SNACKBAR,
+          timeInSecForIosWeb: 2,
+          backgroundColor: const Color.fromARGB(255, 133, 133, 133),
+          textColor: Colors.white,
+          fontSize: 15);
+    }
   }
 
   Future<void> _Pause_And_Go() async {

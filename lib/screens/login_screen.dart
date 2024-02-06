@@ -213,9 +213,10 @@ class Login_Screen extends StatelessWidget {
                                               BorderRadius.circular(30),
                                         )),
                                     onPressed: () {
-                                      print(usernameController.text +
-                                          passwordController.text);
+                                      // print(usernameController.text +
+                                      //     passwordController.text);
                                       context.read<LoginBloc>().add(
+                                        
                                           Login_Casual(
                                               context: context,
                                               getUsername: 'ukeidkhwamsukh',

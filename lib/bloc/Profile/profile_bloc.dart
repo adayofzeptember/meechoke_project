@@ -16,24 +16,28 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<Load_Profile>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
-    
+
       emit(state.copyWith(loading: true));
       try {
         final response = await dio.get(
-          api_url_v1+"get-vehicle-data",
+          api_url_v1 + "get-vehicle-data",
           options: Options(headers: {
-       
             "Authorization": "Bearer $tokenAuth",
           }),
         );
 
-        print("response data: "+ response.data['message']);
+        print("response profile data: " + response.data['message']);
 
         dynamic dataProfile =
             (state.profile_data != '') ? state.profile_data : '';
         dynamic nestedData = response.data['data'];
 
         if (response.statusCode == 200) {
+          prefs.setString(
+              'carPlate', response.data['data']['plateNumber'].toString());
+
+
+             
           emit(state.copyWith(loading: false));
           dataProfile = Profile_Data(
               province: await nestedData['province'].toString(),
