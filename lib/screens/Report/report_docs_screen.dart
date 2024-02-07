@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
@@ -21,34 +22,36 @@ class _Report_AccidentState extends State<Report_Accident> {
 
   @override
   void initState() {
-    _getCurrentLocation();
+    context.read<ReportAccidentBloc>().add(EmitLatLng(context: context));
     // context.read<ReportAccidentBloc>().add(Load_VehicleDocs());
     super.initState();
   }
 
   var reportRemark_Controller = TextEditingController();
 
-  Future<void> _getCurrentLocation() async {
-    try {
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
+  // Future<void> _getCurrentLocation() async {
+  //   try {
+  //     Position position = await Geolocator.getCurrentPosition(
+  //         desiredAccuracy: LocationAccuracy.high);
 
-      context.read<ReportAccidentBloc>().add(
-          EmitLatLng(getLat: position.latitude, getLong: position.longitude));
-    } catch (e) {
-      // Fluttertoast.showToast(
-      //     msg: "ไม่สามารถเข้าถึงตำแหน่งพื้นที่ในปัจจุบันได้",
-      //     toastLength: Toast.LENGTH_LONG,
-      //     gravity: ToastGravity.SNACKBAR,
-      //     timeInSecForIosWeb: 2,
-      //     backgroundColor: const Color.fromARGB(255, 133, 133, 133),
-      //     textColor: Colors.white,
-      //     fontSize: 15);
-      context
-          .read<ReportAccidentBloc>()
-          .add(EmitLatLng(getLat: 0.0, getLong: 0.0));
-    }
-  }
+  //     print(position.latitude.toString() + position.longitude.toString());
+
+  // context.read<ReportAccidentBloc>().add(
+  //     EmitLatLng(getLat: position.latitude, getLong: position.longitude));
+  //   } catch (e) {
+  //     Fluttertoast.showToast(
+  //         msg: "ไม่สามารถเข้าถึงตำแหน่งพื้นที่ในปัจจุบันได้",
+  //         toastLength: Toast.LENGTH_LONG,
+  //         gravity: ToastGravity.SNACKBAR,
+  //         timeInSecForIosWeb: 2,
+  //         backgroundColor: const Color.fromARGB(255, 133, 133, 133),
+  //         textColor: Colors.white,
+  //         fontSize: 15);
+  // context
+  //     .read<ReportAccidentBloc>()
+  //     .add(EmitLatLng(getLat: 0.0, getLong: 0.0));
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -68,20 +71,6 @@ class _Report_AccidentState extends State<Report_Accident> {
         elevation: 0,
         backgroundColor: Palette.thisBlue,
         automaticallyImplyLeading: false,
-        // actions: [
-        //   IconButton(
-        //     onPressed: () {},
-        //     icon: CircleAvatar(
-        //       radius: 20,
-        //       backgroundColor: Colors.white,
-        //       child: const Icon(
-        //         Icons.person,
-        //         color: Palette.thisBlue,
-        //         size: 20,
-        //       ),
-        //     ),
-        //   ),
-        // ],
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -102,6 +91,22 @@ class _Report_AccidentState extends State<Report_Accident> {
       body: SingleChildScrollView(
         child: BlocBuilder<ReportAccidentBloc, ReportAccidentState>(
           builder: (context, state) {
+            if (state.lat == 0 || state.lng == 0) {
+              return Center(
+                  child: Column(
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    'กำลังหาตำแหน่งพื้นที่ปัจจุบัน...',
+                    style: TextStyle(color: Palette.thisBlue),
+                  )
+                ],
+              ));
+            }
+            context.read<ReportAccidentBloc>().add(GetLocationName());
             return Column(children: [
               Stack(
                 children: [
@@ -139,8 +144,8 @@ class _Report_AccidentState extends State<Report_Accident> {
                                         width:
                                             MediaQuery.of(context).size.width *
                                                 0.6,
-                                        child: const Text(
-                                          '9686 เชลล์เขาหินซ้อน เขาหินซ้อน พนมสารคาม ฉะเชิงเทรา',
+                                        child:   Text(
+                                          state.locationName.toString(),
                                           overflow: TextOverflow.clip,
                                           maxLines: 3,
                                           style: TextStyle(
@@ -625,10 +630,10 @@ class _Report_AccidentState extends State<Report_Accident> {
                                 ),
                               ),
                         const SizedBox(
-                          height: 15,
+                          height: 20,
                         ),
                         const Text(
-                          'หมายเหตุ:',
+                          'แจ้งเหตุ:',
                           style: TextStyle(
                               fontSize: 18,
                               color: Color.fromARGB(255, 66, 66, 66),

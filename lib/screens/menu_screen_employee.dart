@@ -343,7 +343,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                                   width: 10,
                                 ),
                                 Container(
-                                  width: 150,
+                                  width: 180,
                                   decoration: const BoxDecoration(
                                       color: Color.fromARGB(255, 255, 234, 127),
                                       borderRadius: BorderRadius.all(
@@ -393,7 +393,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                                   width: 10,
                                 ),
                                 Container(
-                                  width: 150,
+                                  width: 180,
                                   decoration: const BoxDecoration(
                                       color: Color.fromARGB(255, 255, 234, 127),
                                       borderRadius: BorderRadius.all(

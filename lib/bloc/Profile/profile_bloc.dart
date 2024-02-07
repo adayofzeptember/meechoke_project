@@ -36,8 +36,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           prefs.setString(
               'carPlate', response.data['data']['plateNumber'].toString());
 
-
-             
           emit(state.copyWith(loading: false));
           dataProfile = Profile_Data(
               province: await nestedData['province'].toString(),

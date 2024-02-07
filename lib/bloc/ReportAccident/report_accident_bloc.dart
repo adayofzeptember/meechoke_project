@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:http/http.dart' as http;
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:meechoke_project/ETC/api_url.dart';
 import 'package:meechoke_project/bloc/ReportAccident/model.dart';
 import 'package:meechoke_project/screens/Report/report_docs_screen.dart';
@@ -18,6 +20,7 @@ class ReportAccidentBloc
 
   ReportAccidentBloc()
       : super(ReportAccidentState(
+          locationName: '',
           lat: 0,
           lng: 0,
           productIns_Docs: [],
@@ -26,9 +29,9 @@ class ReportAccidentBloc
           isLoading: false,
         )) {
     on<Load_VehicleDocs>((event, emit) async {
-      dio.interceptors.add(LogInterceptor());
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
+
       try {
         final response = await dio.get(
           api_url_v1 +
@@ -40,12 +43,11 @@ class ReportAccidentBloc
             },
           ),
         );
-        dio.interceptors.add(LogInterceptor());
+
         print(response.statusCode);
         print(response.data.toString());
         //!------------------------------------------------------------------------
-        var fetched_docs = (state.vehicle_Docs != []) ? state.vehicle_Docs 
-                                                      : [];
+        var fetched_docs = (state.vehicle_Docs != []) ? state.vehicle_Docs : [];
         var fetched_prdIns =
             (state.productIns_Docs != []) ? state.productIns_Docs : [];
 
@@ -81,7 +83,7 @@ class ReportAccidentBloc
       String? tokenAuth = prefs.getString('userToken');
       List<MultipartFile> multipleImages = [];
 
-      print(state.lat.toString() + state.lng.toString());
+      print(state.lat.toString() + " " + state.lng.toString());
 
       for (final imageFiles in event.files!) {
         String fileName = imageFiles.path.split('/').last;
@@ -92,7 +94,7 @@ class ReportAccidentBloc
         multipleImages.add(file);
       }
       print("image(s) count: " + multipleImages.length.toString());
-      
+
       final formData;
       formData = FormData.fromMap({
         "type": event.type,
@@ -171,7 +173,6 @@ class ReportAccidentBloc
               textColor: Colors.white,
               fontSize: 15);
         }
-        emit(state.copyWith(lat: 0.0, lng: 0.0));
       } catch (e) {
         emit(state.copyWith(isLoading: false));
         Fluttertoast.showToast(
@@ -186,8 +187,57 @@ class ReportAccidentBloc
       }
     });
 
+    on<GetLocationName>((event, emit) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? tokenAuth = prefs.getString('userToken');
+
+      try {
+        final response = await dio.get(
+          api_url_v1 +
+              "external-api-location?latitude=${state.lat}&longtitude=${state.lng}",
+          options: Options(
+            headers: {
+              "Authorization": "Bearer $tokenAuth",
+            },
+            followRedirects: false,
+            validateStatus: (status) {
+              return status! <= 500;
+            },
+            contentType: Headers.formUrlEncodedContentType,
+            responseType: ResponseType.json,
+          ),
+        );
+        print(response.data);
+        if (response.statusCode == 200) {
+          emit(state.copyWith(
+              locationName: response.data['data']['location']['subdistrict']
+                      .toString() +
+                  " " +
+                  response.data['data']['location']['district'].toString() +
+                  " " +
+                  response.data['data']['location']['province'].toString()));
+        } else {
+          emit(state.copyWith(locationName: ''));
+        }
+
+        print(state.locationName);
+      } catch (e) {
+        emit(state.copyWith(locationName: ''));
+        print('error: ' + e.toString());
+      }
+    });
+
     on<EmitLatLng>((event, emit) async {
-      emit(state.copyWith(lat: event.getLat, lng: event.getLong));
+      try {
+        print('x');
+        Position position = await Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.high);
+
+        print(position.latitude.toString() + position.longitude.toString());
+
+        emit(state.copyWith(lat: position.latitude, lng: position.longitude));
+      } catch (e) {}
+      //emit(state.copyWith(lat: event.getLat, lng: event.getLong));
     });
   }
 }
