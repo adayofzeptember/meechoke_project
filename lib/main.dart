@@ -40,7 +40,7 @@ void main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
     (value) => runApp(
       Phoenix(
-        child: StarterWidget(),
+        child: const StarterWidget(),
       ),
     ),
   );
@@ -130,7 +130,7 @@ class _StartPageState extends State<StartPage> {
           PageTransition(
               duration: const Duration(milliseconds: 800),
               type: PageTransitionType.fade,
-              child: MainMenu_Employee()),
+              child: const MainMenu_Employee()),
         );
       }
     });
@@ -138,16 +138,16 @@ class _StartPageState extends State<StartPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Palette.thisBlue,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
 
         //crossAxisAlignmen อออ ัด้ด ใt: CrossAxisAlignment.center,
         children: [
-          const SizedBox(height: 10),
+          SizedBox(height: 10),
           Center(
-            child: const Text(
+            child: Text(
               'Meechoke MS',
               style: TextStyle(
                   color: Colors.white,
