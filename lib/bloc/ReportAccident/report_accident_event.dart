@@ -2,7 +2,7 @@
 
 part of 'report_accident_bloc.dart';
 
-sealed class ReportAccidentEvent extends Equatable {
+class ReportAccidentEvent extends Equatable {
   const ReportAccidentEvent();
 
   @override
@@ -10,6 +10,8 @@ sealed class ReportAccidentEvent extends Equatable {
 }
 
 class Load_VehicleDocs extends ReportAccidentEvent {}
+
+class Remove_Docs extends ReportAccidentEvent {}
 
 class EmitLatLng extends ReportAccidentEvent {
   // double? getLat, getLong;

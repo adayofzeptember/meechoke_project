@@ -7,6 +7,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
+import 'package:meechoke_project/bloc/Report2_Test/report2_bloc.dart';
 import 'package:meechoke_project/bloc/ReportAccident/report_accident_bloc.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
 import 'package:meechoke_project/screens/login_screen.dart';
@@ -57,6 +58,7 @@ class StarterWidget extends StatelessWidget {
         BlocProvider(create: (context) => LoginBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => ReportAccidentBloc()),
+        BlocProvider(create: (context) => Report2Bloc()),
       ],
       child: MaterialApp(
         builder: (context, child) => ResponsiveBreakpoints.builder(

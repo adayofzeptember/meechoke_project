@@ -1,6 +1,5 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/screens/Jobs/newJob_details.dart';
@@ -34,20 +33,7 @@ class _Job_ListsState extends State<Job_Lists>
       appBar: AppBar(
         backgroundColor: Palette.thisBlue,
         automaticallyImplyLeading: false,
-        // actions: [
-        //   IconButton(
-        //     onPressed: () {},
-        //     icon: const CircleAvatar(
-        //       radius: 15,
-        //       backgroundColor: Colors.white,
-        //       child: Icon(
-        //         Icons.person,
-        //         color: Palette.thisBlue,
-        //         size: 15,
-        //       ),
-        //     ),
-        //   ),
-        // ],
+      
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -129,7 +115,10 @@ class _Job_ListsState extends State<Job_Lists>
 }
 
 Widget newJobsWidget(context) {
-  return Padding(
+  
+  return 
+  
+  Padding(
     padding: const EdgeInsets.all(8.0),
     child: GestureDetector(
       onTap: () {

@@ -1,13 +1,13 @@
-
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:meechoke_project/ETC/ProgressHUD.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
-import '../../ETC/ProgressHUD.dart';
-import '../../bloc/ReportAccident/report_accident_bloc.dart';
+import 'package:meechoke_project/bloc/ReportAccident/report_accident_bloc.dart';
+
 
 class Report_Accident extends StatefulWidget {
   @override
@@ -64,7 +64,8 @@ class _Report_AccidentState extends State<Report_Accident> {
   }
 
   Widget _uiLogin(BuildContext context) {
-    return Scaffold(
+    return 
+    Scaffold(
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Palette.thisBlue,
@@ -92,14 +93,20 @@ class _Report_AccidentState extends State<Report_Accident> {
             if (state.lat == 0 || state.lng == 0) {
               return Center(
                   child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  const SizedBox(
+                    height: 50,
+                  ),
                   CircularProgressIndicator(),
-                  SizedBox(
-                    height: 5,
+                  const SizedBox(
+                    height: 10,
                   ),
                   Text(
                     'กำลังหาตำแหน่งพื้นที่ปัจจุบัน...',
-                    style: TextStyle(color: Palette.thisBlue),
+                    style: TextStyle(
+                        color: Palette.thisBlue, fontWeight: FontWeight.bold),
                   )
                 ],
               ));
@@ -110,52 +117,14 @@ class _Report_AccidentState extends State<Report_Accident> {
                 children: [
                   CustomPaint(
                     painter: ShapesPainter(),
-                    child: Container(height: 100),
+                    child: Container(height: 80),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
+                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Container(
-                          width: double.infinity,
-                          decoration: const BoxDecoration(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(40))),
-                          child: Column(
-                            children: [
-                              Padding(
-                                  padding: const EdgeInsets.all(20),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Icon(
-                                        Icons.pin_drop_outlined,
-                                        color: Palette.thisBlue,
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.6,
-                                        child:   Text(
-                                          state.locationName.toString(),
-                                          overflow: TextOverflow.clip,
-                                          maxLines: 3,
-                                          style: TextStyle(
-                                              color: Palette.thisBlue,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ],
-                                  )),
-                            ],
-                          ),
-                        ),
                         const SizedBox(
                           height: 15,
                         ),
@@ -167,7 +136,7 @@ class _Report_AccidentState extends State<Report_Accident> {
                                       .add(Load_VehicleDocs());
                                 },
                                 child:
-                                    Text('เกิดข้อผิดพลาด ไม่สามรถดึงข้อมูลได้'))
+                                    Text('เกิดข้อผิดพลาด, ไม่สามารถแสดงข้อมูล'))
                             : Container(
                                 height: 400,
                                 child: Column(
@@ -230,7 +199,7 @@ class _Report_AccidentState extends State<Report_Accident> {
                                                   ),
                                                   Padding(
                                                     padding: const EdgeInsets
-                                                            .fromLTRB(
+                                                        .fromLTRB(
                                                         20, 15, 20, 15),
                                                     child: Column(
                                                       children: [
@@ -630,13 +599,59 @@ class _Report_AccidentState extends State<Report_Accident> {
                         const SizedBox(
                           height: 20,
                         ),
-                        const Text(
-                          'แจ้งเหตุ:',
+                        Text(
+                          'ตำแหน่งปัจจุบัน',
                           style: TextStyle(
                               fontSize: 18,
-                              color: Color.fromARGB(255, 66, 66, 66),
+                              color: Palette.thisBlue,
                               fontWeight: FontWeight.bold),
                         ),
+                        Text(
+                          state.locationName,
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: Color.fromARGB(255, 110, 110, 109),
+                              fontWeight: FontWeight.bold),
+                        ),
+                        // Container(
+                        //   width: double.infinity,
+                        //   decoration: const BoxDecoration(
+                        //       color: Color.fromARGB(255, 255, 255, 255),
+                        //       borderRadius:
+                        //           BorderRadius.all(Radius.circular(40))),
+                        //   child: Column(
+                        //     children: [
+                        //       Padding(
+                        //           padding: const EdgeInsets.all(10),
+                        //           child: Row(
+                        //             mainAxisAlignment: MainAxisAlignment.center,
+                        //             children: [
+                        //               const Icon(
+                        //                 Icons.pin_drop_outlined,
+                        //                 color: Palette.thisBlue,
+                        //               ),
+                        //               const SizedBox(
+                        //                 width: 10,
+                        //               ),
+                        //               SizedBox(
+                        //                 width:
+                        //                     MediaQuery.of(context).size.width *
+                        //                         0.6,
+                        //                 child: Text(
+                        //                   state.locationName.toString(),
+                        //                   overflow: TextOverflow.clip,
+                        //                   maxLines: 3,
+                        //                   style: TextStyle(
+                        //                       color: Palette.thisBlue,
+                        //                       fontWeight: FontWeight.bold),
+                        //                 ),
+                        //               ),
+                        //             ],
+                        //           )),
+                        //     ],
+                        //   ),
+                        // ),
+
                         const SizedBox(
                           height: 5,
                         ),
@@ -652,7 +667,7 @@ class _Report_AccidentState extends State<Report_Accident> {
                             autofocus: false,
                             keyboardType: TextInputType.multiline,
                             decoration: const InputDecoration(
-                              hintText: 'กรอกหมายเหตุ',
+                              hintText: 'กรอกรายละเอียดแจ้งเหตุ',
                               hintStyle: TextStyle(color: Colors.grey),
                               border: OutlineInputBorder(
                                 borderRadius:

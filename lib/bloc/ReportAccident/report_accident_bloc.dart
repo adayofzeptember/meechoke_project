@@ -8,7 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:meechoke_project/ETC/api_url.dart';
 import 'package:meechoke_project/bloc/ReportAccident/model.dart';
-import 'package:meechoke_project/screens/Report/report_docs_screen.dart';
+import 'package:meechoke_project/screens/Report%20and%20Docs/new/report_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'report_accident_event.dart';
 part 'report_accident_state.dart';
@@ -46,7 +46,7 @@ class ReportAccidentBloc
         print(response.statusCode);
         print(response.data.toString());
         //!------------------------------------------------------------------------
-        var fetched_docs = (state.vehicle_Docs != []) ? state.vehicle_Docs : [];
+        var fetched_docs = [];
         var fetched_prdIns =
             (state.productIns_Docs != []) ? state.productIns_Docs : [];
 
@@ -62,6 +62,8 @@ class ReportAccidentBloc
               ),
             );
           }
+
+      
 
           emit(state.copyWith(
               vehicle_Docs: fetched_docs, productIns_Docs: fetched_prdIns));
@@ -185,7 +187,7 @@ class ReportAccidentBloc
         print('error: ' + e.toString());
       }
     });
-
+//*-----------------------------------
     on<GetLocationName>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
@@ -232,11 +234,12 @@ class ReportAccidentBloc
         Position position = await Geolocator.getCurrentPosition(
             desiredAccuracy: LocationAccuracy.high);
 
-        print(position.latitude.toString() + position.longitude.toString());
+        print(
+            position.latitude.toString() + " " + position.longitude.toString());
 
         emit(state.copyWith(lat: position.latitude, lng: position.longitude));
       } catch (e) {}
-      //emit(state.copyWith(lat: event.getLat, lng: event.getLong));
+      // emit(state.copyWith(lat: 4.04, lng: 4.04));
     });
   }
 }

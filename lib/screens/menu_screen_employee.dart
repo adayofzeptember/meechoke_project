@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,7 +6,7 @@ import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/screens/Checking/check_daily.dart';
 import 'package:meechoke_project/screens/Fuel/fuel_main.dart';
-import 'package:meechoke_project/screens/Report/report_docs_screen.dart';
+import 'package:meechoke_project/screens/Report%20and%20Docs/new/report_and_docs_main.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/ReportAccident/report_accident_bloc.dart';
@@ -25,7 +24,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
   @override
   void initState() {
     context.read<ProfileBloc>().add(Load_Profile());
-    context.read<ReportAccidentBloc>().add(Load_VehicleDocs());
+
     super.initState();
   }
 
@@ -39,7 +38,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
     //*
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+       backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         centerTitle: true,
         actions: [
@@ -199,12 +198,14 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                 children: <Widget>[
                   InkWell(
                     onTap: () {
+                      context.read<ReportAccidentBloc>().add(Load_VehicleDocs());
+                      
                       Navigator.push(
                         context,
                         PageTransition(
                             duration: const Duration(milliseconds: 500),
                             type: PageTransitionType.fade,
-                            child: Report_Accident()),
+                            child:ReportDocs_Main()),
                       );
                     },
                     child: Container(
