@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meechoke_project/ETC/ProgressHUD.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/ReportAccident/report_accident_bloc.dart';
 
 class Report_Screen extends StatefulWidget {
@@ -64,12 +63,12 @@ class _Report_ScreenState extends State<Report_Screen> {
                 ],
               ));
             }
-            
+           
             context.read<ReportAccidentBloc>().add(GetLocationName());
             return Column(children: [
               Stack(
                 children: [
-                  Padding(
+                  Padding(  
                     padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -148,7 +147,7 @@ class _Report_ScreenState extends State<Report_Screen> {
                                       SizedBox(
                                         width: 3,
                                       ),
-                                      Text(
+                                      const Text(
                                         'รูปภาพจุดแจ้งเหตุ',
                                         style: TextStyle(
                                             fontSize: 18,
@@ -164,6 +163,7 @@ class _Report_ScreenState extends State<Report_Screen> {
                                 child: SizedBox(
                                   height: 50,
                                   child: ElevatedButton(
+                                    
                                     style: ElevatedButton.styleFrom(
                                         primary: const Color.fromARGB(
                                             255, 238, 246, 255),
@@ -180,6 +180,9 @@ class _Report_ScreenState extends State<Report_Screen> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(15.0),
                                       child: Container(
+                                       
+                                       
+                                       
                                         width: double.infinity,
                                         alignment: Alignment.center,
                                         child: const Text(

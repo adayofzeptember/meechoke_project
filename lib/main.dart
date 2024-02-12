@@ -102,7 +102,7 @@ class _StartPageState extends State<StartPage> {
     if (status == PermissionStatus.granted) {
     } else {
       Fluttertoast.showToast(
-          msg: "โปรดอนุญาติการให้แอปเข้าถึงตำแหน่งพื้นที่",
+          msg: "ตั้งอนุญาติการให้แอปเข้าถึงตำแหน่งพื้นที่ได้ที่การตั้งค่าแอป",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.SNACKBAR,
           timeInSecForIosWeb: 2,
