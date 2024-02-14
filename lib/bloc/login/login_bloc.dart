@@ -15,7 +15,6 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final dio = Dio();
   LoginBloc() : super(LoginState(loading: false, obscurePass: true)) {
-    //*---------------------------------------------------------------
     on<Login_Casual>((event, emit) async {
       try {
         emit(state.copyWith(loading: true));
@@ -97,13 +96,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
     });
 
-    //?---------------------------------------------------------------
+  
     on<ShowPassword_Swap>((event, emit) {
-      if (state.obscurePass == false) {
-        emit(state.copyWith(obscurePass: true));
-      } else {
-        emit(state.copyWith(obscurePass: false));
-      }
+      emit(state.copyWith(obscurePass: !state.obscurePass));
     });
   }
 }

@@ -6,7 +6,6 @@ import '../ETC/app_color.dart';
 
 var usernameController = TextEditingController();
 var passwordController = TextEditingController();
-bool showPass = true;
 
 class Login_Screen extends StatelessWidget {
   Login_Screen({Key? key}) : super(key: key);

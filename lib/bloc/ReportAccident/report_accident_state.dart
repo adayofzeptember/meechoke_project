@@ -9,12 +9,10 @@ class ReportAccidentState extends Equatable {
   List productIns_Docs;
   String locationName;
 
-
   ReportAccidentState(
       {required this.page,
       required this.isLoading,
       required this.lat,
-
       required this.locationName,
       required this.lng,
       required this.productIns_Docs,
@@ -32,7 +30,6 @@ class ReportAccidentState extends Equatable {
     return ReportAccidentState(
       vehicle_Docs: vehicle_Docs ?? this.vehicle_Docs,
       page: page ?? this.page,
-
       lat: lat ?? this.lat,
       locationName: locationName ?? this.locationName,
       lng: lng ?? this.lng,
@@ -42,14 +39,6 @@ class ReportAccidentState extends Equatable {
   }
 
   @override
-  List<Object> get props => [
-        vehicle_Docs,
-        isLoading,
-        page,
-     
-        productIns_Docs,
-        lat,
-        lng,
-        locationName
-      ];
+  List<Object> get props =>
+      [vehicle_Docs, isLoading, page, productIns_Docs, lat, lng, locationName];
 }

@@ -41,7 +41,7 @@ class _ReportDocs_MainState extends State<ReportDocs_Main>
           ),
         ),
         title: const Text(
-          'แจ้งเหตุและกรมธรรม์',
+          'แจ้งเหตุและข้อมูลกรมธรรม์',
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
         ),
@@ -62,6 +62,7 @@ class _ReportDocs_MainState extends State<ReportDocs_Main>
               child: Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: TabBar(
+              
                   controller: _tabController,
                   dividerColor: Colors.transparent,
                   indicatorColor: Colors.transparent,

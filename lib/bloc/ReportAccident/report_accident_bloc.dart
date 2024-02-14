@@ -43,33 +43,38 @@ class ReportAccidentBloc
           ),
         );
 
-        print(response.statusCode);
-        print(response.data.toString());
-        //!------------------------------------------------------------------------
-        var fetched_docs = [];
-        var fetched_prdIns =
-            (state.productIns_Docs != []) ? state.productIns_Docs : [];
+        print("docs fetch status: "+response.statusCode.toString());
+        // print(response.data.toString());
+
+        var fetchedDocs = [];
 
         if (response.statusCode == 200) {
-          for (var nested in response.data['data']['act']) {
-            fetched_docs.add(
-              Vehicle_Docs_Model(
-                docType: await nested['docType'].toString(),
-                company: await nested['company'].toString(),
-                contact: await nested['contact'].toString(),
-                creditLimit: await nested['creditLimit'].toString(),
-                docNumber: await nested['docNumber'].toString(),
-              ),
-            );
-          }
+          var data = response.data['data'];
 
-      
+          data.forEach((key, value) {
+            if (value is List) {
+              for (var item in value) {
+                fetchedDocs.add(
+                  Vehicle_Docs_Model(
+                    docType: item['docType'] ?? "-",
+                    company: item['company'] ?? "-",
+                    contact: item['contact'] ?? "-",
+                    creditLimit: item['creditLimit'].toString(),
+                    docNumber: item['docNumber'] ?? "-",
+                  ),
+                );
+              }
+            }
+          });
 
           emit(state.copyWith(
-              vehicle_Docs: fetched_docs, productIns_Docs: fetched_prdIns));
+            vehicle_Docs: fetchedDocs,
+          ));
 
-          print(fetched_docs.length);
-        } else {}
+          print('docs count: '+fetchedDocs.length.toString());
+        } else {
+                  print(response.statusCode);
+        }
       } catch (e) {
         if (e is DioException) {
           print(e);
@@ -78,6 +83,7 @@ class ReportAccidentBloc
         }
       }
     });
+
 
     on<Upload_Pics_andReport>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -230,7 +236,7 @@ class ReportAccidentBloc
 
     on<EmitLatLng>((event, emit) async {
       try {
-        print('x');
+        print('locationg...');
         Position position = await Geolocator.getCurrentPosition(
             desiredAccuracy: LocationAccuracy.high);
 
