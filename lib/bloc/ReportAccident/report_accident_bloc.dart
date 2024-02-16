@@ -8,7 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:meechoke_project/ETC/api_url.dart';
 import 'package:meechoke_project/bloc/ReportAccident/model.dart';
-import 'package:meechoke_project/screens/Report%20and%20Docs/new/report_screen.dart';
+import 'package:meechoke_project/ETC/success_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'report_accident_event.dart';
 part 'report_accident_state.dart';
@@ -22,7 +22,7 @@ class ReportAccidentBloc
           locationName: '',
           lat: 0,
           lng: 0,
-          productIns_Docs: [],
+       
           vehicle_Docs: [],
           page: 1,
           isLoading: false,
@@ -43,7 +43,7 @@ class ReportAccidentBloc
           ),
         );
 
-        print("docs fetch status: "+response.statusCode.toString());
+        print("docs fetch status: " + response.statusCode.toString());
         // print(response.data.toString());
 
         var fetchedDocs = [];
@@ -71,9 +71,9 @@ class ReportAccidentBloc
             vehicle_Docs: fetchedDocs,
           ));
 
-          print('docs count: '+fetchedDocs.length.toString());
+          print('docs count: ' + fetchedDocs.length.toString());
         } else {
-                  print(response.statusCode);
+          print('status code != 200: ' + response.toString());
         }
       } catch (e) {
         if (e is DioException) {
@@ -83,7 +83,6 @@ class ReportAccidentBloc
         }
       }
     });
-
 
     on<Upload_Pics_andReport>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -152,11 +151,12 @@ class ReportAccidentBloc
               ),
               data: reportJsonData);
 
-          print(response2.statusMessage);
+          print('---------> upload image status: '+response2.statusMessage.toString());
           if (response2.statusCode == 200) {
             emit(state.copyWith(isLoading: false));
             print(response2.data['data']);
-            uploadSuccessDialog(event.context);
+            SuccessMessage_Dialog(event.context, 'ส่งแจ้งเสร็จสิ้น test Dialog');
+            
           } else {
             emit(state.copyWith(isLoading: false));
             print('error: ' + response2.data['data']);
@@ -193,7 +193,7 @@ class ReportAccidentBloc
         print('error: ' + e.toString());
       }
     });
-//*-----------------------------------
+//*-------------------------------------------------------------------------
     on<GetLocationName>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
@@ -236,7 +236,7 @@ class ReportAccidentBloc
 
     on<EmitLatLng>((event, emit) async {
       try {
-        print('locationg...');
+        print('locating...');
         Position position = await Geolocator.getCurrentPosition(
             desiredAccuracy: LocationAccuracy.high);
 

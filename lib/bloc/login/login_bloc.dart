@@ -54,7 +54,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(state.copyWith(loading: false));
         Fluttertoast.showToast(
             msg:
-                "ไม่พบบัญชีผู้ใช้ในระบบ, สมัครบัญชีใหม่หรือตรวจสอบชื่อผู้ใช้และรหัสผ่านอีกครั้ง \n ${e.toString()}",
+                "ไม่พบบัญชีผู้ใช้ในระบบ}",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.SNACKBAR,
             timeInSecForIosWeb: 2,

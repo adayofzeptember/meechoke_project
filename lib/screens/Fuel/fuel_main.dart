@@ -32,20 +32,11 @@ class _Fuel_ListsState extends State<Fuel_Lists>
       appBar: AppBar(
         backgroundColor: Palette.thisBlue,
         automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: CircleAvatar(
-              radius: 15,
-              backgroundColor: Colors.white,
-              child: const Icon(
-                Icons.person,
-                color: Palette.thisBlue,
-                size: 15,
-              ),
-            ),
-          ),
-        ],
+              shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        bottom: Radius.circular(30),
+      ),
+    ),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {

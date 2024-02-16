@@ -7,7 +7,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
-import 'package:meechoke_project/bloc/Report2_Test/report2_bloc.dart';
 import 'package:meechoke_project/bloc/ReportAccident/report_accident_bloc.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
 import 'package:meechoke_project/screens/login_screen.dart';
@@ -54,11 +53,10 @@ class StarterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        //BLoC
         BlocProvider(create: (context) => LoginBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => ReportAccidentBloc()),
-        BlocProvider(create: (context) => Report2Bloc()),
+ 
       ],
       child: MaterialApp(
         builder: (context, child) => ResponsiveBreakpoints.builder(
@@ -81,7 +79,7 @@ class StarterWidget extends StatelessWidget {
   }
 }
 
-//! ---stateful starts here----
+//!--- stateful starts here ----
 
 class StartPage extends StatefulWidget {
   const StartPage({super.key});

@@ -7,12 +7,12 @@ import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
 import 'package:meechoke_project/screens/Checking/check_daily.dart';
 import 'package:meechoke_project/screens/Fuel/fuel_main.dart';
-import 'package:meechoke_project/screens/Report%20and%20Docs/new/tab_mainScreen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/ReportAccident/report_accident_bloc.dart';
-import 'Jobs/jobs_lists_main.dart';
+import 'Jobs/tab_mainScreen.dart';
 import 'Financial/financial.dart';
+import 'Report and Docs/tab_mainScreen.dart';
 
 class MainMenu_Employee extends StatefulWidget {
   const MainMenu_Employee({super.key});

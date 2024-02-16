@@ -5,23 +5,20 @@ import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meechoke_project/ETC/ProgressHUD.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/ETC/shape_painter.dart';
-import 'package:meechoke_project/bloc/Report2_Test/report2_bloc.dart';
 import 'package:meechoke_project/bloc/ReportAccident/report_accident_bloc.dart';
 
-
-class Report2_Test extends StatefulWidget {
+class Report_Screen extends StatefulWidget {
   @override
-  _Report2_TestState createState() => _Report2_TestState();
+  _Report_ScreenState createState() => _Report_ScreenState();
 }
 
-class _Report2_TestState extends State<Report2_Test> {
+class _Report_ScreenState extends State<Report_Screen> {
   List<File> selectedImages = [];
   final picker = ImagePicker();
 
   @override
   void initState() {
-    context.read<Report2Bloc>().add(Load_Docs());
+    context.read<ReportAccidentBloc>().add(EmitLatLng(context: context));
     super.initState();
   }
 
@@ -41,107 +38,66 @@ class _Report2_TestState extends State<Report2_Test> {
 
   Widget _uiLogin(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Palette.thisBlue,
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios_new,
-              color: Colors.white,
-            ),
-          ),
-          title: const Text(
-            'แจ้งเหตุ/ข้อมูลเกี่ยวกับกรมธรรม์',
-            style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
-          ),
-        ),
-        backgroundColor: const Color.fromARGB(255, 228, 237, 240),
-        body:
-            SingleChildScrollView(child: BlocBuilder<Report2Bloc, Report2State>(
+      backgroundColor: Palette.mainBackgroud,
+      body: SingleChildScrollView(
+        child: BlocBuilder<ReportAccidentBloc, ReportAccidentState>(
           builder: (context, state) {
+            if (state.lat == 0 || state.lng == 0) {
+              return Center(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  CircularProgressIndicator(),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'กำลังหาค้นหาตำแหน่ง',
+                    style: TextStyle(
+                        color: Palette.thisBlue, fontWeight: FontWeight.bold),
+                  )
+                ],
+              ));
+            }
+           
+            context.read<ReportAccidentBloc>().add(GetLocationName());
             return Column(children: [
               Stack(
                 children: [
-                  CustomPaint(
-                    painter: ShapesPainter(),
-                    child: Container(height: 100),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 20, 15, 15),
+                  Padding(  
+                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Container(
-                          width: double.infinity,
-                          decoration: const BoxDecoration(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(40))),
-                          child: Column(
-                            children: [
-                              Padding(
-                                  padding: const EdgeInsets.all(20),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Icon(
-                                        Icons.pin_drop_outlined,
-                                        color: Palette.thisBlue,
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.6,
-                                        child: Text(
-                                          'state.locationName.toString()',
-                                          overflow: TextOverflow.clip,
-                                          maxLines: 3,
-                                          style: TextStyle(
-                                              color: Palette.thisBlue,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ],
-                                  )),
-                            ],
-                          ),
-                        ),
                         const SizedBox(
                           height: 15,
                         ),
-                        (state.statusCheck == "0")
-                        ? Center(child: CircularProgressIndicator())
-
-
-                        : GestureDetector(
-                          onTap: () {
-                                context.read<Report2Bloc>().add(Load_Docs());
-                          },
-                          child: Text('เกิดข้อผิดพลาด กดเพื่อลองใหม่')),
-
-                    
-                        const SizedBox(
-                          height: 20,
+                        Row(
+                          children: [
+                            Icon(Icons.location_on, color: Palette.someRed,),
+                            Text(
+                              'ตำแหน่งปัจจุบัน',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: Palette.thisBlue,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
                         ),
-                        const Text(
-                          'แจ้งเหตุ:',
+                        Text(
+                          state.locationName,
                           style: TextStyle(
-                              fontSize: 18,
-                              color: Color.fromARGB(255, 66, 66, 66),
+                              fontSize: 15,
+                              color: Color.fromARGB(255, 110, 110, 109),
                               fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(
-                          height: 5,
+                          height: 20,
                         ),
                         Container(
                           decoration: const BoxDecoration(
@@ -155,7 +111,7 @@ class _Report2_TestState extends State<Report2_Test> {
                             autofocus: false,
                             keyboardType: TextInputType.multiline,
                             decoration: const InputDecoration(
-                              hintText: 'กรอกหมายเหตุ',
+                              hintText: 'กรอกรายละเอียดแจ้งเหตุ',
                               hintStyle: TextStyle(color: Colors.grey),
                               border: OutlineInputBorder(
                                 borderRadius:
@@ -165,7 +121,7 @@ class _Report2_TestState extends State<Report2_Test> {
                           ),
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 20,
                         ),
                         Container(
                           height: (selectedImages.isEmpty) ? 200 : null,
@@ -196,7 +152,7 @@ class _Report2_TestState extends State<Report2_Test> {
                                       SizedBox(
                                         width: 3,
                                       ),
-                                      Text(
+                                      const Text(
                                         'รูปภาพจุดแจ้งเหตุ',
                                         style: TextStyle(
                                             fontSize: 18,
@@ -212,6 +168,7 @@ class _Report2_TestState extends State<Report2_Test> {
                                 child: SizedBox(
                                   height: 50,
                                   child: ElevatedButton(
+                                    
                                     style: ElevatedButton.styleFrom(
                                         primary: const Color.fromARGB(
                                             255, 238, 246, 255),
@@ -228,6 +185,9 @@ class _Report2_TestState extends State<Report2_Test> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(15.0),
                                       child: Container(
+                                       
+                                       
+                                       
                                         width: double.infinity,
                                         alignment: Alignment.center,
                                         child: const Text(
@@ -258,6 +218,7 @@ class _Report2_TestState extends State<Report2_Test> {
                                             return Center(
                                                 child: GestureDetector(
                                               onTap: () {
+                                                _showImageDialog(context, selectedImages[index].path);
                                                 print(
                                                     selectedImages[index].path);
                                               },
@@ -313,7 +274,7 @@ class _Report2_TestState extends State<Report2_Test> {
                                 width: double.infinity,
                                 alignment: Alignment.center,
                                 child: const Text(
-                                  "บันทึก",
+                                  "ส่งแจ้ง",
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
@@ -330,7 +291,9 @@ class _Report2_TestState extends State<Report2_Test> {
               ),
             ]);
           },
-        )));
+        ),
+      ),
+    );
   }
 
   openImageDialog(context) {
@@ -391,6 +354,26 @@ class _Report2_TestState extends State<Report2_Test> {
         });
   }
 
+
+static void _showImageDialog(BuildContext context, String imagePath) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Center(
+          child: Image.file(
+            File(imagePath),
+            fit: BoxFit.fill,
+          ),
+        ),
+      );
+    },
+  );
+}
+
+
+
   Future<void> _getToCamera() async {
     final picker = ImagePicker();
     final pickedImage = await picker.pickImage(source: ImageSource.camera);
@@ -422,36 +405,36 @@ class _Report2_TestState extends State<Report2_Test> {
 }
 
 //* DIALOG
-uploadSuccessDialog(context) {
-  showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-            scrollable: true, // <-- Set it to true
+// uploadSuccessDialog(context) {
+//   showDialog(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return AlertDialog(
+//             scrollable: true, // <-- Set it to true
 
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            contentPadding: const EdgeInsets.all(20),
-            content: Center(
-              child: Column(
-                children: [
-                  SvgPicture.asset('assets/images/circle-check.svg'),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  const Text(
-                    'ส่งแจ้งเสร็จสิ้น',
-                    style: TextStyle(
-                        color: Colors.green,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  )
-                ],
-              ),
-            ));
-      });
+//             shape: const RoundedRectangleBorder(
+//                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
+//             contentPadding: const EdgeInsets.all(20),
+//             content: Center(
+//               child: Column(
+//                 children: [
+//                   SvgPicture.asset('assets/images/circle-check.svg'),
+//                   const SizedBox(
+//                     height: 15,
+//                   ),
+//                   const Text(
+//                     'ส่งแจ้งเสร็จสิ้น',
+//                     style: TextStyle(
+//                         color: Colors.green,
+//                         fontSize: 20,
+//                         fontWeight: FontWeight.bold),
+//                   )
+//                 ],
+//               ),
+//             ));
+//       });
 
-  Future.delayed(const Duration(seconds: 2), () {
-    Navigator.of(context).pop(); // Close the AlertDialog
-  });
-}
+//   Future.delayed(const Duration(seconds: 2), () {
+//     Navigator.of(context).pop(); // Close the AlertDialog
+//   });
+// }

@@ -30,20 +30,6 @@ class _Financial_ListState extends State<Financial_List>
         appBar: AppBar(
           backgroundColor: Palette.thisBlue,
           automaticallyImplyLeading: false,
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const CircleAvatar(
-                radius: 15,
-                backgroundColor: Colors.white,
-                child: Icon(
-                  Icons.person,
-                  color: Palette.thisBlue,
-                  size: 15,
-                ),
-              ),
-            ),
-          ],
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
@@ -60,7 +46,7 @@ class _Financial_ListState extends State<Financial_List>
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 228, 237, 240),
+        backgroundColor: Palette.mainBackgroud,
         body: SingleChildScrollView(
           child: Column(children: [
             Stack(

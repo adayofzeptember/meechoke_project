@@ -17,20 +17,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
       appBar: AppBar(
         backgroundColor: Palette.thisBlue,
         automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: CircleAvatar(
-              radius: 15,
-              backgroundColor: Colors.white,
-              child: const Icon(
-                Icons.person,
-                color: Palette.thisBlue,
-                size: 15,
-              ),
-            ),
-          ),
-        ],
+    
         centerTitle: true,
         leading: IconButton(
           onPressed: () {

@@ -25,8 +25,6 @@ class _Job_DetailsState extends State<Job_Details>
   void dispose() {
     super.dispose();
     _tabController.dispose();
-
-
   }
 
   @override
@@ -391,7 +389,9 @@ class _Job_DetailsState extends State<Job_Details>
                                             Row(
                                               children: [
                                                 Text('จุดรับ'),
-                                                SizedBox(width: 5,),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
                                                 Container(
                                                   decoration: BoxDecoration(
                                                       color: Palette.thisBlue,
@@ -415,7 +415,6 @@ class _Job_DetailsState extends State<Job_Details>
                                                 ),
                                               ],
                                             ),
-                                         
                                             Text(
                                               'โรงน้ำตาลครบุรี อ.ครบุรี จ.นครราชสีมา',
                                               style: TextStyle(
@@ -434,7 +433,9 @@ class _Job_DetailsState extends State<Job_Details>
                                             Row(
                                               children: [
                                                 Text('จุดส่ง'),
-                                                   SizedBox(width: 5,),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
                                                 Container(
                                                   decoration: BoxDecoration(
                                                       color: Palette.thisBlue,

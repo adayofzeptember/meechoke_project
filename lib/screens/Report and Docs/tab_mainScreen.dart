@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/screens/Report%20and%20Docs/new/docs_screen.dart';
-import 'package:meechoke_project/screens/Report%20and%20Docs/new/report_screen.dart';
+import 'package:meechoke_project/screens/Report%20and%20Docs/docs_screen.dart';
+import 'package:meechoke_project/screens/Report%20and%20Docs/report_screen.dart';
 
 class ReportDocs_Main extends StatefulWidget {
   @override
@@ -28,6 +28,11 @@ class _ReportDocs_MainState extends State<ReportDocs_Main>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+           shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        bottom: Radius.circular(30),
+      ),
+    ),
         backgroundColor: Palette.thisBlue,
         automaticallyImplyLeading: false,
         centerTitle: true,
@@ -46,7 +51,7 @@ class _ReportDocs_MainState extends State<ReportDocs_Main>
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
         ),
       ),
-      backgroundColor: const Color.fromARGB(255, 228, 237, 240),
+      backgroundColor: Palette.mainBackgroud,
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
         child: Column(
@@ -62,7 +67,6 @@ class _ReportDocs_MainState extends State<ReportDocs_Main>
               child: Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: TabBar(
-              
                   controller: _tabController,
                   dividerColor: Colors.transparent,
                   indicatorColor: Colors.transparent,
@@ -79,7 +83,7 @@ class _ReportDocs_MainState extends State<ReportDocs_Main>
                       color: Palette.thisBlue),
                   tabs: const [
                     Tab(
-                      text: 'ข้อมูลกรมธรรม์', 
+                      text: 'ข้อมูลกรมธรรม์',
                     ),
                     Tab(
                       text: 'แจ้งเหตุ',

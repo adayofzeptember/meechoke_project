@@ -6,7 +6,6 @@ class ReportAccidentState extends Equatable {
   bool isLoading;
   double lat, lng;
   List vehicle_Docs;
-  List productIns_Docs;
   String locationName;
 
   ReportAccidentState(
@@ -15,14 +14,11 @@ class ReportAccidentState extends Equatable {
       required this.lat,
       required this.locationName,
       required this.lng,
-      required this.productIns_Docs,
       required this.vehicle_Docs});
 
   ReportAccidentState copyWith(
       {List? vehicle_Docs,
-      List? productIns_Docs,
       int? page,
-      bool? checkInfo,
       String? locationName,
       bool? isLoading,
       double? lat,
@@ -33,12 +29,11 @@ class ReportAccidentState extends Equatable {
       lat: lat ?? this.lat,
       locationName: locationName ?? this.locationName,
       lng: lng ?? this.lng,
-      productIns_Docs: productIns_Docs ?? this.productIns_Docs,
       isLoading: isLoading ?? this.isLoading,
     );
   }
 
   @override
   List<Object> get props =>
-      [vehicle_Docs, isLoading, page, productIns_Docs, lat, lng, locationName];
+      [vehicle_Docs, isLoading, page, lat, lng, locationName];
 }

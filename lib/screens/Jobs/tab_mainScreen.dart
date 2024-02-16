@@ -5,7 +5,7 @@ import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/screens/Jobs/newJob_details.dart';
 import 'package:page_transition/page_transition.dart';
 import 'Job Processing/job_accepted_detail_2.dart';
- 
+
 class Job_Lists extends StatefulWidget {
   @override
   _Job_ListsState createState() => _Job_ListsState();
@@ -31,9 +31,13 @@ class _Job_ListsState extends State<Job_Lists>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
+        ),
         backgroundColor: Palette.thisBlue,
         automaticallyImplyLeading: false,
-      
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -115,10 +119,7 @@ class _Job_ListsState extends State<Job_Lists>
 }
 
 Widget newJobsWidget(context) {
-  
-  return 
-  
-  Padding(
+  return Padding(
     padding: const EdgeInsets.all(8.0),
     child: GestureDetector(
       onTap: () {
@@ -183,8 +184,7 @@ Widget newJobsWidget(context) {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20))),
                                 child: const Padding(
-                                  padding:
-                                      EdgeInsets.fromLTRB(12, 8, 12, 8),
+                                  padding: EdgeInsets.fromLTRB(12, 8, 12, 8),
                                   child: SizedBox(
                                     width: 120,
                                     child: Text(
@@ -242,9 +242,8 @@ Widget newJobsWidget(context) {
                                                       BorderRadius.all(
                                                           Radius.circular(20))),
                                               child: const Padding(
-                                                padding:
-                                                    EdgeInsets.fromLTRB(
-                                                        3, 3, 3, 3),
+                                                padding: EdgeInsets.fromLTRB(
+                                                    3, 3, 3, 3),
                                                 child: Text(
                                                   '10 พ.ย. 2023 - 08:00',
                                                   textAlign: TextAlign.center,
@@ -284,8 +283,8 @@ Widget newJobsWidget(context) {
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(20))),
                                           child: const Padding(
-                                            padding: EdgeInsets.fromLTRB(
-                                                3, 3, 3, 3),
+                                            padding:
+                                                EdgeInsets.fromLTRB(3, 3, 3, 3),
                                             child: Text(
                                               '10 พ.ย. 2023 - 08:00',
                                               textAlign: TextAlign.center,
@@ -393,8 +392,8 @@ Widget onGoingJobWidget(context) {
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(20))),
                                       child: const Padding(
-                                        padding: EdgeInsets.fromLTRB(
-                                            12, 8, 12, 8),
+                                        padding:
+                                            EdgeInsets.fromLTRB(12, 8, 12, 8),
                                         child: SizedBox(
                                           width: 120,
                                           child: Text(
@@ -454,9 +453,8 @@ Widget onGoingJobWidget(context) {
                                                             Radius.circular(
                                                                 20))),
                                                 child: const Padding(
-                                                  padding:
-                                                      EdgeInsets.fromLTRB(
-                                                          3, 3, 3, 3),
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      3, 3, 3, 3),
                                                   child: Text(
                                                     '10 พ.ย. 2023 - 08:00',
                                                     textAlign: TextAlign.center,
@@ -498,9 +496,8 @@ Widget onGoingJobWidget(context) {
                                                             Radius.circular(
                                                                 20))),
                                                 child: const Padding(
-                                                  padding:
-                                                      EdgeInsets.fromLTRB(
-                                                          3, 3, 3, 3),
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      3, 3, 3, 3),
                                                   child: Text(
                                                     '10 พ.ย. 2023 - 08:00',
                                                     textAlign: TextAlign.center,
@@ -618,8 +615,8 @@ Widget onGoingJobWidget(context) {
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(20))),
                                       child: const Padding(
-                                        padding: EdgeInsets.fromLTRB(
-                                            12, 8, 12, 8),
+                                        padding:
+                                            EdgeInsets.fromLTRB(12, 8, 12, 8),
                                         child: SizedBox(
                                           width: 120,
                                           child: Text(
@@ -679,9 +676,8 @@ Widget onGoingJobWidget(context) {
                                                             Radius.circular(
                                                                 20))),
                                                 child: const Padding(
-                                                  padding:
-                                                      EdgeInsets.fromLTRB(
-                                                          3, 3, 3, 3),
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      3, 3, 3, 3),
                                                   child: Text(
                                                     '10 พ.ย. 2023 - 08:00',
                                                     textAlign: TextAlign.center,
@@ -723,9 +719,8 @@ Widget onGoingJobWidget(context) {
                                                             Radius.circular(
                                                                 20))),
                                                 child: const Padding(
-                                                  padding:
-                                                      EdgeInsets.fromLTRB(
-                                                          3, 3, 3, 3),
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      3, 3, 3, 3),
                                                   child: Text(
                                                     '10 พ.ย. 2023 - 08:00',
                                                     textAlign: TextAlign.center,
