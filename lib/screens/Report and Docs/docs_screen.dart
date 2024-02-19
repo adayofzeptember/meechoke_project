@@ -25,7 +25,9 @@ class _Docs_ScreenState extends State<Docs_Screen> {
           child: SingleChildScrollView(
             child: BlocBuilder<ReportAccidentBloc, ReportAccidentState>(
                 builder: (context, state) {
-              return Column(children: [
+              return 
+              Column(
+                children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
                   child: Column(

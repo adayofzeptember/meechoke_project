@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/bloc/ReportAccident/report_accident_bloc.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
@@ -55,8 +56,8 @@ class StarterWidget extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => LoginBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
+        BlocProvider(create: (context) => JobsBloc()),
         BlocProvider(create: (context) => ReportAccidentBloc()),
- 
       ],
       child: MaterialApp(
         builder: (context, child) => ResponsiveBreakpoints.builder(

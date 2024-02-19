@@ -15,6 +15,7 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final dio = Dio();
   LoginBloc() : super(LoginState(loading: false, obscurePass: true)) {
+
     on<Login_Casual>((event, emit) async {
       try {
         emit(state.copyWith(loading: true));
@@ -54,7 +55,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(state.copyWith(loading: false));
         Fluttertoast.showToast(
             msg:
-                "ไม่พบบัญชีผู้ใช้ในระบบ}",
+                "ไม่พบบัญชีผู้ใช้ในระบบ",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.SNACKBAR,
             timeInSecForIosWeb: 2,

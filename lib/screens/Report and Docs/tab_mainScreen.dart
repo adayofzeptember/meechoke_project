@@ -71,7 +71,7 @@ class _ReportDocs_MainState extends State<ReportDocs_Main>
                   dividerColor: Colors.transparent,
                   indicatorColor: Colors.transparent,
                   labelColor: Colors.white,
-                  labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                  labelStyle: const TextStyle(fontWeight: FontWeight.bold,                       fontFamily: 'Sarabun',),
                   unselectedLabelColor: Colors.grey,
                   indicatorSize: TabBarIndicatorSize.tab,
                   indicator: BoxDecoration(
