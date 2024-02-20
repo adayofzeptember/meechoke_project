@@ -1,8 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:meechoke_project/ETC/api_url.dart';
 import 'package:meechoke_project/bloc/Jobs/newjobs_model.dart';
+import 'package:meechoke_project/screens/Jobs/newJob_details.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'jobs_event.dart';
@@ -13,7 +16,12 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
   JobsBloc()
       : super(
           JobsState(
-              newjobs_list: [], status: 0, currentjobs_list: [], status2: 0),
+              status3Detail: 0,
+              newjob_info: '',
+              newjobs_list: [],
+              status: 0,
+              currentjobs_list: [],
+              status2: 0),
         ) {
     //*
     on<Load_NewJobs>((event, emit) async {
@@ -39,6 +47,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
               Newjobs_List_Data(
                 jobNumber: await elements['documentNumber'],
                 jobStatus: await elements['currentStatus'],
+                //?
                 pickupPoint: await elements['checkinLocation'][0]
                     ['locationCode'],
                 pickupDate: await elements['checkinLocation'][0]['meetingTime'],
@@ -108,6 +117,113 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
         print("Exception Try: $e");
         emit(state.copyWith(
           status2: 2,
+        ));
+      }
+    });
+
+    //*
+
+    on<Load_NewJob_Info>((event, emit) async {
+            Navigator.push(
+                            event.context,
+                            PageTransition(
+                                duration: const Duration(milliseconds: 500),
+                                type: PageTransitionType.fade,
+                                child: Job_Details()));   
+   
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? tokenAuth = prefs.getString('userToken');
+
+      try {
+        emit(state.copyWith(
+          status3Detail: 0,
+        ));
+        final response = await dio.get(
+          api_url_v1 + "job-order-number?jobOrderNumber=${event.joNumber}",
+          options: Options(headers: {
+            "Authorization": "Bearer $tokenAuth",
+          }),
+        );
+        //var responseData = response.data['data'];
+        print('job detail status: ' + response.statusMessage.toString());
+        dynamic nestedData = response.data['data'];
+        dynamic fetchedDataInfo =
+            (state.newjob_info != '') ? state.newjob_info : '';
+        if (response.statusCode == 200) {
+ 
+          //!ยังไม่มี จุดรับ-ส่ง ลูป---เบี้ยเลี้ยง-----โอนล่วงหน้า----ชื่อสินค้า
+          fetchedDataInfo = Job_Detail(
+              docNumber: nestedData['documentNumber'].toString(),
+              docStatus: nestedData['documentStatus'].toString(),
+              customerName:
+                  nestedData['saleOrderOrdinary']['customerName'].toString(),
+              weight: nestedData['totalWeight'].toString(),
+              amounts: nestedData['transportAmount'].toString(),
+              pallet: nestedData['palletAmount'].toString(),
+              detail: nestedData['saleOrderOrdinary']['priceData']
+                      ['unitSelector']
+                  .toString(),
+              contactName: nestedData['saleOrderOrdinary']['customer']
+                      ['contactPoint'][0]['name']
+                  .toString(),
+              contactTel: nestedData['saleOrderOrdinary']['customer']
+                      ['contactPoint'][0]['contact']
+                  .toString(),
+              inTheNameOf:
+                  nestedData['saleOrderOrdinary']['customerName'].toString(),
+              collectMoney: nestedData['saleOrderOrdinary']['optionalData']
+                      ['sourcePayment']
+                  .toString(),
+              distance: nestedData['route']['distance'].toString(),
+              remark:
+                  nestedData['saleOrderOrdinary']['remark']['so'].toString(),
+              dod: nestedData['saleOrderOrdinary']['remark']['dod'].toString());
+               
+          emit(state.copyWith(newjob_info: fetchedDataInfo, status3Detail: 1));
+         
+          //!
+          // print('---------------------JOB DETAIL---------------------');
+          // print('doc number: ' + nestedData['documentNumber']);
+          // print('doc status: ' + nestedData['documentStatus']);
+          // print('customer: ' + nestedData['saleOrderOrdinary']['customerName']);
+          // print('total weight: ' + nestedData['totalWeight']);
+          // print('amount(s): ' + nestedData['transportAmount']);
+          // print('pallet: ' + nestedData['palletAmount']);
+
+          // print('job detail: ' +
+          //     nestedData['saleOrderOrdinary']['priceData']['unitSelector']);
+
+          // print('contact: ' +
+          //     nestedData['saleOrderOrdinary']['customer']['contactPoint'][0]
+          //         ['name']);
+
+          // print('contact tel: ' +
+          //     nestedData['saleOrderOrdinary']['customer']['contactPoint'][0]
+          //         ['contact']);
+
+          // print('in the name of: ' +
+          //     nestedData['saleOrderOrdinary']['customerName']);
+
+          // print('เก็บเงินสด: ' +
+          //     nestedData['saleOrderOrdinary']['optionalData']['sourcePayment']
+          //         .toString());
+
+          // print('ระยะทางรวม: ' + nestedData['route']['distance']);
+          // print('หมายเหตุ: ' + nestedData['saleOrderOrdinary']['remark']['so']);
+
+          // print('หมายเหตุ DOD: ' +
+          //     nestedData['saleOrderOrdinary']['remark']['dod']);
+          // print('---------------------END----------------------------');
+        } else {
+          print('error status != 200');
+          emit(state.copyWith(
+            status3Detail: 2,
+          ));
+        }
+      } catch (e) {
+        print("Exception Try: $e");
+        emit(state.copyWith(
+          status3Detail: 2,
         ));
       }
     });

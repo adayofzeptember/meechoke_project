@@ -6,7 +6,7 @@ Future<void> SuccessMessage_Dialog(BuildContext context, String message) async {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-            scrollable: true, // <-- Set it to true
+            scrollable: true, //! <-- Set it to true
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
             contentPadding: const EdgeInsets.all(20),

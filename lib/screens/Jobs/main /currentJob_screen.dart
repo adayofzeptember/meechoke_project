@@ -3,21 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import '../../bloc/Jobs/jobs_bloc.dart';
+import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 
-class NewJobs_Screen extends StatefulWidget {
-  @override
-  _NewJobs_ScreenState createState() => _NewJobs_ScreenState();
-}
-
-class _NewJobs_ScreenState extends State<NewJobs_Screen> {
-  @override
-  void initState() {
-
-
-    super.initState();
-  }
-
+class CurrentJobs_Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 228, 237, 240),
@@ -28,7 +16,7 @@ class _NewJobs_ScreenState extends State<NewJobs_Screen> {
           child: SingleChildScrollView(
             child: BlocBuilder<JobsBloc, JobsState>(
               builder: (context, state) {
-                if (state.status == 0)
+                if (state.status2 == 0)
                   return Center(
                       child: Column(
                     children: [
@@ -38,29 +26,7 @@ class _NewJobs_ScreenState extends State<NewJobs_Screen> {
                       CircularProgressIndicator(),
                     ],
                   ));
-                else if (state.status == 2) {
-                  return GestureDetector(
-                    onTap: () {
-    context.read<JobsBloc>().add(Load_NewJobs());
-                      
-                    },
-                    child: Center(
-                        child: Column(
-                      children: [
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          'เกิดข้อผิดพลาด',
-                          style: TextStyle(
-                              color: Palette.someRed,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
-                        )
-                      ],
-                    )),
-                  );
-                } else if (state.status == 1 && state.newjobs_list.isEmpty) {
+                else if (state.status2 == 2) {
                   return Center(
                       child: Column(
                     children: [
@@ -68,7 +34,23 @@ class _NewJobs_ScreenState extends State<NewJobs_Screen> {
                         height: 20,
                       ),
                       Text(
-                        'ยังไม่มีงานใหม่ในขณะนี้',
+                        'เกิดข้อผิดพลาด',
+                        style: TextStyle(
+                            color: Palette.someRed,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      )
+                    ],
+                  ));
+                } else if (state.status2 == 1 && state.currentjobs_list.isEmpty) {
+                  return Center(
+                      child: Column(
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'ไม่มีงานที่กำลังดำเนินงานในขณะนี้',
                         style: TextStyle(
                             color: Palette.thisBlue,
                             fontWeight: FontWeight.bold,
@@ -80,7 +62,7 @@ class _NewJobs_ScreenState extends State<NewJobs_Screen> {
                 //?  โหลดได้ปกติ
                 return ListView.builder(
                   primary: true,
-                  itemCount: state.newjobs_list.length,
+                  itemCount: state.currentjobs_list.length,
                   shrinkWrap: true,
                   physics: const ClampingScrollPhysics(),
                   itemBuilder: (context, index) {
@@ -99,9 +81,9 @@ class _NewJobs_ScreenState extends State<NewJobs_Screen> {
                                   width: 3,
                                 ),
                                 Text(
-                                  state.newjobs_list[index].pickupDate
+                                  state.currentjobs_list[index].pickupDate
                                       .toString(),
-                                  //+" " + state.newjobs_list[index].dropDate.toString()
+                                  //+" " + state.currentjobs_list[index].dropDate.toString()
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 )
                               ],
@@ -134,7 +116,7 @@ class _NewJobs_ScreenState extends State<NewJobs_Screen> {
                                           children: [
                                             Text(
                                               state
-                                                  .newjobs_list[index].jobNumber
+                                                  .currentjobs_list[index].jobNumber
                                                   .toString(),
                                               style: TextStyle(
                                                   color: Palette.thisBlue,
@@ -142,8 +124,7 @@ class _NewJobs_ScreenState extends State<NewJobs_Screen> {
                                             ),
                                             Container(
                                               decoration: const BoxDecoration(
-                                                  color: Color.fromARGB(
-                                                      255, 193, 193, 193),
+                                                  color: Colors.green,
                                                   borderRadius:
                                                       BorderRadius.all(
                                                           Radius.circular(20))),
@@ -153,7 +134,7 @@ class _NewJobs_ScreenState extends State<NewJobs_Screen> {
                                                 child: SizedBox(
                                                   width: 120,
                                                   child: Text(
-                                                    state.newjobs_list[index]
+                                                    state.currentjobs_list[index]
                                                         .jobStatus
                                                         .toString(),
                                                     textAlign: TextAlign.center,
@@ -231,7 +212,7 @@ class _NewJobs_ScreenState extends State<NewJobs_Screen> {
                                                                           3,
                                                                           3),
                                                               child: Text(
-                                                                '[ ${state.newjobs_list[index].pickupDate.toString()} ]',
+                                                                '[ ${state.currentjobs_list[index].pickupDate.toString()} ]',
                                                                 textAlign:
                                                                     TextAlign
                                                                         .center,
@@ -253,7 +234,7 @@ class _NewJobs_ScreenState extends State<NewJobs_Screen> {
                                                     ],
                                                   ),
                                                   Text(
-                                                    state.newjobs_list[index]
+                                                    state.currentjobs_list[index]
                                                         .pickupPoint,
                                                     style: TextStyle(
                                                         decoration:
@@ -300,7 +281,7 @@ class _NewJobs_ScreenState extends State<NewJobs_Screen> {
                                                               .fromLTRB(
                                                                   3, 3, 3, 3),
                                                           child: Text(
-                                                            '[ ${state.newjobs_list[index].dropDate.toString()} ]',
+                                                            '[ ${state.currentjobs_list[index].dropDate.toString()} ]',
                                                             textAlign: TextAlign
                                                                 .center,
                                                             style: TextStyle(
@@ -322,7 +303,7 @@ class _NewJobs_ScreenState extends State<NewJobs_Screen> {
                                                     height: 5,
                                                   ),
                                                   Text(
-                                                    state.newjobs_list[index]
+                                                    state.currentjobs_list[index]
                                                         .dropPoint,
                                                     style: TextStyle(
                                                         decoration:
