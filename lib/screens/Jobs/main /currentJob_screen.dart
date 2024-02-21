@@ -10,7 +10,7 @@ class CurrentJobs_Screen extends StatelessWidget {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 228, 237, 240),
         body: RawScrollbar(
-          thickness: 1,
+          thickness: 3,
           thumbColor: Palette.thisBlue,
           radius: Radius.circular(20),
           child: SingleChildScrollView(
@@ -42,12 +42,17 @@ class CurrentJobs_Screen extends StatelessWidget {
                       )
                     ],
                   ));
-                } else if (state.status2 == 1 && state.currentjobs_list.isEmpty) {
+                } else if (state.status2 == 1 &&
+                    state.currentjobs_list.isEmpty) {
                   return Center(
                       child: Column(
                     children: [
                       SizedBox(
-                        height: 20,
+                        height: 5,
+                      ),
+                      SvgPicture.asset(
+                        'assets/images/nojob.svg',
+             
                       ),
                       Text(
                         'ไม่มีงานที่กำลังดำเนินงานในขณะนี้',
@@ -115,8 +120,8 @@ class CurrentJobs_Screen extends StatelessWidget {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              state
-                                                  .currentjobs_list[index].jobNumber
+                                              state.currentjobs_list[index]
+                                                  .jobNumber
                                                   .toString(),
                                               style: TextStyle(
                                                   color: Palette.thisBlue,
@@ -134,7 +139,8 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                 child: SizedBox(
                                                   width: 120,
                                                   child: Text(
-                                                    state.currentjobs_list[index]
+                                                    state
+                                                        .currentjobs_list[index]
                                                         .jobStatus
                                                         .toString(),
                                                     textAlign: TextAlign.center,
@@ -234,7 +240,8 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                     ],
                                                   ),
                                                   Text(
-                                                    state.currentjobs_list[index]
+                                                    state
+                                                        .currentjobs_list[index]
                                                         .pickupPoint,
                                                     style: TextStyle(
                                                         decoration:
@@ -303,7 +310,8 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                     height: 5,
                                                   ),
                                                   Text(
-                                                    state.currentjobs_list[index]
+                                                    state
+                                                        .currentjobs_list[index]
                                                         .dropPoint,
                                                     style: TextStyle(
                                                         decoration:

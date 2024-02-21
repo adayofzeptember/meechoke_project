@@ -22,3 +22,12 @@ class Load_NewJob_Info extends JobsEvent {
     required this.joNumber,
   });
 }
+
+class Action_Status extends JobsEvent {
+  String getJONumber;
+  String getStatus;
+  var context;
+
+  Action_Status(
+      {this.context, required this.getJONumber, required this.getStatus});
+}

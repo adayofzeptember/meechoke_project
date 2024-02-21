@@ -12,18 +12,34 @@ class Job_Lists extends StatefulWidget {
 }
 
 class _Job_ListsState extends State<Job_Lists>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late TabController _tabController;
+  late AnimationController _animationController;
+  late Animation<double> _animation;
 
   @override
   void initState() {
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(
+      length: 2,
+      vsync: this,
+    );
+  _animationController = AnimationController(duration: Duration(milliseconds: 500), vsync: this);
+    _animation = Tween<double>(begin: 0, end: 1).animate(_animationController);
     super.initState();
   }
-
+//final jobsState = context.read<JobsBloc>().state;
+  void _handleRefresh() {
+    _animationController.repeat();
+      
+     
+    Future.delayed(Duration(milliseconds: 500), () {
+      _animationController.stop();
+    });
+  }
   @override
   void dispose() {
     super.dispose();
+    _animationController.dispose();
     _tabController.dispose();
   }
 
@@ -39,6 +55,23 @@ class _Job_ListsState extends State<Job_Lists>
         backgroundColor: Palette.thisBlue,
         automaticallyImplyLeading: false,
         centerTitle: true,
+        actions: [
+          RotationTransition(
+            turns: _animation,
+            child: IconButton(
+              icon: Icon(
+                Icons.refresh,
+                color: Colors.white,
+                size: MediaQuery.of(context).size.height * 0.04,
+              ),
+              onPressed: () {
+                _handleRefresh();
+                context.read<JobsBloc>().add(Load_NewJobs());
+                context.read<JobsBloc>().add(Load_CurrentJobs());
+              },
+            ),
+          ),
+        ],
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -91,7 +124,8 @@ class _Job_ListsState extends State<Job_Lists>
                           color: Palette.thisBlue),
                       tabs: [
                         Tab(
-                          text: 'กำลังดำเนินการ',
+                          text:
+                              'กำลังดำเนินการ (${state.currentjobs_list.length})',
                         ),
                         Tab(
                           text: 'งานใหม่ (${state.newjobs_list.length})',

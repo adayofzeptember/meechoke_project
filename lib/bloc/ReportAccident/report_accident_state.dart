@@ -6,6 +6,7 @@ class ReportAccidentState extends Equatable {
   bool isLoading;
   double lat, lng;
   List vehicle_Docs;
+  
   String locationName;
 
   ReportAccidentState(

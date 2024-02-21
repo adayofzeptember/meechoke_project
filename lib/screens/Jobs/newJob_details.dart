@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:meechoke_project/ETC/ProgressHUD.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
+
 
 import '../../ETC/shape_painter.dart';
 
@@ -15,13 +17,18 @@ class Job_Details extends StatefulWidget {
 
 class _Job_DetailsState extends State<Job_Details>
     with SingleTickerProviderStateMixin {
-  @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
+    return BlocBuilder<JobsBloc, JobsState>(
+      builder: (context, state) {
+        return ProgressHUD(
+            child: _uiNewJobDetail(context),
+            inAsyncCall: state.isLoading,
+            opacity: 0.3);
+      },
+    );
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _uiNewJobDetail(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Palette.thisBlue,
@@ -627,15 +634,12 @@ class _Job_DetailsState extends State<Job_Details>
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       )),
-                  onPressed : (state.status3Detail != 1)
-                  ? null
-
-                  :() {
-                    // _onAlert(context);
-                  }
-                  
-                  
-                  ,
+                  onPressed: (state.status3Detail != 1)
+                      ? null
+                      : () {
+                          showCustomDialog(
+                              context, state.newjob_info.docNumber);
+                        },
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Container(
@@ -657,6 +661,63 @@ class _Job_DetailsState extends State<Job_Details>
         ]));
   }
 }
+
+void showCustomDialog(BuildContext context, String joNumber) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+         title: Text(
+            'ยืนยันรับงาน: '+joNumber.toString(),
+            style: TextStyle(
+                color: Palette.thisBlue,
+                fontSize: 15,
+                fontWeight: FontWeight.bold),
+          ),
+        actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.green, // Splash color
+            ),
+            onPressed: () {
+              context.read<JobsBloc>().add(
+                  Action_Status(getJONumber: joNumber, getStatus: 'รับงาน'));
+              context.read<JobsBloc>().add(Load_NewJobs());
+              context.read<JobsBloc>().add(Load_CurrentJobs());
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+                  //           Navigator.of(context).pop();
+                  //             Navigator.push(
+                  //   context,
+                  //   PageTransition(
+                  //       duration: const Duration(milliseconds: 500),
+                  //       type: PageTransitionType.fade,
+                  //       child: Job_Lists()),
+                  // );
+            },
+            child: Text(
+              'ยืนยัน',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          TextButton(
+            style: TextButton.styleFrom(
+              foregroundColor: Palette.someRed,
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(
+              'ยกเลิก',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      );
+    },
+  );
+}
+
 
 // _onAlert(context) {
 //   var alertStyle = AlertStyle(
@@ -695,12 +756,8 @@ class _Job_DetailsState extends State<Job_Details>
 //             'assets/images/warn.svg',
 //             fit: BoxFit.fill,
 //           ),
-//           // Icon(
-//           //   Icons.warning_rounded,
-//           //   size: 50,
-//           //   color: Color.fromARGB(255, 97, 97, 97),
-//           // ),
-//           SizedBox(height: 10),
+           
+//           SizedBox(height: 20),
 //           Text(
 //             'ต้องการรับงานนี้หรือไม่ ?',
 //             style: TextStyle(
@@ -726,14 +783,12 @@ class _Job_DetailsState extends State<Job_Details>
 //           "ยืนยัน",
 //           style: TextStyle(color: Colors.white, fontSize: 20),
 //         ),
-//         onPressed: () => 
-//         Navigator.push(
-//           context,
-//           PageTransition(
-//               duration: const Duration(milliseconds: 500),
-//               type: PageTransitionType.fade,
-//               child: Job_OnGoing()),
-//         ),
+//         onPressed: () {
+       
+//           context.read<JobsBloc>().add(Load_NewJobs());
+//           // context.read<JobsBloc>().add(Load_CurrentJobs());
+//         },
+       
 //         color: Color.fromARGB(255, 9, 154, 75),
 //       ),
 //     ],

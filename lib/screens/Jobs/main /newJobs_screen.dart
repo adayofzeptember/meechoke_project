@@ -10,7 +10,7 @@ class NewJobs_Screen extends StatelessWidget {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 228, 237, 240),
         body: RawScrollbar(
-          thickness: 1,
+          thickness: 3,
           thumbColor: Palette.thisBlue,
           radius: Radius.circular(20),
           child: SingleChildScrollView(
@@ -52,7 +52,10 @@ class NewJobs_Screen extends StatelessWidget {
                       child: Column(
                     children: [
                       SizedBox(
-                        height: 20,
+                        height: 5,
+                      ),
+                      SvgPicture.asset(
+                        'assets/images/nojob.svg',
                       ),
                       Text(
                         'ยังไม่มีงานใหม่ในขณะนี้',
@@ -79,7 +82,6 @@ class NewJobs_Screen extends StatelessWidget {
                             context: context,
                             joNumber: state.newjobs_list[index].jobNumber
                                 .toString()));
-                        
                       },
                       child: Container(
                         child: Column(

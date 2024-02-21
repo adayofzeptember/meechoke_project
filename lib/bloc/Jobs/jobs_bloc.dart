@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:meechoke_project/ETC/api_url.dart';
-import 'package:meechoke_project/bloc/Jobs/newjobs_model.dart';
+import 'package:meechoke_project/bloc/Jobs/jobs_model.dart';
 import 'package:meechoke_project/screens/Jobs/newJob_details.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,6 +16,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
   JobsBloc()
       : super(
           JobsState(
+            isLoading: false,
               status3Detail: 0,
               newjob_info: '',
               newjobs_list: [],
@@ -46,7 +47,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             dataNewJobs.add(
               Newjobs_List_Data(
                 jobNumber: await elements['documentNumber'],
-                jobStatus: await elements['currentStatus'],
+                jobStatus: await elements['documentStatus'],
                 //?
                 pickupPoint: await elements['checkinLocation'][0]
                     ['locationCode'],
@@ -88,15 +89,14 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             "Authorization": "Bearer $tokenAuth",
           }),
         );
-        // var x = response.data['data']
-        // print(x);meetingTime
+    
         var dataCurrentJobs = [];
         if (response.statusCode == 200) {
           for (var elements in response.data['data']['job']) {
             dataCurrentJobs.add(
               Newjobs_List_Data(
                 jobNumber: await elements['documentNumber'],
-                jobStatus: await elements['currentStatus'],
+                jobStatus: await elements['documentStatus'],
                 pickupPoint: await elements['checkinLocation'][0]
                     ['locationCode'],
                 pickupDate: await elements['checkinLocation'][0]['meetingTime'],
@@ -225,6 +225,47 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
         emit(state.copyWith(
           status3Detail: 2,
         ));
+      }
+    });
+
+    //*
+
+      on<Action_Status>((event, emit) async {
+         emit(state.copyWith(
+          isLoading: true,
+        ));
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? tokenAuth = prefs.getString('userToken');
+
+      try {
+       
+        final response = await dio.patch(
+          api_url_v1 + "job-action-status?status=${event.getStatus}&jobOrderNumber=${event.getJONumber}",
+          options: Options(headers: {
+            "Authorization": "Bearer $tokenAuth",
+          }),
+        );
+    
+ 
+        if (response.statusCode == 200) {
+             emit(state.copyWith(
+          isLoading: false,
+        ));
+          print('ok');
+
+        } else {
+                    emit(state.copyWith(
+          isLoading: false,
+        ));
+          print('error status != 200');
+     
+        }
+      } catch (e) {
+                  emit(state.copyWith(
+          isLoading: false,
+        ));
+        print("Exception Try: $e");
+      
       }
     });
   }

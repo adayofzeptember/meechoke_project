@@ -29,14 +29,14 @@ class _Report_ScreenState extends State<Report_Screen> {
     return BlocBuilder<ReportAccidentBloc, ReportAccidentState>(
       builder: (context, state) {
         return ProgressHUD(
-            child: _uiLogin(context),
+            child: _uiReport(context),
             inAsyncCall: state.isLoading,
             opacity: 0.3);
       },
     );
   }
 
-  Widget _uiLogin(BuildContext context) {
+  Widget _uiReport(BuildContext context) {
     return Scaffold(
       backgroundColor: Palette.mainBackgroud,
       body: SingleChildScrollView(
@@ -219,8 +219,7 @@ class _Report_ScreenState extends State<Report_Screen> {
                                                 child: GestureDetector(
                                               onTap: () {
                                                 _showImageDialog(context, selectedImages[index].path);
-                                                print(
-                                                    selectedImages[index].path);
+                                    
                                               },
                                               child: Card(
                                                 child: SizedBox(
@@ -243,43 +242,40 @@ class _Report_ScreenState extends State<Report_Screen> {
                         const SizedBox(
                           height: 10,
                         ),
-                        SizedBox(
-                          height: 60,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: Colors.green,
-                                elevation: 0,
-                                // side: BorderSide(color: Colors.white),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                )),
-                            onPressed: (selectedImages.isEmpty)
-                                ? null
-                                : () {
-                                    context.read<ReportAccidentBloc>().add(
-                                        Upload_Pics_andReport(
-                                            context: context,
-                                            getRemark:
-                                                reportRemark_Controller.text,
-                                            type: 'image',
-                                            collection: 'true',
-                                            files: selectedImages));
-
-                                    selectedImages = [];
-                                    reportRemark_Controller.text = '';
-                                  },
-                            child: Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Container(
-                                width: double.infinity,
-                                alignment: Alignment.center,
-                                child: const Text(
-                                  "ส่งแจ้ง",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      fontSize: 15),
-                                ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: Colors.green,
+                              elevation: 0,
+                              // side: BorderSide(color: Colors.white),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              )),
+                          onPressed: (selectedImages.isEmpty)
+                              ? null
+                              : () {
+                                  context.read<ReportAccidentBloc>().add(
+                                      Upload_Pics_andReport(
+                                          context: context,
+                                          getRemark:
+                                              reportRemark_Controller.text,
+                                          type: 'image',
+                                          collection: 'true',
+                                          files: selectedImages));
+                        
+                                  selectedImages = [];
+                                  reportRemark_Controller.text = '';
+                                },
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Container(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              child: const Text(
+                                "ส่งแจ้ง",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontSize: 15),
                               ),
                             ),
                           ),
@@ -404,37 +400,3 @@ static void _showImageDialog(BuildContext context, String imagePath) {
   }
 }
 
-//* DIALOG
-// uploadSuccessDialog(context) {
-//   showDialog(
-//       context: context,
-//       builder: (BuildContext context) {
-//         return AlertDialog(
-//             scrollable: true, // <-- Set it to true
-
-//             shape: const RoundedRectangleBorder(
-//                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
-//             contentPadding: const EdgeInsets.all(20),
-//             content: Center(
-//               child: Column(
-//                 children: [
-//                   SvgPicture.asset('assets/images/circle-check.svg'),
-//                   const SizedBox(
-//                     height: 15,
-//                   ),
-//                   const Text(
-//                     'ส่งแจ้งเสร็จสิ้น',
-//                     style: TextStyle(
-//                         color: Colors.green,
-//                         fontSize: 20,
-//                         fontWeight: FontWeight.bold),
-//                   )
-//                 ],
-//               ),
-//             ));
-//       });
-
-//   Future.delayed(const Duration(seconds: 2), () {
-//     Navigator.of(context).pop(); // Close the AlertDialog
-//   });
-// }
