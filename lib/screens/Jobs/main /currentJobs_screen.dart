@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import '../../../bloc/Jobs/jobs_bloc.dart';
+import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 
-class NewJobs_Screen extends StatelessWidget {
+class CurrentJobs_Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 228, 237, 240),
@@ -16,7 +16,7 @@ class NewJobs_Screen extends StatelessWidget {
           child: SingleChildScrollView(
             child: BlocBuilder<JobsBloc, JobsState>(
               builder: (context, state) {
-                if (state.status == 0)
+                if (state.status2 == 0)
                   return Center(
                       child: Column(
                     children: [
@@ -26,28 +26,24 @@ class NewJobs_Screen extends StatelessWidget {
                       CircularProgressIndicator(),
                     ],
                   ));
-                else if (state.status == 2) {
-                  return GestureDetector(
-                    onTap: () {
-                      context.read<JobsBloc>().add(Load_NewJobs());
-                    },
-                    child: Center(
-                        child: Column(
-                      children: [
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          'เกิดข้อผิดพลาด',
-                          style: TextStyle(
-                              color: Palette.someRed,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
-                        )
-                      ],
-                    )),
-                  );
-                } else if (state.status == 1 && state.newjobs_list.isEmpty) {
+                else if (state.status2 == 2) {
+                  return Center(
+                      child: Column(
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'เกิดข้อผิดพลาด',
+                        style: TextStyle(
+                            color: Palette.someRed,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      )
+                    ],
+                  ));
+                } else if (state.status2 == 1 &&
+                    state.currentjobs_list.isEmpty) {
                   return Center(
                       child: Column(
                     children: [
@@ -58,7 +54,7 @@ class NewJobs_Screen extends StatelessWidget {
                         'assets/images/nojob.svg',
                       ),
                       Text(
-                        'ยังไม่มีงานใหม่ในขณะนี้',
+                        'ไม่มีงานที่กำลังดำเนินงานในขณะนี้',
                         style: TextStyle(
                             color: Palette.thisBlue,
                             fontWeight: FontWeight.bold,
@@ -70,17 +66,18 @@ class NewJobs_Screen extends StatelessWidget {
                 //?  โหลดได้ปกติ
                 return ListView.builder(
                   primary: true,
-                  itemCount: state.newjobs_list.length,
+                  itemCount: state.currentjobs_list.length,
                   shrinkWrap: true,
                   physics: const ClampingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
                         print('JO number: ' +
-                            state.newjobs_list[index].jobNumber.toString());
-                        context.read<JobsBloc>().add(Load_NewJob_Info(checkPage: 'new_job',
+                            state.currentjobs_list[index].jobNumber.toString());
+                        context.read<JobsBloc>().add(Load_NewJob_Info(
+                            checkPage: 'current_job',
                             context: context,
-                            joNumber: state.newjobs_list[index].jobNumber
+                            joNumber: state.currentjobs_list[index].jobNumber
                                 .toString()));
                       },
                       child: Container(
@@ -98,12 +95,27 @@ class NewJobs_Screen extends StatelessWidget {
                                     width: 3,
                                   ),
                                   Text(
-                                    state.newjobs_list[index].pickupDate
+                                    state.currentjobs_list[index].pickupDate
                                         .toString(),
-                                    //+" " + state.newjobs_list[index].dropDate.toString()
+                                    //+" " + state.currentjobs_list[index].dropDate.toString()
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold),
-                                  )
+                                  ),
+                                  SizedBox(width: 5),
+                                  if (state.currentjobs_list[index].jobStatus
+                                          .toString() ==
+                                      'รับงานแล้ว')
+                                    Text('')
+                                  else if (state
+                                          .currentjobs_list[index].jobStatus
+                                          .toString() ==
+                                      'กำลังดำเนินการ')
+                                    Text(
+                                      'ออกรถแล้ว',
+                                      style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+                                    )
+                                  else
+                                    Text('')
                                 ],
                               ),
                             ),
@@ -133,7 +145,7 @@ class NewJobs_Screen extends StatelessWidget {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                state.newjobs_list[index]
+                                                state.currentjobs_list[index]
                                                     .jobNumber
                                                     .toString(),
                                                 style: TextStyle(
@@ -142,9 +154,15 @@ class NewJobs_Screen extends StatelessWidget {
                                                         FontWeight.bold),
                                               ),
                                               Container(
-                                                decoration: const BoxDecoration(
-                                                    color: Color.fromARGB(
-                                                        255, 193, 193, 193),
+                                                decoration: BoxDecoration(
+                                                    color: (state
+                                                                .currentjobs_list[
+                                                                    index]
+                                                                .jobStatus
+                                                                .toString() ==
+                                                            'รับงานแล้ว')
+                                                        ? Palette.thisBlue
+                                                        : Colors.green,
                                                     borderRadius:
                                                         BorderRadius.all(
                                                             Radius.circular(
@@ -155,7 +173,9 @@ class NewJobs_Screen extends StatelessWidget {
                                                   child: SizedBox(
                                                     width: 120,
                                                     child: Text(
-                                                      state.newjobs_list[index]
+                                                      state
+                                                          .currentjobs_list[
+                                                              index]
                                                           .jobStatus
                                                           .toString(),
                                                       textAlign:
@@ -234,7 +254,7 @@ class NewJobs_Screen extends StatelessWidget {
                                                                             3,
                                                                             3),
                                                                 child: Text(
-                                                                  '[ ${state.newjobs_list[index].pickupDate.toString()} ]',
+                                                                  '[ ${state.currentjobs_list[index].pickupDate.toString()} ]',
                                                                   textAlign:
                                                                       TextAlign
                                                                           .center,
@@ -255,7 +275,9 @@ class NewJobs_Screen extends StatelessWidget {
                                                       ],
                                                     ),
                                                     Text(
-                                                      state.newjobs_list[index]
+                                                      state
+                                                          .currentjobs_list[
+                                                              index]
                                                           .pickupPoint,
                                                       style: TextStyle(
                                                           decoration:
@@ -302,7 +324,7 @@ class NewJobs_Screen extends StatelessWidget {
                                                                 .fromLTRB(
                                                                     3, 3, 3, 3),
                                                             child: Text(
-                                                              '[ ${state.newjobs_list[index].dropDate.toString()} ]',
+                                                              '[ ${state.currentjobs_list[index].dropDate.toString()} ]',
                                                               textAlign:
                                                                   TextAlign
                                                                       .center,
@@ -325,7 +347,9 @@ class NewJobs_Screen extends StatelessWidget {
                                                       height: 5,
                                                     ),
                                                     Text(
-                                                      state.newjobs_list[index]
+                                                      state
+                                                          .currentjobs_list[
+                                                              index]
                                                           .dropPoint,
                                                       style: TextStyle(
                                                           decoration:

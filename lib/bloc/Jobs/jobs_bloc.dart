@@ -4,10 +4,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:meechoke_project/ETC/api_url.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_model.dart';
+import 'package:meechoke_project/screens/Jobs/currentJob_detail.dart';
 import 'package:meechoke_project/screens/Jobs/newJob_details.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 part 'jobs_event.dart';
 part 'jobs_state.dart';
 
@@ -16,7 +16,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
   JobsBloc()
       : super(
           JobsState(
-            isLoading: false,
+              isLoading: false,
               status3Detail: 0,
               newjob_info: '',
               newjobs_list: [],
@@ -89,7 +89,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             "Authorization": "Bearer $tokenAuth",
           }),
         );
-    
+
         var dataCurrentJobs = [];
         if (response.statusCode == 200) {
           for (var elements in response.data['data']['job']) {
@@ -124,13 +124,22 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
     //*
 
     on<Load_NewJob_Info>((event, emit) async {
-            Navigator.push(
-                            event.context,
-                            PageTransition(
-                                duration: const Duration(milliseconds: 500),
-                                type: PageTransitionType.fade,
-                                child: Job_Details()));   
-   
+      if (event.checkPage == 'new_job') {
+        Navigator.push(
+            event.context,
+            PageTransition(
+                duration: const Duration(milliseconds: 500),
+                type: PageTransitionType.fade,
+                child: New_JobDetail()));
+      } else {
+        Navigator.push(
+            event.context,
+            PageTransition(
+                duration: const Duration(milliseconds: 500),
+                type: PageTransitionType.fade,
+                child: Current_JobDetail()));
+      }
+
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
 
@@ -150,7 +159,6 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
         dynamic fetchedDataInfo =
             (state.newjob_info != '') ? state.newjob_info : '';
         if (response.statusCode == 200) {
- 
           //!ยังไม่มี จุดรับ-ส่ง ลูป---เบี้ยเลี้ยง-----โอนล่วงหน้า----ชื่อสินค้า
           fetchedDataInfo = Job_Detail(
               docNumber: nestedData['documentNumber'].toString(),
@@ -178,9 +186,9 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
               remark:
                   nestedData['saleOrderOrdinary']['remark']['so'].toString(),
               dod: nestedData['saleOrderOrdinary']['remark']['dod'].toString());
-               
+
           emit(state.copyWith(newjob_info: fetchedDataInfo, status3Detail: 1));
-         
+
           //!
           // print('---------------------JOB DETAIL---------------------');
           // print('doc number: ' + nestedData['documentNumber']);
@@ -230,42 +238,41 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
 
     //*
 
-      on<Action_Status>((event, emit) async {
-         emit(state.copyWith(
-          isLoading: true,
-        ));
+    on<Action_Status>((event, emit) async {
+      emit(state.copyWith(
+        isLoading: true,
+      ));
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
 
       try {
-       
         final response = await dio.patch(
-          api_url_v1 + "job-action-status?status=${event.getStatus}&jobOrderNumber=${event.getJONumber}",
+          api_url_v1 +
+              "job-action-status?status=${event.getStatus}&jobOrderNumber=${event.getJONumber}",
           options: Options(headers: {
             "Authorization": "Bearer $tokenAuth",
           }),
         );
-    
- 
-        if (response.statusCode == 200) {
-             emit(state.copyWith(
-          isLoading: false,
-        ));
-          print('ok');
 
+        var responsePrint = response.data['data'];
+        print(responsePrint.toString());
+
+        if (response.statusCode == 200) {
+          emit(state.copyWith(
+            isLoading: false,
+          ));
+          print('ok');
         } else {
-                    emit(state.copyWith(
-          isLoading: false,
-        ));
+          emit(state.copyWith(
+            isLoading: false,
+          ));
           print('error status != 200');
-     
         }
       } catch (e) {
-                  emit(state.copyWith(
+        emit(state.copyWith(
           isLoading: false,
         ));
         print("Exception Try: $e");
-      
       }
     });
   }

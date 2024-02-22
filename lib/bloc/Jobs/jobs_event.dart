@@ -14,12 +14,14 @@ class Load_NewJobs extends JobsEvent {}
 class Load_CurrentJobs extends JobsEvent {}
 
 class Load_NewJob_Info extends JobsEvent {
+  String checkPage;
   String joNumber;
   var context;
 
   Load_NewJob_Info({
     required this.context,
     required this.joNumber,
+    required this.checkPage
   });
 }
 

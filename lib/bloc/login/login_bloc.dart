@@ -15,7 +15,6 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final dio = Dio();
   LoginBloc() : super(LoginState(loading: false, obscurePass: true)) {
-
     on<Login_Casual>((event, emit) async {
       try {
         emit(state.copyWith(loading: true));
@@ -39,8 +38,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString(
             'userToken', response.data['data']['accessToken'].toString());
-        if (response.data['loginType'].toString() == 'employee' ||
-            response.data['loginType'].toString() == 'registered-driver') {
+        if (response.statusCode == 200) {
           Navigator.pushReplacement(
             event.context,
             PageTransition(
@@ -49,13 +47,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
                 child: const MainMenu_Employee()),
           );
         } else {
-          print('not employee');
+          emit(state.copyWith(loading: false));
+          Fluttertoast.showToast(
+              msg: "ไม่พอข้อมูล",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.SNACKBAR,
+              timeInSecForIosWeb: 2,
+              backgroundColor: const Color.fromARGB(255, 133, 133, 133),
+              textColor: Colors.white,
+              fontSize: 15);
         }
       } catch (e) {
         emit(state.copyWith(loading: false));
         Fluttertoast.showToast(
-            msg:
-                "ไม่พบบัญชีผู้ใช้ในระบบ",
+            msg: "เกิดข้อผิดพลาด \n ${e.toString()}",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.SNACKBAR,
             timeInSecForIosWeb: 2,
@@ -97,7 +102,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
     });
 
-  
     on<ShowPassword_Swap>((event, emit) {
       emit(state.copyWith(obscurePass: !state.obscurePass));
     });

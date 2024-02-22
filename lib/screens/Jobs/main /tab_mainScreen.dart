@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 
-import 'currentJob_screen.dart';
+import 'currentJobs_screen.dart';
 import 'newJobs_screen.dart';
 
 class Job_Lists extends StatefulWidget {

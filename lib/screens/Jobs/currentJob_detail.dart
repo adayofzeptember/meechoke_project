@@ -6,15 +6,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/ProgressHUD.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
-
 import '../../ETC/shape_painter.dart';
 
-class New_JobDetail extends StatefulWidget {
+class Current_JobDetail extends StatefulWidget {
   @override
-  _New_JobDetailState createState() => _New_JobDetailState();
+  _Current_JobDetailState createState() => _Current_JobDetailState();
 }
 
-class _New_JobDetailState extends State<New_JobDetail>
+class _Current_JobDetailState extends State<Current_JobDetail>
     with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return BlocBuilder<JobsBloc, JobsState>(
@@ -128,8 +127,7 @@ class _New_JobDetailState extends State<New_JobDetail>
                                       ),
                                       Container(
                                         decoration: BoxDecoration(
-                                            color: Color.fromARGB(
-                                                255, 193, 193, 193),
+                                            color: Colors.green,
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(20))),
                                         child: Padding(
@@ -569,7 +567,7 @@ class _New_JobDetailState extends State<New_JobDetail>
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                          const SizedBox(
+                                        const SizedBox(
                                             height: 15,
                                           ),
                                           Text(
@@ -627,7 +625,7 @@ class _New_JobDetailState extends State<New_JobDetail>
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      primary: Palette.thisBlue,
+                      primary:  Colors.green,
                       elevation: 0,
                       // side: BorderSide(color: Colors.white),
                       shape: RoundedRectangleBorder(
@@ -645,7 +643,7 @@ class _New_JobDetailState extends State<New_JobDetail>
                       width: double.infinity,
                       alignment: Alignment.center,
                       child: const Text(
-                        "รับงานนี้",
+                        "ออกรถ",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -666,13 +664,13 @@ void showCustomDialog(BuildContext context, String joNumber) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text(
-          'ยืนยันรับงาน: ' + joNumber.toString(),
-          style: TextStyle(
-              color: Palette.thisBlue,
-              fontSize: 15,
-              fontWeight: FontWeight.bold),
-        ),
+         title: Text(
+            'ออกรถงาน: '+joNumber.toString(),
+            style: TextStyle(
+                color: Palette.thisBlue,
+                fontSize: 15,
+                fontWeight: FontWeight.bold),
+          ),
         actions: <Widget>[
           TextButton(
             style: TextButton.styleFrom(
@@ -680,19 +678,19 @@ void showCustomDialog(BuildContext context, String joNumber) {
             ),
             onPressed: () {
               context.read<JobsBloc>().add(
-                  Action_Status(getJONumber: joNumber, getStatus: 'รับงาน'));
+                  Action_Status(getJONumber: joNumber, getStatus: 'ออกรถ'));
               context.read<JobsBloc>().add(Load_NewJobs());
               context.read<JobsBloc>().add(Load_CurrentJobs());
               Navigator.of(context).pop();
               Navigator.of(context).pop();
-              //           Navigator.of(context).pop();
-              //             Navigator.push(
-              //   context,
-              //   PageTransition(
-              //       duration: const Duration(milliseconds: 500),
-              //       type: PageTransitionType.fade,
-              //       child: Job_Lists()),
-              // );
+                  //           Navigator.of(context).pop();
+                  //             Navigator.push(
+                  //   context,
+                  //   PageTransition(
+                  //       duration: const Duration(milliseconds: 500),
+                  //       type: PageTransitionType.fade,
+                  //       child: Job_Lists()),
+                  // );
             },
             child: Text(
               'ยืนยัน',
