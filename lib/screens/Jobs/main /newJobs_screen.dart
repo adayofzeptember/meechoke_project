@@ -78,7 +78,7 @@ class NewJobs_Screen extends StatelessWidget {
                       onTap: () {
                         print('JO number: ' +
                             state.newjobs_list[index].jobNumber.toString());
-                        context.read<JobsBloc>().add(Load_NewJob_Info(checkPage: 'new_job',
+                        context.read<JobsBloc>().add(Load_Job_Info(checkPage: 'new_job',
                             context: context,
                             joNumber: state.newjobs_list[index].jobNumber
                                 .toString()));

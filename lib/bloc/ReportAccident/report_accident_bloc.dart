@@ -22,7 +22,6 @@ class ReportAccidentBloc
           locationName: '',
           lat: 0,
           lng: 0,
-       
           vehicle_Docs: [],
           page: 1,
           isLoading: false,
@@ -44,7 +43,6 @@ class ReportAccidentBloc
         );
 
         print("docs fetch status: " + response.statusCode.toString());
-        // print(response.data.toString());
 
         var fetchedDocs = [];
 
@@ -151,12 +149,13 @@ class ReportAccidentBloc
               ),
               data: reportJsonData);
 
-          print('---------> upload image status: '+response2.statusMessage.toString());
+          print('---------> upload image status: ' +
+              response2.statusMessage.toString());
           if (response2.statusCode == 200) {
             emit(state.copyWith(isLoading: false));
             print(response2.data['data']);
-            SuccessMessage_Dialog(event.context, 'ส่งแจ้งเสร็จสิ้น test Dialog');
-            
+            SuccessMessage_Dialog(
+                event.context, 'ส่งแจ้งเสร็จสิ้น test Dialog');
           } else {
             emit(state.copyWith(isLoading: false));
             print('error: ' + response2.data['data']);

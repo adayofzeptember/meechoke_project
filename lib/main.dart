@@ -91,6 +91,7 @@ class StartPage extends StatefulWidget {
 class _StartPageState extends State<StartPage> {
   @override
   void initState() {
+   
     _Permission();
     _Pause_And_Go();
     super.initState();
