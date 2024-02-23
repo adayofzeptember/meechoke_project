@@ -27,8 +27,9 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
   void initState() {
     context.read<ProfileBloc>().add(Load_Profile());
     context.read<JobsBloc>().add(Load_NewJobs());
-    context.read<JobsBloc>().add(Load_CurrentJobs());
-        // context.read<JobsBloc>().add(TEST());
+    //context.read<JobsBloc>().add(Load_CurrentJobs());
+    context.read<JobsBloc>().add(TEST());
+
     super.initState();
   }
 

@@ -204,168 +204,197 @@ class CurrentJobs_Screen extends StatelessWidget {
                                           const SizedBox(
                                             height: 15,
                                           ),
-                                          Container(
-                                            child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                SvgPicture.asset(
-                                                  'assets/images/allpoints.svg',
+                                      ListView.builder(
+                  primary: true,
+                  itemCount: state.currentjobs_list[index].checkin_location.length,
+                  shrinkWrap: true,
+                  physics: const ClampingScrollPhysics(),
+                  itemBuilder: (context, index2) {
+
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 50),
+                      child: Row(
+                         children: [
+                                         Text(state.currentjobs_list[index].checkin_location[index2].pickupPoint),
+                          Text(state.currentjobs_list[index].checkin_location[index2].pickupDate),
+
+                          (state.currentjobs_list[index].checkin_location[index2].pickupPoint == "จุดรับสินค้า")
+
+                          ?                                       SvgPicture.asset(
+                                                  'assets/images/pick_up.svg',
+                                                )
+
+
+                          :                                       SvgPicture.asset(
+                                                  'assets/images/drop.svg',
                                                 ),
-                                                const SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            const Text(
-                                                              'จุดรับ',
-                                                              style: TextStyle(
-                                                                  color: Palette
-                                                                      .thisBlue,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                            const SizedBox(
-                                                              width: 5,
-                                                            ),
-                                                            Container(
-                                                              // decoration: const BoxDecoration(
-                                                              //     color: Palette
-                                                              //         .thisBlue,
-                                                              //     borderRadius: BorderRadius
-                                                              //         .all(Radius
-                                                              //             .circular(
-                                                              //                 20))),
-                                                              child: Padding(
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .fromLTRB(
-                                                                            3,
-                                                                            3,
-                                                                            3,
-                                                                            3),
-                                                                child: Text(
-                                                                  '[ ${state.currentjobs_list[index].pickupDate.toString()} ]',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                  style: TextStyle(
-                                                                      color: Color.fromARGB(
-                                                                          255,
-                                                                          133,
-                                                                          133,
-                                                                          133),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Text(
-                                                      state
-                                                          .currentjobs_list[
-                                                              index]
-                                                          .pickupPoint,
-                                                      style: TextStyle(
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .underline,
-                                                          decorationColor:
-                                                              Colors.blue,
-                                                          color: Colors.blue,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                    SizedBox(
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.04,
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        const Text(
-                                                          'จุดส่ง',
-                                                          style: TextStyle(
-                                                              color: Palette
-                                                                  .thisBlue,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 5,
-                                                        ),
-                                                        Container(
-                                                          // decoration: const BoxDecoration(
-                                                          //     color: Palette
-                                                          //         .thisBlue,
-                                                          //     borderRadius:
-                                                          //         BorderRadius
-                                                          //             .all(Radius
-                                                          //                 .circular(
-                                                          //                     20))),
-                                                          child: Padding(
-                                                            padding: EdgeInsets
-                                                                .fromLTRB(
-                                                                    3, 3, 3, 3),
-                                                            child: Text(
-                                                              '[ ${state.currentjobs_list[index].dropDate.toString()} ]',
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                              style: TextStyle(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          133,
-                                                                          133,
-                                                                          133),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Text(
-                                                      state
-                                                          .currentjobs_list[
-                                                              index]
-                                                          .dropPoint,
-                                                      style: TextStyle(
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .underline,
-                                                          decorationColor:
-                                                              Colors.blue,
-                                                          color: Colors.blue,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    )
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
+                          // Icon(
+                          //   (state.currentjobs_list[index].checkin_location[index2].pickupPoint == "จุดรับสินค้า") 
+                          // ?Icons.abc   
+                          // : Icons.access_alarm)
+                       
+                        ],
+                      ),
+                    );
+
+                  }),
+                                          // Container(
+                                          //   child: Row(
+                                          //     crossAxisAlignment:
+                                          //         CrossAxisAlignment.start,
+                                          //     children: [
+                                                // SvgPicture.asset(
+                                                //   'assets/images/allpoints.svg',
+                                                // ),
+                                          //       const SizedBox(
+                                          //         width: 10,
+                                          //       ),
+                                          //       Column(
+                                          //         crossAxisAlignment:
+                                          //             CrossAxisAlignment.start,
+                                          //         mainAxisAlignment:
+                                          //             MainAxisAlignment.start,
+                                          //         children: [
+                                          //           Row(
+                                          //             children: [
+                                          //               Row(
+                                          //                 children: [
+                                          //                   const Text(
+                                          //                     'จุดรับ',
+                                          //                     style: TextStyle(
+                                          //                         color: Palette
+                                          //                             .thisBlue,
+                                          //                         fontWeight:
+                                          //                             FontWeight
+                                          //                                 .bold),
+                                          //                   ),
+                                          //                   const SizedBox(
+                                          //                     width: 5,
+                                          //                   ),
+                                          //                   Container(
+                                          //                     // decoration: const BoxDecoration(
+                                          //                     //     color: Palette
+                                          //                     //         .thisBlue,
+                                          //                     //     borderRadius: BorderRadius
+                                          //                     //         .all(Radius
+                                          //                     //             .circular(
+                                          //                     //                 20))),
+                                          //                     child: Padding(
+                                          //                       padding:
+                                          //                           EdgeInsets
+                                          //                               .fromLTRB(
+                                          //                                   3,
+                                          //                                   3,
+                                          //                                   3,
+                                          //                                   3),
+                                          //                       child: Text(
+                                          //                         'w',
+                                          //                         textAlign:
+                                          //                             TextAlign
+                                          //                                 .center,
+                                          //                         style: TextStyle(
+                                          //                             color: Color.fromARGB(
+                                          //                                 255,
+                                          //                                 133,
+                                          //                                 133,
+                                          //                                 133),
+                                          //                             fontWeight:
+                                          //                                 FontWeight
+                                          //                                     .bold),
+                                          //                       ),
+                                          //                     ),
+                                          //                   ),
+                                          //                 ],
+                                          //               ),
+                                          //             ],
+                                          //           ),
+                                          //           Text(
+                                          //             'dsdsd',
+                                          //             style: TextStyle(
+                                          //                 decoration:
+                                          //                     TextDecoration
+                                          //                         .underline,
+                                          //                 decorationColor:
+                                          //                     Colors.blue,
+                                          //                 color: Colors.blue,
+                                          //                 fontWeight:
+                                          //                     FontWeight.bold),
+                                          //           ),
+                                          //           SizedBox(
+                                          //             height:
+                                          //                 MediaQuery.of(context)
+                                          //                         .size
+                                          //                         .width *
+                                          //                     0.04,
+                                          //           ),
+                                          //           Row(
+                                          //             children: [
+                                          //               const Text(
+                                          //                 'จุดส่ง',
+                                          //                 style: TextStyle(
+                                          //                     color: Palette
+                                          //                         .thisBlue,
+                                          //                     fontWeight:
+                                          //                         FontWeight
+                                          //                             .bold),
+                                          //               ),
+                                          //               const SizedBox(
+                                          //                 width: 5,
+                                          //               ),
+                                          //               Container(
+                                          //                 // decoration: const BoxDecoration(
+                                          //                 //     color: Palette
+                                          //                 //         .thisBlue,
+                                          //                 //     borderRadius:
+                                          //                 //         BorderRadius
+                                          //                 //             .all(Radius
+                                          //                 //                 .circular(
+                                          //                 //                     20))),
+                                          //                 child: Padding(
+                                          //                   padding: EdgeInsets
+                                          //                       .fromLTRB(
+                                          //                           3, 3, 3, 3),
+                                          //                   child: Text(
+                                          //                     'sss',
+                                          //                     textAlign:
+                                          //                         TextAlign
+                                          //                             .center,
+                                          //                     style: TextStyle(
+                                          //                         color: Color
+                                          //                             .fromARGB(
+                                          //                                 255,
+                                          //                                 133,
+                                          //                                 133,
+                                          //                                 133),
+                                          //                         fontWeight:
+                                          //                             FontWeight
+                                          //                                 .bold),
+                                          //                   ),
+                                          //                 ),
+                                          //               ),
+                                          //             ],
+                                          //           ),
+                                          //           const SizedBox(
+                                          //             height: 5,
+                                          //           ),
+                                          //           Text(state.currentjobs_list[index].checkin_location[0].pickupDate),
+                                          //           Text(
+                                          //              'ddd',
+                                          //             style: TextStyle(
+                                          //                 decoration:
+                                          //                     TextDecoration
+                                          //                         .underline,
+                                          //                 decorationColor:
+                                          //                     Colors.blue,
+                                          //                 color: Colors.blue,
+                                          //                 fontWeight:
+                                          //                     FontWeight.bold),
+                                          //           )
+                                          //         ],
+                                          //       ),
+                                          //     ],
+                                          //   ),
+                                          // ),
                                         ],
                                       ),
                                     ),

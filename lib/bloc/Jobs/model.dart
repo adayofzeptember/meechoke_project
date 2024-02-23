@@ -2,19 +2,19 @@
 class Newjobs_List_Data {
   String? jobNumber;
   String? jobStatus;
-  //  List<Checkin_Location>? checkin_location;
+List<Checkin_Location>? checkin_location;
   String? pickupPoint;
   String? pickupDate;
   String? dropPoint;
   String? dropDate;
 
   Newjobs_List_Data({
-    //this.checkin_location,
     this.jobNumber,
-    
     this.jobStatus,
     this.pickupPoint,
     this.pickupDate,
+      this.checkin_location,
+
     this.dropPoint,
     this.dropDate,
   });
@@ -35,6 +35,7 @@ class Checkin_Location {
     this.dropDate,
   });
 }
+
 
 class Job_Detail {
   String? docNumber;
