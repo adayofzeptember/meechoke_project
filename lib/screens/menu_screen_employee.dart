@@ -8,7 +8,7 @@ import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
 import 'package:meechoke_project/screens/Checking/check_daily.dart';
 import 'package:meechoke_project/screens/Fuel/fuel_main.dart';
-import 'package:meechoke_project/screens/Jobs/main%20/tab_mainScreen.dart';
+import 'package:meechoke_project/screens/Jobs/1.%20Main%20Pages%20List/tab_main.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/ReportAccident/report_accident_bloc.dart';
@@ -27,8 +27,8 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
   void initState() {
     context.read<ProfileBloc>().add(Load_Profile());
     context.read<JobsBloc>().add(Load_NewJobs());
-    //context.read<JobsBloc>().add(Load_CurrentJobs());
-    context.read<JobsBloc>().add(TEST());
+    context.read<JobsBloc>().add(Load_CurrentJobs());
+    //context.read<JobsBloc>().add(TEST());
 
     super.initState();
   }
@@ -39,7 +39,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
 
     final double h2 = (size.height - kToolbarHeight - 420) / 2;
     final double w2 = size.width / 2;
-
+    
     // final double h1 = (size.height - kToolbarHeight - 370) / 2;
     // final double w1 = size.width / 2;
     final double h = (size.height - kToolbarHeight - 520) / 2;

@@ -2,10 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meechoke_project/ETC/api_url.dart';
 import 'package:meechoke_project/bloc/Jobs/model.dart';
-import 'package:meechoke_project/screens/Jobs/currentJob_detail.dart';
-import 'package:meechoke_project/screens/Jobs/newJob_details.dart';
+import 'package:meechoke_project/screens/Jobs/2.%20Job%20Detail/current_job.dart';
+import 'package:meechoke_project/screens/Jobs/2.%20Job%20Detail/new_job.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'jobs_event.dart';
@@ -17,7 +18,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
       : super(
           JobsState(
             isLoading: false,
-            newjob_info: '',
+            job_info: '',
             newjobs_list: [],
             currentjobs_list: [],
             status: 0,
@@ -25,69 +26,8 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             status3Detail: 0,
           ),
         ) {
-    //*
-    on<TEST>((event, emit) async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? tokenAuth = prefs.getString('userToken');
 
-      try {
-        emit(state.copyWith(
-          status2: 0,
-        ));
-        final response = await dio.get(
-          api_url_v1 + "get-driver-job/current",
-          options: Options(headers: {
-            "Authorization": "Bearer $tokenAuth",
-          }),
-        );
-
-        var dataCurrentJobs = [];
-        if (response.statusCode == 200) {
- 
-          for (var elements in response.data['data']['job']) {
-            print('id: ' + elements['routeId'].toString());
-
-            List<Checkin_Location> dataCheckin =
-                [];  
-
-            List<dynamic> checkinLocationList = elements['checkinLocation'];
-
-            for (var checkinLocation in checkinLocationList) {
-             
-              dataCheckin.add(Checkin_Location(
-                pickupDate: checkinLocation['id'].toString()  ,
-                pickupPoint: checkinLocation['checkinCategory'].toString()
-              ));
-            }
-
-            dataCurrentJobs.add(
-              Newjobs_List_Data(
-                jobNumber: await elements['documentNumber'] ?? '',
-                jobStatus: await elements['documentStatus'] ?? '',
-                checkin_location: dataCheckin,
-              ),
-            );
-           
      
-            print('have: '+dataCheckin.length.toString());
-          }
-
-          emit(state.copyWith(currentjobs_list: dataCurrentJobs, status2: 1));
-        } else {
-          print('error status != 200');
-          emit(state.copyWith(
-            status2: 2,
-          ));
-        }
-      } catch (e) {
-        print("Exception Try: $e");
-        emit(state.copyWith(
-          status2: 2,
-        ));
-      }
-    });
-
-    //*
 
     on<Load_NewJobs>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -107,21 +47,30 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
         var dataNewJobs = [];
         if (response.statusCode == 200) {
           for (var elements in response.data['data']['job']) {
+            //print('id: ' + elements['routeId'].toString());
+
+            List<dynamic> checkinLocationList = elements['checkinLocation'];
+            List<Checkin_Location> dataCheckin = [];
+            if (elements['checkinLocation'] != null &&
+                elements['checkinLocation'] is List) {
+              for (var checkinLocation in checkinLocationList) {
+                dataCheckin.add(Checkin_Location(
+                  checkinCategory:
+                      checkinLocation['checkinCategory'].toString(),
+                  date: checkinLocation['meetingDate'].toString(),
+                  point: checkinLocation['locationCode'].toString(),
+                ));
+              }
+            }
             dataNewJobs.add(
-              Newjobs_List_Data(
-                jobNumber: await elements['documentNumber'],
-                jobStatus: await elements['documentStatus'],
-                //?
-                pickupPoint:
-                    await elements['checkinLocation'][0]['locationCode'] ?? '',
-                pickupDate:
-                    await elements['checkinLocation'][0]['meetingTime'] ?? '',
-                dropPoint:
-                    await elements['checkinLocation'][1]['locationCode'] ?? '',
-                dropDate:
-                    await elements['checkinLocation'][1]['meetingTime'] ?? '',
+              Jobs_List_Data(
+                jobNumber: await elements['documentNumber'] ?? '',
+                jobStatus: await elements['documentStatus'] ?? '',
+                checkin_location: dataCheckin,
               ),
             );
+
+            //print('have: ' + dataCheckin.length.toString());
           }
 
           emit(state.copyWith(newjobs_list: dataNewJobs, status: 1));
@@ -139,7 +88,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
       }
     });
 
-    //*
+
 
     on<Load_CurrentJobs>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -159,20 +108,30 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
         var dataCurrentJobs = [];
         if (response.statusCode == 200) {
           for (var elements in response.data['data']['job']) {
+       
+
+            List<dynamic> checkinLocationList = elements['checkinLocation'];
+            List<Checkin_Location> dataCheckin = [];
+            if (elements['checkinLocation'] != null &&
+                elements['checkinLocation'] is List) {
+              for (var checkinLocation in checkinLocationList) {
+                dataCheckin.add(Checkin_Location(
+                  checkinCategory:
+                      checkinLocation['checkinCategory'].toString(),
+                  date: checkinLocation['meetingDate'].toString(),
+                  point: checkinLocation['locationCode'].toString(),
+                ));
+              }
+            }
             dataCurrentJobs.add(
-              Newjobs_List_Data(
-                jobNumber: await elements['documentNumber'],
-                jobStatus: await elements['documentStatus'],
-                pickupPoint:
-                    await elements['checkinLocation'][0]['locationCode'] ?? '',
-                pickupDate:
-                    await elements['checkinLocation'][0]['meetingTime'] ?? '',
-                dropPoint:
-                    await elements['checkinLocation'][1]['locationCode'] ?? '',
-                dropDate:
-                    await elements['checkinLocation'][1]['meetingTime'] ?? '',
+              Jobs_List_Data(
+                jobNumber: await elements['documentNumber'] ?? '',
+                jobStatus: await elements['documentStatus'] ?? '',
+                checkin_location: dataCheckin,
               ),
             );
+
+         
           }
 
           emit(state.copyWith(currentjobs_list: dataCurrentJobs, status2: 1));
@@ -189,7 +148,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
         ));
       }
     });
-    //*
+   
 
     on<Load_Job_Info>((event, emit) async {
       if (event.checkPage == 'new_job') {
@@ -221,18 +180,33 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             "Authorization": "Bearer $tokenAuth",
           }),
         );
-        //!ยังไม่มี จุดรับ-ส่ง ลูป---เบี้ยเลี้ยง-----โอนล่วงหน้า----ชื่อสินค้า
-        //var responseData = response.data['data'];
-        print('job detail status: ' + response.statusMessage.toString());
+
+        print('JOB DETAIL STATUS: ' + response.statusMessage.toString());
         dynamic nestedData = response.data['data'];
         dynamic fetchedDataInfo =
-            (state.newjob_info != '') ? state.newjob_info : '';
+            (state.job_info != '') ? state.job_info : '';
         if (response.statusCode == 200) {
           if (nestedData["saleOrderOrdinary"] != null) {
             print('งานปกติ');
+
+            List<dynamic> checkinLocationList = nestedData['checkinLocation'];
+            List<Checkin_Location> dataCheckinInfo = [];
+            if (nestedData['checkinLocation'] != null &&
+                nestedData['checkinLocation'] is List) {
+              for (var checkinLocation in checkinLocationList) {
+                dataCheckinInfo.add(Checkin_Location(
+                  checkinCategory:
+                      checkinLocation['checkinCategory'].toString(),
+                  date: checkinLocation['meetingDate'].toString(),
+                  point: checkinLocation['locationCode'].toString(),
+                ));
+              }
+            }
+
             fetchedDataInfo = Job_Detail(
                 docNumber: nestedData['documentNumber'].toString(),
                 docStatus: nestedData['documentStatus'].toString(),
+                checkInLocation_Info: dataCheckinInfo,
                 customerName:
                     nestedData['saleOrderOrdinary']['customerName'].toString(),
                 weight: nestedData['totalWeight'].toString(),
@@ -259,9 +233,24 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
           } else {
             print('งานตู้');
 
+            List<dynamic> checkinLocationList = nestedData['checkinLocation'];
+            List<Checkin_Location> dataCheckinInfo = [];
+            if (nestedData['checkinLocation'] != null &&
+                nestedData['checkinLocation'] is List) {
+              for (var checkinLocation in checkinLocationList) {
+                dataCheckinInfo.add(Checkin_Location(
+                  checkinCategory:
+                      checkinLocation['checkinCategory'].toString(),
+                  date: checkinLocation['meetingDate'].toString(),
+                  point: checkinLocation['locationCode'].toString(),
+                ));
+              }
+            }
+
             fetchedDataInfo = Job_Detail(
                 docNumber: nestedData['documentNumber'].toString(),
                 docStatus: nestedData['documentStatus'].toString(),
+                checkInLocation_Info: dataCheckinInfo,
                 customerName:
                     nestedData['saleOrderContainer']['customerName'].toString(),
                 weight: nestedData['totalWeight'].toString(),
@@ -325,6 +314,14 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
           emit(state.copyWith(
             isLoading: false,
           ));
+              Fluttertoast.showToast(
+            msg: "${event.getStatus} หมายเลข: ${event.getJONumber} แล้ว",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.SNACKBAR,
+            timeInSecForIosWeb: 2,
+            backgroundColor: const Color.fromARGB(255, 133, 133, 133),
+            textColor: Colors.white,
+            fontSize: 20);
           print('ok');
         } else {
           emit(state.copyWith(

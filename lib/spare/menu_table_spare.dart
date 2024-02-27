@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:meechoke_project/screens/Jobs/main%20/tab_mainScreen.dart';
+import 'package:meechoke_project/screens/Jobs/1.%20Main%20Pages%20List/tab_main.dart';
 import 'package:page_transition/page_transition.dart';
 
 

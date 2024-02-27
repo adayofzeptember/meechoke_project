@@ -3,16 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 
-import 'currentJobs_screen.dart';
-import 'newJobs_screen.dart';
+import 'current_list.dart';
+import 'new_list.dart';
 
 class Job_Lists extends StatefulWidget {
   @override
   _Job_ListsState createState() => _Job_ListsState();
 }
 
-class _Job_ListsState extends State<Job_Lists>
-    with TickerProviderStateMixin {
+class _Job_ListsState extends State<Job_Lists> with TickerProviderStateMixin {
   late TabController _tabController;
   late AnimationController _animationController;
   late Animation<double> _animation;
@@ -23,19 +22,21 @@ class _Job_ListsState extends State<Job_Lists>
       length: 2,
       vsync: this,
     );
-  _animationController = AnimationController(duration: Duration(milliseconds: 500), vsync: this);
+    _animationController =
+        AnimationController(duration: Duration(milliseconds: 500), vsync: this);
     _animation = Tween<double>(begin: 0, end: 1).animate(_animationController);
     super.initState();
   }
+
 //final jobsState = context.read<JobsBloc>().state;
   void _handleRefresh() {
     _animationController.repeat();
-      
-     
+
     Future.delayed(Duration(milliseconds: 500), () {
       _animationController.stop();
     });
   }
+
   @override
   void dispose() {
     super.dispose();
@@ -66,6 +67,8 @@ class _Job_ListsState extends State<Job_Lists>
               ),
               onPressed: () {
                 _handleRefresh();
+                //context.read<JobsBloc>().add(TEST());
+
                 context.read<JobsBloc>().add(Load_NewJobs());
                 context.read<JobsBloc>().add(Load_CurrentJobs());
               },

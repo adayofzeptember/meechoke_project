@@ -6,9 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/screens/Jobs/Job%20Processing/job_done_5.dart';
-import 'package:meechoke_project/screens/Jobs/Job%20Processing/job_onGoing_3.dart';
-import 'package:page_transition/page_transition.dart';
 
 // ignore: must_be_immutable
 class Job_Camera extends StatefulWidget {
@@ -122,23 +119,7 @@ class _Job_CameraState extends State<Job_Camera> {
                               borderRadius: BorderRadius.circular(30),
                             )),
                         onPressed: () {
-                          widget.check
-                              ? Navigator.push(
-                                  context,
-                                  PageTransition(
-                                      duration:
-                                          const Duration(milliseconds: 500),
-                                      type: PageTransitionType.fade,
-                                      child: Job_OnGoing(
-                                        check: false,
-                                      )))
-                              : Navigator.push(
-                                  context,
-                                  PageTransition(
-                                      duration:
-                                          const Duration(milliseconds: 500),
-                                      type: PageTransitionType.fade,
-                                      child: Job_Done()));
+                       
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(20),

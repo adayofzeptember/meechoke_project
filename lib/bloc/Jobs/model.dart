@@ -1,41 +1,34 @@
 //? ใช้ด้วยกันกับ current jobs
-class Newjobs_List_Data {
+class Jobs_List_Data {
   String? jobNumber;
   String? jobStatus;
-List<Checkin_Location>? checkin_location;
+  List<Checkin_Location>? checkin_location;
   String? pickupPoint;
   String? pickupDate;
   String? dropPoint;
   String? dropDate;
 
-  Newjobs_List_Data({
+  Jobs_List_Data({
     this.jobNumber,
     this.jobStatus,
     this.pickupPoint,
     this.pickupDate,
-      this.checkin_location,
-
+    this.checkin_location,
     this.dropPoint,
     this.dropDate,
   });
 }
-
 
 class Checkin_Location {
- String? pickupPoint;
-  String? pickupDate;
-  String? dropPoint;
-  String? dropDate;
-
-   Checkin_Location({
-  
-    this.pickupPoint,
-    this.pickupDate,
-    this.dropPoint,
-    this.dropDate,
+  String? point;
+  String? date;
+  String? checkinCategory;
+  Checkin_Location({
+    this.checkinCategory,
+    this.point,
+    this.date,
   });
 }
-
 
 class Job_Detail {
   String? docNumber;
@@ -52,6 +45,7 @@ class Job_Detail {
   String? distance;
   String? remark;
   String? dod;
+  List<Checkin_Location>? checkInLocation_Info;
 
   Job_Detail(
       {this.docNumber,
@@ -62,6 +56,7 @@ class Job_Detail {
       this.pallet,
       this.detail,
       this.contactName,
+      this.checkInLocation_Info,
       this.contactTel,
       this.inTheNameOf,
       this.collectMoney,

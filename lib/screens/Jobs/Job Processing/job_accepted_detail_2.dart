@@ -734,14 +734,7 @@ class _Job_WorkAcceptedState extends State<Job_WorkAccepted>
                       borderRadius: BorderRadius.circular(20),
                     )),
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      PageTransition(
-                          duration: const Duration(milliseconds: 500),
-                          type: PageTransitionType.fade,
-                          child: Job_OnGoing(
-                            check: true,
-                          )));
+                 
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),

@@ -38,6 +38,7 @@ class Login_Screen extends StatelessWidget {
                     fontSize: 30,
                     fontWeight: FontWeight.bold),
               ),
+
               Stack(
                 alignment: Alignment.topCenter,
                 children: [
@@ -47,7 +48,6 @@ class Login_Screen extends StatelessWidget {
                     ),
                     child: Container(
                       decoration: BoxDecoration(
-                        
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(40),
                       ),
@@ -75,7 +75,8 @@ class Login_Screen extends StatelessWidget {
                                 ),
                                 const Align(
                                   alignment: Alignment.bottomLeft,
-                                  child: Text(
+                                  child: 
+                                  Text(
                                     'ชื่อผู้ใช้',
                                     style: TextStyle(
                                         fontWeight: FontWeight.w900,
@@ -182,7 +183,8 @@ class Login_Screen extends StatelessWidget {
                                               BorderRadius.circular(10)),
                                       filled: true,
                                       fillColor: Colors.white,
-                                      border: OutlineInputBorder(
+                                      border: 
+                                      OutlineInputBorder(
                                           borderSide: const BorderSide(
                                               color: Color.fromARGB(
                                                   255, 211, 211, 211)),

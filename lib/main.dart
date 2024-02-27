@@ -31,7 +31,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 // (milliseconds: 500),
 //               type: PageTransitionType.fade,
 //               child: Job_OnGoing()),
-//         );  
+//         );
 
 void main() async {
   Intl.defaultLocale = 'th';
@@ -80,8 +80,6 @@ class StarterWidget extends StatelessWidget {
   }
 }
 
-//!--- stateful starts here ----
-
 class StartPage extends StatefulWidget {
   const StartPage({super.key});
   @override
@@ -91,7 +89,6 @@ class StartPage extends StatefulWidget {
 class _StartPageState extends State<StartPage> {
   @override
   void initState() {
-   
     _Permission();
     _Pause_And_Go();
     super.initState();
@@ -144,8 +141,6 @@ class _StartPageState extends State<StartPage> {
       backgroundColor: Palette.thisBlue,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-
-        //crossAxisAlignmen อออ ัด้ด ใt: CrossAxisAlignment.center,
         children: [
           SizedBox(height: 10),
           Center(
