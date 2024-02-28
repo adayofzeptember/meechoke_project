@@ -45,6 +45,7 @@ class Job_Detail {
   String? distance;
   String? remark;
   String? dod;
+  String? current_status;
   List<Checkin_Location>? checkInLocation_Info;
 
   Job_Detail(
@@ -61,6 +62,7 @@ class Job_Detail {
       this.inTheNameOf,
       this.collectMoney,
       this.distance,
+      this.current_status,
       this.dod,
       this.remark});
 }

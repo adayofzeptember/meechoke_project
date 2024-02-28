@@ -269,12 +269,15 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
   }
 
   Future showProfile(var context) async {
+    
+    
     return showDialog(
       context: context,
       barrierDismissible: true, //* user must tap button!
       builder: (context) {
         return BlocBuilder<ProfileBloc, ProfileState>(
           builder: (context, state) {
+   
             if (state.loading == true) {
               return const Center(
                 child: CircularProgressIndicator(color: Colors.red),

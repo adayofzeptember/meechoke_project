@@ -7,7 +7,9 @@ import 'package:meechoke_project/ETC/ProgressHUD.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
-import 'package:meechoke_project/screens/Jobs/Job%20Processing/job_onGoing_3.dart';
+import 'package:meechoke_project/screens/Jobs/3.%20Get-Drop%20Point/finish_job.dart';
+import 'package:meechoke_project/screens/Jobs/3.%20Get-Drop%20Point/to_drop.dart';
+import 'package:meechoke_project/screens/Jobs/3.%20Get-Drop%20Point/to_get.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Current_JobDetail extends StatefulWidget {
@@ -121,6 +123,7 @@ class _Current_JobDetailState extends State<Current_JobDetail>
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
+                                      Text(state.job_info.current_status),
                                       Text(
                                         state.job_info.docNumber,
                                         style: TextStyle(
@@ -638,16 +641,40 @@ class _Current_JobDetailState extends State<Current_JobDetail>
                   onPressed: () {
                     if (state.status3Detail != 1) {
                       null;
-                    } else if (state.job_info.docStatus == 'กำลังดำเนินการ') {
+                    } else if (state.job_info.current_status ==
+                        'กำลังดำเนินการ') {
+                      // แยกงานเดียว + งานตู้
                       Navigator.push(
                         context,
                         PageTransition(
                             duration: const Duration(milliseconds: 300),
                             type: PageTransitionType.rightToLeft,
-                            child: Job_OnGoing()),
+                            child: Job_ToGet()),
                       );
-                    } else {
+                    } else if (state.job_info.current_status ==
+                        'จุดรับสินค้า') {
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                            duration: const Duration(milliseconds: 300),
+                            type: PageTransitionType.rightToLeft,
+                            child: Job_ToDrop()),
+                      );
+                    } else if (state.job_info.current_status ==
+                        'จุดส่งสินค้า') {
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                            duration: const Duration(milliseconds: 300),
+                            type: PageTransitionType.rightToLeft,
+                            child: FinishJob_Screen()),
+                      );
+                    } else if(state.job_info.current_status ==
+                        'รับงานแล้ว') {
                       showCustomDialog(context, state.job_info.docNumber);
+                    }
+                    else{
+                      null;
                     }
                   },
                   child: Padding(
@@ -657,7 +684,7 @@ class _Current_JobDetailState extends State<Current_JobDetail>
                       alignment: Alignment.center,
                       child: Text(
                         (state.job_info.docStatus == 'กำลังดำเนินการ')
-                            ? 'จุดรับ/ส่งสินค้า'
+                            ? 'ไปหน้าการดำเนินงาน'
                             : 'ออกรถ',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,

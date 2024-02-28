@@ -1,12 +1,17 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
-
+import 'package:meechoke_project/screens/menu_screen_employee.dart';
+import 'package:page_transition/page_transition.dart';
 import 'current_list.dart';
 import 'new_list.dart';
 
 class Job_Lists extends StatefulWidget {
+  int? toCheck;
+  Job_Lists({this.toCheck}) : super();
   @override
   _Job_ListsState createState() => _Job_ListsState();
 }
@@ -77,7 +82,19 @@ class _Job_ListsState extends State<Job_Lists> with TickerProviderStateMixin {
         ],
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            if (widget.toCheck == 0 ||
+                widget.toCheck == 'null' ||
+                widget.toCheck == null) {
+              Navigator.pop(context);
+            } else {
+              Navigator.pushReplacement(
+                context,
+                PageTransition(
+                    duration: const Duration(milliseconds: 500),
+                    type: PageTransitionType.leftToRight,
+                    child: MainMenu_Employee()),
+              );
+            }
           },
           icon: const Icon(
             Icons.arrow_back_ios_new,

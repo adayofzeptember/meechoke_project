@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:meechoke_project/screens/Jobs/1.%20Main%20Pages%20List/tab_main.dart';
+import 'package:page_transition/page_transition.dart';
 
-Future<void> SuccessMessage_Dialog(BuildContext context, String message) async {
+Future<void> SuccessMessage_Dialog(
+    BuildContext context, String message, String check) async {
   showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -30,6 +33,19 @@ Future<void> SuccessMessage_Dialog(BuildContext context, String message) async {
       });
 
   Future.delayed(const Duration(seconds: 2), () {
-    Navigator.of(context).pop(); // Close the AlertDialog
+    if (check == 'ส่งแจ้ง') {
+      Navigator.of(context).pop();
+      Navigator.of(context).pop();
+    } else {
+      Navigator.pushReplacement(
+        context,
+        PageTransition(
+            duration: const Duration(milliseconds: 500),
+            type: PageTransitionType.fade,
+            child: Job_Lists(
+              toCheck: 1,
+            )),
+      );
+    }
   });
 }

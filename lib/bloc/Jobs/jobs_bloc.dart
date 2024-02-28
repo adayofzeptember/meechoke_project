@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meechoke_project/ETC/api_url.dart';
+import 'package:meechoke_project/ETC/success_dialog.dart';
 import 'package:meechoke_project/bloc/Jobs/model.dart';
 import 'package:meechoke_project/screens/Jobs/2.%20Job%20Detail/current_job.dart';
 import 'package:meechoke_project/screens/Jobs/2.%20Job%20Detail/new_job.dart';
@@ -26,9 +29,6 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             status3Detail: 0,
           ),
         ) {
-
-     
-
     on<Load_NewJobs>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
@@ -88,8 +88,6 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
       }
     });
 
-
-
     on<Load_CurrentJobs>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
@@ -108,8 +106,6 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
         var dataCurrentJobs = [];
         if (response.statusCode == 200) {
           for (var elements in response.data['data']['job']) {
-       
-
             List<dynamic> checkinLocationList = elements['checkinLocation'];
             List<Checkin_Location> dataCheckin = [];
             if (elements['checkinLocation'] != null &&
@@ -130,8 +126,6 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 checkin_location: dataCheckin,
               ),
             );
-
-         
           }
 
           emit(state.copyWith(currentjobs_list: dataCurrentJobs, status2: 1));
@@ -148,7 +142,6 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
         ));
       }
     });
-   
 
     on<Load_Job_Info>((event, emit) async {
       if (event.checkPage == 'new_job') {
@@ -183,8 +176,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
 
         print('JOB DETAIL STATUS: ' + response.statusMessage.toString());
         dynamic nestedData = response.data['data'];
-        dynamic fetchedDataInfo =
-            (state.job_info != '') ? state.job_info : '';
+        dynamic fetchedDataInfo = (state.job_info != '') ? state.job_info : '';
         if (response.statusCode == 200) {
           if (nestedData["saleOrderOrdinary"] != null) {
             print('งานปกติ');
@@ -204,6 +196,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             }
 
             fetchedDataInfo = Job_Detail(
+                current_status: nestedData['currentStatus'].toString(),
                 docNumber: nestedData['documentNumber'].toString(),
                 docStatus: nestedData['documentStatus'].toString(),
                 checkInLocation_Info: dataCheckinInfo,
@@ -248,6 +241,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             }
 
             fetchedDataInfo = Job_Detail(
+                current_status: nestedData['currentStatus'].toString(),
                 docNumber: nestedData['documentNumber'].toString(),
                 docStatus: nestedData['documentStatus'].toString(),
                 checkInLocation_Info: dataCheckinInfo,
@@ -291,6 +285,146 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
       }
     });
 
+    on<Upload_Pics_Jobs>((event, emit) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? tokenAuth = prefs.getString('userToken');
+      List<MultipartFile> multipleImages = [];
+      String fileImages;
+      if (event.check == 'pickup') {
+        fileImages = "files[pickupImage][]";
+      } else {
+        fileImages = "files[deployImage][]";
+      }
+
+      for (final imageFiles in event.files!) {
+        String fileName = imageFiles.path.split('/').last;
+        MultipartFile file =
+            await MultipartFile.fromFile(imageFiles.path, filename: fileName);
+        multipleImages.add(file);
+      }
+
+      final uploadData;
+      uploadData = FormData.fromMap(
+          {"type": "image", "collection": "true", fileImages: multipleImages});
+
+      try {
+        final response = await dio.post(api_url + "uploads",
+            options: Options(
+              headers: {
+                "Authorization": "Bearer $tokenAuth",
+              },
+              followRedirects: false,
+              validateStatus: (status) {
+                return status! <= 500;
+              },
+              contentType: Headers.formUrlEncodedContentType,
+              responseType: ResponseType.json,
+            ),
+            data: uploadData);
+
+        //       var xy = response.data['data'];
+        // print(xy.toString());
+
+        if (response.statusCode == 200) {
+          Map<String, dynamic> reportJsonData = {
+            "jobOrderNumber": event.getJoNumber,
+            "type": event.type,
+            "additionalStatus": {
+              "hasFinished": event.hasFinished,
+              "hasPickedOverTime": event.hasPickedOverTime,
+              "hasDeliveredOverTime": event.hasDeliveredOverTime
+            },
+            'filenames': response.data['data'],
+          };
+          final response2 =
+              await dio.patch(api_url_v1 + "job-action-checkpoint",
+                  options: Options(
+                    headers: {
+                      "Authorization": "Bearer $tokenAuth",
+                    },
+                  ),
+                  data: reportJsonData);
+
+          if (response2.statusCode == 200) {
+            SuccessMessage_Dialog(event.context, 'ส่งรูปภาพเสร็จสิ้น', 'งาน');
+          } else {
+            Fluttertoast.showToast(
+                msg: "เกิดข้อผิดพลาด, โปรดลองใหม่อีกครั้ง",
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.SNACKBAR,
+                timeInSecForIosWeb: 2,
+                backgroundColor: Color.fromARGB(255, 133, 133, 133),
+                textColor: Colors.white,
+                fontSize: 15);
+          }
+        } else {
+          Fluttertoast.showToast(
+              msg: "เกิดข้อผิดพลาด, โปรดลองใหม่อีกครั้ง",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.SNACKBAR,
+              timeInSecForIosWeb: 2,
+              backgroundColor: Color.fromARGB(255, 133, 133, 133),
+              textColor: Colors.white,
+              fontSize: 15);
+        }
+      } catch (e) {
+        Fluttertoast.showToast(
+            msg: "เกิดข้อผิดพลาด, โปรดลองใหม่อีกครั้ง",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.SNACKBAR,
+            timeInSecForIosWeb: 2,
+            backgroundColor: Color.fromARGB(255, 133, 133, 133),
+            textColor: Colors.white,
+            fontSize: 15);
+        print('error: ' + e.toString());
+      }
+    });
+
+    on<FinishTheJob>((event, emit) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? tokenAuth = prefs.getString('userToken');
+
+      Map<String, dynamic> reportJsonData = {
+        "jobOrderNumber": event.getJoNumber,
+        "type": event.type,
+        "additionalStatus": {
+          "hasFinished": true,
+          "hasPickedOverTime": false,
+          "hasDeliveredOverTime": false
+        },
+      };
+
+      try {
+        final response = await dio.patch(api_url_v1 + "job-action-checkpoint",
+            options: Options(headers: {
+              "Authorization": "Bearer $tokenAuth",
+            }),
+            data: reportJsonData);
+
+        if (response.statusCode == 200) {
+                      SuccessMessage_Dialog(event.context, 'ส่งรูปภาพเสร็จสิ้น', 'จบงาน');
+        } else {
+          Fluttertoast.showToast(
+              msg: "เกิดข้อผิดพลาด",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.SNACKBAR,
+              timeInSecForIosWeb: 2,
+              backgroundColor: const Color.fromARGB(255, 133, 133, 133),
+              textColor: Colors.white,
+              fontSize: 20);
+        }
+      } catch (e) {
+        Fluttertoast.showToast(
+            msg: "${e}",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.SNACKBAR,
+            timeInSecForIosWeb: 2,
+            backgroundColor: const Color.fromARGB(255, 133, 133, 133),
+            textColor: Colors.white,
+            fontSize: 20);
+      }
+    });
+
     on<Action_Status>((event, emit) async {
       emit(state.copyWith(
         isLoading: true,
@@ -314,14 +448,14 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
           emit(state.copyWith(
             isLoading: false,
           ));
-              Fluttertoast.showToast(
-            msg: "${event.getStatus} หมายเลข: ${event.getJONumber} แล้ว",
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.SNACKBAR,
-            timeInSecForIosWeb: 2,
-            backgroundColor: const Color.fromARGB(255, 133, 133, 133),
-            textColor: Colors.white,
-            fontSize: 20);
+          Fluttertoast.showToast(
+              msg: "${event.getStatus} หมายเลข: ${event.getJONumber} แล้ว",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.SNACKBAR,
+              timeInSecForIosWeb: 2,
+              backgroundColor: const Color.fromARGB(255, 133, 133, 133),
+              textColor: Colors.white,
+              fontSize: 20);
           print('ok');
         } else {
           emit(state.copyWith(

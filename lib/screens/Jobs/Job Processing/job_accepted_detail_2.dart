@@ -4,11 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
-import 'package:meechoke_project/screens/Jobs/Job%20Processing/job_onGoing_3.dart';
-
-import 'package:page_transition/page_transition.dart';
-
-
 
 class Job_WorkAccepted extends StatefulWidget {
   @override
@@ -733,9 +728,7 @@ class _Job_WorkAcceptedState extends State<Job_WorkAccepted>
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     )),
-                onPressed: () {
-                 
-                },
+                onPressed: () {},
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Container(

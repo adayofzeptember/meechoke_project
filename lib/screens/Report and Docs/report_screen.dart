@@ -255,6 +255,7 @@ class _Report_ScreenState extends State<Report_Screen> {
                               : () {
                                   context.read<ReportAccidentBloc>().add(
                                       Upload_Pics_andReport(
+                                        
                                           context: context,
                                           getRemark:
                                               reportRemark_Controller.text,

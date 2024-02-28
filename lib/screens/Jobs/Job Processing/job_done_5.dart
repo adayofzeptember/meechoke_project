@@ -15,7 +15,8 @@ class Job_Done extends StatefulWidget {
 class _Job_DoneState extends State<Job_Done> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return 
+    Scaffold(
       appBar: AppBar(
         backgroundColor: Palette.thisBlue,
         automaticallyImplyLeading: false,

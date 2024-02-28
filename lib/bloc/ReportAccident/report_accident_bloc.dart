@@ -155,7 +155,7 @@ class ReportAccidentBloc
             emit(state.copyWith(isLoading: false));
             print(response2.data['data']);
             SuccessMessage_Dialog(
-                event.context, 'ส่งแจ้งเสร็จสิ้น test Dialog');
+                event.context, 'ส่งแจ้งเสร็จสิ้น', 'ส่งแจ้ง');
           } else {
             emit(state.copyWith(isLoading: false));
             print('error: ' + response2.data['data']);
