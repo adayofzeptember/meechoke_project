@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 import 'package:meechoke_project/screens/Jobs/1.%20Main%20Pages%20List/tab_main.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -7,6 +9,7 @@ Future<void> SuccessMessage_Dialog(
     BuildContext context, String message, String check) async {
   showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
             scrollable: true, //! <-- Set it to true
@@ -32,11 +35,13 @@ Future<void> SuccessMessage_Dialog(
             ));
       });
 
-  Future.delayed(const Duration(seconds: 2), () {
+  Future.delayed(const Duration(seconds: 1), () {
     if (check == 'ส่งแจ้ง') {
       Navigator.of(context).pop();
       Navigator.of(context).pop();
     } else {
+      context.read<JobsBloc>().add(Load_NewJobs());
+      context.read<JobsBloc>().add(Load_CurrentJobs());
       Navigator.pushReplacement(
         context,
         PageTransition(

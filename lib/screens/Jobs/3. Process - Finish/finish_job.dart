@@ -170,11 +170,13 @@ void showFinishDialog(BuildContext context, String joNumber) {
               foregroundColor: Colors.green, // Splash color
             ),
             onPressed: () {
+      // Navigator.pop(context);
               context.read<JobsBloc>().add(FinishTheJob(
                   check: '',
                   type: 'เสร็จงาน',
                   context: context,
                   getJoNumber: joNumber));
+           
             },
             child: Text(
               'ยืนยัน',

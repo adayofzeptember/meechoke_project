@@ -2,20 +2,16 @@
 class Jobs_List_Data {
   String? jobNumber;
   String? jobStatus;
+  String? currentStatus;
   List<Checkin_Location>? checkin_location;
-  String? pickupPoint;
-  String? pickupDate;
-  String? dropPoint;
-  String? dropDate;
+
 
   Jobs_List_Data({
     this.jobNumber,
     this.jobStatus,
-    this.pickupPoint,
-    this.pickupDate,
+    this.currentStatus,
     this.checkin_location,
-    this.dropPoint,
-    this.dropDate,
+
   });
 }
 

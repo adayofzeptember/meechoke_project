@@ -26,6 +26,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             currentjobs_list: [],
             status: 0,
             status2: 0,
+            count: 0,
             status3Detail: 0,
           ),
         ) {
@@ -121,6 +122,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             }
             dataCurrentJobs.add(
               Jobs_List_Data(
+                currentStatus: await elements['currentStatus'] ?? '',
                 jobNumber: await elements['documentNumber'] ?? '',
                 jobStatus: await elements['documentStatus'] ?? '',
                 checkin_location: dataCheckin,
@@ -270,7 +272,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 dod: nestedData['saleOrderContainer']['remark']['dod'].toString());
           }
 
-          emit(state.copyWith(newjob_info: fetchedDataInfo, status3Detail: 1));
+          emit(state.copyWith(job_info: fetchedDataInfo, status3Detail: 1));
         } else {
           print('error status != 200');
           emit(state.copyWith(
@@ -286,15 +288,12 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
     });
 
     on<Upload_Pics_Jobs>((event, emit) async {
+      emit(state.copyWith(
+        isLoading: true,
+      ));
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
       List<MultipartFile> multipleImages = [];
-      String fileImages;
-      if (event.check == 'pickup') {
-        fileImages = "files[pickupImage][]";
-      } else {
-        fileImages = "files[deployImage][]";
-      }
 
       for (final imageFiles in event.files!) {
         String fileName = imageFiles.path.split('/').last;
@@ -304,8 +303,11 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
       }
 
       final uploadData;
-      uploadData = FormData.fromMap(
-          {"type": "image", "collection": "true", fileImages: multipleImages});
+      uploadData = FormData.fromMap({
+        "type": "image",
+        "collection": "true",
+        event.imageFileName: multipleImages
+      });
 
       try {
         final response = await dio.post(api_url + "uploads",
@@ -322,10 +324,13 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             ),
             data: uploadData);
 
-        //       var xy = response.data['data'];
-        // print(xy.toString());
+        var x = response.data['data'];
+        print(x);
 
         if (response.statusCode == 200) {
+          emit(state.copyWith(
+            isLoading: false,
+          ));
           Map<String, dynamic> reportJsonData = {
             "jobOrderNumber": event.getJoNumber,
             "type": event.type,
@@ -346,8 +351,13 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                   data: reportJsonData);
 
           if (response2.statusCode == 200) {
+            //! เอาไปใส่ที่ไหนได้บ้าง
+            emit(state.copyWith(count: state.count + 1, isLoading: false));
             SuccessMessage_Dialog(event.context, 'ส่งรูปภาพเสร็จสิ้น', 'งาน');
           } else {
+            emit(state.copyWith(
+              isLoading: false,
+            ));
             Fluttertoast.showToast(
                 msg: "เกิดข้อผิดพลาด, โปรดลองใหม่อีกครั้ง",
                 toastLength: Toast.LENGTH_LONG,
@@ -358,6 +368,9 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 fontSize: 15);
           }
         } else {
+          emit(state.copyWith(
+            isLoading: false,
+          ));
           Fluttertoast.showToast(
               msg: "เกิดข้อผิดพลาด, โปรดลองใหม่อีกครั้ง",
               toastLength: Toast.LENGTH_LONG,
@@ -368,6 +381,9 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
               fontSize: 15);
         }
       } catch (e) {
+        emit(state.copyWith(
+          isLoading: false,
+        ));
         Fluttertoast.showToast(
             msg: "เกิดข้อผิดพลาด, โปรดลองใหม่อีกครั้ง",
             toastLength: Toast.LENGTH_LONG,
@@ -402,7 +418,10 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             data: reportJsonData);
 
         if (response.statusCode == 200) {
-                      SuccessMessage_Dialog(event.context, 'ส่งรูปภาพเสร็จสิ้น', 'จบงาน');
+          emit(state.copyWith(
+            count: 0,
+          ));
+          SuccessMessage_Dialog(event.context, 'จบงานแล้ว', 'จบงาน');
         } else {
           Fluttertoast.showToast(
               msg: "เกิดข้อผิดพลาด",
@@ -470,5 +489,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
         print("Exception Try: $e");
       }
     });
+
+ 
   }
 }

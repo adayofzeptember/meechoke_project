@@ -71,7 +71,8 @@ class CurrentJobs_Screen extends StatelessWidget {
                 //?  โหลดได้ปกติ
                 return Padding(
                   padding: const EdgeInsets.all(5),
-                  child: ListView.builder(
+                  child: 
+                  ListView.builder(
                     primary: true,
                     itemCount: state.currentjobs_list.length,
                     shrinkWrap: true,
@@ -103,8 +104,8 @@ class CurrentJobs_Screen extends StatelessWidget {
                                       width: 3,
                                     ),
                                     Text(
-                                      '',
-                                      //state.currentjobs_list[index].checkin_location[0].date + '-'      +   state.currentjobs_list[index].checkin_location[1].date,
+                                     
+                                      state.currentjobs_list[index].checkin_location[0].date,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold),
                                     )
@@ -139,9 +140,37 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                   color: Palette.thisBlue,
                                                   fontWeight: FontWeight.bold),
                                             ),
-                                            Container(
+                                            (state.currentjobs_list[index].currentStatus == 'เสร็จงาน')
+                                            ?     Container(
                                               decoration: const BoxDecoration(
                                                   color: Palette.theGreen,
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(20))),
+                                              child: Padding(
+                                                padding: EdgeInsets.fromLTRB(
+                                                    15, 8, 15, 8),
+                                                child: Row(
+                                                  children: [
+                                                    SizedBox(
+                                                  
+                                                      child: Text(
+                                                        'งานเสร็จสิ้นแล้ว',
+                                                        textAlign: TextAlign.center,
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight.bold),
+                                                      ),
+                                                    ),
+                                                    Icon(Icons.check, color: Colors.white,)
+                                                  ],
+                                                ),
+                                              ),
+                                            )
+                                            :Container(
+                                              decoration: const BoxDecoration(
+                                                  color: Palette.thisBlue,
                                                   borderRadius:
                                                       BorderRadius.all(
                                                           Radius.circular(20))),

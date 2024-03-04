@@ -45,7 +45,7 @@ class FinishTheJob extends JobsEvent {
 }
 
 class Upload_Pics_Jobs extends JobsEvent {
-  String type, getJoNumber, check;
+  String type, getJoNumber, imageFileName;
   var context;
   List<File>? files;
   bool? hasDeliveredOverTime, hasPickedOverTime, hasFinished;
@@ -54,7 +54,7 @@ class Upload_Pics_Jobs extends JobsEvent {
     required this.getJoNumber,
     required this.files,
     required this.type,
-    required this.check,
+    required this.imageFileName,
     required this.context,
     this.hasDeliveredOverTime,
     this.hasPickedOverTime,
