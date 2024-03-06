@@ -8,13 +8,7 @@ import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 
-class New_JobDetail extends StatefulWidget {
-  @override
-  _New_JobDetailState createState() => _New_JobDetailState();
-}
-
-class _New_JobDetailState extends State<New_JobDetail>
-    with SingleTickerProviderStateMixin {
+class New_JobDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<JobsBloc, JobsState>(
       builder: (context, state) {

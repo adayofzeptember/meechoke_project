@@ -69,7 +69,7 @@ class _Report_ScreenState extends State<Report_Screen> {
               Stack(
                 children: [
                   Padding(  
-                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+                    padding: const EdgeInsets.fromLTRB(5, 0, 5, 15),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,

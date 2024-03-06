@@ -179,12 +179,14 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
         print('JOB DETAIL STATUS: ' + response.statusMessage.toString());
         dynamic nestedData = response.data['data'];
         dynamic fetchedDataInfo = (state.job_info != '') ? state.job_info : '';
+        Current_Location dataCurrentLocation;
+        List<dynamic> checkinLocationList = nestedData['checkinLocation'];
+        List<Checkin_Location> dataCheckinInfo = [];
+
         if (response.statusCode == 200) {
           if (nestedData["saleOrderOrdinary"] != null) {
             print('งานปกติ');
 
-            List<dynamic> checkinLocationList = nestedData['checkinLocation'];
-            List<Checkin_Location> dataCheckinInfo = [];
             if (nestedData['checkinLocation'] != null &&
                 nestedData['checkinLocation'] is List) {
               for (var checkinLocation in checkinLocationList) {
@@ -197,7 +199,26 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
               }
             }
 
+            if (nestedData['currentLocation'] != null) {
+              dataCurrentLocation = Current_Location(
+                  currentLocation_id: nestedData['currentLocation']['id'] ?? '',
+                  currentLocation_checkinCategory:
+                      nestedData['currentLocation']['checkinCategory'] ?? '',
+                  currentLocation_date:
+                      nestedData['currentLocation']['meetingDate'] ?? '',
+                  currentLocation_point:
+                      nestedData['currentLocation']['locationCode'] ?? '');
+            } else {
+              print('all location done');
+              dataCurrentLocation = Current_Location(
+                  currentLocation_id: 0,
+                  currentLocation_checkinCategory: '',
+                  currentLocation_date: '',
+                  currentLocation_point: '');
+            }
+
             fetchedDataInfo = Job_Detail(
+                currentLocation: dataCurrentLocation,
                 current_status: nestedData['currentStatus'].toString(),
                 docNumber: nestedData['documentNumber'].toString(),
                 docStatus: nestedData['documentStatus'].toString(),
@@ -228,8 +249,6 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
           } else {
             print('งานตู้');
 
-            List<dynamic> checkinLocationList = nestedData['checkinLocation'];
-            List<Checkin_Location> dataCheckinInfo = [];
             if (nestedData['checkinLocation'] != null &&
                 nestedData['checkinLocation'] is List) {
               for (var checkinLocation in checkinLocationList) {
@@ -242,7 +261,26 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
               }
             }
 
+            if (nestedData['currentLocation'] != null) {
+              dataCurrentLocation = Current_Location(
+                  currentLocation_id: nestedData['currentLocation']['id'] ?? '',
+                  currentLocation_checkinCategory:
+                      nestedData['currentLocation']['checkinCategory'] ?? '',
+                  currentLocation_date:
+                      nestedData['currentLocation']['meetingDate'] ?? '',
+                  currentLocation_point:
+                      nestedData['currentLocation']['locationCode'] ?? '');
+            } else {
+              print('all location done');
+              dataCurrentLocation = Current_Location(
+                  currentLocation_id: 0,
+                  currentLocation_checkinCategory: '',
+                  currentLocation_date: '',
+                  currentLocation_point: '');
+            }
+
             fetchedDataInfo = Job_Detail(
+                currentLocation: dataCurrentLocation,
                 current_status: nestedData['currentStatus'].toString(),
                 docNumber: nestedData['documentNumber'].toString(),
                 docStatus: nestedData['documentStatus'].toString(),
@@ -339,6 +377,10 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
               "hasPickedOverTime": event.hasPickedOverTime,
               "hasDeliveredOverTime": event.hasDeliveredOverTime
             },
+            "checkinLocation": {
+              "id": event.getCurrentLocationID,
+              "mobileState": 1
+            },
             'filenames': response.data['data'],
           };
           final response2 =
@@ -351,8 +393,8 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                   data: reportJsonData);
 
           if (response2.statusCode == 200) {
-            //! เอาไปใส่ที่ไหนได้บ้าง
-            emit(state.copyWith(count: state.count + 1, isLoading: false));
+            //! เอาไปใส่ที่ไหนได้บ้าง //+1
+            emit(state.copyWith(isLoading: false));
             SuccessMessage_Dialog(event.context, 'ส่งรูปภาพเสร็จสิ้น', 'งาน');
           } else {
             emit(state.copyWith(
@@ -489,7 +531,5 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
         print("Exception Try: $e");
       }
     });
-
- 
   }
 }

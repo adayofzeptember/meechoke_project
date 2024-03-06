@@ -5,13 +5,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 
-class FinishJob_Screen extends StatefulWidget {
+class FinishJob_Screen extends StatelessWidget {
   FinishJob_Screen() : super();
-  @override
-  _FinishJob_ScreenState createState() => _FinishJob_ScreenState();
-}
-
-class _FinishJob_ScreenState extends State<FinishJob_Screen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<JobsBloc, JobsState>(
@@ -31,7 +26,7 @@ class _FinishJob_ScreenState extends State<FinishJob_Screen> {
               ),
             ),
             title: const Text(
-              'งาน',
+              'เสร็จงาน',
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -59,14 +54,59 @@ class _FinishJob_ScreenState extends State<FinishJob_Screen> {
                         ),
                         SvgPicture.asset('assets/images/jobdone.svg'),
                         SizedBox(
-                          height: 10,
+                          height: 13,
                         ),
                         Text(
-                          "งานทั้งหมดสำเร็จแล้ว",
+                          "งานสำเร็จแล้ว ! ",
                           style: TextStyle(
                               color: Color.fromARGB(255, 97, 97, 97),
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "กดปุ่ม",
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 97, 97, 97),
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Palette.theGreen,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5))),
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(7,3,7,3),
+                                child: Text(
+                                  "จบงาน",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              "ด้านล่าง",
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 97, 97, 97),
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
                         ),
                         SizedBox(
                           height: 25,
@@ -130,7 +170,7 @@ class _FinishJob_ScreenState extends State<FinishJob_Screen> {
                             width: double.infinity,
                             alignment: Alignment.center,
                             child: Text(
-                              'เสร็จงาน',
+                              'จบงาน',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
@@ -170,13 +210,12 @@ void showFinishDialog(BuildContext context, String joNumber) {
               foregroundColor: Colors.green, // Splash color
             ),
             onPressed: () {
-      // Navigator.pop(context);
+              // Navigator.pop(context);
               context.read<JobsBloc>().add(FinishTheJob(
                   check: '',
                   type: 'เสร็จงาน',
                   context: context,
                   getJoNumber: joNumber));
-           
             },
             child: Text(
               'ยืนยัน',

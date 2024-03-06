@@ -8,13 +8,13 @@ import 'package:meechoke_project/ETC/ProgressHUD.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 
-class Job_ToGet extends StatefulWidget {
-  Job_ToGet() : super();
+class Job_Process extends StatefulWidget {
+  Job_Process() : super();
   @override
-  _Job_ToGetState createState() => _Job_ToGetState();
+  _Job_ProcessState createState() => _Job_ProcessState();
 }
 
-class _Job_ToGetState extends State<Job_ToGet> {
+class _Job_ProcessState extends State<Job_Process> {
   List<File> selectedImages = [];
   final picker = ImagePicker();
   String statusImag = '';
@@ -34,104 +34,134 @@ class _Job_ToGetState extends State<Job_ToGet> {
   Widget _uiProcess(BuildContext context) {
     return BlocBuilder<JobsBloc, JobsState>(
       builder: (context, state) {
-        if (state.count >= state.job_info.checkInLocation_Info.length){
-          return CircularProgressIndicator();
-        }
-          return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Palette.thisBlue,
-              automaticallyImplyLeading: false,
-              centerTitle: true,
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(
-                  Icons.arrow_back_ios_new,
-                  color: Colors.white,
-                ),
-              ),
-              title: Text(
-                state.count.toString(),
-                // state.job_info.docNumber,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Palette.thisBlue,
+            automaticallyImplyLeading: false,
+            centerTitle: true,
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios_new,
+                color: Colors.white,
               ),
             ),
-            backgroundColor: const Color.fromARGB(255, 1, 44, 97),
-            body: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(height: 10),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.location_on,
-                                color: Palette.someRed,
+            title: Text(
+                           state.job_info.currentLocation
+                                  .currentLocation_id.toString(),
+ 
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+          ),
+          backgroundColor: const Color.fromARGB(255, 1, 44, 97),
+          body: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(height: 10),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.location_on,
+                              color: Palette.someRed,
+                            ),
+                            Text(
+                              state.job_info.currentLocation
+                                      .currentLocation_checkinCategory +
+                                  ": ",
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 97, 97, 97),
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
                               ),
-                              Text(
-                                state.job_info.checkInLocation_Info[state.count]
-                                        .checkinCategory +
-                                    ": ",
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 97, 97, 97),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                            ),
+                            Text(
+                              state.job_info.currentLocation
+                                  .currentLocation_point,
+                              style: TextStyle(
+                                color: Palette.thisBlue,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 15),
+                        SvgPicture.asset(
+                          'assets/images/dest.svg',
+                        ),
+                        SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8, bottom: 8),
+                          child: Center(
+                            child: Column(
+                              children: [
+                                Text(
+                                  "เวลาที่ควรถึง",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 97, 97, 97),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                state.job_info.checkInLocation_Info[state.count]
-                                    .point,
-                                style: TextStyle(
-                                  color: Palette.thisBlue,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                                SizedBox(height: 5),
+                                Text(
+                                           state.job_info.currentLocation
+                                  .currentLocation_date,
+                                  style: TextStyle(
+                                    color: Palette.thisBlue,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                          SizedBox(height: 15),
-                          SvgPicture.asset(
-                            'assets/images/dest.svg',
+                        ),
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 255, 246, 246),
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
                           ),
-                          SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8, bottom: 8),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 5, bottom: 5),
                             child: Center(
                               child: Column(
                                 children: [
                                   Text(
-                                    "เวลาที่ควรถึง",
+                                    "เหลือเวลา",
                                     style: TextStyle(
                                       color: Color.fromARGB(255, 97, 97, 97),
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  SizedBox(height: 5),
+                                  SizedBox(height: 3),
                                   Text(
-                                    state.job_info
-                                        .checkInLocation_Info[state.count].date,
+                                    "06:25:15",
                                     style: TextStyle(
-                                      color: Palette.thisBlue,
+                                      color: Colors.red,
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -140,230 +170,188 @@ class _Job_ToGetState extends State<Job_ToGet> {
                               ),
                             ),
                           ),
-                          Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 255, 246, 246),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 5, bottom: 5),
-                              child: Center(
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "เหลือเวลา",
-                                      style: TextStyle(
-                                        color: Color.fromARGB(255, 97, 97, 97),
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    SizedBox(height: 3),
-                                    Text(
-                                      "06:25:15",
-                                      style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  selectedImages.isEmpty
-                      ? Container()
-                      : Text(
-                          'รูปภาพที่แนบ',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17),
-                        ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: selectedImages.isEmpty ? null : Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(15))),
-                    height: 200,
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: SingleChildScrollView(
-                        child: selectedImages.isEmpty
-                            ? const Text(' ')
-                            : GridView.builder(
-                                shrinkWrap: true,
-                                primary: false,
-                                itemCount: selectedImages.length,
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 3),
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Center(
-                                      child: Card(
-                                    child: SizedBox(
-                                      height: 120,
-                                      width: 120,
-                                      child: Image.file(
-                                        selectedImages[index],
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ));
-                                },
-                              ),
-                      ),
-                    ),
-                  ),
-                  Spacer(),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Column(
-                      children: [
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          onPressed: () {
-                            print(state.job_info.current_status);
-                            openImageDialog(context);
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Container(
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              child: Text(
-                                selectedImages.isEmpty
-                                    ? 'ถึงจุดรับสินค้า'
-                                    : 'เพิ่มรูปภาพ',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: 17,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        )
                       ],
                     ),
                   ),
-                  (selectedImages.isEmpty)
-                      ? Text('')
-                      : Column(
-                          children: [
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Column(
-                                children: [
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                selectedImages.isEmpty
+                    ? Container()
+                    : Text(
+                        'รูปภาพที่แนบ',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17),
+                      ),
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: selectedImages.isEmpty ? null : Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(15))),
+                  height: 200,
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: SingleChildScrollView(
+                      child: selectedImages.isEmpty
+                          ? const Text(' ')
+                          : GridView.builder(
+                              shrinkWrap: true,
+                              primary: false,
+                              itemCount: selectedImages.length,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 3),
+                              itemBuilder: (BuildContext context, int index) {
+                                return Center(
+                                    child: Card(
+                                  child: SizedBox(
+                                    height: 120,
+                                    width: 120,
+                                    child: Image.file(
+                                      selectedImages[index],
+                                      fit: BoxFit.cover,
                                     ),
-                                    onPressed: () {
-                                      if (state
-                                              .job_info
-                                              .checkInLocation_Info[state.count]
-                                              .checkinCategory ==
-                                          'จุดรับสินค้า') {
-                                        statusImag = 'files[pickupImage][]';
-                                      } else if (state
-                                              .job_info
-                                              .checkInLocation_Info[state.count]
-                                              .checkinCategory ==
-                                          'จุดส่งสินค้า') {
-                                        statusImag = 'files[deployImage][]';
-                                      } else if (state
-                                              .job_info
-                                              .checkInLocation_Info[state.count]
-                                              .checkinCategory ==
-                                          'จุดรับตู้') {
-                                        statusImag =
-                                            'files[getContainerImage][]';
-                                      } else if (state
-                                              .job_info
-                                              .checkInLocation_Info[state.count]
-                                              .checkinCategory ==
-                                          'จุดบรรจุ') {
-                                        statusImag =
-                                            'files[installContainerImage][]';
-                                      } else if (state
-                                              .job_info
-                                              .checkInLocation_Info[state.count]
-                                              .checkinCategory ==
-                                          'จุดคืนตู้') {
-                                        statusImag =
-                                            'files[returnContainerImage][]';
-                                      } else {
-                                        null;
-                                      }
+                                  ),
+                                ));
+                              },
+                            ),
+                    ),
+                  ),
+                ),
+                Spacer(),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Column(
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        onPressed: () {
+                          print(state.job_info.current_status);
+                          openImageDialog(context);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Container(
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            child: Text(
+                              selectedImages.isEmpty
+                                  ? 'ถึง'+             state.job_info.currentLocation
+                                  .currentLocation_checkinCategory+'แล้ว'
+                                  : 'เพิ่มรูปภาพ',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontSize: 17,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                (selectedImages.isEmpty)
+                    ? Text('')
+                    : Column(
+                        children: [
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Column(
+                              children: [
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    if (state.job_info.currentLocation
+                                  .currentLocation_checkinCategory ==
+                                        'จุดรับสินค้า') {
+                                      statusImag = 'files[pickupImage][]';
+                                    } else if (state.job_info.currentLocation
+                                  .currentLocation_checkinCategory ==
+                                        'จุดส่งสินค้า') {
+                                      statusImag = 'files[deployImage][]';
+                                    } else if (state.job_info.currentLocation
+                                  .currentLocation_checkinCategory ==
+                                        'จุดรับตู้') {
+                                      statusImag = 'files[getContainerImage][]';
+                                    } else if (state.job_info.currentLocation
+                                  .currentLocation_checkinCategory ==
+                                        'จุดบรรจุ') {
+                                      statusImag =
+                                          'files[installContainerImage][]';
+                                    } else if (state.job_info.currentLocation
+                                  .currentLocation_checkinCategory ==
+                                        'จุดคืนตู้') {
+                                      statusImag =
+                                          'files[returnContainerImage][]';
+                                    } else {
+                                      null;
+                                    }
 
-                                      context.read<JobsBloc>().add(
-                                          Upload_Pics_Jobs(
-                                              imageFileName: statusImag,
-                                              hasFinished: false,
-                                              hasDeliveredOverTime: false,
-                                              hasPickedOverTime: false,
-                                              type:
-                                                  state
-                                                      .job_info
-                                                      .checkInLocation_Info[
-                                                          state.count]
-                                                      .checkinCategory
-                                                      .toString(),
-                                              context: context,
-                                              getJoNumber: state
-                                                  .job_info.docNumber
-                                                  .toString(),
-                                              files: selectedImages));
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Container(
-                                        width: double.infinity,
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          'ส่ง',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Palette.thisBlue,
-                                            fontSize: 15,
-                                          ),
+                                    context.read<JobsBloc>().add(
+                                        Upload_Pics_Jobs(
+                                          getCurrentLocationID: state.job_info.currentLocation
+                                  .currentLocation_id,
+                                            imageFileName: statusImag,
+                                            hasFinished: false,
+                                            hasDeliveredOverTime: false,
+                                            hasPickedOverTime: false,
+                                            type: state
+                                                .job_info
+                                                .checkInLocation_Info[
+                                                    state.count]
+                                                .checkinCategory
+                                                .toString(),
+                                            context: context,
+                                            getJoNumber: state
+                                                .job_info.docNumber
+                                                .toString(),
+                                            files: selectedImages));
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Container(
+                                      width: double.infinity,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'ส่ง',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Palette.thisBlue,
+                                          fontSize: 15,
                                         ),
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                ],
-              ),
+                          ),
+                        ],
+                      ),
+              ],
             ),
-          );
+          ),
+        );
       },
     );
   }
@@ -382,7 +370,7 @@ class _Job_ToGetState extends State<Job_ToGet> {
               children: [
                 Center(
                   child: Text(
-                    'รูปขณะรับสินค้า',
+                    'รูป',
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,

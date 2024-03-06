@@ -20,6 +20,7 @@ class _Docs_ScreenState extends State<Docs_Screen> {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 228, 237, 240),
         body: RawScrollbar(
+          thickness: 2.5,
           thumbColor: Palette.thisBlue,
           radius: Radius.circular(20),
           child: SingleChildScrollView(
@@ -29,7 +30,7 @@ class _Docs_ScreenState extends State<Docs_Screen> {
               Column(
                 children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+                  padding: const EdgeInsets.fromLTRB(5, 0, 5, 15),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,

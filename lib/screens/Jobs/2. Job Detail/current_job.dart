@@ -11,13 +11,7 @@ import 'package:meechoke_project/screens/Jobs/3.%20Process%20-%20Finish/finish_j
 import 'package:meechoke_project/screens/Jobs/3.%20Process%20-%20Finish/process.dart';
 import 'package:page_transition/page_transition.dart';
 
-class Current_JobDetail extends StatefulWidget {
-  @override
-  _Current_JobDetailState createState() => _Current_JobDetailState();
-}
-
-class _Current_JobDetailState extends State<Current_JobDetail>
-    with SingleTickerProviderStateMixin {
+class Current_JobDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<JobsBloc, JobsState>(
       builder: (context, state) {
@@ -690,18 +684,9 @@ class _Current_JobDetailState extends State<Current_JobDetail>
                       } else if (state.job_info.current_status ==
                           'รับงานแล้ว') {
                         showCustomDialog(context, state.job_info.docNumber);
+                        //
                       } else {
-                        if (state.count <
-                            state.job_info.checkInLocation_Info.length) {
-                          // context.read<JobsBloc>().add(TEST());
-                          Navigator.push(
-                            context,
-                            PageTransition(
-                                duration: const Duration(milliseconds: 300),
-                                type: PageTransitionType.rightToLeft,
-                                child: Job_ToGet()),
-                          );
-                        } else {
+                        if (state.job_info.currentLocation.currentLocation_id == 0) {
                           Navigator.push(
                             context,
                             PageTransition(
@@ -709,7 +694,34 @@ class _Current_JobDetailState extends State<Current_JobDetail>
                                 type: PageTransitionType.rightToLeft,
                                 child: FinishJob_Screen()),
                           );
+                        } else {
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                                duration: const Duration(milliseconds: 300),
+                                type: PageTransitionType.rightToLeft,
+                                child: Job_Process()),
+                          );
                         }
+
+                        // if (state.count < state.job_info.checkInLocation_Info.length) {
+                        // Navigator.push(
+                        //   context,
+                        //   PageTransition(
+                        //       duration: const Duration(milliseconds: 300),
+                        //       type: PageTransitionType.rightToLeft,
+                        //       child: Job_Process()),
+                        // );
+
+                        // } else {
+                        // Navigator.push(
+                        //   context,
+                        //   PageTransition(
+                        //       duration: const Duration(milliseconds: 300),
+                        //       type: PageTransitionType.rightToLeft,
+                        //       child: FinishJob_Screen()),
+                        // );
+                        // }
                       }
                     },
                     child: Padding(

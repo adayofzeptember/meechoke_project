@@ -90,15 +90,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         prefs.clear();
         Phoenix.rebirth(event.context);
       } catch (e) {
+
         emit(state.copyWith(loading: false));
-        Fluttertoast.showToast(
-            msg: "${e.toString()}",
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.SNACKBAR,
-            timeInSecForIosWeb: 2,
-            backgroundColor: const Color.fromARGB(255, 133, 133, 133),
-            textColor: Colors.white,
-            fontSize: 15);
+
+        prefs.clear();
+        Phoenix.rebirth(event.context);
+        // Fluttertoast.showToast(
+        //     msg: "${e.toString()}",
+        //     toastLength: Toast.LENGTH_LONG,
+        //     gravity: ToastGravity.SNACKBAR,
+        //     timeInSecForIosWeb: 2,
+        //     backgroundColor: const Color.fromARGB(255, 133, 133, 133),
+        //     textColor: Colors.white,
+        //     fontSize: 15);
       }
     });
 

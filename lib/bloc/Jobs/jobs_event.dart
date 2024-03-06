@@ -44,9 +44,19 @@ class FinishTheJob extends JobsEvent {
       {required this.context, required this.getJoNumber, required this.type, required this.check});
 }
 
+
+class Process_Page extends JobsEvent {
+  String getJoNumber;
+  var context;
+
+  Process_Page(
+      {required this.context, required this.getJoNumber });
+}
+
 class Upload_Pics_Jobs extends JobsEvent {
   String type, getJoNumber, imageFileName;
   var context;
+  int getCurrentLocationID;
   List<File>? files;
   bool? hasDeliveredOverTime, hasPickedOverTime, hasFinished;
 
@@ -54,6 +64,7 @@ class Upload_Pics_Jobs extends JobsEvent {
     required this.getJoNumber,
     required this.files,
     required this.type,
+    required this.getCurrentLocationID,
     required this.imageFileName,
     required this.context,
     this.hasDeliveredOverTime,
