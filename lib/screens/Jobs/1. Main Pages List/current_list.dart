@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
+import 'package:meechoke_project/test/thai_date_converter.dart';
 
 class CurrentJobs_Screen extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -222,6 +223,18 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                 physics:
                                                     const ClampingScrollPhysics(),
                                                 itemBuilder: (context, index2) {
+                                                     DateTime dateTime =
+                                                      DateTime.parse(state
+                                                          .newjobs_list[index]
+                                                          .checkin_location[
+                                                              index2]
+                                                          .date
+                                                          .toString());
+
+                                                  String formattedDate =
+                                                      ThaiDateFormat(
+                                                              'd MMMM y', 'th')
+                                                          .format(dateTime);
                                                   return Padding(
                                                       padding:
                                                           const EdgeInsets.only(
@@ -299,7 +312,7 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                                 height: 5,
                                                               ),
                                                               Text(
-                                                                  '[ ${state.currentjobs_list[index].checkin_location[index2].date} ]',
+                                                                  '[ ${formattedDate} ]',
                                                                   overflow:
                                                                       TextOverflow
                                                                           .fade,

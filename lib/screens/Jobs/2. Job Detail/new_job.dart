@@ -7,6 +7,7 @@ import 'package:meechoke_project/ETC/ProgressHUD.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
+import 'package:meechoke_project/test/thai_date_converter.dart';
 
 class New_JobDetail extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -390,6 +391,13 @@ class New_JobDetail extends StatelessWidget {
                                                 physics:
                                                     const ClampingScrollPhysics(),
                                                 itemBuilder: (context, index) {
+                                                     DateTime dateTime =
+                                                      DateTime.parse(state.job_info.checkInLocation_Info[index].date);
+
+                                                  String formattedDate =
+                                                      ThaiDateFormat(
+                                                              'd MMMM y', 'th')
+                                                          .format(dateTime);
                                                   return Padding(
                                                       padding:
                                                           const EdgeInsets.only(
@@ -467,7 +475,7 @@ class New_JobDetail extends StatelessWidget {
                                                                 height: 5,
                                                               ),
                                                               Text(
-                                                                  '[ ${state.job_info.checkInLocation_Info[index].date} ]',
+                                                                  '[ ${formattedDate} ]',
                                                                   overflow:
                                                                       TextOverflow
                                                                           .fade,

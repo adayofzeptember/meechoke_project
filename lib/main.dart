@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
@@ -35,6 +36,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   Intl.defaultLocale = 'th';
+  initializeDateFormatting('th');
   GeolocatorPlatform.instance;
   WidgetsFlutterBinding.ensureInitialized();
   const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
@@ -49,7 +51,6 @@ void main() async {
 
 class StarterWidget extends StatelessWidget {
   const StarterWidget({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

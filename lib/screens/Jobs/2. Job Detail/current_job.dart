@@ -9,6 +9,7 @@ import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 import 'package:meechoke_project/screens/Jobs/3.%20Process%20-%20Finish/finish_job.dart';
 import 'package:meechoke_project/screens/Jobs/3.%20Process%20-%20Finish/process.dart';
+import 'package:meechoke_project/test/thai_date_converter.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Current_JobDetail extends StatelessWidget {
@@ -439,6 +440,13 @@ class Current_JobDetail extends StatelessWidget {
                                                 physics:
                                                     const ClampingScrollPhysics(),
                                                 itemBuilder: (context, index) {
+                                                     DateTime dateTime =
+                                                      DateTime.parse(state.job_info.checkInLocation_Info[index].date);
+
+                                                  String formattedDate =
+                                                      ThaiDateFormat(
+                                                              'd MMMM y', 'th')
+                                                          .format(dateTime);
                                                   return Padding(
                                                       padding:
                                                           const EdgeInsets.only(
@@ -513,7 +521,7 @@ class Current_JobDetail extends StatelessWidget {
                                                                 height: 5,
                                                               ),
                                                               Text(
-                                                                  '[ ${state.job_info.checkInLocation_Info[index].date} ]',
+                                                                  '[ ${formattedDate} ]',
                                                                   overflow:
                                                                       TextOverflow
                                                                           .fade,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/test/thai_date_converter.dart';
 import '../../../bloc/Jobs/jobs_bloc.dart';
 
 class NewJobs_Screen extends StatelessWidget {
@@ -191,7 +192,22 @@ class NewJobs_Screen extends StatelessWidget {
                                                 shrinkWrap: true,
                                                 physics:
                                                     const ClampingScrollPhysics(),
-                                                itemBuilder: (context, index2) {
+                                                itemBuilder:
+                                                    (context, indexLocation) {
+                                                  //state.newjobs_list[index].checkin_location[indexLocation].date.toString()
+
+                                                  DateTime dateTime =
+                                                      DateTime.parse(state
+                                                          .newjobs_list[index]
+                                                          .checkin_location[
+                                                              indexLocation]
+                                                          .date
+                                                          .toString());
+
+                                                  String formattedDate =
+                                                      ThaiDateFormat(
+                                                              'd MMMM y', 'th')
+                                                          .format(dateTime);
                                                   return Padding(
                                                       padding:
                                                           const EdgeInsets.only(
@@ -202,14 +218,14 @@ class NewJobs_Screen extends StatelessWidget {
                                                                           .newjobs_list[
                                                                               index]
                                                                           .checkin_location[
-                                                                              index2]
+                                                                              indexLocation]
                                                                           .checkinCategory ==
                                                                       "จุดรับสินค้า" ||
                                                                   state
                                                                           .newjobs_list[
                                                                               index]
                                                                           .checkin_location[
-                                                                              index2]
+                                                                              indexLocation]
                                                                           .checkinCategory ==
                                                                       "จุดรับตู้")
                                                               ? SvgPicture
@@ -234,7 +250,7 @@ class NewJobs_Screen extends StatelessWidget {
                                                               Row(
                                                                 children: [
                                                                   Text(
-                                                                      state.newjobs_list[index].checkin_location[index2].checkinCategory +
+                                                                      state.newjobs_list[index].checkin_location[indexLocation].checkinCategory +
                                                                           ":",
                                                                       style: TextStyle(
                                                                           color: Palette
@@ -249,7 +265,7 @@ class NewJobs_Screen extends StatelessWidget {
                                                                         .newjobs_list[
                                                                             index]
                                                                         .checkin_location[
-                                                                            index2]
+                                                                            indexLocation]
                                                                         .point,
                                                                     style: TextStyle(
                                                                         decoration:
@@ -268,20 +284,31 @@ class NewJobs_Screen extends StatelessWidget {
                                                               SizedBox(
                                                                 height: 5,
                                                               ),
-                                                              Text(
-                                                                  '[ ${state.newjobs_list[index].checkin_location[index2].date} ]',
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .fade,
-                                                                  style: TextStyle(
-                                                                      color: Color.fromARGB(
-                                                                          255,
-                                                                          133,
-                                                                          133,
-                                                                          133),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold)),
+                                                              Row(
+                                                                children: [
+                                                                  // Icon(
+                                                                  //   Icons
+                                                                  //       .calendar_month_rounded,
+                                                                  //   // You can customize the size, color, and other properties as needed
+                                                                  //   size: 24,
+                                                                  //   color: Palette
+                                                                  //       .thisBlue,
+                                                                  // ),
+                                                                  Text(
+                                                                      '[ ${formattedDate} ] ',
+                                                                      overflow:
+                                                                          TextOverflow
+                                                                              .fade,
+                                                                      style: TextStyle(
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              133,
+                                                                              133,
+                                                                              133),
+                                                                          fontWeight:
+                                                                              FontWeight.bold)),
+                                                                ],
+                                                              ),
                                                             ],
                                                           )
                                                         ],
