@@ -24,7 +24,8 @@ class _Docs_ScreenState extends State<Docs_Screen> {
           thumbColor: Palette.thisBlue,
           radius: Radius.circular(20),
           child: SingleChildScrollView(
-            child: BlocBuilder<ReportAccidentBloc, ReportAccidentState>(
+            child: 
+            BlocBuilder<ReportAccidentBloc, ReportAccidentState>(
                 builder: (context, state) {
               return 
               Column(

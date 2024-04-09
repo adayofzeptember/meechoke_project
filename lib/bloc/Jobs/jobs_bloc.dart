@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
@@ -129,7 +128,6 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
               ),
             );
           }
-
           emit(state.copyWith(currentjobs_list: dataCurrentJobs, status2: 1));
         } else {
           print('error status != 200');

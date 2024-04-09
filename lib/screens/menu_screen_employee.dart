@@ -14,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/ReportAccident/report_accident_bloc.dart';
 import 'Financial/financial.dart';
 import 'Report and Docs/tab_mainScreen.dart';
+import 'history/history_screen.dart';
 
 class MainMenu_Employee extends StatefulWidget {
   const MainMenu_Employee({super.key});
@@ -155,17 +156,17 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                 children: <Widget>[
                   InkWell(
                     onTap: () async {
-                      SharedPreferences prefrences =
-                          await SharedPreferences.getInstance();
-                      prefrences.clear();
-                      Phoenix.rebirth(context);
-                      // Navigator.push(
-                      //   context,
-                      //   PageTransition(
-                      //       duration: const Duration(milliseconds: 500),
-                      //       type: PageTransitionType.fade,
-                      //       child: History_Page()),
-                      // );
+                      // SharedPreferences prefrences =
+                      //     await SharedPreferences.getInstance();
+                      // prefrences.clear();
+                      // Phoenix.rebirth(context);
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                            duration: const Duration(milliseconds: 500),
+                            type: PageTransitionType.fade,
+                            child: History_Page()),
+                      );
                     },
                     child: Container(
                       width: double.infinity,
@@ -226,7 +227,11 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {
+                    onTap: () async{
+                        SharedPreferences prefrences =
+                          await SharedPreferences.getInstance();
+                      prefrences.clear();
+                      Phoenix.rebirth(context);
                       //            Navigator.push(
                       //   context,
                       //   PageTransition(
@@ -237,10 +242,10 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                       // // // context
                       // // //     .read<LoginBloc>()
                       // // //     .add(Logout_Auth(context: context));
-                      // // SharedPreferences prefrences =
-                      // //     await SharedPreferences.getInstance();
-                      // // prefrences.clear();
-                      // // Phoenix.rebirth(context);
+                      // SharedPreferences prefrences =
+                      //     await SharedPreferences.getInstance();
+                      // prefrences.clear();
+                      // Phoenix.rebirth(context);
                       // // //        Navigator.push(
                       // // //   context,
                       // // //   PageTransition(

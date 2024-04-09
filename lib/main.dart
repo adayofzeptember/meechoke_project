@@ -7,6 +7,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/bloc/HistoryWork/history_work_bloc.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/bloc/ReportAccident/report_accident_bloc.dart';
@@ -15,7 +16,6 @@ import 'package:meechoke_project/screens/login_screen.dart';
 import 'package:meechoke_project/screens/menu_screen_employee.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -58,6 +58,7 @@ class StarterWidget extends StatelessWidget {
         BlocProvider(create: (context) => LoginBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => JobsBloc()),
+        BlocProvider(create: (context) => HistoryWorkBloc()),
         BlocProvider(create: (context) => ReportAccidentBloc()),
       ],
       child: MaterialApp(
@@ -100,7 +101,8 @@ class _StartPageState extends State<StartPage> {
     if (status == PermissionStatus.granted) {
     } else {
       Fluttertoast.showToast(
-          msg: "ตั้งอนุญาติการให้แอปเข้าถึงตำแหน่งพื้นที่ได้ที่การตั้งค่าแอป",
+          msg:
+              "ตั้งค่าอนุญาติการให้แอปเข้าถึงตำแหน่งพื้นที่ได้ที่การตั้งค่าแอป",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.SNACKBAR,
           timeInSecForIosWeb: 2,
@@ -114,7 +116,6 @@ class _StartPageState extends State<StartPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? tokenAuth = prefs.getString('userToken').toString();
     print('stored token: ' + tokenAuth);
-
     await Future.delayed(const Duration(seconds: 2), () {
       if (tokenAuth == '' || tokenAuth == 'null') {
         Navigator.pushReplacement(
