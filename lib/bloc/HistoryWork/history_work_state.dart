@@ -7,15 +7,14 @@ class HistoryWorkState extends Equatable {
   String status;
   String count;
   String total;
-    List workhistory_list;
+  List workhistory_list;
 
   HistoryWorkState(
-
       {required this.month,
       required this.year,
       required this.count,
       required this.total,
-        required this.workhistory_list,
+      required this.workhistory_list,
       required this.status});
 
   HistoryWorkState copyWith(

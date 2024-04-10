@@ -2,7 +2,7 @@
 
 part of 'history_work_bloc.dart';
 
-sealed class HistoryWorkEvent extends Equatable {
+class HistoryWorkEvent extends Equatable {
   const HistoryWorkEvent();
 
   @override

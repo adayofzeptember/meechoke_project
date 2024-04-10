@@ -33,7 +33,7 @@ class JobsState extends Equatable {
     int? status2,
   }) {
     return JobsState(
-            status2: status2 ?? this.status2,
+      status2: status2 ?? this.status2,
       newjobs_list: newjobs_list ?? this.newjobs_list,
       status: status ?? this.status,
       isLoading: isLoading ?? this.isLoading,

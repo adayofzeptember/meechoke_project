@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/bloc/Fuel/fuel_bloc.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
@@ -29,6 +30,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
     context.read<ProfileBloc>().add(Load_Profile());
     context.read<JobsBloc>().add(Load_NewJobs());
     context.read<JobsBloc>().add(Load_CurrentJobs());
+        context.read<FuelBloc>().add(Load_FuelNotYet());
     super.initState();
   }
 

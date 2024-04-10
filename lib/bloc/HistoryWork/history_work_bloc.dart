@@ -77,8 +77,9 @@ class HistoryWorkBloc extends Bloc<HistoryWorkEvent, HistoryWorkState> {
               HistoryWork_Model(
                   customer: await elements['customer'] ?? '',
                   date_range: await elements['dateRange'] ?? '',
-                  allowance: await elements['allowance'] ?? '-',
+                  allowance: await elements['allowance'] ?? '0.00',
                   doc_number: await elements['documentNumber'] ?? ''),
+                  
             );
           }
           emit(state.copyWith(
