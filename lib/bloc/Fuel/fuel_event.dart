@@ -1,4 +1,7 @@
+// ignore_for_file: must_be_immutable
+
 part of 'fuel_bloc.dart';
+
 class FuelEvent extends Equatable {
   const FuelEvent();
 
@@ -6,8 +9,13 @@ class FuelEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class Load_FuelNotYet extends FuelEvent {}
 
+class Load_Fuel_Info extends FuelEvent {
+  // String checkPage;
+  String joNumber;
+  var context;
 
-class Load_FuelNotYet extends FuelEvent {
-
+  Load_Fuel_Info(
+      {required this.context, required this.joNumber});
 }

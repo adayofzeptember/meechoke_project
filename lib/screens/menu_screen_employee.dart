@@ -8,7 +8,7 @@ import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
 import 'package:meechoke_project/screens/Checking/check_daily.dart';
-import 'package:meechoke_project/screens/Fuel/fuel_main.dart';
+import 'package:meechoke_project/screens/Fuel/Main%20List/main_list.dart';
 import 'package:meechoke_project/screens/Jobs/1.%20Main%20Pages%20List/tab_main.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,7 +30,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
     context.read<ProfileBloc>().add(Load_Profile());
     context.read<JobsBloc>().add(Load_NewJobs());
     context.read<JobsBloc>().add(Load_CurrentJobs());
-        context.read<FuelBloc>().add(Load_FuelNotYet());
+ 
     super.initState();
   }
 
@@ -111,6 +111,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                 children: <Widget>[
                   InkWell(
                     onTap: () {
+                        context.read<FuelBloc>().add(Load_FuelNotYet());
                       Navigator.push(
                         context,
                         PageTransition(
