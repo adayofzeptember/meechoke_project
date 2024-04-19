@@ -28,11 +28,11 @@ class _ReportDocs_MainState extends State<ReportDocs_Main>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-           shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(
-        bottom: Radius.circular(30),
-      ),
-    ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
+        ),
         backgroundColor: Palette.thisBlue,
         automaticallyImplyLeading: false,
         centerTitle: true,
@@ -71,7 +71,10 @@ class _ReportDocs_MainState extends State<ReportDocs_Main>
                   dividerColor: Colors.transparent,
                   indicatorColor: Colors.transparent,
                   labelColor: Colors.white,
-                  labelStyle: const TextStyle(fontWeight: FontWeight.bold,                       fontFamily: 'Sarabun',),
+                  labelStyle: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Sarabun',
+                  ),
                   unselectedLabelColor: Colors.grey,
                   indicatorSize: TabBarIndicatorSize.tab,
                   indicator: BoxDecoration(

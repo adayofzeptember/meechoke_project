@@ -33,10 +33,8 @@ class _Job_ListsState extends State<Job_Lists> with TickerProviderStateMixin {
     super.initState();
   }
 
-//final jobsState = context.read<JobsBloc>().state;
   void _handleRefresh() {
     _animationController.repeat();
-
     Future.delayed(Duration(milliseconds: 500), () {
       _animationController.stop();
     });

@@ -75,8 +75,9 @@ class Fuel_NotDone extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                         // print(state.fuel_notYet_list[index].id);
+                          print(state.fuel_notYet_list[index].id);
                           context.read<FuelBloc>().add(Load_Fuel_Info(
+                            checkPage: 'notfill',
                             context: context,
                               joNumber:
                                   state.fuel_notYet_list[index].id));
@@ -202,10 +203,10 @@ class Fuel_NotDone extends StatelessWidget {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                SvgPicture.asset(
-                                                  'assets/images/fuel.svg',
-                                                  fit: BoxFit.fill,
-                                                ),
+                                                  SvgPicture.asset(
+                                                    'assets/images/fuel.svg',
+                                                    fit: BoxFit.fill,
+                                                  ),
                                                 SizedBox(
                                                   width: 5,
                                                 ),

@@ -118,7 +118,14 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                               ),
                               Container(
                                 decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 233, 196, 0),
+                                    color: (state.fuelInfo.status == 'ยังไม่เติม')
+                                    
+                                    ? Color.fromARGB(255, 233, 196, 0)
+
+                                    : Colors.green
+                                    
+                                    
+                                    ,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20))),
                                 child: Padding(
@@ -127,10 +134,14 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                   child: SizedBox(
                                     width: 130,
                                     child: Text(
-                                      'ยังไม่ได้เติม',
+                                      state.fuelInfo.status,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                          color: Colors.black,
+                                         color: (state.fuelInfo.status == 'ยังไม่เติม')
+                                    
+                                    ? Colors.black
+
+                                    : Colors.white,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
@@ -429,7 +440,10 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                   SizedBox(
                     height: 20,
                   ),
-                  ElevatedButton(
+                  (state.fuelInfo.status == 'ยังไม่เติม')
+
+                  ?
+                       ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         primary: Palette.thisBlue,
                         elevation: 0,
@@ -460,7 +474,16 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                         ),
                       ),
                     ),
-                  ),
+                  )
+
+
+
+
+
+                  : Container()
+                 
+              
+             
                 ],
               );
             },

@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/HistoryWork/history_work_bloc.dart';
+import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 
 class History_Page extends StatefulWidget {
   @override
@@ -350,11 +351,12 @@ class _History_PageState extends State<History_Page> {
                       ),
                       GestureDetector(
                         onTap: () {
-                        // context.read<JobsBloc>().add(Load_Job_Info(
-                        //       checkPage: 'cuurent_job',
-                        //       context: context,
-                        //       joNumber: state.workhistory_list[index].doc_number
-                        //           .toString()));
+                          
+                          context.read<JobsBloc>().add(Load_Job_Info(
+                                checkPage: 'cuurent_job',
+                                context: context,
+                                joNumber: state.workhistory_list[index].doc_number
+                                    .toString()));
                         },
                         child: Stack(
                           children: <Widget>[

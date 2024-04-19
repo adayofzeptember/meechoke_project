@@ -30,7 +30,8 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
     context.read<ProfileBloc>().add(Load_Profile());
     context.read<JobsBloc>().add(Load_NewJobs());
     context.read<JobsBloc>().add(Load_CurrentJobs());
- 
+    context.read<FuelBloc>().add(Load_FuelNotYet());
+    context.read<FuelBloc>().add(Load_Filled());
     super.initState();
   }
 
@@ -40,7 +41,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
 
     final double h2 = (size.height - kToolbarHeight - 420) / 2;
     final double w2 = size.width / 2;
-    
+
     // final double h1 = (size.height - kToolbarHeight - 370) / 2;
     // final double w1 = size.width / 2;
     final double h = (size.height - kToolbarHeight - 520) / 2;
@@ -111,7 +112,6 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                 children: <Widget>[
                   InkWell(
                     onTap: () {
-                        context.read<FuelBloc>().add(Load_FuelNotYet());
                       Navigator.push(
                         context,
                         PageTransition(
@@ -230,8 +230,8 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                     ),
                   ),
                   InkWell(
-                    onTap: () async{
-                        SharedPreferences prefrences =
+                    onTap: () async {
+                      SharedPreferences prefrences =
                           await SharedPreferences.getInstance();
                       prefrences.clear();
                       Phoenix.rebirth(context);
@@ -275,15 +275,12 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
   }
 
   Future showProfile(var context) async {
-    
-    
     return showDialog(
       context: context,
       barrierDismissible: true, //* user must tap button!
       builder: (context) {
         return BlocBuilder<ProfileBloc, ProfileState>(
           builder: (context, state) {
-   
             if (state.loading == true) {
               return const Center(
                 child: CircularProgressIndicator(color: Colors.red),

@@ -67,12 +67,14 @@ class _Fuel_ListsState extends State<Fuel_Lists>
               ),
               child: Padding(
                 padding: const EdgeInsets.all(2.0),
-                child: TabBar(
+                child: 
+                TabBar(
+                  
                   controller: _tabController,
                   dividerColor: Colors.transparent,
                   indicatorColor: Colors.transparent,
                   labelColor: Colors.white,
-                  labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                  labelStyle: TextStyle(fontWeight: FontWeight.bold,  fontFamily: 'Sarabun'),
                   unselectedLabelColor: Colors.grey,
                   indicatorSize: TabBarIndicatorSize.tab,
                   indicator: BoxDecoration(
@@ -86,6 +88,8 @@ class _Fuel_ListsState extends State<Fuel_Lists>
                   tabs: [
                     Tab(
                       text: 'ยังไม่ได้เติม',
+                      
+                      
                     ),
                     Tab(
                       text: 'เติมแล้ว',
@@ -102,11 +106,8 @@ class _Fuel_ListsState extends State<Fuel_Lists>
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  
                   Fuel_NotDone(),
-
-                  
-                  Fuel_Done(),
+                  Fuel_Filled(),
                 ],
               ),
             ),
@@ -116,4 +117,3 @@ class _Fuel_ListsState extends State<Fuel_Lists>
     );
   }
 }
-

@@ -59,7 +59,7 @@ class StarterWidget extends StatelessWidget {
         BlocProvider(create: (context) => LoginBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => JobsBloc()),
-                BlocProvider(create: (context) => FuelBloc()),
+        BlocProvider(create: (context) => FuelBloc()),
         BlocProvider(create: (context) => HistoryWorkBloc()),
         BlocProvider(create: (context) => ReportAccidentBloc()),
       ],

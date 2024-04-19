@@ -89,6 +89,7 @@ class ReportAccidentBloc
 
       print(state.lat.toString() + " " + state.lng.toString());
 
+
       for (final imageFiles in event.files!) {
         String fileName = imageFiles.path.split('/').last;
 
@@ -192,6 +193,9 @@ class ReportAccidentBloc
         print('error: ' + e.toString());
       }
     });
+
+
+    
 //*-------------------------------------------------------------------------
     on<GetLocationName>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
