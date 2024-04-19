@@ -12,8 +12,8 @@ class FinancialBloc extends Bloc<FinancialEvent, FinancialState> {
   final dio = Dio();
   FinancialBloc() : super(FinancialState(financial_list: [], status1: 0)) {
     //?
-    on<Load_Financial>((event, emit) async{
-                SharedPreferences prefs = await SharedPreferences.getInstance();
+    on<Load_Financial>((event, emit) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
       try {
         emit(state.copyWith(
@@ -26,17 +26,32 @@ class FinancialBloc extends Bloc<FinancialEvent, FinancialState> {
           }),
         );
 
-          var x = response.data['data'];
-         print(x);
-
         var data = [];
+
         if (response.statusCode == 200) {
-         
           for (var elements in response.data['data']) {
+            List<dynamic> dataExpandList = elements['extClearingJob'];
+            List<ExtClearingJob> dataExpand = [];
+            for (var expandedEXT in dataExpandList) {
+              dataExpand.add(ExtClearingJob(
+                documentNumber: await expandedEXT['job']['documentNumber'].toString(),
+                jobTotal:await expandedEXT['jobTotal'].toString(),
+                jobStatus:await expandedEXT['job']['documentStatus'].toString(),
+                allowance_total:await expandedEXT['options']['allowance_total'].toString(),
+                highwayTotal:await expandedEXT['options']['ticket_total'].toString(),
+                advance_total:await expandedEXT['options']['advance_total'].toString(),
+
+                sum: int.parse(expandedEXT['options']['allowance_total'].toString()) + int.parse(expandedEXT['options']['ticket_total'].toString()),
+               
+              ));
+            }
             data.add(Financial_Model(
-              transferMethod: elements['transferMethod'].toString()
-              
-            ));
+                id:await elements['id'].toString(),
+                transferMethod:await elements['transferMethod'].toString(),
+                clearingDate:await elements['clearingDate']['date'].toString(),
+                total:await elements['total'].toString(),
+                driverDebt: await elements['currentDriverDebt'],
+                expanded_list: dataExpand));
           }
 
           emit(state.copyWith(financial_list: data, status1: 1));

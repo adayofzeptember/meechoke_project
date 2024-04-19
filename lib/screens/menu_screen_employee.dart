@@ -277,7 +277,8 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
   }
 
   Future showProfile(var context) async {
-    return showDialog(
+    return 
+    showDialog(
       context: context,
       barrierDismissible: true, //* user must tap button!
       builder: (context) {

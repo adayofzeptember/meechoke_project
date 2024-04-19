@@ -55,16 +55,9 @@ class _Financial_ListState extends State<Financial_List> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(25))),
                           child: Padding(
-                            padding: const EdgeInsets.all(15),
+                            padding: const EdgeInsets.all(10),
                             child: Column(
                               children: [
-                                const Text(
-                                  'รายการประวัติการเงิน',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      color: Color.fromARGB(255, 79, 79, 79),
-                                      fontWeight: FontWeight.bold),
-                                ),
                                 BlocBuilder<FinancialBloc, FinancialState>(
                                   builder: (context, state) {
                                     if (state.status1 == 0) {
@@ -119,56 +112,399 @@ class _Financial_ListState extends State<Financial_List> {
                                       ));
                                     }
                                     return Padding(
-                                      padding: const EdgeInsets.only(top: 20  ),
+                                      padding: const EdgeInsets.only(top: 20),
                                       child: ListView.builder(
                                           primary: true,
-                                          itemCount: state.financial_list.length,
+                                          itemCount:
+                                              state.financial_list.length,
                                           shrinkWrap: true,
-                                          physics: const ClampingScrollPhysics(),
+                                          physics:
+                                              const ClampingScrollPhysics(),
                                           itemBuilder: (context, index) {
-                                            return Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
+                                            return ExpansionTile(
+                                              title: Container(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          state
+                                                              .financial_list[
+                                                                  index]
+                                                              .transferMethod,
+                                                          style: TextStyle(
+                                                              fontSize: 20,
+                                                              color: Palette
+                                                                  .thisBlue,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                        Text(
+                                                          state
+                                                              .financial_list[
+                                                                  index]
+                                                              .total
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 20,
+                                                              color:
+                                                                  Colors.green,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
                                                     Text(
-                                                      state.financial_list[index].transferMethod,
+                                                      state
+                                                          .financial_list[index]
+                                                          .clearingDate
+                                                          .toString(),
                                                       style: TextStyle(
-                                                          fontSize: 20,
-                                                          color:
-                                                              Palette.thisBlue,
+                                                          fontSize: 15,
+                                                          color: Colors.grey,
                                                           fontWeight:
                                                               FontWeight.bold),
                                                     ),
-                                                    Text(
-                                                      '17,890.00',
-                                                      style: TextStyle(
-                                                          fontSize: 20,
-                                                          color: Colors.green,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
+                                                    SizedBox(height: 5),
                                                   ],
                                                 ),
-                                                SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text(
-                                                  '15 ก.พ. 23 10:26 น.',
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      color: Colors.grey,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                SizedBox(height: 5),
-                                                Divider()
+                                              ),
+                                              children: <Widget>[
+                                                ListView.builder(
+                                                    primary: true,
+                                                    itemCount: state
+                                                        .financial_list[index]
+                                                        .expanded_list
+                                                        .length,
+                                                    shrinkWrap: true,
+                                                    physics:
+                                                        const ClampingScrollPhysics(),
+                                                    itemBuilder:
+                                                        (context, index2) {
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                left: 10,
+                                                                right: 10,
+                                                                bottom: 5),
+                                                        child: GestureDetector(
+                                                          onTap: () {
+                                                            showDialog(
+                                                              context: context,
+                                                              barrierDismissible:
+                                                                  true, //* user must tap button!
+                                                              builder:
+                                                                  (context) {
+                                                                return AlertDialog(
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .white,
+                                                                  content:
+                                                                      SingleChildScrollView(
+                                                                    child:
+                                                                        Column(
+                                                                      children: [
+                                                                        Center(
+                                                                            child:
+                                                                                Text(
+                                                                          state
+                                                                              .financial_list[index]
+                                                                              .expanded_list[index2]
+                                                                              .documentNumber,
+                                                                          style: TextStyle(
+                                                                              color: Palette.thisBlue,
+                                                                              fontWeight: FontWeight.bold,
+                                                                              fontSize: 18),
+                                                                        )),
+                                                                        SizedBox(
+                                                                          height:
+                                                                              10,
+                                                                        ),
+                                                                        Container(
+                                                                          decoration: BoxDecoration(
+                                                                              color: const Color.fromARGB(255, 191, 191, 191),
+                                                                              borderRadius: BorderRadius.all(Radius.circular(20))),
+                                                                          child:
+                                                                              Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.all(8),
+                                                                            child:
+                                                                                Row(
+                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                              children: [
+                                                                                Text(
+                                                                                  'เงินที่ได้รับในเที่ยวนี้: ',
+                                                                                  style: const TextStyle(color: Color.fromARGB(255, 49, 48, 48), fontWeight: FontWeight.bold),
+                                                                                ),
+                                                                                Text(
+                                                                                  state.financial_list[index].expanded_list[index2].jobTotal + " บาท",
+                                                                                  style: const TextStyle(color: Palette.thisBlue, fontWeight: FontWeight.bold),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                        Divider(),
+                                                                        const SizedBox(
+                                                                          height:
+                                                                              10,
+                                                                        ),
+                                                                        Center(
+                                                                          child:
+                                                                              Text(
+                                                                            'รายละเอียดยอดเงินรับในเที่ยวนี้',
+                                                                            style:
+                                                                                const TextStyle(color: Palette.thisBlue, fontWeight: FontWeight.bold),
+                                                                          ),
+                                                                        ),
+                                                                        const SizedBox(
+                                                                          height:
+                                                                              15,
+                                                                        ),
+                                                                        Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceBetween,
+                                                                          children: [
+                                                                            Text(
+                                                                              'ค่าเบี้ยเลี้ยง: ',
+                                                                              style: const TextStyle(color: Color.fromARGB(255, 49, 48, 48), fontWeight: FontWeight.bold),
+                                                                            ),
+                                                                            Text(
+                                                                              state.financial_list[index].expanded_list[index2].allowance_total + " บาท",
+                                                                              style: const TextStyle(color: Palette.thisBlue, fontWeight: FontWeight.bold),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        const SizedBox(
+                                                                          height:
+                                                                              15,
+                                                                        ),
+                                                                        Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceBetween,
+                                                                          children: [
+                                                                            Text(
+                                                                              'ค่าทางด่วน: ',
+                                                                              style: const TextStyle(color: Color.fromARGB(255, 49, 48, 48), fontWeight: FontWeight.bold),
+                                                                            ),
+                                                                            Text(
+                                                                              state.financial_list[index].expanded_list[index2].highwayTotal + " บาท",
+                                                                              style: const TextStyle(color: Palette.thisBlue, fontWeight: FontWeight.bold),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        const SizedBox(
+                                                                          height:
+                                                                              15,
+                                                                        ),
+                                                                        Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceBetween,
+                                                                          children: [
+                                                                            Text(
+                                                                              'รวมเงินที่ได้รับ: ',
+                                                                              style: const TextStyle(color: Color.fromARGB(255, 49, 48, 48), fontWeight: FontWeight.bold),
+                                                                            ),
+                                                                            Text(
+                                                                              state.financial_list[index].expanded_list[index2].sum.toString() + " บาท",
+                                                                              style: const TextStyle(color: Palette.theGreen, fontWeight: FontWeight.bold),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        Divider(),
+                                                                        const SizedBox(
+                                                                          height:
+                                                                              10,
+                                                                        ),
+                                                                        Center(
+                                                                          child:
+                                                                              Text(
+                                                                            'รายการที่หักในเที่ยววิ่งนี้',
+                                                                            style:
+                                                                                const TextStyle(color: Palette.thisBlue, fontWeight: FontWeight.bold),
+                                                                          ),
+                                                                        ),
+                                                                        const SizedBox(
+                                                                          height:
+                                                                              15,
+                                                                        ),
+                                                                        Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceBetween,
+                                                                          children: [
+                                                                            Text(
+                                                                              'เงินทดรอง: ',
+                                                                              style: const TextStyle(color: Color.fromARGB(255, 49, 48, 48), fontWeight: FontWeight.bold),
+                                                                            ),
+                                                                            Text(
+                                                                              state.financial_list[index].expanded_list[index2].advance_total + " บาท",
+                                                                              style: const TextStyle(color: Palette.thisBlue, fontWeight: FontWeight.bold),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        const SizedBox(
+                                                                          height:
+                                                                              15,
+                                                                        ),
+                                                                        Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceBetween,
+                                                                          children: [
+                                                                            Text(
+                                                                              'หนี้ค้างเดิม: ',
+                                                                              style: const TextStyle(color: Color.fromARGB(255, 49, 48, 48), fontWeight: FontWeight.bold),
+                                                                            ),
+                                                                            Text(
+                                                                              state.financial_list[index].driverDebt + " บาท",
+                                                                              style: const TextStyle(color: Palette.thisBlue, fontWeight: FontWeight.bold),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        const SizedBox(
+                                                                          height:
+                                                                              15,
+                                                                        ),
+                                                                        Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceBetween,
+                                                                          children: [
+                                                                            Text(
+                                                                              'รวมเงินที่หัก: ',
+                                                                              style: const TextStyle(color: Color.fromARGB(255, 49, 48, 48), fontWeight: FontWeight.bold),
+                                                                            ),
+                                                                            Text(
+                                                                              (double.parse(state.financial_list[index].expanded_list[index2].advance_total) + double.parse(state.financial_list[index].driverDebt)).toString(),
+                                                                              style: const TextStyle(color: Palette.someRed, fontWeight: FontWeight.bold),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  actions: <Widget>[
+                                                                    Center(
+                                                                      child:
+                                                                          ElevatedButton(
+                                                                        style: ElevatedButton.styleFrom(
+                                                                            primary: const Color.fromARGB(255, 234, 240, 255),
+                                                                            elevation: 0,
+                                                                            side: const BorderSide(color: Palette.thisBlue),
+                                                                            shape: RoundedRectangleBorder(
+                                                                              borderRadius: BorderRadius.circular(10),
+                                                                            )),
+                                                                        onPressed:
+                                                                            () async {},
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: const EdgeInsets
+                                                                              .all(
+                                                                              10.0),
+                                                                          child:
+                                                                              Container(
+                                                                            width:
+                                                                                double.infinity,
+                                                                            alignment:
+                                                                                Alignment.center,
+                                                                            child:
+                                                                                Text(
+                                                                              "ปิด",
+                                                                              style: TextStyle(fontWeight: FontWeight.bold, color: Palette.thisBlue, fontSize: 15),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                );
+                                                              },
+                                                            );
+                                                          },
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(),
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(5),
+                                                              child: Row(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center, // Align children vertically centered
+
+                                                                children: [
+                                                                  Expanded(
+                                                                    child: Text(
+                                                                      state
+                                                                          .financial_list[
+                                                                              index]
+                                                                          .expanded_list[
+                                                                              index2]
+                                                                          .documentNumber,
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              15,
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          color:
+                                                                              Colors.black),
+                                                                    ),
+                                                                  ),
+                                                                  Expanded(
+                                                                    child: Text(
+                                                                      state
+                                                                          .financial_list[
+                                                                              index]
+                                                                          .expanded_list[
+                                                                              index2]
+                                                                          .jobTotal,
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              15,
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          color:
+                                                                              Palette.thisBlue),
+                                                                    ),
+                                                                  ),
+                                                                  Expanded(
+                                                                    child: Text(
+                                                                      state
+                                                                          .financial_list[
+                                                                              index]
+                                                                          .expanded_list[
+                                                                              index2]
+                                                                          .jobStatus,
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontSize:
+                                                                            15,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    })
                                               ],
                                             );
+
+                                            // );
                                           }),
                                     );
                                   },
