@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/bloc/Financial/financial_bloc.dart';
 import 'package:meechoke_project/bloc/Fuel/fuel_bloc.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
@@ -10,10 +11,10 @@ import 'package:meechoke_project/bloc/login/login_bloc.dart';
 import 'package:meechoke_project/screens/Checking/check_daily.dart';
 import 'package:meechoke_project/screens/Fuel/Main%20List/main_list.dart';
 import 'package:meechoke_project/screens/Jobs/1.%20Main%20Pages%20List/tab_main.dart';
+import 'package:meechoke_project/screens/financial/financials_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/ReportAccident/report_accident_bloc.dart';
-import 'Financial/financial.dart';
 import 'Report and Docs/tab_mainScreen.dart';
 import 'history/history_screen.dart';
 
@@ -32,6 +33,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
     context.read<JobsBloc>().add(Load_CurrentJobs());
     context.read<FuelBloc>().add(Load_FuelNotYet());
     context.read<FuelBloc>().add(Load_Filled());
+    context.read<FinancialBloc>().add(Load_Financial());
     super.initState();
   }
 
