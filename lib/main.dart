@@ -73,7 +73,9 @@ class StarterWidget extends StatelessWidget {
             const Breakpoint(start: 451, end: 800, name: TABLET),
             const Breakpoint(start: 801, end: 1920, name: DESKTOP),
           ],
+          
         ),
+        
         initialRoute: "/",
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Palette.thisBlue),
@@ -81,6 +83,7 @@ class StarterWidget extends StatelessWidget {
           fontFamily: 'Sarabun',
         ),
         home: const StartPage(),
+        
       ),
     );
   }

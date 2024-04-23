@@ -74,6 +74,7 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
         ));
         print(e);
       }
+     
     });
     on<Load_Filled>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -130,8 +131,8 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
       Navigator.push(
           event.context,
           PageTransition(
-              duration: const Duration(milliseconds: 500),
-              type: PageTransitionType.fade,
+              duration: const Duration(milliseconds: 300),
+              type: PageTransitionType.rightToLeft,
               child: Fuel_Detail()));
 
       SharedPreferences prefs = await SharedPreferences.getInstance();

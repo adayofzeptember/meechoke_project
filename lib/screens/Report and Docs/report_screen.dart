@@ -69,7 +69,7 @@ class _Report_ScreenState extends State<Report_Screen> {
               Stack(
                 children: [
                   Padding(  
-                    padding: const EdgeInsets.fromLTRB(5, 0, 5, 15),
+                    padding: const EdgeInsets.fromLTRB( 0, 0, 5, 15),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -77,27 +77,54 @@ class _Report_ScreenState extends State<Report_Screen> {
                         const SizedBox(
                           height: 15,
                         ),
-                        Row(
-                          children: [
-                            Icon(Icons.location_on, color: Palette.someRed,),
-                            Text(
-                              'ตำแหน่งปัจจุบัน',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Palette.thisBlue,
-                                  fontWeight: FontWeight.bold),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Palette.thisBlue,
+                            // border: Border.all(),
+                            borderRadius: BorderRadius.all(Radius.circular(10))
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
+                               mainAxisAlignment: MainAxisAlignment.center,
+                               crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Row(
+                               crossAxisAlignment: CrossAxisAlignment.center,
+                            
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.location_on, color: Palette.someRed,),
+                                    // Text(
+                                    //   'ตำแหน่งปัจจุบัน',
+                                    //   style: TextStyle(
+                                    //       fontSize: 18,
+                                    //       color: Colors.white,
+                                    //       fontWeight: FontWeight.bold),
+                                    // ),
+                                  ],
+                                ),
+                                SizedBox(height: 5,),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: Text(
+                                    state.locationName,
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                        Text(
-                          state.locationName,
-                          style: TextStyle(
-                              fontSize: 15,
-                              color: Color.fromARGB(255, 110, 110, 109),
-                              fontWeight: FontWeight.bold),
+                          ),
                         ),
                         const SizedBox(
                           height: 20,
+                        ),
+                        Text('รายละเอียดการแจ้ง'),
+                         const SizedBox(
+                          height: 5,
                         ),
                         Container(
                           decoration: const BoxDecoration(

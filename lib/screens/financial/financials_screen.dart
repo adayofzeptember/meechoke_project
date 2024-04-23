@@ -15,6 +15,7 @@ class _Financial_ListState extends State<Financial_List> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          elevation: 0.0,
           backgroundColor: Palette.thisBlue,
           automaticallyImplyLeading: false,
           centerTitle: true,
@@ -33,7 +34,7 @@ class _Financial_ListState extends State<Financial_List> {
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
           ),
         ),
-        backgroundColor: Palette.mainBackgroud,
+        backgroundColor: const Color.fromARGB(255, 1, 44, 97),
         body: SingleChildScrollView(
           child: Column(children: [
             Stack(
@@ -70,6 +71,22 @@ class _Financial_ListState extends State<Financial_List> {
                                           CircularProgressIndicator(),
                                         ],
                                       ));
+                                    } else if (state.status1 == 1 && state.financial_list.isEmpty) {
+                                      return Center(
+                                          child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 30,
+                                          ),
+                                          Text(
+                                            'ยังไม่มีรายการการเงิน',
+                                            style: TextStyle(
+                                                color: Palette.thisBlue,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20),
+                                          )
+                                        ],
+                                      ));
                                     } else if (state.status1 == 2) {
                                       return GestureDetector(
                                         onTap: () {
@@ -93,24 +110,7 @@ class _Financial_ListState extends State<Financial_List> {
                                           ],
                                         )),
                                       );
-                                    } else if (state.status1 == 1 &&
-                                        state.financial_list.isEmpty) {
-                                      return Center(
-                                          child: Column(
-                                        children: [
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                            'ยังไม่มีรายการเงิน',
-                                            style: TextStyle(
-                                                color: Palette.thisBlue,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 20),
-                                          )
-                                        ],
-                                      ));
-                                    }
+                                    } 
                                     return Padding(
                                       padding: const EdgeInsets.only(top: 20),
                                       child: ListView.builder(
@@ -404,7 +404,10 @@ class _Financial_ListState extends State<Financial_List> {
                                                                               borderRadius: BorderRadius.circular(10),
                                                                             )),
                                                                         onPressed:
-                                                                            () async {},
+                                                                            () {
+                                                                          Navigator.pop(
+                                                                              context);
+                                                                        },
                                                                         child:
                                                                             Padding(
                                                                           padding: const EdgeInsets

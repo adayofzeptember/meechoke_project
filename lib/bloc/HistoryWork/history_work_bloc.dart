@@ -75,10 +75,10 @@ class HistoryWorkBloc extends Bloc<HistoryWorkEvent, HistoryWorkState> {
           for (var elements in response.data['driverFinanceSummary']) {
             data.add(
               HistoryWork_Model(
-                  customer: await elements['customer'] ?? '',
-                  date_range: await elements['dateRange'] ?? '',
-                  allowance: await elements['allowance'] ?? '0.00',
-                  doc_number: await elements['documentNumber'] ?? ''),
+                  customer: await elements['customer'].toString(),
+                  date_range: await elements['dateRange'].toString(),
+                  allowance: await elements['allowance'].toString(),
+                  doc_number: await elements['documentNumber'].toString()),
                   
             );
           }

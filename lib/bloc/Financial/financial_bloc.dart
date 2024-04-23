@@ -4,7 +4,6 @@ import 'package:equatable/equatable.dart';
 import 'package:meechoke_project/ETC/api_url.dart';
 import 'package:meechoke_project/bloc/Financial/model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 part 'financial_event.dart';
 part 'financial_state.dart';
 
@@ -16,9 +15,8 @@ class FinancialBloc extends Bloc<FinancialEvent, FinancialState> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
       try {
-        emit(state.copyWith(
-          status1: 0,
-        ));
+    
+
         final response = await dio.get(
           api_url_v1 + "transaction-history",
           options: Options(headers: {
@@ -29,27 +27,37 @@ class FinancialBloc extends Bloc<FinancialEvent, FinancialState> {
         var data = [];
 
         if (response.statusCode == 200) {
+          // print('object');
+          // emit(state.copyWith(status1: 1));
+
+
           for (var elements in response.data['data']) {
             List<dynamic> dataExpandList = elements['extClearingJob'];
             List<ExtClearingJob> dataExpand = [];
             for (var expandedEXT in dataExpandList) {
               dataExpand.add(ExtClearingJob(
-                documentNumber: await expandedEXT['job']['documentNumber'].toString(),
-                jobTotal:await expandedEXT['jobTotal'].toString(),
-                jobStatus:await expandedEXT['job']['documentStatus'].toString(),
-                allowance_total:await expandedEXT['options']['allowance_total'].toString(),
-                highwayTotal:await expandedEXT['options']['ticket_total'].toString(),
-                advance_total:await expandedEXT['options']['advance_total'].toString(),
-
-                sum: int.parse(expandedEXT['options']['allowance_total'].toString()) + int.parse(expandedEXT['options']['ticket_total'].toString()),
-               
+                documentNumber:
+                    await expandedEXT['job']['documentNumber'].toString(),
+                jobTotal: await expandedEXT['jobTotal'].toString(),
+                jobStatus:
+                    await expandedEXT['job']['documentStatus'].toString(),
+                allowance_total:
+                    await expandedEXT['options']['allowance_total'].toString(),
+                highwayTotal:
+                    await expandedEXT['options']['ticket_total'].toString(),
+                advance_total:
+                    await expandedEXT['options']['advance_total'].toString(),
+                sum: int.parse(
+                        expandedEXT['options']['allowance_total'].toString()) +
+                    int.parse(
+                        expandedEXT['options']['ticket_total'].toString()),
               ));
             }
             data.add(Financial_Model(
-                id:await elements['id'].toString(),
-                transferMethod:await elements['transferMethod'].toString(),
-                clearingDate:await elements['clearingDate']['date'].toString(),
-                total:await elements['total'].toString(),
+                id: await elements['id'].toString(),
+                transferMethod: await elements['transferMethod'].toString(),
+                clearingDate: await elements['clearingDate']['date'].toString(),
+                total: await elements['total'].toString(),
                 driverDebt: await elements['currentDriverDebt'],
                 expanded_list: dataExpand));
           }
@@ -67,6 +75,8 @@ class FinancialBloc extends Bloc<FinancialEvent, FinancialState> {
         ));
         print(e);
       }
+
+      print('allllllll------' + state.status1.toString());
     });
   }
 }

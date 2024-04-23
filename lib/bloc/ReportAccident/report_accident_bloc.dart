@@ -198,6 +198,7 @@ class ReportAccidentBloc
     
 //*-------------------------------------------------------------------------
     on<GetLocationName>((event, emit) async {
+      print('LOCATEWIng');
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
 

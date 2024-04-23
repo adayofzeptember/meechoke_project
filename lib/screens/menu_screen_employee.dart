@@ -11,12 +11,12 @@ import 'package:meechoke_project/bloc/login/login_bloc.dart';
 import 'package:meechoke_project/screens/Checking/check_daily.dart';
 import 'package:meechoke_project/screens/Fuel/Main%20List/main_list.dart';
 import 'package:meechoke_project/screens/Jobs/1.%20Main%20Pages%20List/tab_main.dart';
-import 'package:meechoke_project/screens/financial/financials_screen.dart';
+import 'package:meechoke_project/screens/Financial/financials_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/ReportAccident/report_accident_bloc.dart';
 import 'Report and Docs/tab_mainScreen.dart';
-import 'history/history_screen.dart';
+import 'Work History/history_screen.dart';
 
 class MainMenu_Employee extends StatefulWidget {
   const MainMenu_Employee({super.key});
@@ -33,7 +33,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
     context.read<JobsBloc>().add(Load_CurrentJobs());
     context.read<FuelBloc>().add(Load_FuelNotYet());
     context.read<FuelBloc>().add(Load_Filled());
-    context.read<FinancialBloc>().add(Load_Financial());
+    //context.read<FinancialBloc>().add(Load_Financial());
     super.initState();
   }
 
@@ -59,12 +59,14 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
             onPressed: () {
               showProfile(context);
             },
-            icon: const CircleAvatar(
+            icon:   
+            CircleAvatar(
               backgroundColor: Palette.thisBlue,
-              child: Icon(
-                Icons.person,
-                color: Colors.white,
-              ),
+              child: Image.asset('assets/images/oct.png', color: Colors.white, height: 30,)
+              // Icon(
+              //   Icons.person,
+              //   color: Colors.white,
+              // ),
             ),
           ),
         ],
@@ -183,6 +185,8 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                   ),
                   InkWell(
                     onTap: () {
+    context.read<FinancialBloc>().add(Load_Financial());
+
                       Navigator.push(
                         context,
                         PageTransition(
@@ -351,7 +355,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                               width: 10,
                             ),
                             Container(
-                              width: 180,
+                  width: MediaQuery.of(context).size.width * 0.35,
                               decoration: const BoxDecoration(
                                   color: Color.fromARGB(255, 255, 234, 127),
                                   borderRadius:
@@ -403,7 +407,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                               width: 10,
                             ),
                             Container(
-                              width: 180,
+                              width: MediaQuery.of(context).size.width * 0.35,
                               decoration: const BoxDecoration(
                                   color: Color.fromARGB(255, 255, 234, 127),
                                   borderRadius:

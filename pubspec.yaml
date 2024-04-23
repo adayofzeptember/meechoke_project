@@ -32,6 +32,7 @@ dependencies:
   dropdown_button2: ^2.0.0
 
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -40,8 +41,8 @@ dev_dependencies:
 
 flutter_launcher_icons:
   android: "launcher_icon"
-  ios: true
-  image_path: "assets/images/person.png"
+  ios: trueoct
+  image_path: "assets/images/oct.png"
 
 flutter:
   uses-material-design: true

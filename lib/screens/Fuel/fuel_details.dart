@@ -30,7 +30,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
           ),
         ),
         title: const Text(
-          'เติมเชื้อเพลิง',
+          ' ',
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
         ),
@@ -258,10 +258,16 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                       SizedBox(
                                         width: 30,
                                       ),
-                                      Text(
-                                        state.fuelInfo.fuelType,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                      SizedBox(
+                                        width: MediaQuery.of(context).size.width * 0.23,
+                                        child: Text(
+                                          state.fuelInfo.fuelType,
+                                         
+                                          
+                                          
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       )
                                     ],
                                   ),
@@ -332,7 +338,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                         width: 30,
                                       ),
                                       SizedBox(
-                                        width: 100,
+                                        width:80,
                                         child: Text(
                                           state.fuelInfo.cardNumber,
                                           style: TextStyle(
@@ -376,8 +382,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                       ),
                                       SizedBox(
                                         width:
-                                            MediaQuery.of(context).size.width *
-                                                0.25,
+                                            80,
                                         child: Text(
                                           'นครราชสีมา',
                                           overflow: TextOverflow.clip,
@@ -402,11 +407,10 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                       ),
                                       SizedBox(
                                         width:
-                                            MediaQuery.of(context).size.width *
-                                                0.25,
+                                            80,
                                         child: Text(
                                           'นครราชสีมา',
-                                          overflow: TextOverflow.clip,
+                                          overflow: TextOverflow.fade,
                                           maxLines: 3,
                                           style: TextStyle(
                                               color: Colors.black,
