@@ -212,15 +212,15 @@ class Login_Screen extends StatelessWidget {
                                         )),
                                     onPressed: () {
                                       // print(usernameController.text +
-                                      //     passwordController.text);
+                                      //     passwordController.text); usernameController.text passwordController.text
                                       context.read<LoginBloc>().add(
                                           Login_Casual(
                                               context: context,
                                               //getUsername: 'ukeidkhwamsukh',
                                               getUsername:
-                                                  usernameController.text,
+                                                  'driver1',
                                               getPassword:
-                                                  passwordController.text));
+                                                  'password'));
                                       //NotificationService().scheduleNotifications();
                                     },
                                     child: Padding(
@@ -253,3 +253,6 @@ class Login_Screen extends StatelessWidget {
     );
   }
 }
+
+//*clersr 
+

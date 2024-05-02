@@ -8,6 +8,7 @@ import 'package:meechoke_project/bloc/Fuel/fuel_bloc.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
+import 'package:meechoke_project/screens/Checking/Main%20List/main_list.dart';
 import 'package:meechoke_project/screens/Checking/check_daily.dart';
 import 'package:meechoke_project/screens/Fuel/Main%20List/main_list.dart';
 import 'package:meechoke_project/screens/Jobs/1.%20Main%20Pages%20List/tab_main.dart';
@@ -59,15 +60,18 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
             onPressed: () {
               showProfile(context);
             },
-            icon:   
-            CircleAvatar(
-              backgroundColor: Palette.thisBlue,
-              child: Image.asset('assets/images/oct.png', color: Colors.white, height: 30,)
-              // Icon(
-              //   Icons.person,
-              //   color: Colors.white,
-              // ),
-            ),
+            icon: CircleAvatar(
+                backgroundColor: Palette.thisBlue,
+                child: Image.asset(
+                  'assets/images/oct.png',
+                  color: Colors.white,
+                  height: 30,
+                )
+                // Icon(
+                //   Icons.person,
+                //   color: Colors.white,
+                // ),
+                ),
           ),
         ],
         title: const Text(
@@ -133,13 +137,18 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {
+                    onTap: () async{
+                      //           ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+                      //   content: Text("ฟังก์ชันยังไม่พร้อมใช้งาน"),
+                      // ));
+               
                       Navigator.push(
+                 
                         context,
                         PageTransition(
                             duration: const Duration(milliseconds: 500),
                             type: PageTransitionType.fade,
-                            child: Check_Daily()),
+                            child: Check_Lists()),
                       );
                     },
                     child: Container(
@@ -185,7 +194,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                   ),
                   InkWell(
                     onTap: () {
-    context.read<FinancialBloc>().add(Load_Financial());
+                      context.read<FinancialBloc>().add(Load_Financial());
 
                       Navigator.push(
                         context,
@@ -237,10 +246,17 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                   ),
                   InkWell(
                     onTap: () async {
-                      SharedPreferences prefrences =
+                                SharedPreferences prefrences =
                           await SharedPreferences.getInstance();
                       prefrences.clear();
                       Phoenix.rebirth(context);
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("ฟังก์ชันยังไม่พร้อมใช้งาน"),
+                      ));
+                      // SharedPreferences prefrences =
+                      //     await SharedPreferences.getInstance();
+                      // prefrences.clear();
+                      // Phoenix.rebirth(context);
                       //            Navigator.push(
                       //   context,
                       //   PageTransition(
@@ -281,8 +297,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
   }
 
   Future showProfile(var context) async {
-    return 
-    showDialog(
+    return showDialog(
       context: context,
       barrierDismissible: true, //* user must tap button!
       builder: (context) {
@@ -355,7 +370,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                               width: 10,
                             ),
                             Container(
-                  width: MediaQuery.of(context).size.width * 0.35,
+                              width: MediaQuery.of(context).size.width * 0.35,
                               decoration: const BoxDecoration(
                                   color: Color.fromARGB(255, 255, 234, 127),
                                   borderRadius:
