@@ -148,7 +148,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                         PageTransition(
                             duration: const Duration(milliseconds: 500),
                             type: PageTransitionType.fade,
-                            child: Check_Lists()),
+                            child: Check_Daily()),
                       );
                     },
                     child: Container(
