@@ -49,7 +49,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         } else {
           emit(state.copyWith(loading: false));
           Fluttertoast.showToast(
-              msg: "ไม่พอข้อมูล",
+              msg: "ไม่พอข้อมูล, ตรวจสอบชื่อผู้ใช้หรือรหัสผ่านอีกครั้ง",
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.SNACKBAR,
               timeInSecForIosWeb: 2,
@@ -60,7 +60,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       } catch (e) {
         emit(state.copyWith(loading: false));
         Fluttertoast.showToast(
-            msg: "เกิดข้อผิดพลาด \n ${e.toString()}",
+            msg: "ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้, โปรดลองใหม่อีกครั้ง",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.SNACKBAR,
             timeInSecForIosWeb: 2,

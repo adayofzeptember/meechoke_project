@@ -75,8 +75,7 @@ class FinancialBloc extends Bloc<FinancialEvent, FinancialState> {
         ));
         print(e);
       }
-
-      print('allllllll------' + state.status1.toString());
+ 
     });
   }
 }

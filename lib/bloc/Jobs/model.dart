@@ -34,7 +34,6 @@ class Job_Detail {
   List<Checkin_Location>? checkInLocation_Info;
   //*
   Current_Location? currentLocation;
-
   Job_Detail(
       {this.currentLocation,
       //*

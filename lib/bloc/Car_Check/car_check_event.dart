@@ -6,3 +6,7 @@ sealed class CarCheckEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class Load_CheckList extends CarCheckEvent {}
+
+class Load_CheckList2 extends CarCheckEvent {}
