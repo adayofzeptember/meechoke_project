@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/Main%20List/waitList.dart';
-import 'package:meechoke_project/screens/Fuel/Main%20List/fuel_done.dart';
-import 'package:meechoke_project/screens/Fuel/Main%20List/fuel_not.dart';
 
 class Check_Lists extends StatefulWidget {
   @override

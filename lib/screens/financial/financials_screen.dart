@@ -90,9 +90,7 @@ class _Financial_ListState extends State<Financial_List> {
                                     } else if (state.status1 == 2) {
                                       return GestureDetector(
                                         onTap: () {
-                                          // context
-                                          //     .read<JobsBloc>()
-                                          //     .add(Load_NewJobs());
+                             
                                         },
                                         child: Center(
                                             child: Column(
@@ -113,7 +111,8 @@ class _Financial_ListState extends State<Financial_List> {
                                     } 
                                     return Padding(
                                       padding: const EdgeInsets.only(top: 20),
-                                      child: ListView.builder(
+                                      child: 
+                                      ListView.builder(
                                           primary: true,
                                           itemCount:
                                               state.financial_list.length,

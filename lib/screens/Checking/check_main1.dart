@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/screens/Checking/check_does2.dart';
+import 'package:meechoke_project/screens/Checking/testCheck.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Check_Daily extends StatefulWidget {
@@ -196,12 +197,22 @@ class _Check_DailyState extends State<Check_Daily> {
                     InkWell(
                       onTap: () {
 
+
+                      //    Navigator.push(
+                      //   context,
+                      //   PageTransition(
+                      //       duration: const Duration(milliseconds: 300),
+                      //       type: PageTransitionType.rightToLeft,
+                      //       child: Check_Does()),
+                      // );
+                     
+
                       Navigator.push(
                         context,
                         PageTransition(
                             duration: const Duration(milliseconds: 300),
                             type: PageTransitionType.rightToLeft,
-                            child: Check_Does()),
+                            child: Test_Check()),
                       );
                      
                        

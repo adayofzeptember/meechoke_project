@@ -24,6 +24,9 @@ class FinancialBloc extends Bloc<FinancialEvent, FinancialState> {
           }),
         );
 
+        // var x = response.data['data'];
+        // print('x------'+x.toString());
+
         var data = [];
 
         if (response.statusCode == 200) {
@@ -42,15 +45,17 @@ class FinancialBloc extends Bloc<FinancialEvent, FinancialState> {
                 jobStatus:
                     await expandedEXT['job']['documentStatus'].toString(),
                 allowance_total:
-                    await expandedEXT['options']['allowance_total'].toString(),
+                    await expandedEXT['options']['allowanceTotal'].toString(),
                 highwayTotal:
-                    await expandedEXT['options']['ticket_total'].toString(),
+                    await expandedEXT['options']['ticketTotal'].toString(),
                 advance_total:
-                    await expandedEXT['options']['advance_total'].toString(),
+                    await expandedEXT['options']['advanceTotal'].toString(),
+
+                  
                 sum: int.parse(
-                        expandedEXT['options']['allowance_total'].toString()) +
+                        expandedEXT['options']['allowanceTotal'].toString()) +
                     int.parse(
-                        expandedEXT['options']['ticket_total'].toString()),
+                        expandedEXT['options']['ticketTotal'].toString()),
               ));
             }
             data.add(Financial_Model(

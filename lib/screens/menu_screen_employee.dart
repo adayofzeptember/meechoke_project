@@ -34,7 +34,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
     context.read<JobsBloc>().add(Load_CurrentJobs());
     context.read<FuelBloc>().add(Load_FuelNotYet());
     context.read<FuelBloc>().add(Load_Filled());
-    context.read<CarCheckBloc>().add(Load_CheckList());
+
     super.initState();
   }
 
@@ -141,6 +141,8 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                       //           ScaffoldMessenger.of(context).showSnackBar( SnackBar(
                       //   content: Text("ฟังก์ชันยังไม่พร้อมใช้งาน"),
                       // ));
+
+                          context.read<CarCheckBloc>().add(Load_CheckList());
 
                       Navigator.push(
                         context,

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -119,7 +120,8 @@ class _Check_DoesState extends State<Check_Does> {
                                   width: 3,
                                 ),
                                 Expanded(
-                                  child: ElevatedButton(
+                                  child: 
+                                  ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                         primary: Palette.thisBlue,
                                         elevation: 0,
@@ -220,6 +222,7 @@ class _Check_DoesState extends State<Check_Does> {
                               ),
                             ),
                           ),
+          
                           Padding(
                             padding: const EdgeInsets.fromLTRB(10, 10, 0, 10),
                             child: Row(
@@ -296,7 +299,8 @@ class _Check_DoesState extends State<Check_Does> {
                     SizedBox(
                       height: 60,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
+                        style: 
+                        ElevatedButton.styleFrom(
                             primary: Colors.green,
                             elevation: 0,
                             // side: BorderSide(color: Colors.white),
@@ -328,6 +332,23 @@ class _Check_DoesState extends State<Check_Does> {
                         ),
                       ),
                     ),
+       CupertinoSegmentedControl<int>(
+      children: {
+        0: Text('Option 1'),
+        1: Text('Option 2'),
+      },
+      groupValue: 1,
+      selectedColor: Colors.blue, // Customize the selected button color
+      unselectedColor: Colors.grey, // Customize the unselected button color
+      pressedColor: Colors.blue[200], // Customize the color when pressed
+      borderColor: Colors.blue, // Customize the border color
+        // Customize the border radius
+      onValueChanged: (value) {
+        setState(() {
+         
+        });
+      },
+    )
                   ],
                 ),
               )
