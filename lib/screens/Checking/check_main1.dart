@@ -1,10 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
-import 'package:meechoke_project/screens/Checking/check_does2.dart';
+import 'package:meechoke_project/bloc/Car_Check/car_check_bloc.dart';
 import 'package:meechoke_project/screens/Checking/testCheck.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -196,26 +197,23 @@ class _Check_DailyState extends State<Check_Daily> {
                     ),
                     InkWell(
                       onTap: () {
+                        //    Navigator.push(
+                        //   context,
+                        //   PageTransition(
+                        //       duration: const Duration(milliseconds: 300),
+                        //       type: PageTransitionType.rightToLeft,
+                        //       child: Check_Does()),
+                        // );
 
+                        context.read<CarCheckBloc>().add(Load_CheckList());
 
-                      //    Navigator.push(
-                      //   context,
-                      //   PageTransition(
-                      //       duration: const Duration(milliseconds: 300),
-                      //       type: PageTransitionType.rightToLeft,
-                      //       child: Check_Does()),
-                      // );
-                     
-
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                            duration: const Duration(milliseconds: 300),
-                            type: PageTransitionType.rightToLeft,
-                            child: Test_Check()),
-                      );
-                     
-                       
+                        Navigator.push(
+                          context,
+                          PageTransition(
+                              duration: const Duration(milliseconds: 300),
+                              type: PageTransitionType.rightToLeft,
+                              child: Test_Check()),
+                        );
                       },
                       child: Container(
                         width: double.infinity,

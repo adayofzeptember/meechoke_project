@@ -29,3 +29,8 @@ class TestList extends CarCheckEvent {
   TestList({required this.getString});
 }
 
+
+class StoreCheck1 extends CarCheckEvent {
+  List<CheckupResult_Item>? getCheck1;
+  StoreCheck1({required this.getCheck1});
+}

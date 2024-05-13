@@ -108,7 +108,6 @@ class ReportAccidentBloc
         // await MultipartFile.fromFile(event.files![1].path
         // )
       });
-
       try {
         emit(state.copyWith(isLoading: true));
         final response = await dio.post(api_url + "uploads",
@@ -124,7 +123,6 @@ class ReportAccidentBloc
               responseType: ResponseType.json,
             ),
             data: formData);
-
         if (response.statusCode == 200) {
           emit(state.copyWith(isLoading: false));
 

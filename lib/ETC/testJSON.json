@@ -6,74 +6,15 @@
         {
             "sysVehicleChecklistId": 1,
             "list": "ปั๊มน้ำมัน",
-            "result": "ปกติ",
-            "order": 1,
-            "filenames": {
-                "checkupImage1": [
-                    {
-                        "id": 1,
-                        "collection": "checkupImage1",
-                        "hash_name": "227775a7a27bc5ec9ba017960e2186b3.webp",
-                        "original_name": "images.webp",
-                        "type": "image/jpeg",
-                        "ext": {
-                            "original": "jpg",
-                            "storage": "webp"
-                        },
-                        "size": {
-                            "original": {
-                                "byte": 3344,
-                                "kb": 3.27,
-                                "mb": 0
-                            },
-                            "storage": {
-                                "byte": 2920,
-                                "kb": 2.85,
-                                "mb": 0
-                            }
-                        },
-                        "path": "public/tmp/images/227775a7a27bc5ec9ba017960e2186b3.webp",
-                        "url": "https://meechoke.test/storage/tmp/images/227775a7a27bc5ec9ba017960e2186b3.webp"
-                    }
-                ]
-            }
+            "result": "ปกติ"
         },
         {
             "sysVehicleChecklistId": 1,
             "list": "ปั๊มน้ำมัน",
-            "result": "ปกติ",
-            "order": 2,
-            "filenames": {
-                "checkupImage2": [
-                    {
-                        "id": 1,
-                        "collection": "checkupImage2",
-                        "hash_name": "227775a7a27bc5ec9ba017960e2186b3.webp",
-                        "original_name": "images.webp",
-                        "type": "image/jpeg",
-                        "ext": {
-                            "original": "jpg",
-                            "storage": "webp"
-                        },
-                        "size": {
-                            "original": {
-                                "byte": 3344,
-                                "kb": 3.27,
-                                "mb": 0
-                            },
-                            "storage": {
-                                "byte": 2920,
-                                "kb": 2.85,
-                                "mb": 0
-                            }
-                        },
-                        "path": "public/tmp/images/227775a7a27bc5ec9ba017960e2186b3.webp",
-                        "url": "https://meechoke.test/storage/tmp/images/227775a7a27bc5ec9ba017960e2186b3.webp"
-                    }
-                ]
-            }
+            "result": "ปกติ"
         }
     ],
+
     "equipmentResult": [
         {
             "sysVehicleEquipmentId": 1,
@@ -219,3 +160,7 @@
         }
     ]
 }
+
+
+
+

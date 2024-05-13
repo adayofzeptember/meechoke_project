@@ -142,7 +142,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                       //   content: Text("ฟังก์ชันยังไม่พร้อมใช้งาน"),
                       // ));
 
-                          context.read<CarCheckBloc>().add(Load_CheckList());
+                        
 
                       Navigator.push(
                         context,

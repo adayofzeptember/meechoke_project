@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/Car_Check/car_check_bloc.dart';
+import 'package:meechoke_project/screens/Checking/CheckMethod/CheckupResult_Method.dart';
 
 class Test_Check extends StatefulWidget {
   @override
@@ -21,6 +22,8 @@ class _Test_CheckState extends State<Test_Check> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
+   
+            // context.read<CarCheckBloc>().add(Count_PlusIndex(method: "reset"));
             Navigator.pop(context);
           },
           icon: const Icon(
@@ -154,81 +157,70 @@ class _Test_CheckState extends State<Test_Check> {
                                   ),
                                 ),
                               ],
-                            )
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  primary: Palette.theGreen,
+                                  elevation: 0,
+                                  // side: BorderSide(color: Colors.white),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  )),
+                              onPressed: () {
+                                if (state.toCheckChecklist1 == 1) {
+                                  context.read<CarCheckBloc>().add(StoreCheck1(
+                                      getCheck1: CheckupResult_Item.checklist));
+                                  // print('สรุป' +
+                                  //     ChecklistItem.checklist.length
+                                  //         .toString());
+                                  // print('-----------------------');
+                                  // for (var item in ChecklistItem.checklist) {
+                                  //   print(item.result); // Print each item
+                                  // }
+                                } else {
+                                  CheckupResult_Item.addItem(
+                                      sysVehicleChecklistId: int.parse(state
+                                          .checkList1[state.countIndexCheck].id
+                                          .toString()),
+                                      list: state
+                                          .checkList1[state.countIndexCheck]
+                                          .name,
+                                      result: (context
+                                                  .read<CarCheckBloc>()
+                                                  .state
+                                                  .indexButtonSelect ==
+                                              0)
+                                          ? 'ปกติ'
+                                          : 'ไม่ปกติ',
+                                      order: 1);
+
+                                  context
+                                      .read<CarCheckBloc>()
+                                      .add(Count_PlusIndex(method: "+"));
+
+                                  context
+                                      .read<CarCheckBloc>()
+                                      .add(Swap_Index(getIndex: 0));
+                                }
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Container(
+                                  width: double.infinity,
+                                  alignment: Alignment.center,
+                                  child: const Text(
+                                    "+ 1",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontSize: 15),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         );
                       },
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Palette.theGreen,
-                          elevation: 0,
-                          // side: BorderSide(color: Colors.white),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          )),
-                      onPressed: () {
-                        if (context
-                                .read<CarCheckBloc>()
-                                .state
-                                .indexButtonSelect ==
-                            0) {
-                          print('ปกติ');
-                        } else {
-                          print('ไม่ปกติ');
-                        }
-                                   context
-                            .read<CarCheckBloc>()
-                            .add(TestList(getString: 'sds'));
-                        context
-                            .read<CarCheckBloc>()
-                            .add(Count_PlusIndex(method: "+"));
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Container(
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          child: const Text(
-                            "+ 1",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 15),
-                          ),
-                        ),
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Palette.someRed,
-                          elevation: 0,
-                          // side: BorderSide(color: Colors.white),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          )),
-                      onPressed: () {
-                        context
-                            .read<CarCheckBloc>()
-                            .add(Count_PlusIndex(method: "-"));
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Container(
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          child: const Text(
-                            "- 1",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 15),
-                          ),
-                        ),
-                      ),
                     ),
                     SizedBox(
                       height: 20,
