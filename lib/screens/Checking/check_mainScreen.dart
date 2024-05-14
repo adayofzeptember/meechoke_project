@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -208,7 +209,8 @@ class _Check_DailyState extends State<Check_Daily> {
                             //       child: Check_Does()),
                             // );
 
-                            context.read<CarCheckBloc>().add(Load_CheckList());
+                            context.read<CarCheckBloc>().add(
+                                Load_CheckList(getCheckType: 'extCheckupList'));
 
                             Navigator.push(
                               context,
@@ -237,7 +239,7 @@ class _Check_DailyState extends State<Check_Daily> {
                                         fontSize: 20,
                                         color: Colors.white),
                                   ),
-                                  (state.fetched_checkList1.length == 0)
+                                  (state.storedExtCheckupList1.length == 0)
                                       ? Icon(
                                           Icons.arrow_circle_right_outlined,
                                           color: Colors.white,
@@ -251,58 +253,138 @@ class _Check_DailyState extends State<Check_Daily> {
                         SizedBox(
                           height: 10,
                         ),
-                        Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                              color: Palette.thisBlue,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5))),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '2. อุปกรณ์',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                      color: Colors.white),
-                                ),
-                                Icon(
-                                  Icons.arrow_circle_right_outlined,
-                                  color: Colors.white,
-                                )
-                              ],
+                        InkWell(
+                          onTap: () {
+                            context.read<CarCheckBloc>().add(Load_CheckList(
+                                getCheckType: 'extCheckupEquipment'));
+
+                            Navigator.push(
+                              context,
+                              PageTransition(
+                                  duration: const Duration(milliseconds: 300),
+                                  type: PageTransitionType.rightToLeft,
+                                  child: Test_Check()),
+                            );
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                color: Palette.thisBlue,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5))),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '2. อุปกรณ์',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                        color: Colors.white),
+                                  ),
+                                  (state.storedExtCheckupEquipment2.length == 0)
+                                      ? Icon(
+                                          Icons.arrow_circle_right_outlined,
+                                          color: Colors.white,
+                                        )
+                                      : Text('เช็คแล้ว')
+                                ],
+                              ),
                             ),
                           ),
                         ),
                         SizedBox(
                           height: 10,
                         ),
-                        Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                              color: Palette.thisBlue,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5))),
+                        InkWell(
+                          onTap: () {
+                            context.read<CarCheckBloc>().add(Load_CheckList(
+                                getCheckType: 'extCheckupSafetyList'));
+
+                            Navigator.push(
+                              context,
+                              PageTransition(
+                                  duration: const Duration(milliseconds: 300),
+                                  type: PageTransitionType.rightToLeft,
+                                  child: Test_Check()),
+                            );
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                color: Palette.thisBlue,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5))),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '3. เซฟตี้',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                        color: Colors.white),
+                                  ),
+                                  (state.storedExtCheckupSafety3.length == 0)
+                                      ? Icon(
+                                          Icons.arrow_circle_right_outlined,
+                                          color: Colors.white,
+                                        )
+                                      : Text('เช็คแล้ว')
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                            onTap: () {
+                              print(
+                                  '--------------------------1-------------------------------');
+                              print(json.encode(state.storedExtCheckupList1));
+
+                              print(
+                                  '--------------------------2-------------------------------');
+                              print(json
+                                  .encode(state.storedExtCheckupEquipment2));
+                              print(
+                                  '--------------------------3-------------------------------');
+                              print(json.encode(state.storedExtCheckupSafety3));
+                            },
+                            child: Text('sdfsdf')),
+                        //!
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: Palette.theGreen,
+                              elevation: 0,
+                              // side: BorderSide(color: Colors.white),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              )),
+                          onPressed: (state.storedExtCheckupList1.isEmpty ||
+                                  state.storedExtCheckupEquipment2.isEmpty||
+                                  state.storedExtCheckupSafety3.isEmpty)
+                              ? null
+                              : (){ //w,j;jk'
+                                 print('go');
+                              },
                           child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '3. เซฟตี้',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                      color: Colors.white),
-                                ),
-                                Icon(
-                                  Icons.arrow_circle_right_outlined,
-                                  color: Colors.white,
-                                )
-                              ],
+                            padding: const EdgeInsets.all(15.0),
+                            child: Container(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              child: const Text(
+                                "ส่งแบบตรวจเช็ค",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontSize: 15),
+                              ),
                             ),
                           ),
                         ),

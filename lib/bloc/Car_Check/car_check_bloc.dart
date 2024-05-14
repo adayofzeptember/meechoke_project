@@ -5,7 +5,9 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meechoke_project/ETC/api_url.dart';
 import 'package:meechoke_project/bloc/Car_Check/model.dart';
+import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupEquipment_addMethod.dart';
 import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupList_addMethod.dart';
+import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupSafety_addMethod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'car_check_event.dart';
 part 'car_check_state.dart';
@@ -15,11 +17,26 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
   CarCheckBloc()
       : super(CarCheckState(
             storedExtCheckupList1: [],
+            storedExtCheckupEquipment2: [],
+            storedExtCheckupSafety3: [],
             toCheckChecklist1: 0,
             fetched_checkList1: [],
+            typeCheckState: '',
             countIndexCheck: 0,
             indexButtonSelect: 0)) {
     on<Load_CheckList>((event, emit) async {
+      String x;
+      if (event.getCheckType == 'extCheckupList') {
+        x = 'sysVehicleChecklistId';
+      } else if (event.getCheckType == 'extCheckupEquipment') {
+        x = 'sysVehicleEquipmentId';
+      } else {
+        x = 'sysVehicleSafetyListId';
+      }
+      emit(state.copyWith(
+          typeCheckState: event.getCheckType, countIndexCheck: 0, toCheckChecklist1: 0));
+
+      print(event.getCheckType.toString() + ' : ' + x.toString());
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
       try {
@@ -36,13 +53,11 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
         List<ExtCheckupList> dataExtCheckupList = [];
         if (response.statusCode == 200) {
           for (var elements in response.data['data']) {
-            List<dynamic> extCheckupList = elements['extCheckupList'];
+            List<dynamic> extCheckupList = elements[event.getCheckType];
             for (var extCheckupListLoop in extCheckupList) {
               dataExtCheckupList.add(ExtCheckupList(
-                  id: extCheckupListLoop['sysVehicleChecklistId']['id']
-                      .toString(),
-                  name: extCheckupListLoop['sysVehicleChecklistId']['name']
-                      .toString()));
+                  id: extCheckupListLoop[x.toString()]['id'].toString(),
+                  name: extCheckupListLoop[x.toString()]['name'].toString()));
             }
           }
           // print('--------' + dataExtCheckupList[2].name.toString());
@@ -72,11 +87,19 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
     });
 
     on<CheckupList_BlocAdd>((event, emit) async {
-      emit(state.copyWith(storedExtCheckupList1: event.getExtCheckup_List));
-      print('from bloc....' + jsonEncode(state.storedExtCheckupList1));
-      // for (var item in state.storedChecklist1) {
-      //   print(item.list); // Print each item
-      // }
+      // emit(state.copyWith(storedExtCheckupList1: event.getExtCheckup_List));
+      // print('from bloc1....' + jsonEncode(state.storedExtCheckupList1));
+      if (event.getTypeCheckToStore == 'extCheckupList') {
+        emit(state.copyWith(storedExtCheckupList1: event.getExtCheckup_List));
+        print('from bloc1....' + jsonEncode(state.storedExtCheckupList1));
+      } else if (event.getTypeCheckToStore == 'extCheckupEquipment') {
+        emit(state.copyWith(storedExtCheckupEquipment2: event.getExtEqipment_List));
+        print('from bloc2....' + jsonEncode(state.storedExtCheckupEquipment2));
+      } else {
+         emit(state.copyWith(storedExtCheckupSafety3: event.getExtSafety_List));
+        print('from bloc3....' + jsonEncode(state.storedExtCheckupSafety3));
+      }
+   
     });
 
     on<Swap_Index_forButtones>((event, emit) async {

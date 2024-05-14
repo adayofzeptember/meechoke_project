@@ -5,7 +5,9 @@ import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/ETC/success_dialog.dart';
 import 'package:meechoke_project/bloc/Car_Check/car_check_bloc.dart';
+import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupEquipment_addMethod.dart';
 import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupList_addMethod.dart';
+import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupSafety_addMethod.dart';
 
 class Test_Check extends StatefulWidget {
   @override
@@ -23,7 +25,6 @@ class _Test_CheckState extends State<Test_Check> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-   
             // context.read<CarCheckBloc>().add(Count_PlusIndex(method: "reset"));
             Navigator.pop(context);
           },
@@ -59,7 +60,7 @@ class _Test_CheckState extends State<Test_Check> {
 
                         return Column(
                           children: [
-                            Text('data'),
+                            Text(state.typeCheckState.toString()),
                             ListView.builder(
                                 primary: true,
                                 itemCount: 1,
@@ -83,7 +84,8 @@ class _Test_CheckState extends State<Test_Check> {
                                       child: Center(
                                         child: Text(
                                           state
-                                              .fetched_checkList1[state.countIndexCheck]
+                                              .fetched_checkList1[
+                                                  state.countIndexCheck]
                                               .name,
                                           style: TextStyle(
                                               color: Palette.thisBlue,
@@ -110,9 +112,8 @@ class _Test_CheckState extends State<Test_Check> {
                                         borderRadius: BorderRadius.circular(10),
                                       )),
                                   onPressed: () {
-                                    context
-                                        .read<CarCheckBloc>()
-                                        .add(Swap_Index_forButtones(getIndex: 0));
+                                    context.read<CarCheckBloc>().add(
+                                        Swap_Index_forButtones(getIndex: 0));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(15.0),
@@ -139,9 +140,8 @@ class _Test_CheckState extends State<Test_Check> {
                                         borderRadius: BorderRadius.circular(10),
                                       )),
                                   onPressed: () {
-                                    context
-                                        .read<CarCheckBloc>()
-                                        .add(Swap_Index_forButtones(getIndex: 1));
+                                    context.read<CarCheckBloc>().add(
+                                        Swap_Index_forButtones(getIndex: 1));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(15.0),
@@ -169,36 +169,102 @@ class _Test_CheckState extends State<Test_Check> {
                                   )),
                               onPressed: () {
                                 if (state.toCheckChecklist1 == 1) {
+                                  SuccessMessage_Dialog(context,
+                                      'เช็ครายการเบื้องต้นเสร็จสิ้น', 'เช็ครถ');
 
-                                      SuccessMessage_Dialog(context, 'เช็ครายการเบื้องต้นเสร็จสิ้น', 'เช็ครถ');
-                                  context.read<CarCheckBloc>().add(CheckupList_BlocAdd(
-                                      getExtCheckup_List: ExtCheckupList_Item.checklist));
+                                  context.read<CarCheckBloc>().add(
+                                      CheckupList_BlocAdd(
+                                          getExtCheckup_List:
+                                              ExtCheckupList_Item.checklist,
+                                          getTypeCheckToStore:
+                                              state.typeCheckState));
 
-                              // SuccessMessage_Dialog(context, 'เช็ครายการเบื้องต้นเสร็จสิ้น', 'เช็ครถ');
-                                      
-                                  // print('สรุป' +
-                                  //     ChecklistItem.checklist.length
-                                  //         .toString());
-                                  // print('-----------------------');
-                                  // for (var item in ChecklistItem.checklist) {
-                                  //   print(item.result); // Print each item
-                                  // }
+                                  if (state.typeCheckState ==
+                                      'extCheckupList') {
+                                    context.read<CarCheckBloc>().add(
+                                        CheckupList_BlocAdd(
+                                            getExtCheckup_List:
+                                                ExtCheckupList_Item.checklist,
+                                            getTypeCheckToStore:
+                                                state.typeCheckState));
+                                  } else if (state.typeCheckState ==
+                                      'extCheckupEquipment') {
+                                    context.read<CarCheckBloc>().add(
+                                        CheckupList_BlocAdd(
+                                            getExtEqipment_List:
+                                                ExtCheckupEquipment_Item
+                                                    .checklistEquipment,
+                                            getTypeCheckToStore:
+                                                state.typeCheckState));
+                                  } else {
+                                    context.read<CarCheckBloc>().add(
+                                        CheckupList_BlocAdd(
+                                            getExtSafety_List: ExtCheckupSafety_Item
+                                                .checklistExtCheckupSafety_Item,
+                                            getTypeCheckToStore:
+                                                state.typeCheckState));
+                                  }
                                 } else {
-                                  ExtCheckupList_Item.addItem(
-                                      sysVehicleChecklistId: int.parse(state
-                                          .fetched_checkList1[state.countIndexCheck].id
-                                          .toString()),
-                                      list: state
-                                          .fetched_checkList1[state.countIndexCheck]
-                                          .name,
-                                      result: (context
-                                                  .read<CarCheckBloc>()
-                                                  .state
-                                                  .indexButtonSelect ==
-                                              0)
-                                          ? 'ปกติ'
-                                          : 'ไม่ปกติ',
-                                      order: 1);
+                                  if (state.typeCheckState ==
+                                      'extCheckupList') {
+                                    ExtCheckupList_Item.addItem1(
+                                        sysVehicleChecklistId: int.parse(state
+                                            .fetched_checkList1[
+                                                state.countIndexCheck]
+                                            .id
+                                            .toString()),
+                                        list: state
+                                            .fetched_checkList1[
+                                                state.countIndexCheck]
+                                            .name,
+                                        result: (context
+                                                    .read<CarCheckBloc>()
+                                                    .state
+                                                    .indexButtonSelect ==
+                                                0)
+                                            ? 'ปกติ'
+                                            : 'ไม่ปกติ',
+                                        order: 1);
+                                  } else if (state.typeCheckState ==
+                                      'extCheckupEquipment') {
+                                    ExtCheckupEquipment_Item.addItem2(
+                                        sysVehicleChecklistId: int.parse(state
+                                            .fetched_checkList1[
+                                                state.countIndexCheck]
+                                            .id
+                                            .toString()),
+                                        list: state
+                                            .fetched_checkList1[
+                                                state.countIndexCheck]
+                                            .name,
+                                        result: (context
+                                                    .read<CarCheckBloc>()
+                                                    .state
+                                                    .indexButtonSelect ==
+                                                0)
+                                            ? 'ปกติ'
+                                            : 'ไม่ปกติ',
+                                        order: 1);
+                                  } else {
+                                    ExtCheckupSafety_Item.addItem3(
+                                        sysVehicleChecklistId: int.parse(state
+                                            .fetched_checkList1[
+                                                state.countIndexCheck]
+                                            .id
+                                            .toString()),
+                                        list: state
+                                            .fetched_checkList1[
+                                                state.countIndexCheck]
+                                            .name,
+                                        result: (context
+                                                    .read<CarCheckBloc>()
+                                                    .state
+                                                    .indexButtonSelect ==
+                                                0)
+                                            ? 'ปกติ'
+                                            : 'ไม่ปกติ',
+                                        order: 1);
+                                  }
 
                                   context
                                       .read<CarCheckBloc>()
@@ -215,7 +281,7 @@ class _Test_CheckState extends State<Test_Check> {
                                   width: double.infinity,
                                   alignment: Alignment.center,
                                   child: const Text(
-                                    "+ 1",
+                                    "บันทึก",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,

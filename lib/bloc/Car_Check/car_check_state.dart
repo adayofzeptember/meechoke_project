@@ -5,13 +5,18 @@ part of 'car_check_bloc.dart';
 class CarCheckState extends Equatable {
   int indexButtonSelect;
   List fetched_checkList1;
-
   int toCheckChecklist1;
   List<ExtCheckupList_Item> storedExtCheckupList1;
+  List<ExtCheckupEquipment_Item> storedExtCheckupEquipment2;
+  List<ExtCheckupSafety_Item> storedExtCheckupSafety3;
   int countIndexCheck;
+  String typeCheckState;
   CarCheckState(
       {required this.fetched_checkList1,
+      required this.storedExtCheckupEquipment2,
+      required this.storedExtCheckupSafety3,
       required this.toCheckChecklist1,
+      required this.typeCheckState,
       required this.storedExtCheckupList1,
       required this.countIndexCheck,
       required this.indexButtonSelect});
@@ -20,13 +25,22 @@ class CarCheckState extends Equatable {
       {List? fetched_checkList1,
       int? indexButtonSelect,
       int? countIndexCheck,
+      String? typeCheckState,
       int? toCheckChecklist1,
       List<ExtCheckupList_Item>? storedExtCheckupList1,
+      List<ExtCheckupEquipment_Item>? storedExtCheckupEquipment2,
+      List<ExtCheckupSafety_Item>? storedExtCheckupSafety3,
       List? test}) {
     return CarCheckState(
+      typeCheckState: typeCheckState ?? this.typeCheckState,
       fetched_checkList1: fetched_checkList1 ?? this.fetched_checkList1,
       toCheckChecklist1: toCheckChecklist1 ?? this.toCheckChecklist1,
-      storedExtCheckupList1: storedExtCheckupList1 ?? this.storedExtCheckupList1,
+      storedExtCheckupList1:
+          storedExtCheckupList1 ?? this.storedExtCheckupList1,
+      storedExtCheckupEquipment2:
+          storedExtCheckupEquipment2 ?? this.storedExtCheckupEquipment2,
+      storedExtCheckupSafety3:
+          storedExtCheckupSafety3 ?? this.storedExtCheckupSafety3,
       countIndexCheck: countIndexCheck ?? this.countIndexCheck,
       indexButtonSelect: indexButtonSelect ?? this.indexButtonSelect,
     );
@@ -34,10 +48,13 @@ class CarCheckState extends Equatable {
 
   @override
   List<Object> get props => [
+        typeCheckState,
         fetched_checkList1,
+        storedExtCheckupSafety3,
+        storedExtCheckupEquipment2,
+        storedExtCheckupList1,
         countIndexCheck,
         indexButtonSelect,
         toCheckChecklist1,
-        storedExtCheckupList1
       ];
 }
