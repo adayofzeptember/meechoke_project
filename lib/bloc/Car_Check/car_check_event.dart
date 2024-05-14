@@ -19,18 +19,15 @@ class Count_PlusIndex extends CarCheckEvent {
 }
 
 
-class Swap_Index extends CarCheckEvent {
+class Swap_Index_forButtones extends CarCheckEvent {
   int? getIndex;
-  Swap_Index({required this.getIndex});
-}
-
-class TestList extends CarCheckEvent {
-  String? getString;
-  TestList({required this.getString});
+  Swap_Index_forButtones({required this.getIndex});
 }
 
 
-class StoreCheck1 extends CarCheckEvent {
-  List<CheckupResult_Item>? getCheck1;
-  StoreCheck1({required this.getCheck1});
+
+
+class CheckupList_BlocAdd extends CarCheckEvent {
+  List<ExtCheckupList_Item>? getExtCheckup_List;
+  CheckupList_BlocAdd({required this.getExtCheckup_List});
 }

@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meechoke_project/ETC/api_url.dart';
 import 'package:meechoke_project/bloc/Car_Check/model.dart';
-import 'package:meechoke_project/screens/Checking/CheckMethod/CheckupResult_Method.dart';
+import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupList_addMethod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'car_check_event.dart';
 part 'car_check_state.dart';
@@ -14,9 +14,9 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
   final dio = Dio();
   CarCheckBloc()
       : super(CarCheckState(
-            storedChecklist1: [],
+            storedExtCheckupList1: [],
             toCheckChecklist1: 0,
-            checkList1: [],
+            fetched_checkList1: [],
             countIndexCheck: 0,
             indexButtonSelect: 0)) {
     on<Load_CheckList>((event, emit) async {
@@ -46,7 +46,7 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
             }
           }
           // print('--------' + dataExtCheckupList[2].name.toString());
-          emit(state.copyWith(checkList1: dataExtCheckupList));
+          emit(state.copyWith(fetched_checkList1: dataExtCheckupList));
         } else {
           print('error status != 200');
         }
@@ -57,7 +57,7 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
 
     on<Count_PlusIndex>((event, emit) async {
       if (event.method == "+") {
-        if (state.countIndexCheck >= state.checkList1.length - 1) {
+        if (state.countIndexCheck >= state.fetched_checkList1.length - 1) {
           emit(state.copyWith(
               countIndexCheck: state.countIndexCheck + 0,
               toCheckChecklist1: 1));
@@ -71,17 +71,15 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
       }
     });
 
-    on<StoreCheck1>((event, emit) async {
-      emit(state.copyWith(storedChecklist1: event.getCheck1));
-      // print('in bloc' + state.storedChecklist1.toString());
-
-      print(jsonEncode(state.storedChecklist1));
+    on<CheckupList_BlocAdd>((event, emit) async {
+      emit(state.copyWith(storedExtCheckupList1: event.getExtCheckup_List));
+      print('from bloc....' + jsonEncode(state.storedExtCheckupList1));
       // for (var item in state.storedChecklist1) {
       //   print(item.list); // Print each item
       // }
     });
 
-    on<Swap_Index>((event, emit) async {
+    on<Swap_Index_forButtones>((event, emit) async {
       emit(state.copyWith(indexButtonSelect: event.getIndex));
     });
   }

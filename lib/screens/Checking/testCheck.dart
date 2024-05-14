@@ -3,8 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
+import 'package:meechoke_project/ETC/success_dialog.dart';
 import 'package:meechoke_project/bloc/Car_Check/car_check_bloc.dart';
-import 'package:meechoke_project/screens/Checking/CheckMethod/CheckupResult_Method.dart';
+import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupList_addMethod.dart';
 
 class Test_Check extends StatefulWidget {
   @override
@@ -52,7 +53,7 @@ class _Test_CheckState extends State<Test_Check> {
                   children: [
                     BlocBuilder<CarCheckBloc, CarCheckState>(
                       builder: (context, state) {
-                        if (state.checkList1.length == 0) {
+                        if (state.fetched_checkList1.length == 0) {
                           return Text('wait');
                         }
 
@@ -82,7 +83,7 @@ class _Test_CheckState extends State<Test_Check> {
                                       child: Center(
                                         child: Text(
                                           state
-                                              .checkList1[state.countIndexCheck]
+                                              .fetched_checkList1[state.countIndexCheck]
                                               .name,
                                           style: TextStyle(
                                               color: Palette.thisBlue,
@@ -111,7 +112,7 @@ class _Test_CheckState extends State<Test_Check> {
                                   onPressed: () {
                                     context
                                         .read<CarCheckBloc>()
-                                        .add(Swap_Index(getIndex: 0));
+                                        .add(Swap_Index_forButtones(getIndex: 0));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(15.0),
@@ -140,7 +141,7 @@ class _Test_CheckState extends State<Test_Check> {
                                   onPressed: () {
                                     context
                                         .read<CarCheckBloc>()
-                                        .add(Swap_Index(getIndex: 1));
+                                        .add(Swap_Index_forButtones(getIndex: 1));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(15.0),
@@ -168,8 +169,13 @@ class _Test_CheckState extends State<Test_Check> {
                                   )),
                               onPressed: () {
                                 if (state.toCheckChecklist1 == 1) {
-                                  context.read<CarCheckBloc>().add(StoreCheck1(
-                                      getCheck1: CheckupResult_Item.checklist));
+
+                                      SuccessMessage_Dialog(context, 'เช็ครายการเบื้องต้นเสร็จสิ้น', 'เช็ครถ');
+                                  context.read<CarCheckBloc>().add(CheckupList_BlocAdd(
+                                      getExtCheckup_List: ExtCheckupList_Item.checklist));
+
+                              // SuccessMessage_Dialog(context, 'เช็ครายการเบื้องต้นเสร็จสิ้น', 'เช็ครถ');
+                                      
                                   // print('สรุป' +
                                   //     ChecklistItem.checklist.length
                                   //         .toString());
@@ -178,12 +184,12 @@ class _Test_CheckState extends State<Test_Check> {
                                   //   print(item.result); // Print each item
                                   // }
                                 } else {
-                                  CheckupResult_Item.addItem(
+                                  ExtCheckupList_Item.addItem(
                                       sysVehicleChecklistId: int.parse(state
-                                          .checkList1[state.countIndexCheck].id
+                                          .fetched_checkList1[state.countIndexCheck].id
                                           .toString()),
                                       list: state
-                                          .checkList1[state.countIndexCheck]
+                                          .fetched_checkList1[state.countIndexCheck]
                                           .name,
                                       result: (context
                                                   .read<CarCheckBloc>()
@@ -200,7 +206,7 @@ class _Test_CheckState extends State<Test_Check> {
 
                                   context
                                       .read<CarCheckBloc>()
-                                      .add(Swap_Index(getIndex: 0));
+                                      .add(Swap_Index_forButtones(getIndex: 0));
                                 }
                               },
                               child: Padding(

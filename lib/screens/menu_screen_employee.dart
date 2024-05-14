@@ -3,13 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/bloc/Car_Check/car_check_bloc.dart';
 import 'package:meechoke_project/bloc/Financial/financial_bloc.dart';
 import 'package:meechoke_project/bloc/Fuel/fuel_bloc.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
-import 'package:meechoke_project/screens/Checking/check_main1.dart';
+import 'package:meechoke_project/screens/Checking/check_mainScreen.dart';
 import 'package:meechoke_project/screens/Fuel/Main%20List/main_list.dart';
 import 'package:meechoke_project/screens/Jobs/1.%20Main%20Pages%20List/tab_main.dart';
 import 'package:meechoke_project/screens/Financial/financials_screen.dart';
@@ -41,10 +40,8 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
   Widget build(BuildContext context) {
     //*
     var size = MediaQuery.of(context).size;
-
     final double h2 = (size.height - kToolbarHeight - 420) / 2;
     final double w2 = size.width / 2;
-
     // final double h1 = (size.height - kToolbarHeight - 370) / 2;
     // final double w1 = size.width / 2;
     final double h = (size.height - kToolbarHeight - 520) / 2;

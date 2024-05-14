@@ -46,6 +46,9 @@ Future<void> SuccessMessage_Dialog(
       Navigator.of(context).pop();
       Navigator.of(context).pop();
       Navigator.of(context).pop();
+    } else if (check == 'เช็ครถ') {
+      Navigator.of(context).pop();
+      Navigator.of(context).pop();
     } else {
       context.read<JobsBloc>().add(Load_NewJobs());
       context.read<JobsBloc>().add(Load_CurrentJobs());

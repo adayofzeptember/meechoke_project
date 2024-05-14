@@ -4,29 +4,29 @@ part of 'car_check_bloc.dart';
 
 class CarCheckState extends Equatable {
   int indexButtonSelect;
-  List checkList1;
+  List fetched_checkList1;
 
   int toCheckChecklist1;
-  List<CheckupResult_Item> storedChecklist1;
+  List<ExtCheckupList_Item> storedExtCheckupList1;
   int countIndexCheck;
   CarCheckState(
-      {required this.checkList1,
+      {required this.fetched_checkList1,
       required this.toCheckChecklist1,
-      required this.storedChecklist1,
+      required this.storedExtCheckupList1,
       required this.countIndexCheck,
       required this.indexButtonSelect});
 
   CarCheckState copyWith(
-      {List? checkList1,
+      {List? fetched_checkList1,
       int? indexButtonSelect,
       int? countIndexCheck,
       int? toCheckChecklist1,
-      List<CheckupResult_Item>? storedChecklist1,
+      List<ExtCheckupList_Item>? storedExtCheckupList1,
       List? test}) {
     return CarCheckState(
-      checkList1: checkList1 ?? this.checkList1,
+      fetched_checkList1: fetched_checkList1 ?? this.fetched_checkList1,
       toCheckChecklist1: toCheckChecklist1 ?? this.toCheckChecklist1,
-      storedChecklist1: storedChecklist1 ?? this.storedChecklist1,
+      storedExtCheckupList1: storedExtCheckupList1 ?? this.storedExtCheckupList1,
       countIndexCheck: countIndexCheck ?? this.countIndexCheck,
       indexButtonSelect: indexButtonSelect ?? this.indexButtonSelect,
     );
@@ -34,10 +34,10 @@ class CarCheckState extends Equatable {
 
   @override
   List<Object> get props => [
-        checkList1,
+        fetched_checkList1,
         countIndexCheck,
         indexButtonSelect,
         toCheckChecklist1,
-        storedChecklist1
+        storedExtCheckupList1
       ];
 }

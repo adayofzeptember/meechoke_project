@@ -9,12 +9,12 @@ import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/screens/Checking/checking_result.dart';
 import 'package:page_transition/page_transition.dart';
 
-class Check_Does extends StatefulWidget {
+class ExtCheckupList_Screen extends StatefulWidget {
   @override
-  _Check_DoesState createState() => _Check_DoesState();
+  _ExtCheckupList_ScreenState createState() => _ExtCheckupList_ScreenState();
 }
 
-class _Check_DoesState extends State<Check_Does> {
+class _ExtCheckupList_ScreenState extends State<ExtCheckupList_Screen> {
   List<File> selectedImages = [];
   final picker = ImagePicker();
 
