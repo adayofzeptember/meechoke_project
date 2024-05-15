@@ -34,7 +34,9 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
         x = 'sysVehicleSafetyListId';
       }
       emit(state.copyWith(
-          typeCheckState: event.getCheckType, countIndexCheck: 0, toCheckChecklist1: 0));
+          typeCheckState: event.getCheckType,
+          countIndexCheck: 0,
+          toCheckChecklist1: 0));
 
       print(event.getCheckType.toString() + ' : ' + x.toString());
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -71,19 +73,26 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
     });
 
     on<Count_PlusIndex>((event, emit) async {
-      if (event.method == "+") {
-        if (state.countIndexCheck >= state.fetched_checkList1.length - 1) {
-          emit(state.copyWith(
-              countIndexCheck: state.countIndexCheck + 0,
-              toCheckChecklist1: 1));
-        } else {
-          emit(state.copyWith(countIndexCheck: state.countIndexCheck + 1));
-        }
+      if (state.countIndexCheck >= state.fetched_checkList1.length - 1) {
+        emit(state.copyWith(
+            countIndexCheck: state.countIndexCheck + 0, toCheckChecklist1: 1));
       } else {
-        if (state.countIndexCheck != 0) {
-          emit(state.copyWith(countIndexCheck: 0));
-        }
+        emit(state.copyWith(countIndexCheck: state.countIndexCheck + 1));
       }
+
+      // if (event.method == "+") {
+      //   if (state.countIndexCheck >= state.fetched_checkList1.length - 1) {
+      //     emit(state.copyWith(
+      //         countIndexCheck: state.countIndexCheck + 0,
+      //         toCheckChecklist1: 1));
+      //   } else {
+      //     emit(state.copyWith(countIndexCheck: state.countIndexCheck + 1));
+      //   }
+      // } else {
+      //   if (state.countIndexCheck != 0) {
+      //     emit(state.copyWith(countIndexCheck: 0));
+      //   }
+      // }
     });
 
     on<CheckupList_BlocAdd>((event, emit) async {
@@ -93,13 +102,13 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
         emit(state.copyWith(storedExtCheckupList1: event.getExtCheckup_List));
         print('from bloc1....' + jsonEncode(state.storedExtCheckupList1));
       } else if (event.getTypeCheckToStore == 'extCheckupEquipment') {
-        emit(state.copyWith(storedExtCheckupEquipment2: event.getExtEqipment_List));
+        emit(state.copyWith(
+            storedExtCheckupEquipment2: event.getExtEqipment_List));
         print('from bloc2....' + jsonEncode(state.storedExtCheckupEquipment2));
       } else {
-         emit(state.copyWith(storedExtCheckupSafety3: event.getExtSafety_List));
+        emit(state.copyWith(storedExtCheckupSafety3: event.getExtSafety_List));
         print('from bloc3....' + jsonEncode(state.storedExtCheckupSafety3));
       }
-   
     });
 
     on<Swap_Index_forButtones>((event, emit) async {

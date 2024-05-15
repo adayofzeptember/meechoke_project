@@ -7,7 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/Car_Check/car_check_bloc.dart';
-import 'package:meechoke_project/screens/Checking/testCheck.dart';
+import 'package:meechoke_project/screens/Checking/Check_Screen.dart';
+import 'package:meechoke_project/ETC/testCheck.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Check_Daily extends StatefulWidget {
@@ -217,7 +218,7 @@ class _Check_DailyState extends State<Check_Daily> {
                               PageTransition(
                                   duration: const Duration(milliseconds: 300),
                                   type: PageTransitionType.rightToLeft,
-                                  child: Test_Check()),
+                                  child: Check_Screen(checkingType: 'เบื้องต้น',)),
                             );
                           },
                           child: Container(
@@ -263,7 +264,7 @@ class _Check_DailyState extends State<Check_Daily> {
                               PageTransition(
                                   duration: const Duration(milliseconds: 300),
                                   type: PageTransitionType.rightToLeft,
-                                  child: Test_Check()),
+                                  child: Check_Screen(checkingType: 'อุปกรณ์',)),
                             );
                           },
                           child: Container(
@@ -309,7 +310,7 @@ class _Check_DailyState extends State<Check_Daily> {
                               PageTransition(
                                   duration: const Duration(milliseconds: 300),
                                   type: PageTransitionType.rightToLeft,
-                                  child: Test_Check()),
+                                  child: Check_Screen(checkingType: 'เซฟตี้',)),
                             );
                           },
                           child: Container(

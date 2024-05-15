@@ -255,7 +255,9 @@ class _Check_ResultState extends State<Check_Result> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(width: 10,),
+                                SizedBox(
+                                  width: 10,
+                                ),
                                 Expanded(
                                   child: Container(
                                     decoration: BoxDecoration(

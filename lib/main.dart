@@ -62,7 +62,6 @@ class StarterWidget extends StatelessWidget {
         BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => JobsBloc()),
         BlocProvider(create: (context) => CarCheckBloc()),
-
         BlocProvider(create: (context) => FuelBloc()),
         BlocProvider(create: (context) => FinancialBloc()),
         BlocProvider(create: (context) => HistoryWorkBloc()),
@@ -76,9 +75,7 @@ class StarterWidget extends StatelessWidget {
             const Breakpoint(start: 451, end: 800, name: TABLET),
             const Breakpoint(start: 801, end: 1920, name: DESKTOP),
           ],
-          
         ),
-        
         initialRoute: "/",
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Palette.thisBlue),
@@ -86,7 +83,6 @@ class StarterWidget extends StatelessWidget {
           fontFamily: 'Sarabun',
         ),
         home: const StartPage(),
-        
       ),
     );
   }
@@ -139,9 +135,9 @@ class _StartPageState extends State<StartPage> {
         Navigator.pushReplacement(
           context,
           PageTransition(
-              duration: const Duration(milliseconds: 800),
+              duration: Duration(milliseconds: 800),
               type: PageTransitionType.fade,
-              child: const MainMenu_Employee()),
+              child: MainMenu_Employee()),
         );
       }
     });
