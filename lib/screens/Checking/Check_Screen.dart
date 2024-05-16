@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +25,7 @@ class Check_Screen extends StatefulWidget {
 }
 
 class _Check_ScreenState extends State<Check_Screen> {
-  List<File> selectedImages = [];
+  File? selectedImage;
   final picker = ImagePicker();
 
   @override
@@ -41,6 +43,10 @@ class _Check_ScreenState extends State<Check_Screen> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
+            ExtCheckupList_Item.checklist.clear();
+            ExtCheckupEquipment_Item.checklistEquipment.clear();
+            ExtCheckupSafety_Item.checklistExtCheckupSafety_Item.clear();
+
             Navigator.pop(context);
           },
           icon: const Icon(
@@ -67,7 +73,6 @@ class _Check_ScreenState extends State<Check_Screen> {
                 padding: EdgeInsets.fromLTRB(15, 10, 15, 15),
                 child: BlocBuilder<CarCheckBloc, CarCheckState>(
                   builder: (context, state) {
-                    
                     if (state.fetched_checkList1.length == 0) {
                       return Center(
                         child: CircularProgressIndicator(
@@ -165,7 +170,15 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                           child: Row(
                                                             children: [
                                                               SvgPicture.asset(
-                                                                  'assets/images/normal.svg'),
+                                                                  'assets/images/normal.svg', color: state.indexButtonSelect ==
+                                                                          0
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Colors
+                                                                          .grey,),
+                                                              SizedBox(
+                                                                width: 5,
+                                                              ),
                                                               Text(
                                                                 "ปกติ",
                                                                 style:
@@ -229,7 +242,18 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                           child: Row(
                                                             children: [
                                                               SvgPicture.asset(
-                                                                  'assets/images/abnormal.svg'),
+                                                                'assets/images/abnormal.svg',
+                                                                color: state
+                                                                            .indexButtonSelect ==
+                                                                        1
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey,
+                                                              ),
+                                                              SizedBox(
+                                                                width: 5,
+                                                              ),
                                                               Text(
                                                                 "ไม่ปกติ",
                                                                 style:
@@ -361,19 +385,19 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                               children: [
                                                                 Icon(
                                                                   Icons.image,
-                                                                  color: Colors
-                                                                      .grey,
+                                                                  color: Palette
+                                                                      .thisBlue,
                                                                 ),
                                                                 SizedBox(
                                                                   width: 3,
                                                                 ),
                                                                 Text(
-                                                                  'ภาพประกอบ',
+                                                                  'ภาพประกอบรายการผิดปกติ',
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           18,
-                                                                      color: Colors
-                                                                          .grey,
+                                                                      color: Palette
+                                                                          .thisBlue,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .bold),
@@ -395,80 +419,79 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                                 CrossAxisAlignment
                                                                     .center,
                                                             children: [
-                                                              InkWell(
-                                                                onTap: () {
-                                                                  //openAlertBox(context);
-                                                                  //_openModal();
-                                                                  // _getGallery();
-                                                                },
-                                                                child:
-                                                                    Container(
-                                                                  height: 100,
-                                                                  width: 100,
-                                                                  decoration: BoxDecoration(
-                                                                      color: const Color
-                                                                          .fromARGB(
-                                                                          255,
-                                                                          238,
-                                                                          246,
-                                                                          255),
-                                                                      borderRadius: const BorderRadius
-                                                                          .all(
-                                                                          Radius.circular(
-                                                                              20)),
-                                                                      border: Border.all(
-                                                                          color:
-                                                                              Colors.grey)),
-                                                                  child:
-                                                                      const Center(
-                                                                    child: Text(
-                                                                      '+ เพิ่มรูป',
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .grey,
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              Expanded(
-                                                                child: SizedBox(
-                                                                  child: selectedImages
-                                                                          .isEmpty
-                                                                      ? const Text(
-                                                                          ' ')
-                                                                      : GridView
-                                                                          .builder(
-                                                                          shrinkWrap:
-                                                                              true,
-                                                                          itemCount:
-                                                                              selectedImages.length,
-                                                                          gridDelegate:
-                                                                              const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-                                                                          itemBuilder:
-                                                                              (BuildContext context, int index) {
-                                                                            return Center(
-                                                                                child: GestureDetector(
-                                                                              onTap: () {
-                                                                                print(index);
-                                                                              },
-                                                                              child: Container(
-                                                                                  child: Card(
-                                                                                child: SizedBox(
-                                                                                  height: 100,
-                                                                                  width: 100,
-                                                                                  child: Image.file(
-                                                                                    selectedImages[index],
-                                                                                    fit: BoxFit.cover,
-                                                                                  ),
+                                                              selectedImage !=
+                                                                      null
+                                                                  ? GestureDetector(
+                                                                      onTap:
+                                                                          () {
+                                                                        setState(
+                                                                            () {
+                                                                          print(selectedImage!
+                                                                              .path
+                                                                              .toString());
+                                                                        });
+                                                                      },
+                                                                      child:
+                                                                          Center(
+                                                                        child:
+                                                                            Stack(
+                                                                          children: [
+                                                                            Card(
+                                                                              child: SizedBox(
+                                                                                height: 120,
+                                                                                width: 120,
+                                                                                child: Image.file(
+                                                                                  selectedImage!,
+                                                                                  fit: BoxFit.cover,
                                                                                 ),
-                                                                              )),
-                                                                            ));
-                                                                          },
+                                                                              ),
+                                                                            ),
+                                                                            Positioned(
+                                                                              top: 0,
+                                                                              right: 0,
+                                                                              child: IconButton(
+                                                                                icon: Icon(Icons.close),
+                                                                                onPressed: () {
+                                                                                  selectedImage = null;
+                                                                                },
+                                                                              ),
+                                                                            ),
+                                                                          ],
                                                                         ),
-                                                                ),
-                                                              ),
+                                                                      ),
+                                                                    )
+                                                                  : InkWell(
+                                                                      onTap:
+                                                                          () {
+                                                                        _openImageDialogChecking(
+                                                                            context);
+                                                                      },
+                                                                      child:
+                                                                          Container(
+                                                                        height:
+                                                                            100,
+                                                                        width:
+                                                                            100,
+                                                                        decoration: BoxDecoration(
+                                                                            color: const Color.fromARGB(
+                                                                                255,
+                                                                                238,
+                                                                                246,
+                                                                                255),
+                                                                            borderRadius:
+                                                                                const BorderRadius.all(Radius.circular(20)),
+                                                                            border: Border.all(color: Colors.grey)),
+                                                                        child:
+                                                                            const Center(
+                                                                          child:
+                                                                              Text(
+                                                                            '+ รูปถ่าย',
+                                                                            style:
+                                                                                TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
                                                             ],
                                                           ),
                                                         )
@@ -481,159 +504,202 @@ class _Check_ScreenState extends State<Check_Screen> {
                                       ],
                                     )
                                   : Container(
+                                      width: double.infinity,
                                       decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Palette.thisBlue,
-                                              width: 2),
                                           color: Colors.white,
                                           borderRadius: BorderRadius.all(
-                                              Radius.circular(20))),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              'ตรวจเช็ครายการ ${widget.checkingType} ทั้งหมดแล้ว',
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Palette.thisBlue),
-                                            ),
-                                            SizedBox(
-                                              height: 15,
-                                            ),
-                                            if (state.typeCheckState ==
-                                                'extCheckupList')
-                                              ListView.builder(
-                                                shrinkWrap: true,
-                                                itemCount: ExtCheckupList_Item
-                                                    .checklist.length,
-                                                itemBuilder: (context, index) {
-                                                  return Row(
-                                                    children: [
-                                                      Text(
-                                                        ExtCheckupList_Item
-                                                            .checklist[index]
-                                                            .list
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                            fontSize: 20,
-                                                            color: Palette
-                                                                .thisBlue),
-                                                      ),
-                                                      Text(
-                                                        ExtCheckupList_Item
-                                                            .checklist[index]
-                                                            .result
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                            fontSize: 20,
-                                                            color: (ExtCheckupList_Item
-                                                                        .checklist[
-                                                                            index]
-                                                                        .result
-                                                                        .toString() ==
-                                                                    'ปกติ')
-                                                                ? Palette
-                                                                    .theGreen
-                                                                : Palette
-                                                                    .someRed),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
+                                              Radius.circular(25))),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                                color: Color.fromARGB(
+                                                    255, 238, 246, 255),
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(25),
+                                                    topRight:
+                                                        Radius.circular(25))),
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 8, bottom: 8),
+                                              child: Center(
+                                                child: Text(
+                                                  'ตรวจเช็ครายการ ${widget.checkingType} ทั้งหมดแล้ว',
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: Palette.thisBlue,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
                                               ),
-                                            if (state.typeCheckState ==
-                                                'extCheckupEquipment')
-                                              ListView.builder(
-                                                shrinkWrap: true,
-                                                itemCount:
-                                                    ExtCheckupEquipment_Item
-                                                        .checklistEquipment
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(15.0),
+                                            child: Column(
+                                              children: [
+                                                if (state.typeCheckState ==
+                                                    'extCheckupList')
+                                                  ListView.builder(
+                                                    shrinkWrap: true,
+                                                    itemCount:
+                                                        ExtCheckupList_Item
+                                                            .checklist.length,
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            ExtCheckupList_Item
+                                                                .checklist[
+                                                                    index]
+                                                                .list
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                fontSize: 20,
+                                                                color: Palette
+                                                                    .thisBlue),
+                                                          ),
+                                                          Text(
+                                                            ExtCheckupList_Item
+                                                                .checklist[
+                                                                    index]
+                                                                .result
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                fontSize: 20,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: (ExtCheckupList_Item
+                                                                            .checklist[
+                                                                                index]
+                                                                            .result
+                                                                            .toString() ==
+                                                                        'ปกติ')
+                                                                    ? Palette
+                                                                        .theGreen
+                                                                    : Palette
+                                                                        .someRed),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  ),
+                                                if (state.typeCheckState ==
+                                                    'extCheckupEquipment')
+                                                  ListView.builder(
+                                                    shrinkWrap: true,
+                                                    itemCount:
+                                                        ExtCheckupEquipment_Item
+                                                            .checklistEquipment
+                                                            .length,
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            ExtCheckupEquipment_Item
+                                                                .checklistEquipment[
+                                                                    index]
+                                                                .list
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                fontSize: 20,
+                                                                color: Palette
+                                                                    .thisBlue),
+                                                          ),
+                                                          Text(
+                                                            ExtCheckupEquipment_Item
+                                                                .checklistEquipment[
+                                                                    index]
+                                                                .result
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 20,
+                                                                color: (ExtCheckupEquipment_Item
+                                                                            .checklistEquipment[
+                                                                                index]
+                                                                            .result
+                                                                            .toString() ==
+                                                                        'ปกติ')
+                                                                    ? Palette
+                                                                        .theGreen
+                                                                    : Palette
+                                                                        .someRed),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  ),
+                                                if (state.typeCheckState ==
+                                                    'extCheckupSafetyList')
+                                                  ListView.builder(
+                                                    shrinkWrap: true,
+                                                    itemCount: ExtCheckupSafety_Item
+                                                        .checklistExtCheckupSafety_Item
                                                         .length,
-                                                itemBuilder: (context, index) {
-                                                  return Row(
-                                                    children: [
-                                                      Text(
-                                                        ExtCheckupEquipment_Item
-                                                            .checklistEquipment[
-                                                                index]
-                                                            .list
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                            fontSize: 20,
-                                                            color: Palette
-                                                                .thisBlue),
-                                                      ),
-                                                      Text(
-                                                        ExtCheckupEquipment_Item
-                                                            .checklistEquipment[
-                                                                index]
-                                                            .result
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                            fontSize: 20,
-                                                            color: (ExtCheckupEquipment_Item
-                                                                        .checklistEquipment[
-                                                                            index]
-                                                                        .result
-                                                                        .toString() ==
-                                                                    'ปกติ')
-                                                                ? Palette
-                                                                    .theGreen
-                                                                : Palette
-                                                                    .someRed),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              ),
-                                            if (state.typeCheckState ==
-                                                'extCheckupSafetyList')
-                                              ListView.builder(
-                                                shrinkWrap: true,
-                                                itemCount: ExtCheckupSafety_Item
-                                                    .checklistExtCheckupSafety_Item
-                                                    .length,
-                                                itemBuilder: (context, index) {
-                                                  return Row(
-                                                    children: [
-                                                      Text(
-                                                        ExtCheckupSafety_Item
-                                                            .checklistExtCheckupSafety_Item[
-                                                                index]
-                                                            .list
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                            fontSize: 20,
-                                                            color: Palette
-                                                                .thisBlue),
-                                                      ),
-                                                      Text(
-                                                        ExtCheckupSafety_Item
-                                                            .checklistExtCheckupSafety_Item[
-                                                                index]
-                                                            .result
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                            fontSize: 20,
-                                                            color: (ExtCheckupList_Item
-                                                                        .checklist[
-                                                                            index]
-                                                                        .result
-                                                                        .toString() ==
-                                                                    'ปกติ')
-                                                                ? Palette
-                                                                    .theGreen
-                                                                : Palette
-                                                                    .someRed),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              ),
-                                          ],
-                                        ),
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            ExtCheckupSafety_Item
+                                                                .checklistExtCheckupSafety_Item[
+                                                                    index]
+                                                                .list
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                fontSize: 20,
+                                                                color: Palette
+                                                                    .thisBlue),
+                                                          ),
+                                                          Text(
+                                                            ExtCheckupSafety_Item
+                                                                .checklistExtCheckupSafety_Item[
+                                                                    index]
+                                                                .result
+                                                                .toString(),
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 20,
+                                                                color: (ExtCheckupSafety_Item
+                                                                            .checklistExtCheckupSafety_Item[
+                                                                                index]
+                                                                            .result
+                                                                            .toString() ==
+                                                                        'ปกติ')
+                                                                    ? Palette
+                                                                        .theGreen
+                                                                    : Palette
+                                                                        .someRed),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                               SizedBox(
@@ -650,10 +716,11 @@ class _Check_ScreenState extends State<Check_Screen> {
                                         borderRadius: BorderRadius.circular(10),
                                       )),
                                   onPressed: () {
+                                    // selectedImage = null;
                                     if (state.toCheckChecklist1 == 1) {
                                       SuccessMessage_Dialog(
                                           context,
-                                          'เช็ครายการเบื้องต้นเสร็จสิ้น',
+                                          'เช็ครายการ${widget.checkingType}เสร็จสิ้น',
                                           'เช็ครถ');
 
                                       context.read<CarCheckBloc>().add(
@@ -690,70 +757,14 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                 getTypeCheckToStore:
                                                     state.typeCheckState));
                                       }
-                                    } else {
-                                      if (state.typeCheckState ==
-                                          'extCheckupList') {
-                                        ExtCheckupList_Item.addItem1(
-                                            sysVehicleChecklistId: int.parse(
-                                                state
-                                                    .fetched_checkList1[
-                                                        state.countIndexCheck]
-                                                    .id
-                                                    .toString()),
-                                            list: state
-                                                .fetched_checkList1[
-                                                    state.countIndexCheck]
-                                                .name,
-                                            result: (context
-                                                        .read<CarCheckBloc>()
-                                                        .state
-                                                        .indexButtonSelect ==
-                                                    0)
-                                                ? 'ปกติ'
-                                                : 'ไม่ปกติ',
-                                            order: 1);
-                                      } else if (state.typeCheckState ==
-                                          'extCheckupEquipment') {
-                                        ExtCheckupEquipment_Item.addItem2(
-                                            sysVehicleChecklistId: int.parse(
-                                                state
-                                                    .fetched_checkList1[
-                                                        state.countIndexCheck]
-                                                    .id
-                                                    .toString()),
-                                            list: state
-                                                .fetched_checkList1[
-                                                    state.countIndexCheck]
-                                                .name,
-                                            result: (context
-                                                        .read<CarCheckBloc>()
-                                                        .state
-                                                        .indexButtonSelect ==
-                                                    0)
-                                                ? 'ปกติ'
-                                                : 'ไม่ปกติ',
-                                            order: 1);
-                                      } else {
-                                        ExtCheckupSafety_Item.addItem3(
-                                            sysVehicleChecklistId: int.parse(
-                                                state
-                                                    .fetched_checkList1[
-                                                        state.countIndexCheck]
-                                                    .id
-                                                    .toString()),
-                                            list: state
-                                                .fetched_checkList1[
-                                                    state.countIndexCheck]
-                                                .name,
-                                            result: (context
-                                                        .read<CarCheckBloc>()
-                                                        .state
-                                                        .indexButtonSelect ==
-                                                    0)
-                                                ? 'ปกติ'
-                                                : 'ไม่ปกติ',
-                                            order: 1);
-                                      }
+                                    }
+                                    //!
+                                    else {
+                                      context.read<CarCheckBloc>().add(
+                                          AddItem_Bloc(
+                                              getTypeCheckToAddItem:
+                                                  state.typeCheckState,
+                                              fileImage: selectedImage));
 
                                       context
                                           .read<CarCheckBloc>()
@@ -762,6 +773,8 @@ class _Check_ScreenState extends State<Check_Screen> {
                                       context.read<CarCheckBloc>().add(
                                           Swap_Index_forButtones(getIndex: 0));
                                     }
+
+                                    // selectedImage = null;
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(15.0),
@@ -790,5 +803,101 @@ class _Check_ScreenState extends State<Check_Screen> {
         ]),
       ),
     );
+  }
+
+  _openImageDialogChecking(context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            scrollable: true, // <-- Set it to true
+
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(32.0))),
+            contentPadding: const EdgeInsets.all(20),
+            content: Column(
+              children: [
+                Center(
+                  child: Text(
+                    'รูป',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Palette.thisBlue),
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        _getToCamera();
+                        Navigator.pop(context);
+                      },
+                      child: Column(
+                        children: [
+                          SvgPicture.asset('assets/images/cam.svg'),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          const Text(
+                            'ถ่ายภาพ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 25,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        _getGallery();
+                        Navigator.pop(context);
+                      },
+                      child: Column(
+                        children: [
+                          SvgPicture.asset('assets/images/gal.svg'),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          const Text(
+                            'แกลอรี่',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
+  Future<void> _getToCamera() async {
+    final pickedImage = await picker.pickImage(source: ImageSource.camera);
+    if (pickedImage != null) {
+      setState(() {
+        selectedImage = File(pickedImage.path);
+      });
+    }
+  }
+
+  Future<void> _getGallery() async {
+    final pickedFiles = await picker.pickMultiImage(
+        imageQuality: 100, maxHeight: 1000, maxWidth: 1000);
+    if (pickedFiles != null && pickedFiles.isNotEmpty) {
+      setState(() {
+        selectedImage = File(pickedFiles.first.path);
+      });
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('No image selected')));
+    }
   }
 }

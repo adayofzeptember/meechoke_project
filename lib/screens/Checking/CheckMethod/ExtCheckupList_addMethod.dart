@@ -6,9 +6,11 @@ class ExtCheckupList_Item {
   String result;
   int order;
 
+
   ExtCheckupList_Item(
       {required this.sysVehicleChecklistId,
       required this.list,
+
       required this.result,
       required this.order});
 
@@ -17,7 +19,8 @@ class ExtCheckupList_Item {
       'sysVehicleChecklistId': sysVehicleChecklistId,
       'list': list,
       'result': result,
-      'order': order
+      'order': order,
+      
     };
   }
 
@@ -27,6 +30,7 @@ class ExtCheckupList_Item {
     required String list,
     required String result,
     required int order,
+    
   }) {
     checklist.add(ExtCheckupList_Item(
         sysVehicleChecklistId: sysVehicleChecklistId,

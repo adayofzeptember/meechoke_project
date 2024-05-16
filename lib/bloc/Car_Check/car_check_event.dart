@@ -37,3 +37,12 @@ class CheckupList_BlocAdd extends CarCheckEvent {
       this.getExtSafety_List,
       this.getExtEqipment_List});
 }
+
+class AddItem_Bloc extends CarCheckEvent {
+  File? fileImage;
+  String getTypeCheckToAddItem;
+  AddItem_Bloc({required this.getTypeCheckToAddItem, this.fileImage});
+}
+
+class Submit_AllCheckings extends CarCheckEvent {
+}

@@ -8,7 +8,6 @@ import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/Car_Check/car_check_bloc.dart';
 import 'package:meechoke_project/screens/Checking/Check_Screen.dart';
-import 'package:meechoke_project/ETC/testCheck.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Check_Daily extends StatefulWidget {
@@ -218,7 +217,9 @@ class _Check_DailyState extends State<Check_Daily> {
                               PageTransition(
                                   duration: const Duration(milliseconds: 300),
                                   type: PageTransitionType.rightToLeft,
-                                  child: Check_Screen(checkingType: 'เบื้องต้น',)),
+                                  child: Check_Screen(
+                                    checkingType: 'เบื้องต้น',
+                                  )),
                             );
                           },
                           child: Container(
@@ -264,7 +265,9 @@ class _Check_DailyState extends State<Check_Daily> {
                               PageTransition(
                                   duration: const Duration(milliseconds: 300),
                                   type: PageTransitionType.rightToLeft,
-                                  child: Check_Screen(checkingType: 'อุปกรณ์',)),
+                                  child: Check_Screen(
+                                    checkingType: 'อุปกรณ์',
+                                  )),
                             );
                           },
                           child: Container(
@@ -310,7 +313,9 @@ class _Check_DailyState extends State<Check_Daily> {
                               PageTransition(
                                   duration: const Duration(milliseconds: 300),
                                   type: PageTransitionType.rightToLeft,
-                                  child: Check_Screen(checkingType: 'เซฟตี้',)),
+                                  child: Check_Screen(
+                                    checkingType: 'เซฟตี้',
+                                  )),
                             );
                           },
                           child: Container(
@@ -356,6 +361,8 @@ class _Check_DailyState extends State<Check_Daily> {
                               print(
                                   '--------------------------3-------------------------------');
                               print(json.encode(state.storedExtCheckupSafety3));
+                              print(
+                                  '-----------------------------------------------------------');
                             },
                             child: Text('sdfsdf')),
                         //!
@@ -368,12 +375,15 @@ class _Check_DailyState extends State<Check_Daily> {
                                 borderRadius: BorderRadius.circular(10),
                               )),
                           onPressed: (state.storedExtCheckupList1.isEmpty ||
-                                  state.storedExtCheckupEquipment2.isEmpty||
+                                  state.storedExtCheckupEquipment2.isEmpty ||
                                   state.storedExtCheckupSafety3.isEmpty)
                               ? null
-                              : (){ //w,j;jk'
-                                 print('go');
-                              },
+                              : () {
+                                  context
+                                      .read<CarCheckBloc>()
+                                      .add(Submit_AllCheckings());
+
+                                },
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
                             child: Container(

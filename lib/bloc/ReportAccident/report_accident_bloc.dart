@@ -89,7 +89,7 @@ class ReportAccidentBloc
 
       print(state.lat.toString() + " " + state.lng.toString());
 
-
+ 
       for (final imageFiles in event.files!) {
         String fileName = imageFiles.path.split('/').last;
 
@@ -196,7 +196,7 @@ class ReportAccidentBloc
     
 //*-------------------------------------------------------------------------
     on<GetLocationName>((event, emit) async {
-      print('LOCATEWIng');
+      print('LOCATE');
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
 

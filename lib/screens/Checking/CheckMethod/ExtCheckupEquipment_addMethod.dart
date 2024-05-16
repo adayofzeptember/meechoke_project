@@ -1,20 +1,20 @@
 // ignore_for_file: unused_local_variable
 
 class ExtCheckupEquipment_Item {
-  int sysVehicleChecklistId;
+  int sysVehicleEquipmentId;
   String list;
   String result;
   int order;
 
   ExtCheckupEquipment_Item(
-      {required this.sysVehicleChecklistId,
+      {required this.sysVehicleEquipmentId,
       required this.list,
       required this.result,
       required this.order});
 
   Map<String, dynamic> toJson() {
     return {
-      'sysVehicleChecklistId': sysVehicleChecklistId,
+      'sysVehicleEquipmentId': sysVehicleEquipmentId,
       'list': list,
       'result': result,
       'order': order
@@ -23,13 +23,13 @@ class ExtCheckupEquipment_Item {
 
   static List<ExtCheckupEquipment_Item> checklistEquipment = [];
   static void addItem2({
-    required int sysVehicleChecklistId,
+    required int sysVehicleEquipmentId,
     required String list,
     required String result,
     required int order,
   }) {
     checklistEquipment.add(ExtCheckupEquipment_Item(
-        sysVehicleChecklistId: sysVehicleChecklistId,
+        sysVehicleEquipmentId: sysVehicleEquipmentId,
         list: list,
         result: result,
         order: order));

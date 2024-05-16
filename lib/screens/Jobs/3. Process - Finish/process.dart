@@ -49,9 +49,7 @@ class _Job_ProcessState extends State<Job_Process> {
               ),
             ),
             title: Text(
-                           state.job_info.currentLocation
-                                  .currentLocation_id.toString(),
- 
+              state.job_info.currentLocation.currentLocation_id.toString(),
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -126,8 +124,8 @@ class _Job_ProcessState extends State<Job_Process> {
                                 ),
                                 SizedBox(height: 5),
                                 Text(
-                                           state.job_info.currentLocation
-                                  .currentLocation_date,
+                                  state.job_info.currentLocation
+                                      .currentLocation_date,
                                   style: TextStyle(
                                     color: Palette.thisBlue,
                                     fontSize: 18,
@@ -247,8 +245,10 @@ class _Job_ProcessState extends State<Job_Process> {
                             alignment: Alignment.center,
                             child: Text(
                               selectedImages.isEmpty
-                                  ? 'ถึง'+             state.job_info.currentLocation
-                                  .currentLocation_checkinCategory+'แล้ว'
+                                  ? 'ถึง' +
+                                      state.job_info.currentLocation
+                                          .currentLocation_checkinCategory +
+                                      'แล้ว'
                                   : 'เพิ่มรูปภาพ',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -282,24 +282,24 @@ class _Job_ProcessState extends State<Job_Process> {
                                   ),
                                   onPressed: () {
                                     if (state.job_info.currentLocation
-                                  .currentLocation_checkinCategory ==
+                                            .currentLocation_checkinCategory ==
                                         'จุดรับสินค้า') {
                                       statusImag = 'files[pickupImage][]';
                                     } else if (state.job_info.currentLocation
-                                  .currentLocation_checkinCategory ==
+                                            .currentLocation_checkinCategory ==
                                         'จุดส่งสินค้า') {
                                       statusImag = 'files[deployImage][]';
                                     } else if (state.job_info.currentLocation
-                                  .currentLocation_checkinCategory ==
+                                            .currentLocation_checkinCategory ==
                                         'จุดรับตู้') {
                                       statusImag = 'files[getContainerImage][]';
                                     } else if (state.job_info.currentLocation
-                                  .currentLocation_checkinCategory ==
+                                            .currentLocation_checkinCategory ==
                                         'จุดบรรจุ') {
                                       statusImag =
                                           'files[installContainerImage][]';
                                     } else if (state.job_info.currentLocation
-                                  .currentLocation_checkinCategory ==
+                                            .currentLocation_checkinCategory ==
                                         'จุดคืนตู้') {
                                       statusImag =
                                           'files[returnContainerImage][]';
@@ -309,18 +309,21 @@ class _Job_ProcessState extends State<Job_Process> {
 
                                     context.read<JobsBloc>().add(
                                         Upload_Pics_Jobs(
-                                          getCurrentLocationID: state.job_info.currentLocation
-                                  .currentLocation_id,
+                                            getCurrentLocationID: state
+                                                .job_info
+                                                .currentLocation
+                                                .currentLocation_id,
                                             imageFileName: statusImag,
                                             hasFinished: false,
                                             hasDeliveredOverTime: false,
                                             hasPickedOverTime: false,
-                                            type: state
-                                                .job_info
-                                                .checkInLocation_Info[
-                                                    state.count]
-                                                .checkinCategory
-                                                .toString(),
+                                            type:
+                                                state
+                                                    .job_info
+                                                    .checkInLocation_Info[
+                                                        state.count]
+                                                    .checkinCategory
+                                                    .toString(),
                                             context: context,
                                             getJoNumber: state
                                                 .job_info.docNumber
