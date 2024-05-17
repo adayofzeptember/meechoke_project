@@ -1,8 +1,11 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
@@ -246,7 +249,34 @@ class _Check_DailyState extends State<Check_Daily> {
                                           Icons.arrow_circle_right_outlined,
                                           color: Colors.white,
                                         )
-                                      : Text('เช็คแล้ว')
+                                      : Container(
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10))),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              children: [
+                                                SvgPicture.asset(
+                                                  'assets/images/normal.svg',
+                                                  color: Palette.theGreen,
+                                                  width: 25,
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  'ตรวจเช็คแล้ว',
+                                                  style: TextStyle(
+                                                      color: Palette.theGreen,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
                                 ],
                               ),
                             ),
@@ -294,7 +324,34 @@ class _Check_DailyState extends State<Check_Daily> {
                                           Icons.arrow_circle_right_outlined,
                                           color: Colors.white,
                                         )
-                                      : Text('เช็คแล้ว')
+                                      : Container(
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10))),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              children: [
+                                                SvgPicture.asset(
+                                                  'assets/images/normal.svg',
+                                                  color: Palette.theGreen,
+                                                  width: 25,
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  'ตรวจเช็คแล้ว',
+                                                  style: TextStyle(
+                                                      color: Palette.theGreen,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
                                 ],
                               ),
                             ),
@@ -314,7 +371,7 @@ class _Check_DailyState extends State<Check_Daily> {
                                   duration: const Duration(milliseconds: 300),
                                   type: PageTransitionType.rightToLeft,
                                   child: Check_Screen(
-                                    checkingType: 'เซฟตี้',
+                                    checkingType: 'ส่วนความปลอดภัย',
                                   )),
                             );
                           },
@@ -331,7 +388,7 @@ class _Check_DailyState extends State<Check_Daily> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    '3. เซฟตี้',
+                                    '3. ส่วนความปลอดภัย',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20,
@@ -342,7 +399,34 @@ class _Check_DailyState extends State<Check_Daily> {
                                           Icons.arrow_circle_right_outlined,
                                           color: Colors.white,
                                         )
-                                      : Text('เช็คแล้ว')
+                                      : Container(
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10))),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              children: [
+                                                SvgPicture.asset(
+                                                  'assets/images/normal.svg',
+                                                  color: Palette.theGreen,
+                                                  width: 25,
+                                                ),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  'ตรวจเช็คแล้ว',
+                                                  style: TextStyle(
+                                                      color: Palette.theGreen,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
                                 ],
                               ),
                             ),
@@ -382,7 +466,6 @@ class _Check_DailyState extends State<Check_Daily> {
                                   context
                                       .read<CarCheckBloc>()
                                       .add(Submit_AllCheckings());
-
                                 },
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),

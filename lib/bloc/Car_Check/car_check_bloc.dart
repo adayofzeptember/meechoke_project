@@ -9,6 +9,7 @@ import 'package:meechoke_project/bloc/Car_Check/model.dart';
 import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupEquipment_addMethod.dart';
 import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupList_addMethod.dart';
 import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupSafety_addMethod.dart';
+import 'package:meechoke_project/screens/Checking/CheckMethod/filenames.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'car_check_event.dart';
 part 'car_check_state.dart';
@@ -260,16 +261,26 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
                 (state.countIndexCheck >= state.fetched_checkList1.length - 1)
                     ? 1
                     : state.toCheckChecklist1,
-            indexButtonSelect: 0, isLoading: false));
+            indexButtonSelect: 0,
+            isLoading: false));
       } else {
+        String imgType;
+        if (state.typeCheckState == 'extCheckupList') {
+          imgType = 'checkupListImage';
+        } else if (state.typeCheckState == 'extCheckupEquipment') {
+          imgType = 'checkupEquipmentImage';
+        } else {
+          imgType = 'checkupSafetyListImage';
+        }
+        String fileName = event.fileImage!.path.split('/').last;
         //!-------------------------------------------------------------------------------------------
         final formData;
         formData = FormData.fromMap({
           "type": "image",
           "collection": "true",
-          "files[checkupImage][]": await MultipartFile.fromFile(
+          "files[${imgType}][]": await MultipartFile.fromFile(
               event.fileImage!.path,
-              filename: "checkupImage.jpg")
+              filename: "${fileName}")
         });
 
         final response = await dio.post(api_url + "uploads",
@@ -286,8 +297,14 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
             ),
             data: formData);
 
-        var x = response.data['data'];
-        print(x.toString());
+        var imgUploadResponse = response.data['data'];
+
+        Map<String, List<FileInformation>> filenames = {};
+        imgUploadResponse.forEach((key, value) {
+          filenames[key] = (value as List)
+              .map((item) => FileInformation.fromJson(item))
+              .toList();
+        });
 
         if (state.typeCheckState == 'extCheckupList') {
           ExtCheckupList_Item.addItem1(
@@ -296,6 +313,7 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
                   .toString()),
               list: state.fetched_checkList1[state.countIndexCheck].name,
               result: (state.indexButtonSelect == 0) ? 'ปกติ' : 'ไม่ปกติ',
+              filenames: filenames,
               order: 1);
         } else if (state.typeCheckState == 'extCheckupEquipment') {
           ExtCheckupEquipment_Item.addItem2(
@@ -304,12 +322,14 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
                   .toString()),
               list: state.fetched_checkList1[state.countIndexCheck].name,
               result: (state.indexButtonSelect == 0) ? 'ปกติ' : 'ไม่ปกติ',
+              filenames: filenames,
               order: 1);
         } else {
           ExtCheckupSafety_Item.addItem3(
               sysVehicleSafetyListId: int.parse(state
                   .fetched_checkList1[state.countIndexCheck].id
                   .toString()),
+              filenames: filenames,
               list: state.fetched_checkList1[state.countIndexCheck].name,
               result: (state.indexButtonSelect == 0) ? 'ปกติ' : 'ไม่ปกติ',
               order: 1);
@@ -323,7 +343,8 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
                 (state.countIndexCheck >= state.fetched_checkList1.length - 1)
                     ? 1
                     : state.toCheckChecklist1,
-            indexButtonSelect: 0, isLoading: false));
+            indexButtonSelect: 0,
+            isLoading: false));
       }
 
       //?--------------------------------------+++++-----------------+++++-----------------+++++-----------------+++++
