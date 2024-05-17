@@ -16,8 +16,8 @@ class Load_CheckList extends CarCheckEvent {
 class Load_CheckList2 extends CarCheckEvent {}
 
 class Count_PlusIndex extends CarCheckEvent {
-  String? method;
-  Count_PlusIndex({required this.method});
+  // String? method;
+  // Count_PlusIndex({required this.method});
 }
 
 class Swap_Index_forButtones extends CarCheckEvent {
@@ -40,8 +40,15 @@ class CheckupList_BlocAdd extends CarCheckEvent {
 
 class AddItem_Bloc extends CarCheckEvent {
   File? fileImage;
-  String getTypeCheckToAddItem;
-  AddItem_Bloc({required this.getTypeCheckToAddItem, this.fileImage});
+
+  AddItem_Bloc({this.fileImage});
+}
+
+
+class AddItem_Bloc2 extends CarCheckEvent {
+  File? fileImage;
+
+  AddItem_Bloc2({this.fileImage});
 }
 
 class Submit_AllCheckings extends CarCheckEvent {

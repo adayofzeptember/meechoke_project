@@ -34,14 +34,12 @@ class ExtCheckupSafety_Item {
         result: result,
         order: order));
 
-    List<Map<String, dynamic>> jsonList1 =
-        ExtCheckupSafety_Item.checklistExtCheckupSafety_Item.map((item) => item.toJson()).toList();
+    List<Map<String, dynamic>> jsonList1 = ExtCheckupSafety_Item
+        .checklistExtCheckupSafety_Item
+        .map((item) => item.toJson())
+        .toList();
 
 
-
- 
+            print(jsonList1);
   }
-
-
 }
-

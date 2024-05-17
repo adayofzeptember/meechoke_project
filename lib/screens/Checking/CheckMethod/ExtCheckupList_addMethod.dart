@@ -6,11 +6,9 @@ class ExtCheckupList_Item {
   String result;
   int order;
 
-
   ExtCheckupList_Item(
       {required this.sysVehicleChecklistId,
       required this.list,
-
       required this.result,
       required this.order});
 
@@ -20,7 +18,6 @@ class ExtCheckupList_Item {
       'list': list,
       'result': result,
       'order': order,
-      
     };
   }
 
@@ -30,7 +27,6 @@ class ExtCheckupList_Item {
     required String list,
     required String result,
     required int order,
-    
   }) {
     checklist.add(ExtCheckupList_Item(
         sysVehicleChecklistId: sysVehicleChecklistId,
@@ -41,13 +37,6 @@ class ExtCheckupList_Item {
     List<Map<String, dynamic>> jsonList1 =
         ExtCheckupList_Item.checklist.map((item) => item.toJson()).toList();
 
-    // Print JSON list
     print(jsonList1);
-    // print(jsonList.length);
   }
-
-  
 }
-
-
-

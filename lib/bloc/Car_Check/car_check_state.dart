@@ -4,6 +4,7 @@ part of 'car_check_bloc.dart';
 
 class CarCheckState extends Equatable {
   int indexButtonSelect;
+  bool isLoading;
   List fetched_checkList1;
   int toCheckChecklist1;
   List<ExtCheckupList_Item> storedExtCheckupList1;
@@ -17,6 +18,7 @@ class CarCheckState extends Equatable {
       required this.storedExtCheckupSafety3,
       required this.toCheckChecklist1,
       required this.typeCheckState,
+      required this.isLoading,
       required this.storedExtCheckupList1,
       required this.countIndexCheck,
       required this.indexButtonSelect});
@@ -26,12 +28,14 @@ class CarCheckState extends Equatable {
       int? indexButtonSelect,
       int? countIndexCheck,
       String? typeCheckState,
+      bool? isLoading,
       int? toCheckChecklist1,
       List<ExtCheckupList_Item>? storedExtCheckupList1,
       List<ExtCheckupEquipment_Item>? storedExtCheckupEquipment2,
       List<ExtCheckupSafety_Item>? storedExtCheckupSafety3,
       List? test}) {
     return CarCheckState(
+      isLoading: isLoading ?? this.isLoading,
       typeCheckState: typeCheckState ?? this.typeCheckState,
       fetched_checkList1: fetched_checkList1 ?? this.fetched_checkList1,
       toCheckChecklist1: toCheckChecklist1 ?? this.toCheckChecklist1,
@@ -50,6 +54,7 @@ class CarCheckState extends Equatable {
   List<Object> get props => [
         typeCheckState,
         fetched_checkList1,
+        isLoading,
         storedExtCheckupSafety3,
         storedExtCheckupEquipment2,
         storedExtCheckupList1,

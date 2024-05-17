@@ -17,6 +17,7 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
   final dio = Dio();
   CarCheckBloc()
       : super(CarCheckState(
+            isLoading: false,
             storedExtCheckupList1: [],
             storedExtCheckupEquipment2: [],
             storedExtCheckupSafety3: [],
@@ -39,7 +40,6 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
           countIndexCheck: 0,
           toCheckChecklist1: 0));
 
- 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
       try {
@@ -83,9 +83,14 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
     });
 
     on<AddItem_Bloc>((event, emit) async {
-      // SharedPreferences prefs = await SharedPreferences.getInstance();
-      // String? tokenAuth = prefs.getString('userToken');
-      // print(event.fileImage!.path);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? tokenAuth = prefs.getString('userToken');
+
+      // if (event.fileImage?.path == null || event.fileImage?.path == 'null') {
+      //   print('no img');
+      // } else {
+      //   print(event.fileImage?.path);
+      // }
       // final formData;
       // formData = FormData.fromMap({
       //   "type": "image",
@@ -93,8 +98,6 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
       //   "files[checkupImage][]": await MultipartFile.fromFile(
       //       event.fileImage!.path,
       //       filename: "checkupImage.jpg")
-      //   // await MultipartFile.fromFile(event.files![1].path
-      //   // )
       // });
 
       // final response = await dio.post(api_url + "uploads",
@@ -113,6 +116,8 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
 
       // var x = response.data['data'];
       // print(x.toString());
+
+      //?--------------------------------------+++++-----------------+++++-----------------+++++-----------------+++++
 
       if (state.typeCheckState == 'extCheckupList') {
         ExtCheckupList_Item.addItem1(
@@ -136,6 +141,16 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
             result: (state.indexButtonSelect == 0) ? 'ปกติ' : 'ไม่ปกติ',
             order: 1);
       }
+      emit(state.copyWith(
+          countIndexCheck:
+              (state.countIndexCheck >= state.fetched_checkList1.length - 1)
+                  ? state.countIndexCheck + 0
+                  : state.countIndexCheck + 1,
+          toCheckChecklist1:
+              (state.countIndexCheck >= state.fetched_checkList1.length - 1)
+                  ? 1
+                  : state.toCheckChecklist1,
+          indexButtonSelect: 0));
     });
 
     on<Submit_AllCheckings>((event, emit) async {
@@ -201,6 +216,117 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
 
     on<Swap_Index_forButtones>((event, emit) async {
       emit(state.copyWith(indexButtonSelect: event.getIndex));
+    });
+
+    on<AddItem_Bloc2>((event, emit) async {
+      emit(state.copyWith(isLoading: true));
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? tokenAuth = prefs.getString('userToken');
+
+      if (event.fileImage?.path == null || event.fileImage?.path == 'null') {
+        print('-no img-');
+        if (state.typeCheckState == 'extCheckupList') {
+          ExtCheckupList_Item.addItem1(
+              sysVehicleChecklistId: int.parse(state
+                  .fetched_checkList1[state.countIndexCheck].id
+                  .toString()),
+              list: state.fetched_checkList1[state.countIndexCheck].name,
+              result: (state.indexButtonSelect == 0) ? 'ปกติ' : 'ไม่ปกติ',
+              order: 1);
+        } else if (state.typeCheckState == 'extCheckupEquipment') {
+          ExtCheckupEquipment_Item.addItem2(
+              sysVehicleEquipmentId: int.parse(state
+                  .fetched_checkList1[state.countIndexCheck].id
+                  .toString()),
+              list: state.fetched_checkList1[state.countIndexCheck].name,
+              result: (state.indexButtonSelect == 0) ? 'ปกติ' : 'ไม่ปกติ',
+              order: 1);
+        } else {
+          ExtCheckupSafety_Item.addItem3(
+              sysVehicleSafetyListId: int.parse(state
+                  .fetched_checkList1[state.countIndexCheck].id
+                  .toString()),
+              list: state.fetched_checkList1[state.countIndexCheck].name,
+              result: (state.indexButtonSelect == 0) ? 'ปกติ' : 'ไม่ปกติ',
+              order: 1);
+        }
+        emit(state.copyWith(
+            countIndexCheck:
+                (state.countIndexCheck >= state.fetched_checkList1.length - 1)
+                    ? state.countIndexCheck + 0
+                    : state.countIndexCheck + 1,
+            toCheckChecklist1:
+                (state.countIndexCheck >= state.fetched_checkList1.length - 1)
+                    ? 1
+                    : state.toCheckChecklist1,
+            indexButtonSelect: 0, isLoading: false));
+      } else {
+        //!-------------------------------------------------------------------------------------------
+        final formData;
+        formData = FormData.fromMap({
+          "type": "image",
+          "collection": "true",
+          "files[checkupImage][]": await MultipartFile.fromFile(
+              event.fileImage!.path,
+              filename: "checkupImage.jpg")
+        });
+
+        final response = await dio.post(api_url + "uploads",
+            options: Options(
+              headers: {
+                "Authorization": "Bearer $tokenAuth",
+              },
+              followRedirects: false,
+              validateStatus: (status) {
+                return status! <= 500;
+              },
+              contentType: Headers.formUrlEncodedContentType,
+              responseType: ResponseType.json,
+            ),
+            data: formData);
+
+        var x = response.data['data'];
+        print(x.toString());
+
+        if (state.typeCheckState == 'extCheckupList') {
+          ExtCheckupList_Item.addItem1(
+              sysVehicleChecklistId: int.parse(state
+                  .fetched_checkList1[state.countIndexCheck].id
+                  .toString()),
+              list: state.fetched_checkList1[state.countIndexCheck].name,
+              result: (state.indexButtonSelect == 0) ? 'ปกติ' : 'ไม่ปกติ',
+              order: 1);
+        } else if (state.typeCheckState == 'extCheckupEquipment') {
+          ExtCheckupEquipment_Item.addItem2(
+              sysVehicleEquipmentId: int.parse(state
+                  .fetched_checkList1[state.countIndexCheck].id
+                  .toString()),
+              list: state.fetched_checkList1[state.countIndexCheck].name,
+              result: (state.indexButtonSelect == 0) ? 'ปกติ' : 'ไม่ปกติ',
+              order: 1);
+        } else {
+          ExtCheckupSafety_Item.addItem3(
+              sysVehicleSafetyListId: int.parse(state
+                  .fetched_checkList1[state.countIndexCheck].id
+                  .toString()),
+              list: state.fetched_checkList1[state.countIndexCheck].name,
+              result: (state.indexButtonSelect == 0) ? 'ปกติ' : 'ไม่ปกติ',
+              order: 1);
+        }
+        emit(state.copyWith(
+            countIndexCheck:
+                (state.countIndexCheck >= state.fetched_checkList1.length - 1)
+                    ? state.countIndexCheck + 0
+                    : state.countIndexCheck + 1,
+            toCheckChecklist1:
+                (state.countIndexCheck >= state.fetched_checkList1.length - 1)
+                    ? 1
+                    : state.toCheckChecklist1,
+            indexButtonSelect: 0, isLoading: false));
+      }
+
+      //?--------------------------------------+++++-----------------+++++-----------------+++++-----------------+++++
     });
   }
 }

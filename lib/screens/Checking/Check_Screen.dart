@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:meechoke_project/ETC/ProgressHUD.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/ETC/success_dialog.dart';
@@ -33,8 +34,18 @@ class _Check_ScreenState extends State<Check_Screen> {
     super.initState();
   }
 
-  @override
   Widget build(BuildContext context) {
+    return BlocBuilder<CarCheckBloc, CarCheckState>(
+      builder: (context, state) {
+        return ProgressHUD(
+            child: _uiChecking(context),
+            inAsyncCall: state.isLoading,
+            opacity: 0.3);
+      },
+    );
+  }
+
+  Widget _uiChecking(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -43,9 +54,13 @@ class _Check_ScreenState extends State<Check_Screen> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            ExtCheckupList_Item.checklist.clear();
-            ExtCheckupEquipment_Item.checklistEquipment.clear();
-            ExtCheckupSafety_Item.checklistExtCheckupSafety_Item.clear();
+            if (widget.checkingType == "เบื้องต้น") {
+              ExtCheckupList_Item.checklist.clear();
+            } else if (widget.checkingType == "อุปกรณ์") {
+              ExtCheckupEquipment_Item.checklistEquipment.clear();
+            } else {
+              ExtCheckupSafety_Item.checklistExtCheckupSafety_Item.clear();
+            }
 
             Navigator.pop(context);
           },
@@ -170,12 +185,15 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                           child: Row(
                                                             children: [
                                                               SvgPicture.asset(
-                                                                  'assets/images/normal.svg', color: state.indexButtonSelect ==
-                                                                          0
-                                                                      ? Colors
-                                                                          .white
-                                                                      : Colors
-                                                                          .grey,),
+                                                                'assets/images/normal.svg',
+                                                                color: state
+                                                                            .indexButtonSelect ==
+                                                                        0
+                                                                    ? Colors
+                                                                        .white
+                                                                    : Colors
+                                                                        .grey,
+                                                              ),
                                                               SizedBox(
                                                                 width: 5,
                                                               ),
@@ -716,7 +734,6 @@ class _Check_ScreenState extends State<Check_Screen> {
                                         borderRadius: BorderRadius.circular(10),
                                       )),
                                   onPressed: () {
-                                    // selectedImage = null;
                                     if (state.toCheckChecklist1 == 1) {
                                       SuccessMessage_Dialog(
                                           context,
@@ -759,19 +776,83 @@ class _Check_ScreenState extends State<Check_Screen> {
                                       }
                                     }
                                     //!
+
                                     else {
                                       context.read<CarCheckBloc>().add(
-                                          AddItem_Bloc(
-                                              getTypeCheckToAddItem:
-                                                  state.typeCheckState,
+                                          AddItem_Bloc2(
                                               fileImage: selectedImage));
 
-                                      context
-                                          .read<CarCheckBloc>()
-                                          .add(Count_PlusIndex(method: "+"));
+                                      selectedImage = null;
+                                      // if (state.typeCheckState ==
+                                      //     'extCheckupList') {
+                                      //   ExtCheckupList_Item.addItem1(
+                                      //       sysVehicleChecklistId: int.parse(
+                                      //           state
+                                      //               .fetched_checkList1[
+                                      //                   state.countIndexCheck]
+                                      //               .id
+                                      //               .toString()),
+                                      //       list: state
+                                      //           .fetched_checkList1[
+                                      //               state.countIndexCheck]
+                                      //           .name,
+                                      //       result: (context
+                                      //                   .read<CarCheckBloc>()
+                                      //                   .state
+                                      //                   .indexButtonSelect ==
+                                      //               0)
+                                      //           ? 'ปกติ'
+                                      //           : 'ไม่ปกติ',
+                                      //       order: 1);
+                                      // } else if (state.typeCheckState ==
+                                      //     'extCheckupEquipment') {
+                                      //   ExtCheckupEquipment_Item.addItem2(
+                                      //       sysVehicleEquipmentId: int.parse(
+                                      //           state
+                                      //               .fetched_checkList1[
+                                      //                   state.countIndexCheck]
+                                      //               .id
+                                      //               .toString()),
+                                      //       list: state
+                                      //           .fetched_checkList1[
+                                      //               state.countIndexCheck]
+                                      //           .name,
+                                      //       result: (context
+                                      //                   .read<CarCheckBloc>()
+                                      //                   .state
+                                      //                   .indexButtonSelect ==
+                                      //               0)
+                                      //           ? 'ปกติ'
+                                      //           : 'ไม่ปกติ',
+                                      //       order: 1);
+                                      // } else {
+                                      //   ExtCheckupSafety_Item.addItem3(
+                                      //       sysVehicleSafetyListId: int.parse(
+                                      //           state
+                                      //               .fetched_checkList1[
+                                      //                   state.countIndexCheck]
+                                      //               .id
+                                      //               .toString()),
+                                      //       list: state
+                                      //           .fetched_checkList1[
+                                      //               state.countIndexCheck]
+                                      //           .name,
+                                      //       result: (context
+                                      //                   .read<CarCheckBloc>()
+                                      //                   .state
+                                      //                   .indexButtonSelect ==
+                                      //               0)
+                                      //           ? 'ปกติ'
+                                      //           : 'ไม่ปกติ',
+                                      //       order: 1);
+                                      // }
 
-                                      context.read<CarCheckBloc>().add(
-                                          Swap_Index_forButtones(getIndex: 0));
+                                      // context
+                                      //     .read<CarCheckBloc>()
+                                      //     .add(Count_PlusIndex());
+
+                                      // context.read<CarCheckBloc>().add(
+                                      //     Swap_Index_forButtones(getIndex: 0));
                                     }
 
                                     // selectedImage = null;
