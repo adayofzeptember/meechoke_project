@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/Car_Check/car_check_bloc.dart';
+import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/screens/Checking/Check_Screen.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -79,12 +80,14 @@ class _Check_DailyState extends State<Check_Daily> {
                               Container(
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 238, 246, 255),
+                                    color:
+                                        Color.fromARGB(255, 238, 246, 255),
                                     borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(25),
                                         topRight: Radius.circular(25))),
                                 child: const Padding(
-                                  padding: EdgeInsets.only(top: 8, bottom: 8),
+                                  padding:
+                                      EdgeInsets.only(top: 8, bottom: 8),
                                   child: Center(
                                     child: Text(
                                       'บันทึกตรวจสภาพรถประจำวัน',
@@ -110,14 +113,15 @@ class _Check_DailyState extends State<Check_Daily> {
                                                 fontSize: 15,
                                                 color: Color.fromARGB(
                                                     255, 66, 66, 66),
-                                                fontWeight: FontWeight.bold),
+                                                fontWeight:
+                                                    FontWeight.bold),
                                           ),
                                         ),
                                         SizedBox(
                                           width: 10,
                                         ),
                                         Text(
-                                          'ทวีศักดิ์ ชยันกลาง',
+                                          'ทรงภพ หงส์แก้ว',
                                           style: TextStyle(
                                               fontSize: 15,
                                               color: Palette.thisBlue,
@@ -138,14 +142,15 @@ class _Check_DailyState extends State<Check_Daily> {
                                                 fontSize: 15,
                                                 color: Color.fromARGB(
                                                     255, 66, 66, 66),
-                                                fontWeight: FontWeight.bold),
+                                                fontWeight:
+                                                    FontWeight.bold),
                                           ),
                                         ),
                                         SizedBox(
                                           width: 10,
                                         ),
                                         Text(
-                                          '71-0151',
+                                          '70-0985',
                                           style: TextStyle(
                                               fontSize: 15,
                                               color: Palette.thisBlue,
@@ -166,14 +171,15 @@ class _Check_DailyState extends State<Check_Daily> {
                                                 fontSize: 15,
                                                 color: Color.fromARGB(
                                                     255, 66, 66, 66),
-                                                fontWeight: FontWeight.bold),
+                                                fontWeight:
+                                                    FontWeight.bold),
                                           ),
                                         ),
                                         SizedBox(
                                           width: 10,
                                         ),
                                         Text(
-                                          '71-71-0152',
+                                          '70-1249',
                                           style: TextStyle(
                                               fontSize: 15,
                                               color: Palette.thisBlue,
@@ -432,23 +438,26 @@ class _Check_DailyState extends State<Check_Daily> {
                             ),
                           ),
                         ),
-                        InkWell(
-                            onTap: () {
-                              print(
-                                  '--------------------------1-------------------------------');
-                              print(json.encode(state.storedExtCheckupList1));
+                        SizedBox(
+                          height: 10,
+                        ),
+                        // InkWell(
+                        //     onTap: () {
+                        //       print(
+                        //           '--------------------------1-------------------------------');
+                        //       print(json.encode(state.storedExtCheckupList1));
 
-                              print(
-                                  '--------------------------2-------------------------------');
-                              print(json
-                                  .encode(state.storedExtCheckupEquipment2));
-                              print(
-                                  '--------------------------3-------------------------------');
-                              print(json.encode(state.storedExtCheckupSafety3));
-                              print(
-                                  '-----------------------------------------------------------');
-                            },
-                            child: Text('sdfsdf')),
+                        //       print(
+                        //           '--------------------------2-------------------------------');
+                        //       print(json
+                        //           .encode(state.storedExtCheckupEquipment2));
+                        //       print(
+                        //           '--------------------------3-------------------------------');
+                        //       print(json.encode(state.storedExtCheckupSafety3));
+                        //       print(
+                        //           '-----------------------------------------------------------');
+                        //     },
+                        //     child: Text('sdfsdf')),
                         //!
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(

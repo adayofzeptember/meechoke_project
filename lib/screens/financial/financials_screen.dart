@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/ETC/cuurency.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/Financial/financial_bloc.dart';
 
@@ -145,11 +146,12 @@ class _Financial_ListState extends State<Financial_List> {
                                                                       .bold),
                                                         ),
                                                         Text(
-                                                          state
+                                                          formatNumber(state
                                                               .financial_list[
                                                                   index]
-                                                              .total
-                                                              .toString(),
+                                                              .total.toString()
+                                                              )
+                                                          ,
                                                           style: TextStyle(
                                                               fontSize: 20,
                                                               color:
@@ -247,7 +249,8 @@ class _Financial_ListState extends State<Financial_List> {
                                                                                   style: const TextStyle(color: Color.fromARGB(255, 49, 48, 48), fontWeight: FontWeight.bold),
                                                                                 ),
                                                                                 Text(
-                                                                                  state.financial_list[index].expanded_list[index2].jobTotal + " บาท",
+                                                                                  formatNumber(state.financial_list[index].expanded_list[index2].jobTotal)
+                                                                                   + " บาท",
                                                                                   style: const TextStyle(color: Palette.thisBlue, fontWeight: FontWeight.bold),
                                                                                 ),
                                                                               ],
@@ -280,7 +283,7 @@ class _Financial_ListState extends State<Financial_List> {
                                                                               style: const TextStyle(color: Color.fromARGB(255, 49, 48, 48), fontWeight: FontWeight.bold),
                                                                             ),
                                                                             Text(
-                                                                              state.financial_list[index].expanded_list[index2].allowance_total + " บาท",
+                                                                              formatNumber(state.financial_list[index].expanded_list[index2].allowance_total) + " บาท",
                                                                               style: const TextStyle(color: Palette.thisBlue, fontWeight: FontWeight.bold),
                                                                             ),
                                                                           ],
@@ -298,7 +301,7 @@ class _Financial_ListState extends State<Financial_List> {
                                                                               style: const TextStyle(color: Color.fromARGB(255, 49, 48, 48), fontWeight: FontWeight.bold),
                                                                             ),
                                                                             Text(
-                                                                              state.financial_list[index].expanded_list[index2].highwayTotal + " บาท",
+                                                                              formatNumber(state.financial_list[index].expanded_list[index2].highwayTotal) + " บาท",
                                                                               style: const TextStyle(color: Palette.thisBlue, fontWeight: FontWeight.bold),
                                                                             ),
                                                                           ],
@@ -316,7 +319,7 @@ class _Financial_ListState extends State<Financial_List> {
                                                                               style: const TextStyle(color: Color.fromARGB(255, 49, 48, 48), fontWeight: FontWeight.bold),
                                                                             ),
                                                                             Text(
-                                                                              state.financial_list[index].expanded_list[index2].sum.toString() + " บาท",
+                                                                              formatNumber(state.financial_list[index].expanded_list[index2].sum.toString()) + " บาท",
                                                                               style: const TextStyle(color: Palette.theGreen, fontWeight: FontWeight.bold),
                                                                             ),
                                                                           ],
@@ -347,7 +350,7 @@ class _Financial_ListState extends State<Financial_List> {
                                                                               style: const TextStyle(color: Color.fromARGB(255, 49, 48, 48), fontWeight: FontWeight.bold),
                                                                             ),
                                                                             Text(
-                                                                              state.financial_list[index].expanded_list[index2].advance_total + " บาท",
+                                                                              formatNumber(state.financial_list[index].expanded_list[index2].advance_total) + " บาท",
                                                                               style: const TextStyle(color: Palette.thisBlue, fontWeight: FontWeight.bold),
                                                                             ),
                                                                           ],
@@ -365,7 +368,7 @@ class _Financial_ListState extends State<Financial_List> {
                                                                               style: const TextStyle(color: Color.fromARGB(255, 49, 48, 48), fontWeight: FontWeight.bold),
                                                                             ),
                                                                             Text(
-                                                                              state.financial_list[index].driverDebt + " บาท",
+                                                                              formatNumber(state.financial_list[index].driverDebt) + " บาท",
                                                                               style: const TextStyle(color: Palette.thisBlue, fontWeight: FontWeight.bold),
                                                                             ),
                                                                           ],
@@ -383,7 +386,7 @@ class _Financial_ListState extends State<Financial_List> {
                                                                               style: const TextStyle(color: Color.fromARGB(255, 49, 48, 48), fontWeight: FontWeight.bold),
                                                                             ),
                                                                             Text(
-                                                                              (double.parse(state.financial_list[index].expanded_list[index2].advance_total) + double.parse(state.financial_list[index].driverDebt)).toString(),
+                                                                              formatNumber((double.parse(state.financial_list[index].expanded_list[index2].advance_total) + double.parse(state.financial_list[index].driverDebt)).toString()),
                                                                               style: const TextStyle(color: Palette.someRed, fontWeight: FontWeight.bold),
                                                                             ),
                                                                           ],
@@ -464,12 +467,12 @@ class _Financial_ListState extends State<Financial_List> {
                                                                   ),
                                                                   Expanded(
                                                                     child: Text(
-                                                                      state
+                                                                      formatNumber(state
                                                                           .financial_list[
                                                                               index]
                                                                           .expanded_list[
                                                                               index2]
-                                                                          .jobTotal,
+                                                                          .jobTotal),
                                                                       style: TextStyle(
                                                                           fontSize:
                                                                               15,

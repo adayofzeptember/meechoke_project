@@ -218,9 +218,9 @@ class Login_Screen extends StatelessWidget {
                                               context: context,
                                               //getUsername: 'ukeidkhwamsukh',
                                               getUsername:
-                                                  'driver1',
+                                                  usernameController.text,
                                               getPassword:
-                                                  'password'));
+                                                  passwordController.text));
                                       //NotificationService().scheduleNotifications();
                                     },
                                     child: Padding(

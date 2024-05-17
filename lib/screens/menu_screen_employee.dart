@@ -244,13 +244,18 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                   ),
                   InkWell(
                     onTap: () async {
-                      SharedPreferences prefrences =
-                          await SharedPreferences.getInstance();
-                      prefrences.clear();
-                      Phoenix.rebirth(context);
+                      // SharedPreferences prefrences =
+                      //     await SharedPreferences.getInstance();
+                      // prefrences.clear();
+                      // Phoenix.rebirth(context);
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("ฟังก์ชันยังไม่พร้อมใช้งาน"),
                       ));
+                              SharedPreferences prefrences =
+                          await SharedPreferences.getInstance();
+                      prefrences.clear();
+                      Phoenix.rebirth(context);
+                      
                       // SharedPreferences prefrences =
                       //     await SharedPreferences.getInstance();
                       // prefrences.clear();

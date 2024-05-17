@@ -18,6 +18,7 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
   final dio = Dio();
   CarCheckBloc()
       : super(CarCheckState(
+            checkLoad: 0,
             isLoading: false,
             storedExtCheckupList1: [],
             storedExtCheckupEquipment2: [],
@@ -84,8 +85,8 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
     });
 
     on<AddItem_Bloc>((event, emit) async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? tokenAuth = prefs.getString('userToken');
+      // SharedPreferences prefs = await SharedPreferences.getInstance();
+      // String? tokenAuth = prefs.getString('userToken');
 
       if (state.typeCheckState == 'extCheckupList') {
         ExtCheckupList_Item.addItem1(
