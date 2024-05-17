@@ -87,39 +87,6 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
 
-      // if (event.fileImage?.path == null || event.fileImage?.path == 'null') {
-      //   print('no img');
-      // } else {
-      //   print(event.fileImage?.path);
-      // }
-      // final formData;
-      // formData = FormData.fromMap({
-      //   "type": "image",
-      //   "collection": "true",
-      //   "files[checkupImage][]": await MultipartFile.fromFile(
-      //       event.fileImage!.path,
-      //       filename: "checkupImage.jpg")
-      // });
-
-      // final response = await dio.post(api_url + "uploads",
-      //     options: Options(
-      //       headers: {
-      //         "Authorization": "Bearer $tokenAuth",
-      //       },
-      //       followRedirects: false,
-      //       validateStatus: (status) {
-      //         return status! <= 500;
-      //       },
-      //       contentType: Headers.formUrlEncodedContentType,
-      //       responseType: ResponseType.json,
-      //     ),
-      //     data: formData);
-
-      // var x = response.data['data'];
-      // print(x.toString());
-
-      //?--------------------------------------+++++-----------------+++++-----------------+++++-----------------+++++
-
       if (state.typeCheckState == 'extCheckupList') {
         ExtCheckupList_Item.addItem1(
             sysVehicleChecklistId: int.parse(
@@ -272,6 +239,7 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
         } else {
           imgType = 'checkupSafetyListImage';
         }
+        print(event.fileImage!.path);
         String fileName = event.fileImage!.path.split('/').last;
         //!-------------------------------------------------------------------------------------------
         final formData;
