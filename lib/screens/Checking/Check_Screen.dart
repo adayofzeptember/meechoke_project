@@ -70,7 +70,7 @@ class _Check_ScreenState extends State<Check_Screen> {
           ),
         ),
         title: Text(
-          widget.checkingType,
+          "ตรวจเช็ค${widget.checkingType}",
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
         ),
@@ -470,7 +470,11 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                                               child: IconButton(
                                                                                 icon: Icon(Icons.close),
                                                                                 onPressed: () {
+                                                                           
+                                                                                  setState(() {
                                                                                   selectedImage = null;
+                                                                                    
+                                                                                  });
                                                                                 },
                                                                               ),
                                                                             ),
@@ -546,9 +550,10 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                   top: 8, bottom: 8),
                                               child: Center(
                                                 child: Text(
-                                                  'ตรวจเช็ครายการ ${widget.checkingType} ทั้งหมดแล้ว',
+                                                  'สรุปรายการ ${widget.checkingType} ทั้งหมด',
                                                   style: TextStyle(
                                                       fontSize: 18,
+                                                      
                                                       color: Palette.thisBlue,
                                                       fontWeight:
                                                           FontWeight.bold),

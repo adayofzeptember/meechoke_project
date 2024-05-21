@@ -172,14 +172,20 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
       // print('from bloc1....' + jsonEncode(state.storedExtCheckupList1));
       if (event.getTypeCheckToStore == 'extCheckupList') {
         emit(state.copyWith(storedExtCheckupList1: event.getExtCheckup_List));
-        print('from bloc1....' + jsonEncode(state.storedExtCheckupList1));
+        print('----------------------from bloc1-----------------------------');
+        print(jsonEncode(state.storedExtCheckupList1));
+        print('-------------------------------------------------------------');
       } else if (event.getTypeCheckToStore == 'extCheckupEquipment') {
         emit(state.copyWith(
             storedExtCheckupEquipment2: event.getExtEqipment_List));
-        print('from bloc2....' + jsonEncode(state.storedExtCheckupEquipment2));
+        print('----------------------from bloc2-----------------------------');
+        print(jsonEncode(state.storedExtCheckupEquipment2));
+        print('-------------------------------------------------------------');
       } else {
         emit(state.copyWith(storedExtCheckupSafety3: event.getExtSafety_List));
-        print('from bloc3....' + jsonEncode(state.storedExtCheckupSafety3));
+        print('----------------------from bloc3-----------------------------');
+        print(jsonEncode(state.storedExtCheckupSafety3));
+        print('-------------------------------------------------------------');
       }
     });
 

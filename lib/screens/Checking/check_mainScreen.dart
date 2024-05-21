@@ -1,6 +1,4 @@
 // ignore_for_file: deprecated_member_use
-
-import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,6 +23,7 @@ class _Check_DailyState extends State<Check_Daily> {
 
   @override
   void initState() {
+    context.read<ProfileBloc>().add(Load_Profile());
     super.initState();
   }
 
@@ -68,130 +67,263 @@ class _Check_DailyState extends State<Check_Daily> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25))),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                    color:
-                                        Color.fromARGB(255, 238, 246, 255),
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(25),
-                                        topRight: Radius.circular(25))),
-                                child: const Padding(
-                                  padding:
-                                      EdgeInsets.only(top: 8, bottom: 8),
-                                  child: Center(
-                                    child: Text(
-                                      'บันทึกตรวจสภาพรถประจำวัน',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          color: Palette.thisBlue,
-                                          fontWeight: FontWeight.bold),
+                        BlocBuilder<ProfileBloc, ProfileState>(
+                          builder: (context, state) {
+                            if (state.loading == true) {
+                              return      Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25))),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(255, 238, 246, 255),
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(25),
+                                            topRight: Radius.circular(25))),
+                                    child: const Padding(
+                                      padding:
+                                          EdgeInsets.only(top: 8, bottom: 8),
+                                      child: Center(
+                                        child: Text(
+                                          'บันทึกตรวจสภาพรถประจำวัน',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Palette.thisBlue,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(20, 15, 0, 15),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 90,
+                                              child: Text(
+                                                'ชื่อพขร. :',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Color.fromARGB(
+                                                        255, 66, 66, 66),
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                                '.....',
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: Palette.thisBlue,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 90,
+                                              child: Text(
+                                                'ทะเบียนแม่ :',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Color.fromARGB(
+                                                        255, 66, 66, 66),
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                               '.....',
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: Palette.thisBlue,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 90,
+                                              child: Text(
+                                                'ทะเบียนลูก :',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Color.fromARGB(
+                                                        255, 66, 66, 66),
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              '.....',
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: Palette.thisBlue,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
                               ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(20, 15, 0, 15),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          width: 90,
-                                          child: Text(
-                                            'ชื่อพขร. :',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Color.fromARGB(
-                                                    255, 66, 66, 66),
-                                                fontWeight:
-                                                    FontWeight.bold),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          'ทรงภพ หงส์แก้ว',
+                            );
+                            }
+                            return 
+                            Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25))),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(255, 238, 246, 255),
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(25),
+                                            topRight: Radius.circular(25))),
+                                    child: const Padding(
+                                      padding:
+                                          EdgeInsets.only(top: 8, bottom: 8),
+                                      child: Center(
+                                        child: Text(
+                                          'บันทึกตรวจสภาพรถประจำวัน',
                                           style: TextStyle(
-                                              fontSize: 15,
+                                              fontSize: 18,
                                               color: Palette.thisBlue,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(20, 15, 0, 15),
+                                    child: Column(
                                       children: [
-                                        SizedBox(
-                                          width: 90,
-                                          child: Text(
-                                            'ทะเบียนแม่ :',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Color.fromARGB(
-                                                    255, 66, 66, 66),
-                                                fontWeight:
-                                                    FontWeight.bold),
-                                          ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 90,
+                                              child: Text(
+                                                'ชื่อพขร. :',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Color.fromARGB(
+                                                        255, 66, 66, 66),
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              state.profile_data.name,
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: Palette.thisBlue,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
                                         ),
                                         SizedBox(
-                                          width: 10,
+                                          height: 5,
                                         ),
-                                        Text(
-                                          '70-0985',
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Palette.thisBlue,
-                                              fontWeight: FontWeight.bold),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 90,
+                                              child: Text(
+                                                'ทะเบียนแม่ :',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Color.fromARGB(
+                                                        255, 66, 66, 66),
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              state.profile_data.plateNumber,
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: Palette.thisBlue,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 90,
+                                              child: Text(
+                                                'ทะเบียนลูก :',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Color.fromARGB(
+                                                        255, 66, 66, 66),
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              state.profile_data
+                                                  .trailerPlateNumber,
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: Palette.thisBlue,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          width: 90,
-                                          child: Text(
-                                            'ทะเบียนลูก :',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Color.fromARGB(
-                                                    255, 66, 66, 66),
-                                                fontWeight:
-                                                    FontWeight.bold),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Text(
-                                          '70-1249',
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Palette.thisBlue,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
+                                  )
+                                ],
+                              ),
+                            );
+                          },
                         ),
                         const SizedBox(
                           height: 10,
@@ -377,7 +509,7 @@ class _Check_DailyState extends State<Check_Daily> {
                                   duration: const Duration(milliseconds: 300),
                                   type: PageTransitionType.rightToLeft,
                                   child: Check_Screen(
-                                    checkingType: 'ส่วนความปลอดภัย',
+                                    checkingType: 'ความปลอดภัย',
                                   )),
                             );
                           },
@@ -394,7 +526,7 @@ class _Check_DailyState extends State<Check_Daily> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    '3. ส่วนความปลอดภัย',
+                                    '3. ความปลอดภัย',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20,
