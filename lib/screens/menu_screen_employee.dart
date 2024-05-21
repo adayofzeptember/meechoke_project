@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Financial/financial_bloc.dart';
@@ -13,7 +12,6 @@ import 'package:meechoke_project/screens/Fuel/Main%20List/main_list.dart';
 import 'package:meechoke_project/screens/Jobs/1.%20Main%20Pages%20List/tab_main.dart';
 import 'package:meechoke_project/screens/Financial/financials_screen.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/ReportAccident/report_accident_bloc.dart';
 import 'Report and Docs/tab_mainScreen.dart';
 import 'Work History/history_screen.dart';
