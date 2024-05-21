@@ -9,6 +9,7 @@ var passwordController = TextEditingController();
 
 class Login_Screen extends StatelessWidget {
   Login_Screen({Key? key}) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +56,7 @@ class Login_Screen extends StatelessWidget {
                       width: double.infinity,
                       height: MediaQuery.of(context).size.height * 1,
                       child: Form(
+                        key: _formKey,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 10, right: 10),
                           child: Padding(
@@ -211,12 +213,17 @@ class Login_Screen extends StatelessWidget {
                                               BorderRadius.circular(30),
                                         )),
                                     onPressed: () {
-                                      // print(usernameController.text +
-                                      //     passwordController.text); usernameController.text passwordController.text
+                                      if (_formKey.currentState!.validate()) {
+                                        // If the form is valid, display a snackbar or perform any action
+                                        // ScaffoldMessenger.of(context)
+                                        //     .showSnackBar(
+                                        //   SnackBar(content: Text('Valid!')),
+                                        // );
+                                      }
+
                                       context.read<LoginBloc>().add(
                                           Login_Casual(
                                               context: context,
-                                              //getUsername: 'ukeidkhwamsukh',
                                               getUsername:
                                                   usernameController.text,
                                               getPassword:

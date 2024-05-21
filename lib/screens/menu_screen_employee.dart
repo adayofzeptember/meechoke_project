@@ -249,36 +249,6 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("ฟังก์ชันยังไม่พร้อมใช้งาน"),
                       ));
-                      SharedPreferences prefrences =
-                          await SharedPreferences.getInstance();
-                      prefrences.clear();
-                      Phoenix.rebirth(context);
-
-                      // SharedPreferences prefrences =
-                      //     await SharedPreferences.getInstance();
-                      // prefrences.clear();
-                      // Phoenix.rebirth(context);
-                      //            Navigator.push(
-                      //   context,
-                      //   PageTransition(
-                      //       duration: const Duration(milliseconds: 500),
-                      //       type: PageTransitionType.fade,
-                      //       child: MyApp()),
-                      // );
-                      // // // context
-                      // // //     .read<LoginBloc>()
-                      // // //     .add(Logout_Auth(context: context));
-                      // SharedPreferences prefrences =
-                      //     await SharedPreferences.getInstance();
-                      // prefrences.clear();
-                      // Phoenix.rebirth(context);
-                      // // //        Navigator.push(
-                      // // //   context,
-                      // // //   PageTransition(
-                      // // //       duration: const Duration(milliseconds: 500),
-                      // // //       type: PageTransitionType.fade,
-                      // // //       child: Report_Accident()),
-                      // // // );
                     },
                     child: Container(
                       width: double.infinity,
@@ -477,10 +447,6 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                       borderRadius: BorderRadius.circular(10),
                     )),
                 onPressed: () async {
-                  // SharedPreferences prefrences =
-                  //     await SharedPreferences.getInstance();
-                  // prefrences.clear();
-                  // Phoenix.rebirth(context);
                   logoutAlert(context);
                 },
                 child: Padding(
@@ -561,6 +527,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
               ),
               onPressed: () async {
                 context.read<LoginBloc>().add(Logout_Auth(context: context));
+         
               },
             ),
           ],

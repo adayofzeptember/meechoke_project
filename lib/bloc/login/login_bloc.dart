@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../ETC/api_url.dart';
@@ -34,11 +35,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             response.statusCode.toString() + response.statusMessage.toString());
         emit(state.copyWith(loading: false));
         print('auth token: ' + response.data['data']['accessToken'].toString());
-        print('email: ' + response.data['data']['user']['email'].toString());
+        //print('email: ' + response.data['data']['user']['email'].toString());
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString(
             'userToken', response.data['data']['accessToken'].toString());
         if (response.statusCode == 200) {
+          Fluttertoast.showToast(
+              msg: "เข้าสู่ระบบแล้ว",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 2,
+              backgroundColor: Palette.theGreen,
+              textColor: Colors.white,
+              fontSize: 15);
           Navigator.pushReplacement(
             event.context,
             PageTransition(
@@ -89,20 +98,27 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
         prefs.clear();
         Phoenix.rebirth(event.context);
+        Fluttertoast.showToast(
+            msg: "ออกจากระบบแล้ว",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 2,
+            backgroundColor: const Color.fromARGB(255, 133, 133, 133),
+            textColor: Colors.white,
+            fontSize: 15);
       } catch (e) {
-
         emit(state.copyWith(loading: false));
 
         prefs.clear();
         Phoenix.rebirth(event.context);
-        // Fluttertoast.showToast(
-        //     msg: "${e.toString()}",
-        //     toastLength: Toast.LENGTH_LONG,
-        //     gravity: ToastGravity.SNACKBAR,
-        //     timeInSecForIosWeb: 2,
-        //     backgroundColor: const Color.fromARGB(255, 133, 133, 133),
-        //     textColor: Colors.white,
-        //     fontSize: 15);
+        Fluttertoast.showToast(
+            msg: "${e.toString()}",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.SNACKBAR,
+            timeInSecForIosWeb: 2,
+            backgroundColor: const Color.fromARGB(255, 133, 133, 133),
+            textColor: Colors.white,
+            fontSize: 15);
       }
     });
 
