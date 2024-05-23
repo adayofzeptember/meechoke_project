@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meechoke_project/ETC/api_url.dart';
 import 'package:meechoke_project/bloc/Car_Check/model.dart';
+import 'package:meechoke_project/bloc/Login/login_bloc.dart';
 import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupEquipment_addMethod.dart';
 import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupList_addMethod.dart';
 import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupSafety_addMethod.dart';
@@ -21,6 +22,7 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
             checkLoad: 0,
             isLoading: false,
             storedExtCheckupList1: [],
+            twty4Check: false,
             storedExtCheckupEquipment2: [],
             storedExtCheckupSafety3: [],
             toCheckChecklist1: 0,
@@ -193,6 +195,36 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
       emit(state.copyWith(indexButtonSelect: event.getIndex));
     });
 
+    on<Daily_Check>((event, emit) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? tokenAuth = prefs.getString('userToken');
+      // print(prefs.get('registeredDriverId'));
+      // print(prefs.get('registeredCarId'));
+      try {
+        final response = await dio.get(
+          api_url_v1 +
+              "checkup-car-log?registeredDriverId=${1}&registeredCarId=${1}",
+          // api_url_v1 +
+          //     "checkup-car-log?registeredDriverId=${prefs.get('registeredDriverId')}&registeredCarId=${prefs.get('registeredCarId')}",
+          options: Options(headers: {
+            "Authorization": "Bearer $tokenAuth",
+          }),
+        );
+
+        if (response.statusCode == 200) {
+          if (response.data['data'] == null) {
+            emit(state.copyWith(twty4Check: false));
+          } else {
+            emit(state.copyWith(twty4Check: true));
+          }
+        } else {
+          print('error status != 200');
+        }
+      } catch (e) {
+        print(e);
+      }
+    });
+
     on<AddItem_Bloc2>((event, emit) async {
       emit(state.copyWith(isLoading: true));
 
@@ -238,13 +270,14 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
             indexButtonSelect: 0,
             isLoading: false));
       } else {
+        //? มีรูป
         String imgType;
         if (state.typeCheckState == 'extCheckupList') {
-          imgType = 'checkupListImage';
+          imgType = 'checkListImage';
         } else if (state.typeCheckState == 'extCheckupEquipment') {
-          imgType = 'checkupEquipmentImage';
+          imgType = 'checkEquipmentImage';
         } else {
-          imgType = 'checkupSafetyListImage';
+          imgType = 'checkupSafetyList';
         }
         print(event.fileImage!.path);
         String fileName = event.fileImage!.path.split('/').last;
@@ -253,7 +286,7 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
         formData = FormData.fromMap({
           "type": "image",
           "collection": "true",
-          "files[${imgType}][]": await MultipartFile.fromFile(
+          "files[${imgType}][${1}]": await MultipartFile.fromFile(
               event.fileImage!.path,
               filename: "${fileName}")
         });
@@ -273,6 +306,7 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
             data: formData);
 
         var imgUploadResponse = response.data['data'];
+        print('--' + imgUploadResponse.toString());
 
         Map<String, List<FileInformation>> filenames = {};
         imgUploadResponse.forEach((key, value) {

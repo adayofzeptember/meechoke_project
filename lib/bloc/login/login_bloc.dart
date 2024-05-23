@@ -15,7 +15,12 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final dio = Dio();
-  LoginBloc() : super(LoginState(loading: false, obscurePass: true)) {
+  LoginBloc()
+      : super(LoginState(
+            loading: false,
+            obscurePass: true,
+            registeredCarId: '',
+            registeredDriverId: '')) {
     on<Login_Casual>((event, emit) async {
       try {
         emit(state.copyWith(loading: true));
@@ -33,10 +38,26 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
         print(
             response.statusCode.toString() + response.statusMessage.toString());
-        emit(state.copyWith(loading: false));
+        emit(state.copyWith(
+            loading: false,
+            registeredCarId: response.data['data']['user']['currentCar']
+                    ['registeredCarId']
+                .toString(),
+            registeredDriverId:
+                response.data['data']['user']['id'].toString()));
         print('auth token: ' + response.data['data']['accessToken'].toString());
-        //print('email: ' + response.data['data']['user']['email'].toString());
+        // print('driver id: ' + response.data['data']['user']['id'].toString());
+        // print('car id: ' +
+        //     response.data['data']['user']['currentCar']['registeredCarId']
+        //         .toString());
+
         SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('registeredDriverId',
+            response.data['data']['user']['id'].toString());
+        prefs.setString(
+            'registeredCarId',
+            response.data['data']['user']['currentCar']['registeredCarId']
+                .toString());
         prefs.setString(
             'userToken', response.data['data']['accessToken'].toString());
         if (response.statusCode == 200) {

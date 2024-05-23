@@ -26,7 +26,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           }),
         );
 
-        print("response profile data: " + response.data['message']);
+      
 
         dynamic dataProfile =
             (state.profile_data != '') ? state.profile_data : '';

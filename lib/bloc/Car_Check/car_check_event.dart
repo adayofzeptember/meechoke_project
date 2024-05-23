@@ -44,6 +44,7 @@ class AddItem_Bloc extends CarCheckEvent {
   AddItem_Bloc({this.fileImage});
 }
 
+class Daily_Check extends CarCheckEvent {}
 
 class AddItem_Bloc2 extends CarCheckEvent {
   File? fileImage;
@@ -51,5 +52,4 @@ class AddItem_Bloc2 extends CarCheckEvent {
   AddItem_Bloc2({this.fileImage});
 }
 
-class Submit_AllCheckings extends CarCheckEvent {
-}
+class Submit_AllCheckings extends CarCheckEvent {}

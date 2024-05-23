@@ -31,6 +31,7 @@ class _Check_ScreenState extends State<Check_Screen> {
 
   @override
   void initState() {
+    
     super.initState();
   }
 
@@ -167,7 +168,7 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
-                                                                              10),
+                                                                              25),
                                                                 )),
                                                         onPressed: () {
                                                           context
@@ -242,7 +243,7 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
-                                                                              10),
+                                                                              25),
                                                                 )),
                                                         onPressed: () {
                                                           context
@@ -788,79 +789,9 @@ class _Check_ScreenState extends State<Check_Screen> {
                                               fileImage: selectedImage));
 
                                       selectedImage = null;
-                                      // if (state.typeCheckState ==
-                                      //     'extCheckupList') {
-                                      //   ExtCheckupList_Item.addItem1(
-                                      //       sysVehicleChecklistId: int.parse(
-                                      //           state
-                                      //               .fetched_checkList1[
-                                      //                   state.countIndexCheck]
-                                      //               .id
-                                      //               .toString()),
-                                      //       list: state
-                                      //           .fetched_checkList1[
-                                      //               state.countIndexCheck]
-                                      //           .name,
-                                      //       result: (context
-                                      //                   .read<CarCheckBloc>()
-                                      //                   .state
-                                      //                   .indexButtonSelect ==
-                                      //               0)
-                                      //           ? 'ปกติ'
-                                      //           : 'ไม่ปกติ',
-                                      //       order: 1);
-                                      // } else if (state.typeCheckState ==
-                                      //     'extCheckupEquipment') {
-                                      //   ExtCheckupEquipment_Item.addItem2(
-                                      //       sysVehicleEquipmentId: int.parse(
-                                      //           state
-                                      //               .fetched_checkList1[
-                                      //                   state.countIndexCheck]
-                                      //               .id
-                                      //               .toString()),
-                                      //       list: state
-                                      //           .fetched_checkList1[
-                                      //               state.countIndexCheck]
-                                      //           .name,
-                                      //       result: (context
-                                      //                   .read<CarCheckBloc>()
-                                      //                   .state
-                                      //                   .indexButtonSelect ==
-                                      //               0)
-                                      //           ? 'ปกติ'
-                                      //           : 'ไม่ปกติ',
-                                      //       order: 1);
-                                      // } else {
-                                      //   ExtCheckupSafety_Item.addItem3(
-                                      //       sysVehicleSafetyListId: int.parse(
-                                      //           state
-                                      //               .fetched_checkList1[
-                                      //                   state.countIndexCheck]
-                                      //               .id
-                                      //               .toString()),
-                                      //       list: state
-                                      //           .fetched_checkList1[
-                                      //               state.countIndexCheck]
-                                      //           .name,
-                                      //       result: (context
-                                      //                   .read<CarCheckBloc>()
-                                      //                   .state
-                                      //                   .indexButtonSelect ==
-                                      //               0)
-                                      //           ? 'ปกติ'
-                                      //           : 'ไม่ปกติ',
-                                      //       order: 1);
-                                      // }
-
-                                      // context
-                                      //     .read<CarCheckBloc>()
-                                      //     .add(Count_PlusIndex());
-
-                                      // context.read<CarCheckBloc>().add(
-                                      //     Swap_Index_forButtones(getIndex: 0));
+                                   
                                     }
 
-                                    // selectedImage = null;
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(15.0),

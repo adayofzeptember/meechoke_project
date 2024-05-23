@@ -7,7 +7,7 @@ import 'package:meechoke_project/bloc/Fuel/fuel_bloc.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
-import 'package:meechoke_project/screens/Checking/check_mainScreen.dart';
+import 'package:meechoke_project/screens/Checking/Checking_Main.dart';
 import 'package:meechoke_project/screens/Fuel/Main%20List/main_list.dart';
 import 'package:meechoke_project/screens/Jobs/1.%20Main%20Pages%20List/tab_main.dart';
 import 'package:meechoke_project/screens/Financial/financials_screen.dart';
@@ -525,7 +525,6 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
               ),
               onPressed: () async {
                 context.read<LoginBloc>().add(Logout_Auth(context: context));
-         
               },
             ),
           ],
