@@ -31,7 +31,6 @@ class _Check_ScreenState extends State<Check_Screen> {
 
   @override
   void initState() {
-    
     super.initState();
   }
 
@@ -127,10 +126,14 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                                 25))),
                                                 child: Center(
                                                   child: Text(
-                                                    state
-                                                        .fetched_checkList1[state
-                                                            .countIndexCheck]
-                                                        .name,
+                                                    (state.countIndexCheck + 1)
+                                                            .toString() +
+                                                        ". " +
+                                                        state
+                                                            .fetched_checkList1[
+                                                                state
+                                                                    .countIndexCheck]
+                                                            .name,
                                                     style: TextStyle(
                                                         color: Palette.thisBlue,
                                                         fontWeight:
@@ -471,10 +474,8 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                                               child: IconButton(
                                                                                 icon: Icon(Icons.close),
                                                                                 onPressed: () {
-                                                                           
                                                                                   setState(() {
-                                                                                  selectedImage = null;
-                                                                                    
+                                                                                    selectedImage = null;
                                                                                   });
                                                                                 },
                                                                               ),
@@ -554,7 +555,6 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                   'สรุปรายการ ${widget.checkingType} ทั้งหมด',
                                                   style: TextStyle(
                                                       fontSize: 18,
-                                                      
                                                       color: Palette.thisBlue,
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -789,9 +789,7 @@ class _Check_ScreenState extends State<Check_Screen> {
                                               fileImage: selectedImage));
 
                                       selectedImage = null;
-                                   
                                     }
-
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(15.0),

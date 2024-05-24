@@ -1,4 +1,5 @@
 // ignore_for_file: deprecated_member_use
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -334,22 +335,43 @@ class _Check_DailyState extends State<Check_Daily> {
                         ),
                         BlocBuilder<CarCheckBloc, CarCheckState>(
                           builder: (context, state) {
-                            print(state.twty4Check.toString());
                             if (state.twty4Check == true) {
-                            return  Column(
-                              children: [
-                                SizedBox(height: 20,),
-                                Center(
+                              return Column(
+                                children: [
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Center(
                                     child: Text(
-                                      'ยังไม่มีรายการตรวจเช็คประจำวัน',
+                                      'ไม่มีรายการตรวจเช็คประจำวัน',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: Palette.thisBlue,
                                           fontSize: 23),
                                     ),
                                   ),
-                              ],
-                            );
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      '- ตรวจเช็คได้อีกครั้งหลังครบ 24 ชั่วโมง -',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Palette.theGrey,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                    SizedBox(
+                                    height: 10,
+                                  ),
+                                  Icon(
+                                    Icons.access_time,
+                                    size: 80,
+                                    color: Palette.thisBlue,
+                                  ),
+                                ],
+                              );
                             }
                             return Column(
                               children: [
@@ -627,6 +649,20 @@ class _Check_DailyState extends State<Check_Daily> {
                                 SizedBox(
                                   height: 10,
                                 ),
+                                GestureDetector(
+                                    onTap: () {
+                                      print('----------------------------');
+                                      print(jsonEncode(
+                                          state.storedExtCheckupList1));
+
+                                      print(jsonEncode(
+                                          state.storedExtCheckupEquipment2));
+
+                                      print(jsonEncode(
+                                          state.storedExtCheckupSafety3));
+                                      print('----------------------------');
+                                    },
+                                    child: Text('for dev')),
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                       primary: Palette.theGreen,

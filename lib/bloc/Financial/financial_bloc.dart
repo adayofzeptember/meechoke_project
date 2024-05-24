@@ -15,8 +15,6 @@ class FinancialBloc extends Bloc<FinancialEvent, FinancialState> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
       try {
-    
-
         final response = await dio.get(
           api_url_v1 + "transaction-history",
           options: Options(headers: {
@@ -24,20 +22,14 @@ class FinancialBloc extends Bloc<FinancialEvent, FinancialState> {
           }),
         );
 
-        // var x = response.data['data'];
-        // print('x------'+x.toString());
-
         var data = [];
 
         if (response.statusCode == 200) {
-          // print('object');
-          // emit(state.copyWith(status1: 1));
-
-
           for (var elements in response.data['data']) {
             List<dynamic> dataExpandList = elements['extClearingJob'];
             List<ExtClearingJob> dataExpand = [];
             for (var expandedEXT in dataExpandList) {
+              //list ย่อย
               dataExpand.add(ExtClearingJob(
                 documentNumber:
                     await expandedEXT['job']['documentNumber'].toString(),
@@ -50,14 +42,12 @@ class FinancialBloc extends Bloc<FinancialEvent, FinancialState> {
                     await expandedEXT['options']['ticketTotal'].toString(),
                 advance_total:
                     await expandedEXT['options']['advanceTotal'].toString(),
-
-                  
                 sum: int.parse(
                         expandedEXT['options']['allowanceTotal'].toString()) +
-                    int.parse(
-                        expandedEXT['options']['ticketTotal'].toString()),
+                    int.parse(expandedEXT['options']['ticketTotal'].toString()),
               ));
             }
+                 //list ใหญ่
             data.add(Financial_Model(
                 id: await elements['id'].toString(),
                 transferMethod: await elements['transferMethod'].toString(),
@@ -80,7 +70,6 @@ class FinancialBloc extends Bloc<FinancialEvent, FinancialState> {
         ));
         print(e);
       }
- 
     });
   }
 }

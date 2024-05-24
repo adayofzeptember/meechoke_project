@@ -40,11 +40,11 @@ class _History_PageState extends State<History_Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30),
-          ),
-        ),
+        // shape: RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.vertical(
+        //     bottom: Radius.circular(30),
+        //   ),
+        // ),
         backgroundColor: Palette.thisBlue,
         automaticallyImplyLeading: false,
         centerTitle: true,

@@ -24,18 +24,18 @@ class _Financial_ListState extends State<Financial_List> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_ios_new,
               color: Colors.white,
             ),
           ),
-          title: const Text(
+          title: Text(
             'ประวัติการเงิน',
             style: TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 1, 44, 97),
+        backgroundColor: Palette.mainBackgroud,
         body: SingleChildScrollView(
           child: Column(children: [
             Stack(
@@ -72,7 +72,8 @@ class _Financial_ListState extends State<Financial_List> {
                                           CircularProgressIndicator(),
                                         ],
                                       ));
-                                    } else if (state.status1 == 1 && state.financial_list.isEmpty) {
+                                    } else if (state.status1 == 1 &&
+                                        state.financial_list.isEmpty) {
                                       return Center(
                                           child: Column(
                                         children: [
@@ -90,9 +91,7 @@ class _Financial_ListState extends State<Financial_List> {
                                       ));
                                     } else if (state.status1 == 2) {
                                       return GestureDetector(
-                                        onTap: () {
-                             
-                                        },
+                                        onTap: () {},
                                         child: Center(
                                             child: Column(
                                           children: [
@@ -109,11 +108,10 @@ class _Financial_ListState extends State<Financial_List> {
                                           ],
                                         )),
                                       );
-                                    } 
+                                    }
                                     return Padding(
                                       padding: const EdgeInsets.only(top: 20),
-                                      child: 
-                                      ListView.builder(
+                                      child: ListView.builder(
                                           primary: true,
                                           itemCount:
                                               state.financial_list.length,
@@ -149,9 +147,8 @@ class _Financial_ListState extends State<Financial_List> {
                                                           formatNumber(state
                                                               .financial_list[
                                                                   index]
-                                                              .total.toString()
-                                                              )
-                                                          ,
+                                                              .total
+                                                              .toString()),
                                                           style: TextStyle(
                                                               fontSize: 20,
                                                               color:
@@ -249,8 +246,7 @@ class _Financial_ListState extends State<Financial_List> {
                                                                                   style: const TextStyle(color: Color.fromARGB(255, 49, 48, 48), fontWeight: FontWeight.bold),
                                                                                 ),
                                                                                 Text(
-                                                                                  formatNumber(state.financial_list[index].expanded_list[index2].jobTotal)
-                                                                                   + " บาท",
+                                                                                  formatNumber(state.financial_list[index].expanded_list[index2].jobTotal) + " บาท",
                                                                                   style: const TextStyle(color: Palette.thisBlue, fontWeight: FontWeight.bold),
                                                                                 ),
                                                                               ],
@@ -386,7 +382,7 @@ class _Financial_ListState extends State<Financial_List> {
                                                                               style: const TextStyle(color: Color.fromARGB(255, 49, 48, 48), fontWeight: FontWeight.bold),
                                                                             ),
                                                                             Text(
-                                                                              formatNumber((double.parse(state.financial_list[index].expanded_list[index2].advance_total) + double.parse(state.financial_list[index].driverDebt)).toString()),
+                                                                              (formatNumber((double.parse(state.financial_list[index].expanded_list[index2].advance_total) + double.parse(state.financial_list[index].driverDebt)).toString()) + " บาท"),
                                                                               style: const TextStyle(color: Palette.someRed, fontWeight: FontWeight.bold),
                                                                             ),
                                                                           ],
@@ -453,7 +449,7 @@ class _Financial_ListState extends State<Financial_List> {
                                                                       state
                                                                           .financial_list[
                                                                               index]
-                                                                          .expanded_list[
+                                                                          .expanded_lhighwayTotalist[
                                                                               index2]
                                                                           .documentNumber,
                                                                       style: TextStyle(
@@ -514,43 +510,43 @@ class _Financial_ListState extends State<Financial_List> {
                                     );
                                   },
                                 ),
-                                const SizedBox(
-                                  height: 50,
-                                ),
-                                Container(
-                                  decoration: const BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(25)),
-                                      color:
-                                          Color.fromARGB(255, 236, 212, 212)),
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'หมายเหตุ: ',
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        Text(
-                                          'วันเวลาที่แสดงนี้จะช้ากว่าเวลาที่โอนจริงเนื่องจากเป็นการ บันทึกเข้าโปรแกรมหลังจากที่ได้โอนเงินผ่านธนาคารแล้วแต่จะอยู่ภายในวันเดียวกัน',
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              color: Colors.red,
-                                              fontWeight: FontWeight.bold),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                )
+                                // const SizedBox(
+                                //   height: 50,
+                                // ),
+                                // Container(
+                                //   decoration: const BoxDecoration(
+                                //       borderRadius:
+                                //           BorderRadius.all(Radius.circular(25)),
+                                //       color:
+                                //           Color.fromARGB(255, 236, 212, 212)),
+                                //   child: const Padding(
+                                //     padding: EdgeInsets.all(10),
+                                //     child: Column(
+                                //       crossAxisAlignment:
+                                //           CrossAxisAlignment.start,
+                                //       mainAxisAlignment:
+                                //           MainAxisAlignment.start,
+                                //       children: [
+                                //         Text(
+                                //           'หมายเหตุ: ',
+                                //           style: TextStyle(
+                                //               fontSize: 13,
+                                //               fontWeight: FontWeight.bold),
+                                //         ),
+                                //         const SizedBox(
+                                //           height: 5,
+                                //         ),
+                                //         Text(
+                                //           'วันเวลาที่แสดงนี้จะช้ากว่าเวลาที่โอนจริงเนื่องจากเป็นการ บันทึกเข้าโปรแกรมหลังจากที่ได้โอนเงินผ่านธนาคารแล้วแต่จะอยู่ภายในวันเดียวกัน',
+                                //           style: TextStyle(
+                                //               fontSize: 13,
+                                //               color: Colors.red,
+                                //               fontWeight: FontWeight.bold),
+                                //         )
+                                //       ],
+                                //     ),
+                                //   ),
+                                // )
                               ],
                             ),
                           ),

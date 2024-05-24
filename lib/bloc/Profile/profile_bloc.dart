@@ -26,8 +26,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           }),
         );
 
-      
-
         dynamic dataProfile =
             (state.profile_data != '') ? state.profile_data : '';
         dynamic nestedData = response.data['data'];
@@ -41,7 +39,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
               province: await nestedData['province'].toString(),
               plateNumber: await nestedData['plateNumber'].toString(),
               trailerPlateNumber:
-                  await nestedData['trailerPlateNumber'].toString(),
+                  (await nestedData['trailerPlateNumber'].toString() == 'null'
+                      ? '-'
+                      : nestedData['trailerPlateNumber'].toString()),
               name: await response.data['data']['drivers'][0]['firstName']
                       .toString() +
                   " " +
