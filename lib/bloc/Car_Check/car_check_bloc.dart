@@ -4,11 +4,14 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meechoke_project/ETC/api_url.dart';
+import 'package:meechoke_project/ETC/curency.dart';
+import 'package:meechoke_project/ETC/timer.dart';
 import 'package:meechoke_project/bloc/Car_Check/model.dart';
 import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupEquipment_addMethod.dart';
 import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupList_addMethod.dart';
 import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupSafety_addMethod.dart';
 import 'package:meechoke_project/screens/Checking/CheckMethod/filenames.dart';
+import 'package:meechoke_project/screens/Checking/Checking_Main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'car_check_event.dart';
 part 'car_check_state.dart';
@@ -17,6 +20,7 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
   final dio = Dio();
   CarCheckBloc()
       : super(CarCheckState(
+            remainingTime: Duration.zero, 
             checkLoad: 0,
             isLoading: false,
             storedExtCheckupList1: [],
@@ -123,6 +127,7 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
     });
 
     on<Submit_AllCheckings>((event, emit) async {
+      emit(state.copyWith(isLoading: true));
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
 
@@ -144,7 +149,9 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
             ),
             data: checkingJsonData);
         var x = response.data['data'];
+
         if (response.statusCode == 200) {
+          emit(state.copyWith(isLoading: false));
           print(
               '--------------------SEND CHECKINGS: OK----------------------------------');
           ExtCheckupList_Item.checklist.clear();
@@ -158,11 +165,15 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
               countIndexCheck: 0,
               toCheckChecklist1: 0));
         } else {
+          emit(state.copyWith(isLoading: false));
+
           print('error');
 
           print(x.toString());
         }
       } catch (e) {
+        emit(state.copyWith(isLoading: false));
+
         print(e);
       }
     });

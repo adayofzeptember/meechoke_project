@@ -117,7 +117,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(state.copyWith(loading: false));
         print('logout response: ' + response.statusMessage.toString());
 
-        prefs.clear();
+        // prefs.clear();
+        prefs.remove('userToken');
         Phoenix.rebirth(event.context);
         Fluttertoast.showToast(
             msg: "ออกจากระบบแล้ว",

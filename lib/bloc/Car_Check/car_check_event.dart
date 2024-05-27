@@ -44,6 +44,12 @@ class AddItem_Bloc extends CarCheckEvent {
   AddItem_Bloc({this.fileImage});
 }
 
+class CountDown_RemainingTime extends CarCheckEvent {
+  Duration getTime;
+
+  CountDown_RemainingTime({ required this.getTime});
+}
+
 class Daily_Check extends CarCheckEvent {}
 
 class AddItem_Bloc2 extends CarCheckEvent {
