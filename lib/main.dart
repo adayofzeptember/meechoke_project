@@ -105,10 +105,11 @@ class _StartPageState extends State<StartPage> {
   Future<void> _Permission() async {
     var status = await Permission.location.request();
     if (status == PermissionStatus.granted) {
+      {}
     } else {
       Fluttertoast.showToast(
           msg:
-              "ตั้งค่าอนุญาติการให้แอปเข้าถึงตำแหน่งพื้นที่ได้ที่การตั้งค่าแอป",
+              "ตั้งค่าอนุญาติการให้แอปภายหลังเข้าถึงตำแหน่งพื้นที่ได้ที่การตั้งค่าแอป",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.SNACKBAR,
           timeInSecForIosWeb: 2,

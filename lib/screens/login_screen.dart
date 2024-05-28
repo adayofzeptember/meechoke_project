@@ -164,8 +164,10 @@ class Login_Screen extends StatelessWidget {
                                               .add(ShowPassword_Swap());
                                         },
                                         icon: Icon(Icons.remove_red_eye,
-                                            color: Color.fromARGB(
-                                                255, 211, 211, 211)),
+                                            color: (state.obscurePass == true)
+                                                ? Color.fromARGB(
+                                                    255, 211, 211, 211)
+                                                : Palette.thisBlue),
                                       ),
                                       // suffixIcon:
                                       // Align(

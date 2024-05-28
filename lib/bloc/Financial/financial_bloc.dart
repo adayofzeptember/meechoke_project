@@ -47,7 +47,7 @@ class FinancialBloc extends Bloc<FinancialEvent, FinancialState> {
                     int.parse(expandedEXT['options']['ticketTotal'].toString()),
               ));
             }
-                 //list ใหญ่
+            //list ใหญ่
             data.add(Financial_Model(
                 id: await elements['id'].toString(),
                 transferMethod: await elements['transferMethod'].toString(),
