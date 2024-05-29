@@ -187,6 +187,7 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                               const EdgeInsets
                                                                   .all(15.0),
                                                           child: Row(
+                                                                mainAxisAlignment: MainAxisAlignment.center,
                                                             children: [
                                                               SvgPicture.asset(
                                                                 'assets/images/normal.svg',
@@ -199,7 +200,7 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                                         .grey,
                                                               ),
                                                               SizedBox(
-                                                                width: 5,
+                                                                width: 3,
                                                               ),
                                                               Text(
                                                                 "ปกติ",
@@ -232,8 +233,7 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                                 primary: state
                                                                             .indexButtonSelect ==
                                                                         1
-                                                                    ? Palette
-                                                                        .someRed
+                                                                    ? const Color.fromARGB(255, 200, 40, 43)
                                                                     : const Color
                                                                         .fromARGB(
                                                                         255,
@@ -262,6 +262,8 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                               const EdgeInsets
                                                                   .all(15.0),
                                                           child: Row(
+                                                            
+                                                            mainAxisAlignment: MainAxisAlignment.center,
                                                             children: [
                                                               SvgPicture.asset(
                                                                 'assets/images/abnormal.svg',
@@ -274,7 +276,7 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                                         .grey,
                                                               ),
                                                               SizedBox(
-                                                                width: 5,
+                                                                width: 3,
                                                               ),
                                                               Text(
                                                                 "ไม่ปกติ",
@@ -414,7 +416,7 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                                   width: 3,
                                                                 ),
                                                                 Text(
-                                                                  'ภาพประกอบรายการผิดปกติ',
+                                                                  'ภาพอุปกรณ์ผิดปกติ',
                                                                   style: TextStyle(
                                                                       fontSize:
                                                                           18,
@@ -527,6 +529,7 @@ class _Check_ScreenState extends State<Check_Screen> {
                                             : Container(),
                                       ],
                                     )
+//! หน้ารายการสรุป
                                   : Container(
                                       width: double.infinity,
                                       decoration: BoxDecoration(

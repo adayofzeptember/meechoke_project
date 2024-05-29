@@ -29,7 +29,7 @@ class FinancialBloc extends Bloc<FinancialEvent, FinancialState> {
             List<dynamic> dataExpandList = elements['extClearingJob'];
             List<ExtClearingJob> dataExpand = [];
             for (var expandedEXT in dataExpandList) {
-              //list ย่อย
+              // วน list ย่อยก่อน แล้วเอาไปใส่ list ใหญ่
               dataExpand.add(ExtClearingJob(
                 documentNumber:
                     await expandedEXT['job']['documentNumber'].toString(),

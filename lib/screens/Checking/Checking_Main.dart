@@ -362,7 +362,7 @@ class _Check_DailyState extends State<Check_Daily> {
                                           fontSize: 15),
                                     ),
                                   ),
-                                    SizedBox(
+                                  SizedBox(
                                     height: 10,
                                   ),
                                   Icon(
@@ -388,22 +388,27 @@ class _Check_DailyState extends State<Check_Daily> {
                                   height: 15,
                                 ),
                                 InkWell(
-                                  onTap: () {
-                                    context.read<CarCheckBloc>().add(
-                                        Load_CheckList(
-                                            getCheckType: 'extCheckupList'));
+                                  onTap:
+                                      (state.storedExtCheckupList1.length == 0)
+                                          ? () {
+                                              context.read<CarCheckBloc>().add(
+                                                  Load_CheckList(
+                                                      getCheckType:
+                                                          'extCheckupList'));
 
-                                    Navigator.push(
-                                      context,
-                                      PageTransition(
-                                          duration:
-                                              const Duration(milliseconds: 300),
-                                          type: PageTransitionType.rightToLeft,
-                                          child: Check_Screen(
-                                            checkingType: 'เบื้องต้น',
-                                          )),
-                                    );
-                                  },
+                                              Navigator.push(
+                                                context,
+                                                PageTransition(
+                                                    duration: const Duration(
+                                                        milliseconds: 300),
+                                                    type: PageTransitionType
+                                                        .rightToLeft,
+                                                    child: Check_Screen(
+                                                      checkingType: 'เบื้องต้น',
+                                                    )),
+                                              );
+                                            }
+                                          : null,
                                   child: Container(
                                     width: double.infinity,
                                     decoration: BoxDecoration(
@@ -431,6 +436,7 @@ class _Check_DailyState extends State<Check_Daily> {
                                                   color: Colors.white,
                                                 )
                                               : Container(
+                                                
                                                   decoration: BoxDecoration(
                                                       color: Colors.white,
                                                       borderRadius:
