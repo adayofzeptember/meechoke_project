@@ -554,7 +554,7 @@ class _Financial_ListState extends State<Financial_List> {
                   ],
                 )
               ],
-            ),
+            ),  
           ]),
         ));
   }

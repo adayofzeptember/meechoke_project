@@ -70,7 +70,6 @@ class _Job_ListsState extends State<Job_Lists> with TickerProviderStateMixin {
               ),
               onPressed: () {
                 _handleRefresh();
-
                 context.read<JobsBloc>().add(Load_NewJobs());
                 context.read<JobsBloc>().add(Load_CurrentJobs());
               },

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
@@ -11,6 +13,7 @@ class HistoryWorkBloc extends Bloc<HistoryWorkEvent, HistoryWorkState> {
   final dio = Dio();
   HistoryWorkBloc()
       : super(HistoryWorkState(
+            errorMsg: '',
             count: '0',
             workhistory_list: [],
             total: '',
@@ -77,9 +80,10 @@ class HistoryWorkBloc extends Bloc<HistoryWorkEvent, HistoryWorkState> {
               HistoryWork_Model(
                   customer: await elements['customer'].toString(),
                   date_range: await elements['dateRange'].toString(),
-                  allowance: await elements['allowance'].toString(),
+                  allowance: (await elements['allowance'].toString() == 'null')
+                      ? '0'
+                      : await elements['allowance'].toString(),
                   doc_number: await elements['documentNumber'].toString()),
-                  
             );
           }
           emit(state.copyWith(
@@ -88,11 +92,11 @@ class HistoryWorkBloc extends Bloc<HistoryWorkEvent, HistoryWorkState> {
               count: response.data['count'].toString(),
               total: response.data['allowanceTotal'].toString()));
         } else {
-          emit(state.copyWith(status: 'error'));
+          emit(state.copyWith(status: 'error', errorMsg: response.statusMessage));
           print('error status != 200');
         }
       } catch (e) {
-        emit(state.copyWith(status: 'error'));
+        emit(state.copyWith(status: 'error', errorMsg: "Exception Try: $e"));
         print("Exception Try: $e");
       }
     });
