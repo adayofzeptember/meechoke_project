@@ -436,7 +436,6 @@ class _Check_DailyState extends State<Check_Daily> {
                                                   color: Colors.white,
                                                 )
                                               : Container(
-                                                
                                                   decoration: BoxDecoration(
                                                       color: Colors.white,
                                                       borderRadius:
@@ -480,23 +479,28 @@ class _Check_DailyState extends State<Check_Daily> {
                                   height: 10,
                                 ),
                                 InkWell(
-                                  onTap: () {
-                                    context.read<CarCheckBloc>().add(
-                                        Load_CheckList(
-                                            getCheckType:
-                                                'extCheckupEquipment'));
+                                  onTap: (state.storedExtCheckupEquipment2
+                                              .length ==
+                                          0)
+                                      ? () {
+                                          context.read<CarCheckBloc>().add(
+                                              Load_CheckList(
+                                                  getCheckType:
+                                                      'extCheckupEquipment'));
 
-                                    Navigator.push(
-                                      context,
-                                      PageTransition(
-                                          duration:
-                                              const Duration(milliseconds: 300),
-                                          type: PageTransitionType.rightToLeft,
-                                          child: Check_Screen(
-                                            checkingType: 'อุปกรณ์',
-                                          )),
-                                    );
-                                  },
+                                          Navigator.push(
+                                            context,
+                                            PageTransition(
+                                                duration: const Duration(
+                                                    milliseconds: 300),
+                                                type: PageTransitionType
+                                                    .rightToLeft,
+                                                child: Check_Screen(
+                                                  checkingType: 'อุปกรณ์',
+                                                )),
+                                          );
+                                        }
+                                      : null,
                                   child: Container(
                                     width: double.infinity,
                                     decoration: BoxDecoration(
@@ -568,23 +572,45 @@ class _Check_DailyState extends State<Check_Daily> {
                                   height: 10,
                                 ),
                                 InkWell(
-                                  onTap: () {
-                                    context.read<CarCheckBloc>().add(
-                                        Load_CheckList(
-                                            getCheckType:
-                                                'extCheckupSafetyList'));
+                                  onTap: (state
+                                              .storedExtCheckupSafety3.length ==
+                                          0)
+                                      ? () {
+                                          context.read<CarCheckBloc>().add(
+                                              Load_CheckList(
+                                                  getCheckType:
+                                                      'extCheckupSafetyList'));
 
-                                    Navigator.push(
-                                      context,
-                                      PageTransition(
-                                          duration:
-                                              const Duration(milliseconds: 300),
-                                          type: PageTransitionType.rightToLeft,
-                                          child: Check_Screen(
-                                            checkingType: 'ความปลอดภัย',
-                                          )),
-                                    );
-                                  },
+                                          Navigator.push(
+                                            context,
+                                            PageTransition(
+                                                duration: const Duration(
+                                                    milliseconds: 300),
+                                                type: PageTransitionType
+                                                    .rightToLeft,
+                                                child: Check_Screen(
+                                                  checkingType: 'ความปลอดภัย',
+                                                )),
+                                          );
+                                        }
+                                      : null,
+                                  // onTap: () {
+                                  //   context.read<CarCheckBloc>().add(
+                                  //       Load_CheckList(
+                                  //           getCheckType:
+                                  //               'extCheckupSafetyList'));
+
+                                  //   Navigator.push(
+                                  //     context,
+                                  //     PageTransition(
+                                  //         duration:
+                                  //             const Duration(milliseconds: 300),
+                                  //         type: PageTransitionType.rightToLeft,
+                                  //         child: Check_Screen(
+                                  //           checkingType: 'ความปลอดภัย',
+                                  //         )),
+                                  //   );
+                                  // },
                                   child: Container(
                                     width: double.infinity,
                                     decoration: BoxDecoration(

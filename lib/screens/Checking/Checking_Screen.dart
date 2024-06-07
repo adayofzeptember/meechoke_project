@@ -187,7 +187,9 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                               const EdgeInsets
                                                                   .all(15.0),
                                                           child: Row(
-                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
                                                             children: [
                                                               SvgPicture.asset(
                                                                 'assets/images/normal.svg',
@@ -233,7 +235,12 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                                 primary: state
                                                                             .indexButtonSelect ==
                                                                         1
-                                                                    ? const Color.fromARGB(255, 200, 40, 43)
+                                                                    ? const Color
+                                                                        .fromARGB(
+                                                                        255,
+                                                                        200,
+                                                                        40,
+                                                                        43)
                                                                     : const Color
                                                                         .fromARGB(
                                                                         255,
@@ -262,8 +269,9 @@ class _Check_ScreenState extends State<Check_Screen> {
                                                               const EdgeInsets
                                                                   .all(15.0),
                                                           child: Row(
-                                                            
-                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
                                                             children: [
                                                               SvgPicture.asset(
                                                                 'assets/images/abnormal.svg',
@@ -736,7 +744,9 @@ class _Check_ScreenState extends State<Check_Screen> {
                                 height: 60,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      primary: Colors.green,
+                                      primary: (state.toCheckChecklist1 == 0)
+                                          ? Colors.green
+                                          : Palette.theGreen,
                                       elevation: 0,
                                       // side: BorderSide(color: Colors.white),
                                       shape: RoundedRectangleBorder(
@@ -799,8 +809,10 @@ class _Check_ScreenState extends State<Check_Screen> {
                                     child: Container(
                                       width: double.infinity,
                                       alignment: Alignment.center,
-                                      child: const Text(
-                                        "บันทึก",
+                                      child: Text(
+                                        (state.toCheckChecklist1 == 0)
+                                            ? 'ต่อไป'
+                                            : 'บันทึกผล',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: Colors.white,
@@ -810,6 +822,56 @@ class _Check_ScreenState extends State<Check_Screen> {
                                   ),
                                 ),
                               ),
+                              (state.toCheckChecklist1 == 0)
+                                  ? Container()
+                                  : Padding(
+                                      padding: const EdgeInsets.only(top: 5),
+                                      child: SizedBox(
+                                        height: 60,
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              primary: Palette.someRed,
+                                              elevation: 0,
+                                              // side: BorderSide(color: Colors.white),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              )),
+                                          onPressed: () {
+                                            if (widget.checkingType ==
+                                                "เบื้องต้น") {
+                                              ExtCheckupList_Item.checklist
+                                                  .clear();
+                                            } else if (widget.checkingType ==
+                                                "อุปกรณ์") {
+                                              ExtCheckupEquipment_Item
+                                                  .checklistEquipment
+                                                  .clear();
+                                            } else {
+                                              ExtCheckupSafety_Item
+                                                  .checklistExtCheckupSafety_Item
+                                                  .clear();
+                                            }
+
+                                            Navigator.pop(context);
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(15.0),
+                                            child: Container(
+                                              width: double.infinity,
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                'ละทิ้ง',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                    fontSize: 15),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                             ],
                           );
                         });

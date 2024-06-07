@@ -20,7 +20,7 @@ class _MainMenu_AlliesState extends State<MainMenu_Allies> {
     context.read<ProfileBloc>().add(Load_Profile());
     super.initState();
   }
-  
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -111,7 +111,6 @@ class _MainMenu_AlliesState extends State<MainMenu_Allies> {
                   //       child: Job_Lists()),
                   //);
                 },
-               
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.2,
                   width: double.infinity,
@@ -132,7 +131,8 @@ class _MainMenu_AlliesState extends State<MainMenu_Allies> {
       ),
     );
   }
-Future showProfile(var context) async {
+
+  Future showProfile(var context) async {
     return showDialog(
       context: context,
       barrierDismissible: true, // user must tap button!
@@ -171,7 +171,7 @@ Future showProfile(var context) async {
                             //       "พขร. ID: ${state.profile_data.id}",
                             //       style: TextStyle(
                             //           fontSize: 20,
-                            
+
                             //           fontWeight: FontWeight.bold,
                             //           color: Palette.thisBlue),
                             //     ),
@@ -217,7 +217,8 @@ Future showProfile(var context) async {
                                     const Text(
                                       'ทะเบียนลูก',
                                       style: TextStyle(
-                                        color: Color.fromARGB(255, 131, 131, 131),
+                                          color: Color.fromARGB(
+                                              255, 131, 131, 131),
                                           fontWeight: FontWeight.bold),
                                     ),
                                     const SizedBox(
@@ -230,7 +231,6 @@ Future showProfile(var context) async {
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(15))),
                                       child: Padding(
-
                                         padding: const EdgeInsets.all(5.0),
                                         child: Container(
                                           decoration: BoxDecoration(
@@ -238,13 +238,13 @@ Future showProfile(var context) async {
                                                   255, 255, 234, 127),
                                               border: Border.all(
                                                   color: Colors.black),
-                                              borderRadius: const BorderRadius.all(
-                                                  Radius.circular(15))),
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(15))),
                                           child: const Padding(
                                             padding: EdgeInsets.fromLTRB(
                                                 15, 8, 15, 8),
-                                            child: 
-                                            Column(
+                                            child: Column(
                                               children: [
                                                 const Text(
                                                   '899599',
@@ -270,28 +270,30 @@ Future showProfile(var context) async {
                                     const Text(
                                       'ทะเบียนลูก',
                                       style: TextStyle(
-                                                                    color: Color.fromARGB(255, 131, 131, 131),
+                                          color: Color.fromARGB(
+                                              255, 131, 131, 131),
                                           fontWeight: FontWeight.bold),
                                     ),
                                     const SizedBox(
                                       height: 5,
                                     ),
                                     Container(
-                                      decoration:   BoxDecoration(
+                                      decoration: BoxDecoration(
                                           color: Color.fromARGB(
                                               255, 255, 234, 127),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(15))),
                                       child: Padding(
-                                        padding:  EdgeInsets.all(5.0),
+                                        padding: EdgeInsets.all(5.0),
                                         child: Container(
                                           decoration: BoxDecoration(
-                                              color:  Color.fromARGB(
+                                              color: Color.fromARGB(
                                                   255, 255, 234, 127),
                                               border: Border.all(
                                                   color: Colors.black),
-                                              borderRadius: const BorderRadius.all(
-                                                  Radius.circular(15))),
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(15))),
                                           child: const Padding(
                                             padding: EdgeInsets.fromLTRB(
                                                 15, 8, 15, 8),
@@ -304,7 +306,7 @@ Future showProfile(var context) async {
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),
-                                             Text('นครราชสีมา'),
+                                                Text('นครราชสีมา'),
                                               ],
                                             ),
                                           ),
@@ -332,8 +334,9 @@ Future showProfile(var context) async {
                             borderRadius: BorderRadius.circular(10),
                           )),
                       onPressed: () async {
+                        //synflex
                         // SharedPreferences prefrences =
-                        //     await SharedPreferences.getInstance();
+                        // await SharedPreferences.getInstance();
                         // prefrences.clear();
                         // Phoenix.rebirth(context);
                         logoutAlert(context);
@@ -343,7 +346,7 @@ Future showProfile(var context) async {
                         child: Container(
                           width: double.infinity,
                           alignment: Alignment.center,
-                          child: const Row(
+                          child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -385,7 +388,7 @@ Future showProfile(var context) async {
       barrierDismissible: false, // user must tap button!
       builder: (context) {
         return AlertDialog(
-          title: const Text(
+          title: Text(
             'ต้องการออกจากระบบหรือไม่?',
             style: TextStyle(
                 color: Palette.thisBlue,
@@ -396,7 +399,7 @@ Future showProfile(var context) async {
             TextButton(
               style: TextButton.styleFrom(
                 foregroundColor:
-                    const Color.fromARGB(255, 235, 116, 108), // Splash color
+                    Color.fromARGB(255, 235, 116, 108), // Splash color
               ),
               child: const Text(
                 'ยกเลิก',
@@ -410,9 +413,9 @@ Future showProfile(var context) async {
             TextButton(
               style: TextButton.styleFrom(
                 foregroundColor:
-                    const Color.fromARGB(255, 138, 206, 140), // Splash color
+                    Color.fromARGB(255, 138, 206, 140), // Splash color
               ),
-              child: const Text(
+              child: Text(
                 'ยืนยัน',
                 style:
                     TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
@@ -430,4 +433,4 @@ Future showProfile(var context) async {
       },
     );
   }
-} 
+}
