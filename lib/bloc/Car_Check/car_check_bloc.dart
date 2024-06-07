@@ -137,7 +137,6 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
           "equipmentResult": state.storedExtCheckupEquipment2,
           "safetyResult": state.storedExtCheckupSafety3,
         };
-
         final response = await dio.post(api_url_v1 + "checkup-car",
             options: Options(
               headers: {

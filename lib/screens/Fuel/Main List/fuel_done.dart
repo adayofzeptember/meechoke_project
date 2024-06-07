@@ -77,10 +77,9 @@ class Fuel_Filled extends StatelessWidget {
                         onTap: () {
                           print(state.fuel_filled_list[index].id);
                           context.read<FuelBloc>().add(Load_Fuel_Info(
-                            checkPage: 'filled',
-                            context: context,
-                              joNumber:
-                                  state.fuel_filled_list[index].id));
+                              checkPage: 'filled',
+                              context: context,
+                              joNumber: state.fuel_filled_list[index].id));
                         },
                         child: Container(
                           child: Padding(
@@ -197,7 +196,7 @@ class Fuel_Filled extends StatelessWidget {
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(20))),
                                           child: Padding(
-                                            padding: const EdgeInsets.all(10.0),
+                                            padding: EdgeInsets.all(10.0),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
@@ -276,7 +275,6 @@ class Fuel_Filled extends StatelessWidget {
                       );
                     },
                   );
-           
               },
             ),
           ),
