@@ -42,11 +42,11 @@ void main() async {
   initializeDateFormatting('th');
   GeolocatorPlatform.instance;
   WidgetsFlutterBinding.ensureInitialized();
-  const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+  SystemUiOverlayStyle(statusBarColor: Colors.transparent);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
     (value) => runApp(
       Phoenix(
-        child: const StarterWidget(),
+        child: StarterWidget(),
       ),
     ),
   );
@@ -82,7 +82,7 @@ class StarterWidget extends StatelessWidget {
           useMaterial3: true,
           fontFamily: 'Sarabun',
         ),
-        home: const StartPage(),
+        home: StartPage(),
       ),
     );
   }

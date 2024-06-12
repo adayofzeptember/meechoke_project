@@ -333,46 +333,47 @@ class _Check_DailyState extends State<Check_Daily> {
                         const SizedBox(
                           height: 10,
                         ),
+                        //! เริ่มส่วนที่เช็ค
                         BlocBuilder<CarCheckBloc, CarCheckState>(
                           builder: (context, state) {
-                            if (state.twty4Check == true) {
-                              return Column(
-                                children: [
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'ไม่มีรายการตรวจเช็คประจำวัน',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Palette.thisBlue,
-                                          fontSize: 23),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      '- ตรวจเช็คได้อีกครั้งหลังครบ 24 ชั่วโมง -',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Palette.theGrey,
-                                          fontSize: 15),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Icon(
-                                    Icons.access_time,
-                                    size: 80,
-                                    color: Palette.thisBlue,
-                                  ),
-                                ],
-                              );
-                            }
+                            // if (state.twty4Check == true) {
+                            //   return Column(
+                            //     children: [
+                            //       SizedBox(
+                            //         height: 20,
+                            //       ),
+                            //       Center(
+                            //         child: Text(
+                            //           'ไม่มีรายการตรวจเช็คประจำวัน',
+                            //           style: TextStyle(
+                            //               fontWeight: FontWeight.bold,
+                            //               color: Palette.thisBlue,
+                            //               fontSize: 23),
+                            //         ),
+                            //       ),
+                            //       SizedBox(
+                            //         height: 10,
+                            //       ),
+                            //       Center(
+                            //         child: Text(
+                            //           '- ตรวจเช็คได้อีกครั้งหลังครบ 24 ชั่วโมง -',
+                            //           style: TextStyle(
+                            //               fontWeight: FontWeight.bold,
+                            //               color: Palette.theGrey,
+                            //               fontSize: 15),
+                            //         ),
+                            //       ),
+                            //       SizedBox(
+                            //         height: 10,
+                            //       ),
+                            //       Icon(
+                            //         Icons.access_time,
+                            //         size: 80,
+                            //         color: Palette.thisBlue,
+                            //       ),
+                            //     ],
+                            //   );
+                            // }
                             return Column(
                               children: [
                                 Center(

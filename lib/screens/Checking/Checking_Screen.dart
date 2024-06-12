@@ -798,7 +798,7 @@ class _Check_ScreenState extends State<Check_Screen> {
 
                                     else {
                                       context.read<CarCheckBloc>().add(
-                                          AddItem_Bloc2(
+                                          AddEachItem_Bloc(
                                               fileImage: selectedImage));
 
                                       selectedImage = null;

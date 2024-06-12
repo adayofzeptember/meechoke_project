@@ -130,7 +130,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             fontSize: 15);
       } catch (e) {
         emit(state.copyWith(loading: false));
-
         prefs.clear();
         Phoenix.rebirth(event.context);
         Fluttertoast.showToast(
@@ -138,7 +137,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.SNACKBAR,
             timeInSecForIosWeb: 2,
-            backgroundColor: const Color.fromARGB(255, 133, 133, 133),
+            backgroundColor: Color.fromARGB(255, 133, 133, 133),
             textColor: Colors.white,
             fontSize: 15);
       }

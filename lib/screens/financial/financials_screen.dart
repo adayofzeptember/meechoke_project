@@ -66,21 +66,7 @@ class _Financial_ListState extends State<Financial_List> {
                                 ));
                               } else if (state.status1 == 1 &&
                                   state.financial_list.isEmpty) {
-                                return Center(
-                                    child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 30,
-                                    ),
-                                    Text(
-                                      'ยังไม่มีรายการการเงิน',
-                                      style: TextStyle(
-                                          color: Palette.thisBlue,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20),
-                                    )
-                                  ],
-                                ));
+                                return Container();
                               } else if (state.status1 == 2) {
                                 return GestureDetector(
                                   onTap: () {},
@@ -511,43 +497,7 @@ class _Financial_ListState extends State<Financial_List> {
                               );
                             },
                           ),
-                          // const SizedBox(
-                          //   height: 50,
-                          // ),
-                          // Container(
-                          //   decoration: const BoxDecoration(
-                          //       borderRadius:
-                          //           BorderRadius.all(Radius.circular(25)),
-                          //       color:
-                          //           Color.fromARGB(255, 236, 212, 212)),
-                          //   child: const Padding(
-                          //     padding: EdgeInsets.all(10),
-                          //     child: Column(
-                          //       crossAxisAlignment:
-                          //           CrossAxisAlignment.start,
-                          //       mainAxisAlignment:
-                          //           MainAxisAlignment.start,
-                          //       children: [
-                          //         Text(
-                          //           'หมายเหตุ: ',
-                          //           style: TextStyle(
-                          //               fontSize: 13,
-                          //               fontWeight: FontWeight.bold),
-                          //         ),
-                          //         const SizedBox(
-                          //           height: 5,
-                          //         ),
-                          // Text(
-                          //   'วันเวลาที่แสดงนี้จะช้ากว่าเวลาที่โอนจริงเนื่องจากเป็นการ บันทึกเข้าโปรแกรมหลังจากที่ได้โอนเงินผ่านธนาคารแล้วแต่จะอยู่ภายในวันเดียวกัน',
-                          //   style: TextStyle(
-                          //       fontSize: 13,
-                          //       color: Colors.red,
-                          //       fontWeight: FontWeight.bold),
-                          //         )
-                          //       ],
-                          //     ),
-                          //   ),
-                          // )
+                         
                         ],
                       ),
                     ),
