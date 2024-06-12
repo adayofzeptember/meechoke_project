@@ -10,7 +10,7 @@ import 'package:meechoke_project/bloc/login/login_bloc.dart';
 import 'package:meechoke_project/screens/Checking/Checking_Main.dart';
 import 'package:meechoke_project/screens/Fuel/Main%20List/main_list.dart';
 import 'package:meechoke_project/screens/Jobs/1.%20Main%20Pages%20List/tab_main.dart';
-import 'package:meechoke_project/screens/Financial/financials_screen.dart';
+import 'package:meechoke_project/screens/Financial/financial_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import '../bloc/ReportAccident/report_accident_bloc.dart';
 import 'Report and Docs/tab_mainScreen.dart';

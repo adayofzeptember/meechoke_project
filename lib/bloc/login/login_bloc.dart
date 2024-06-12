@@ -129,6 +129,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             textColor: Colors.white,
             fontSize: 15);
       } catch (e) {
+        
+
         emit(state.copyWith(loading: false));
         prefs.clear();
         Phoenix.rebirth(event.context);
