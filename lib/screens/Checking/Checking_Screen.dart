@@ -148,7 +148,8 @@ class _Check_ScreenState extends State<Check_Screen> {
                                               Padding(
                                                 padding:
                                                     const EdgeInsets.all(8.0),
-                                                child: Row(
+                                                child: 
+                                                Row(
                                                   children: [
                                                     Expanded(
                                                       child: ElevatedButton(

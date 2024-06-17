@@ -17,6 +17,7 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
   final dio = Dio();
   CarCheckBloc()
       : super(CarCheckState(
+            checkEmpty: '',
             remainingTime: Duration.zero,
             checkLoad: 0,
             isLoading: false,
@@ -40,6 +41,29 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
 
     on<Swap_Index_forButtones>((event, emit) async {
       emit(state.copyWith(indexButtonSelect: event.getIndex));
+    });
+
+    on<Empty_Check>((event, emit) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? tokenAuth = prefs.getString('userToken');
+      try {
+        final response = await dio.get(
+          api_url_v1 + "checkup-car",
+          options: Options(headers: {
+            "Authorization": "Bearer $tokenAuth",
+          }),
+        );
+
+        if (response.statusCode == 200) {
+          if (response.data['data'].isEmpty) {
+            emit(state.copyWith(checkEmpty: 'empty'));
+          } else {
+            emit(state.copyWith(checkEmpty: 'not empty'));
+          }
+        } else {
+          print('error status != 200');
+        }
+      } catch (e) {}
     });
 
     on<Daily_Check>((event, emit) async {

@@ -52,6 +52,8 @@ class CountDown_RemainingTime extends CarCheckEvent {
 
 class Daily_Check extends CarCheckEvent {}
 
+class Empty_Check extends CarCheckEvent {}
+
 class AddEachItem_Bloc extends CarCheckEvent {
   File? fileImage;
 

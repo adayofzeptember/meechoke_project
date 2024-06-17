@@ -105,7 +105,9 @@ class _StartPageState extends State<StartPage> {
   Future<void> _Permission() async {
     var status = await Permission.location.request();
     if (status == PermissionStatus.granted) {
-      {}
+      {
+        print('location permission granted');
+      }
     } else {
       Fluttertoast.showToast(
           msg:
@@ -154,7 +156,7 @@ class _StartPageState extends State<StartPage> {
           SizedBox(height: 10),
           Center(
             child: Text(
-              'Meechoke MS',
+              'Meechoke Mobile',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,

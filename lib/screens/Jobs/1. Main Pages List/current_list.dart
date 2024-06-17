@@ -50,7 +50,8 @@ class CurrentJobs_Screen extends StatelessWidget {
                   );
                 } else if (state.status2 == 1 &&
                     state.currentjobs_list.isEmpty) {
-                  return Center(
+                  return 
+                  Center(
                       child: Column(
                     children: [
                       SizedBox(

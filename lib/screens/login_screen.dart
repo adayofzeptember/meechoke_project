@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/ProgressHUD.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
+import 'package:meechoke_project/screens/A%20Co-op%20Part/coop_mainScreen.dart';
+import 'package:page_transition/page_transition.dart';
 import '../ETC/app_color.dart';
 
 var usernameController = TextEditingController();
@@ -169,14 +171,6 @@ class Login_Screen extends StatelessWidget {
                                                     255, 211, 211, 211)
                                                 : Palette.thisBlue),
                                       ),
-                                      // suffixIcon:
-                                      // Align(
-                                      //   widthFactor: 1.0,
-                                      //   heightFactor: 1.0,
-                                      //   child: Icon(Icons.remove_red_eye,
-                                      //       color: Color.fromARGB(
-                                      //           255, 211, 211, 211)),
-                                      // ),
                                       hintText: 'กรอกรหัสผ่าน',
                                       labelStyle: const TextStyle(fontSize: 15),
                                       focusedBorder: OutlineInputBorder(
@@ -215,22 +209,30 @@ class Login_Screen extends StatelessWidget {
                                               BorderRadius.circular(30),
                                         )),
                                     onPressed: () {
-                                      if (_formKey.currentState!.validate()) {
-                                        // If the form is valid, display a snackbar or perform any action
-                                        // ScaffoldMessenger.of(context)
-                                        //     .showSnackBar(
-                                        //   SnackBar(content: Text('Valid!')),
-                                        // );
-                                      }
+                                      Navigator.pushReplacement(
+                                        context,
+                                        PageTransition(
+                                            duration: const Duration(
+                                                milliseconds: 500),
+                                            type: PageTransitionType.fade,
+                                            child: Coop_mainScreen()),
+                                      );
+                                      // if (_formKey.currentState!.validate()) {
+                                      //   // If the form is valid, display a snackbar or perform any action
+                                      //   // ScaffoldMessenger.of(context)
+                                      //   //     .showSnackBar(
+                                      //   //   SnackBar(content: Text('Valid!')),
+                                      //   // );
+                                      // }
 
-                                      context.read<LoginBloc>().add(
-                                          Login_Casual(
-                                              context: context,
-                                              getUsername:
-                                                  usernameController.text,
-                                              getPassword:
-                                                  passwordController.text));
-                                      //NotificationService().scheduleNotifications();
+                                      // context.read<LoginBloc>().add(
+                                      //     Login_Casual(
+                                      //         context: context,
+                                      //         getUsername:
+                                      //             usernameController.text,
+                                      //         getPassword:
+                                      //             passwordController.text));
+                                      // //NotificationService().scheduleNotifications();
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(15.0),
@@ -265,3 +267,106 @@ class Login_Screen extends StatelessWidget {
 
 //*clersr 
 
+
+
+
+
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text('Selectable ElevatedButtons')),
+        body: ButtonSelection(),
+      ),
+    );
+  }
+}
+
+class ButtonSelection extends StatefulWidget {
+  @override
+  _ButtonSelectionState createState() => _ButtonSelectionState();
+}
+
+class _ButtonSelectionState extends State<ButtonSelection> {
+  int? _selectedButtonIndex;
+
+  void _onButtonPressed(int index) {
+    setState(() {
+      _selectedButtonIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: 
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: _selectedButtonIndex == 0 ? Colors.blue : Colors.grey,
+              ),
+              onPressed: () => _onButtonPressed(0),
+              child: Text('Button 1'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: _selectedButtonIndex == 1 ? Colors.blue : Colors.grey,
+              ),
+              onPressed: () => _onButtonPressed(1),
+              child: Text('Button 2'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: _selectedButtonIndex == 2 ? Colors.blue : Colors.grey,
+              ),
+              onPressed: () => _onButtonPressed(2),
+              child: Text('Button 3'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: _selectedButtonIndex == 3 ? Colors.blue : Colors.grey,
+              ),
+              onPressed: () => _onButtonPressed(3),
+              child: Text('Button 4'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: _selectedButtonIndex == 4 ? Colors.blue : Colors.grey,
+              ),
+              onPressed: () => _onButtonPressed(4),
+              child: Text('Button 5'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: _selectedButtonIndex == 5 ? Colors.blue : Colors.grey,
+              ),
+              onPressed: () => _onButtonPressed(5),
+              child: Text('Button 6'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

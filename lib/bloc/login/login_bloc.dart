@@ -15,6 +15,7 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final dio = Dio();
+
   LoginBloc()
       : super(LoginState(
             loading: false,
@@ -117,8 +118,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(state.copyWith(loading: false));
         print('logout response: ' + response.statusMessage.toString());
 
-        // prefs.clear();
-        prefs.remove('userToken');
+        prefs.clear();
+
         Phoenix.rebirth(event.context);
         Fluttertoast.showToast(
             msg: "ออกจากระบบแล้ว",
@@ -129,13 +130,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             textColor: Colors.white,
             fontSize: 15);
       } catch (e) {
-        
-
         emit(state.copyWith(loading: false));
         prefs.clear();
         Phoenix.rebirth(event.context);
         Fluttertoast.showToast(
-            msg: "${e.toString()}",
+            msg: "ออกจากระบบแล้ว",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.SNACKBAR,
             timeInSecForIosWeb: 2,

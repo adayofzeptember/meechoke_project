@@ -51,14 +51,18 @@ class Fuel_NotDone extends StatelessWidget {
                   );
                 } else if (state.status1 == 1 &&
                     state.fuel_notYet_list.isEmpty) {
-                  return Center(
+                  return 
+                  Center(
                       child: Column(
                     children: [
                       SizedBox(
-                        height: 10,
+                        height: 5,
+                      ),
+                      SvgPicture.asset(
+                        'assets/images/nojob.svg',
                       ),
                       Text(
-                        'ไม่มีรายการเติมเชื้อเพลิง',
+                        'ไม่มีรายการ',
                         style: TextStyle(
                             color: Palette.thisBlue,
                             fontWeight: FontWeight.bold,
