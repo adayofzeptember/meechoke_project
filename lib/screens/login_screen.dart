@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/ProgressHUD.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
-import 'package:meechoke_project/screens/A%20Co-op%20Part/coop_mainScreen.dart';
+import 'package:meechoke_project/screens/menu_screen_allience.dart';
 import 'package:page_transition/page_transition.dart';
 import '../ETC/app_color.dart';
 
@@ -215,7 +215,7 @@ class Login_Screen extends StatelessWidget {
                                             duration: const Duration(
                                                 milliseconds: 500),
                                             type: PageTransitionType.fade,
-                                            child: Coop_mainScreen()),
+                                            child: MainMenu_Allience()),
                                       );
                                       // if (_formKey.currentState!.validate()) {
                                       //   // If the form is valid, display a snackbar or perform any action

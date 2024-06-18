@@ -8,6 +8,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Car_Check/car_check_bloc.dart';
+import 'package:meechoke_project/bloc/Car_Power/car_power_bloc.dart';
 import 'package:meechoke_project/bloc/Financial/financial_bloc.dart';
 import 'package:meechoke_project/bloc/Fuel/fuel_bloc.dart';
 import 'package:meechoke_project/bloc/HistoryWork/history_work_bloc.dart';
@@ -58,6 +59,7 @@ class StarterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => CarPowerBloc()),
         BlocProvider(create: (context) => LoginBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => JobsBloc()),

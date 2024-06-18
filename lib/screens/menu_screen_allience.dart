@@ -4,17 +4,17 @@ import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
-import 'package:meechoke_project/screens/A%20Co-op%20Part/Car%20Power/carpower.dart';
+import 'package:meechoke_project/screens/Allience/Car%20Power/main.dart';
 import 'package:page_transition/page_transition.dart';
 
-class Coop_mainScreen extends StatefulWidget {
-  const Coop_mainScreen({super.key});
+class MainMenu_Allience extends StatefulWidget {
+  const MainMenu_Allience({super.key});
 
   @override
-  State<Coop_mainScreen> createState() => _Coop_mainScreenState();
+  State<MainMenu_Allience> createState() => _MainMenu_AllienceState();
 }
 
-class _Coop_mainScreenState extends State<Coop_mainScreen> {
+class _MainMenu_AllienceState extends State<MainMenu_Allience> {
   @override
   void initState() {
     // context.read<ProfileBloc>().add(Load_Profile());
@@ -65,13 +65,12 @@ class _Coop_mainScreenState extends State<Coop_mainScreen> {
             children: [
               GestureDetector(
                 onTap: () {
-                 
                   Navigator.push(
                     context,
                     PageTransition(
                         duration: const Duration(milliseconds: 500),
                         type: PageTransitionType.fade,
-                        child: CarPower_Screen()),
+                        child: CarPower_Tab()),
                   );
                 },
                 child: Container(
@@ -105,9 +104,7 @@ class _Coop_mainScreenState extends State<Coop_mainScreen> {
                 ),
               ),
               GestureDetector(
-                onTap: () {
-                 
-                },
+                onTap: () {},
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.2,
                   width: double.infinity,
