@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Car_Power/car_power_bloc.dart';
@@ -11,6 +12,7 @@ class CarPower_Form extends StatefulWidget {
 class _CarPower_FormState extends State<CarPower_Form> {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 228, 237, 240),
       body: SingleChildScrollView(
@@ -349,7 +351,7 @@ class _CarPower_FormState extends State<CarPower_Form> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                '4ล้อพ่วง รูปแบบที่ 1 ',
+                                                '${state.car_group_name} รูปแบบที่ 1 ',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 15,
@@ -466,7 +468,7 @@ class _CarPower_FormState extends State<CarPower_Form> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                '4ล้อพ่วง รูปแบบที่ 2 ',
+                                                '${state.car_group_name} รูปแบบที่ 2 ',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 15,
@@ -566,7 +568,7 @@ class _BottomSheet_CarPowerState extends State<BottomSheet_CarPower> {
               SizedBox(width: 20),
               Text(
                 '$_counter',
-                style: TextStyle(fontSize: 24),
+                style: TextStyle(fontSize: 24, color: Palette.theGrey),
               ),
               SizedBox(width: 20),
               IconButton(

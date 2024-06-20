@@ -48,8 +48,7 @@ class NewJobs_Screen extends StatelessWidget {
                       ],
                     )),
                   );
-                } 
-                else if (state.status == 1 && state.newjobs_list.isEmpty) {
+                } else if (state.status == 1 && state.newjobs_list.isEmpty) {
                   return Center(
                       child: Column(
                     children: [
@@ -72,8 +71,7 @@ class NewJobs_Screen extends StatelessWidget {
                 //?  โหลดได้ปกติ
                 return Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: 
-                  ListView.builder(
+                  child: ListView.builder(
                     primary: true,
                     itemCount: state.newjobs_list.length,
                     shrinkWrap: true,

@@ -1,11 +1,12 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
-import 'package:meechoke_project/screens/Allience/Car%20Power/form_carPower.dart';
-import 'package:meechoke_project/screens/Jobs/1.%20Main%20Pages%20List/new_list.dart';
+import 'package:meechoke_project/screens/Allience/Car%20Power/form.dart';
+import 'package:meechoke_project/screens/Allience/Car%20Power/history.dart';
 import 'package:meechoke_project/screens/menu_screen_employee.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -32,9 +33,22 @@ class _CarPower_TabState extends State<CarPower_Tab>
 
   @override
   Widget build(BuildContext context) {
+ 
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Palette.thisBlue,
+         flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 0, 54, 120),
+                Color.fromARGB(235, 2, 16, 34)
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
         automaticallyImplyLeading: false,
         centerTitle: true,
         leading: IconButton(
@@ -119,7 +133,7 @@ class _CarPower_TabState extends State<CarPower_Tab>
             Expanded(
               child: TabBarView(
                 controller: _tabController,
-                children: [CarPower_Form(), NewJobs_Screen()],
+                children: [CarPower_Form(), CarPower_History()],
               ),
             ),
           ],

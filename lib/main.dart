@@ -22,13 +22,14 @@ import 'package:page_transition/page_transition.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+ 
 // gradient: LinearGradient(colors: [
 //                     Palette.thisBlue,
 //                     const Color.fromARGB(255, 214, 77, 77)
 //                   ]),
 
 // MediaQuery.of(context).size.width * 0.04
+
 //  Navigator.push(
 //           context,
 //           PageTransition(
@@ -37,6 +38,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 //               type: PageTransitionType.fade,
 //               child: Job_OnGoing()),
 //         );
+
+//  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+//     statusBarColor: Colors.white, // Background color
+//     statusBarIconBrightness: Brightness.light, // Icon color
+//     statusBarBrightness: Brightness.light, // For iOS
+//   ));
 
 void main() async {
   Intl.defaultLocale = 'th';
@@ -112,8 +119,7 @@ class _StartPageState extends State<StartPage> {
       }
     } else {
       Fluttertoast.showToast(
-          msg:
-              "ตั้งค่าอนุญาติการให้แอปภายหลังเข้าถึงตำแหน่งพื้นที่ได้ที่การตั้งค่าแอป",
+          msg: "อนุญาติการเข้าถึงในภายหลังได้ที่ การตั้งค่าแอป",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.SNACKBAR,
           timeInSecForIosWeb: 2,

@@ -4,7 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
-import 'package:meechoke_project/screens/Allience/Car%20Power/main.dart';
+import 'package:meechoke_project/screens/Allience/Car%20Power/main_tab.dart';
+import 'package:meechoke_project/screens/Allience/allience_docs.dart';
 import 'package:page_transition/page_transition.dart';
 
 class MainMenu_Allience extends StatefulWidget {
@@ -120,7 +121,15 @@ class _MainMenu_AllienceState extends State<MainMenu_Allience> {
                 ),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    PageTransition(
+                        duration: const Duration(milliseconds: 500),
+                        type: PageTransitionType.fade,
+                        child: Allience_Docs()),
+                  );
+                },
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.2,
                   width: double.infinity,
