@@ -6,10 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/screens/menu_screen_employee.dart';
+import 'package:meechoke_project/screens/menu_screen_registered_driver.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../ETC/api_url.dart';
-import '../../screens/menu_screen_employee.dart';
 part 'login_event.dart';
 part 'login_state.dart';
 
@@ -23,6 +24,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             registeredCarId: '',
             registeredDriverId: '')) {
     on<Login_Casual>((event, emit) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
       try {
         emit(state.copyWith(loading: true));
 
@@ -41,27 +44,51 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             response.statusCode.toString() + response.statusMessage.toString());
         emit(state.copyWith(
             loading: false,
-            registeredCarId: response.data['data']['user']['currentCar']
-                    ['registeredCarId']
-                .toString(),
             registeredDriverId:
                 response.data['data']['user']['id'].toString()));
-        print('auth token: ' + response.data['data']['accessToken'].toString());
-        // print('driver id: ' + response.data['data']['user']['id'].toString());
-        // print('car id: ' +
-        //     response.data['data']['user']['currentCar']['registeredCarId']
-        //         .toString());
 
-        SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('registeredDriverId',
             response.data['data']['user']['id'].toString());
-        prefs.setString(
-            'registeredCarId',
-            response.data['data']['user']['currentCar']['registeredCarId']
-                .toString());
+
         prefs.setString(
             'userToken', response.data['data']['accessToken'].toString());
+
+        print('auth token: ' + response.data['data']['accessToken'].toString());
+        print('user type: ' + response.data['loginType'].toString());
+
+        var currentCar = response.data['data']['user']['currentCar'];
+        if (currentCar != null && currentCar['registeredCarId'] != null) {
+          prefs.setString(
+              'registeredCarId',
+              response.data['data']['user']['currentCar']['registeredCarId']
+                  .toString());
+          emit(state.copyWith(
+            registeredCarId: (response.data['data']['user']['currentCar']
+                    ['registeredCarId']
+                .toString()),
+          ));
+        } else {
+          prefs.setString('registeredCarId', 'null');
+        }
+
         if (response.statusCode == 200) {
+          if (response.data['loginType'].toString() == 'employee') {
+            Navigator.pushReplacement(
+              event.context,
+              PageTransition(
+                  duration: const Duration(milliseconds: 500),
+                  type: PageTransitionType.fade,
+                  child: const MainMenu_Employee()),
+            );
+          } else {
+            Navigator.pushReplacement(
+              event.context,
+              PageTransition(
+                  duration: const Duration(milliseconds: 500),
+                  type: PageTransitionType.fade,
+                  child: const MainMenu_RegisteredDriver()),
+            );
+          }
           Fluttertoast.showToast(
               msg: "เข้าสู่ระบบแล้ว",
               toastLength: Toast.LENGTH_SHORT,

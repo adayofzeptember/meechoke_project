@@ -209,29 +209,29 @@ class Login_Screen extends StatelessWidget {
                                               BorderRadius.circular(30),
                                         )),
                                     onPressed: () {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        PageTransition(
-                                            duration: const Duration(
-                                                milliseconds: 500),
-                                            type: PageTransitionType.fade,
-                                            child: MainMenu_Allience()),
-                                      );
-                                      // if (_formKey.currentState!.validate()) {
-                                      //   // If the form is valid, display a snackbar or perform any action
-                                      //   // ScaffoldMessenger.of(context)
-                                      //   //     .showSnackBar(
-                                      //   //   SnackBar(content: Text('Valid!')),
-                                      //   // );
-                                      // }
+                                      // Navigator.pushReplacement(
+                                      //   context,
+                                      //   PageTransition(
+                                      //       duration: const Duration(
+                                      //           milliseconds: 500),
+                                      //       type: PageTransitionType.fade,
+                                      //       child: MainMenu_Allience()),
+                                      // );
+                                      if (_formKey.currentState!.validate()) {
+                                        // If the form is valid, display a snackbar or perform any action
+                                        // ScaffoldMessenger.of(context)
+                                        //     .showSnackBar(
+                                        //   SnackBar(content: Text('Valid!')),
+                                        // );
+                                      }
 
-                                      // context.read<LoginBloc>().add(
-                                      //     Login_Casual(
-                                      //         context: context,
-                                      //         getUsername:
-                                      //             usernameController.text,
-                                      //         getPassword:
-                                      //             passwordController.text));
+                                      context.read<LoginBloc>().add(
+                                          Login_Casual(
+                                              context: context,
+                                              getUsername:
+                                                  usernameController.text,
+                                              getPassword:
+                                                  passwordController.text));
                                       // //NotificationService().scheduleNotifications();
                                     },
                                     child: Padding(
