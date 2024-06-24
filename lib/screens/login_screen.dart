@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/ProgressHUD.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
-import 'package:meechoke_project/screens/menu_screen_allience.dart';
-import 'package:page_transition/page_transition.dart';
 import '../ETC/app_color.dart';
 
 var usernameController = TextEditingController();

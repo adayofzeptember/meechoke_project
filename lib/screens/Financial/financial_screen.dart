@@ -108,7 +108,10 @@ class _Financial_ListState extends State<Financial_List> {
                                             Radius.circular(25))),
                                     child: Padding(
                                       padding: const EdgeInsets.all(10),
-                                      child: ListView.builder(
+                                      child: 
+                                      
+                                      
+                                      ListView.builder(
                                           primary: true,
                                           itemCount:
                                               state.financial_list.length,

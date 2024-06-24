@@ -10,6 +10,7 @@ class FuelEvent extends Equatable {
 }
 
 class Load_FuelNotYet extends FuelEvent {}
+
 class Load_Filled extends FuelEvent {}
 
 class Load_Fuel_Info extends FuelEvent {
@@ -37,4 +38,3 @@ class Upload_Pics_Fuel extends FuelEvent {
     this.getRemark,
   });
 }
-

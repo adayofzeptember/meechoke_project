@@ -5,7 +5,7 @@ import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Car_Check/car_check_bloc.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
-import 'package:meechoke_project/screens/Checking/Checking_Main.dart';
+import 'package:meechoke_project/screens/Employee/Monthly/tab.dart';
 import 'package:page_transition/page_transition.dart';
 
 class MainMenu_Employee extends StatefulWidget {
@@ -69,7 +69,7 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                     PageTransition(
                         duration: const Duration(milliseconds: 500),
                         type: PageTransitionType.fade,
-                        child: Check_Daily()),
+                        child: Check_Montly()),
                   );
                 },
                 child: Container(

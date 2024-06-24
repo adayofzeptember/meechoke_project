@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Car_Check/car_check_bloc.dart';
 import 'package:meechoke_project/bloc/Car_Power/car_power_bloc.dart';
+import 'package:meechoke_project/bloc/Employee%20Monthly/employee_check_monthly_bloc.dart';
 import 'package:meechoke_project/bloc/Financial/financial_bloc.dart';
 import 'package:meechoke_project/bloc/Fuel/fuel_bloc.dart';
 import 'package:meechoke_project/bloc/HistoryWork/history_work_bloc.dart';
@@ -17,6 +18,7 @@ import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/bloc/ReportAccident/report_accident_bloc.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
 import 'package:meechoke_project/screens/login_screen.dart';
+import 'package:meechoke_project/screens/menu_screen_employee.dart';
 import 'package:meechoke_project/screens/menu_screen_registered_driver.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -72,6 +74,7 @@ class StarterWidget extends StatelessWidget {
         BlocProvider(create: (context) => JobsBloc()),
         BlocProvider(create: (context) => CarCheckBloc()),
         BlocProvider(create: (context) => FuelBloc()),
+        BlocProvider(create: (context) => EmployeeCheckMonthlyBloc()),
         BlocProvider(create: (context) => FinancialBloc()),
         BlocProvider(create: (context) => HistoryWorkBloc()),
         BlocProvider(create: (context) => ReportAccidentBloc()),
@@ -133,6 +136,7 @@ class _StartPageState extends State<StartPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? tokenAuth = prefs.getString('userToken').toString();
     print('stored token: ' + tokenAuth);
+    print('logintype: ' + prefs.getString('loginType').toString());
     await Future.delayed(const Duration(seconds: 2), () {
       if (tokenAuth == '' || tokenAuth == 'null') {
         Navigator.pushReplacement(
@@ -143,13 +147,23 @@ class _StartPageState extends State<StartPage> {
               child: Login_Screen()),
         );
       } else {
-        Navigator.pushReplacement(
-          context,
-          PageTransition(
-              duration: Duration(milliseconds: 800),
-              type: PageTransitionType.fade,
-              child: MainMenu_RegisteredDriver()),
-        );
+        if (prefs.getString('loginType').toString() == 'employee') {
+          Navigator.pushReplacement(
+            context,
+            PageTransition(
+                duration: Duration(milliseconds: 800),
+                type: PageTransitionType.fade,
+                child: MainMenu_Employee()),
+          );
+        } else {
+          Navigator.pushReplacement(
+            context,
+            PageTransition(
+                duration: Duration(milliseconds: 800),
+                type: PageTransitionType.fade,
+                child: MainMenu_RegisteredDriver()),
+          );
+        }
       }
     });
   }

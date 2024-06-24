@@ -53,6 +53,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         prefs.setString(
             'userToken', response.data['data']['accessToken'].toString());
 
+        prefs.setString('loginType', response.data['loginType'].toString());
+
         print('auth token: ' + response.data['data']['accessToken'].toString());
         print('user type: ' + response.data['loginType'].toString());
 
@@ -86,7 +88,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
               PageTransition(
                   duration: const Duration(milliseconds: 500),
                   type: PageTransitionType.fade,
-                  child: const MainMenu_RegisteredDriver()),
+                  child: MainMenu_RegisteredDriver()),
             );
           }
           Fluttertoast.showToast(
@@ -97,13 +99,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
               backgroundColor: Palette.theGreen,
               textColor: Colors.white,
               fontSize: 15);
-          Navigator.pushReplacement(
-            event.context,
-            PageTransition(
-                duration: const Duration(milliseconds: 500),
-                type: PageTransitionType.fade,
-                child: const MainMenu_Employee()),
-          );
         } else {
           emit(state.copyWith(loading: false));
           Fluttertoast.showToast(
