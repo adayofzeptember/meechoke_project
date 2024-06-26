@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Car_Check/car_check_bloc.dart';
@@ -7,12 +8,12 @@ import 'package:meechoke_project/bloc/Financial/financial_bloc.dart';
 import 'package:meechoke_project/bloc/Fuel/fuel_bloc.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
-import 'package:meechoke_project/bloc/login/login_bloc.dart';
 import 'package:meechoke_project/screens/Checking/Checking_Main.dart';
 import 'package:meechoke_project/screens/Fuel/Main%20List/main_list.dart';
 import 'package:meechoke_project/screens/Jobs/1.%20Main%20Pages%20List/tab_main.dart';
 import 'package:meechoke_project/screens/Financial/financial_screen.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/ReportAccident/report_accident_bloc.dart';
 import 'Report and Docs/tab_mainScreen.dart';
 import 'Work History/history_screen.dart';
@@ -21,7 +22,8 @@ class MainMenu_RegisteredDriver extends StatefulWidget {
   const MainMenu_RegisteredDriver({super.key});
 
   @override
-  State<MainMenu_RegisteredDriver> createState() => _MainMenu_RegisteredDriverState();
+  State<MainMenu_RegisteredDriver> createState() =>
+      _MainMenu_RegisteredDriverState();
 }
 
 class _MainMenu_RegisteredDriverState extends State<MainMenu_RegisteredDriver> {
@@ -527,7 +529,11 @@ class _MainMenu_RegisteredDriverState extends State<MainMenu_RegisteredDriver> {
                     TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
               ),
               onPressed: () async {
-                context.read<LoginBloc>().add(Logout_Auth(context: context));
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+               
+                prefs.clear();
+                Phoenix.rebirth(context);
+                // context.read<LoginBloc>().add(Logout_Auth(context: context));
               },
             ),
           ],

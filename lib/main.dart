@@ -131,6 +131,7 @@ class _StartPageState extends State<StartPage> {
           fontSize: 15);
     }
   }
+  
 
   Future<void> _Pause_And_Go() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

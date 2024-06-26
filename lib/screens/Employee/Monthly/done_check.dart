@@ -120,7 +120,7 @@ class Monthly_Checked extends StatelessWidget {
                                                 width: 5,
                                               ),
                                               Text(
-                                                state.all_monthly_list[index]
+                                                state.all_monthly_done[index]
                                                     .name
                                                     .toString(),
                                                 style: TextStyle(
@@ -152,7 +152,7 @@ class Monthly_Checked extends StatelessWidget {
                                                 height: 5,
                                               ),
                                               Text(
-                                                state.all_monthly_list[index]
+                                                state.all_monthly_done[index]
                                                     .primaryPlateNumber
                                                     .toString(),
                                                 style: TextStyle(
@@ -174,7 +174,7 @@ class Monthly_Checked extends StatelessWidget {
                                                 height: 5,
                                               ),
                                               Text(
-                                                state.all_monthly_list[index]
+                                                state.all_monthly_done[index]
                                                     .secondaryPlateNumber
                                                     .toString(),
                                                 style: TextStyle(

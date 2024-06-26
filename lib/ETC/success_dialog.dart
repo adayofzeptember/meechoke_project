@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:meechoke_project/bloc/Employee%20Monthly/employee_check_monthly_bloc.dart';
 import 'package:meechoke_project/bloc/Fuel/fuel_bloc.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 import 'package:meechoke_project/screens/Jobs/1.%20Main%20Pages%20List/tab_main.dart';
@@ -49,6 +50,11 @@ Future<void> SuccessMessage_Dialog(
     } else if (check == 'เช็ครถ') {
       Navigator.of(context).pop();
       Navigator.of(context).pop();
+    } else if (check == 'เช็ครถ2') {
+      Navigator.of(context).pop();
+      Navigator.of(context).pop();
+      context.read<EmployeeCheckMonthlyBloc>().add(Load_All_MonthList());
+      context.read<EmployeeCheckMonthlyBloc>().add(Load_Done_MonthList());
     } else {
       context.read<JobsBloc>().add(Load_NewJobs());
       context.read<JobsBloc>().add(Load_CurrentJobs());

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Employee%20Monthly/employee_check_monthly_bloc.dart';
+import 'package:meechoke_project/screens/Employee/Monthly/check_topics.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Monthly_Not extends StatelessWidget {
   const Monthly_Not({super.key});
@@ -52,11 +55,19 @@ class Monthly_Not extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Text(
-                            'ประจำเดือน: ',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Palette.theGrey),
+                          InkWell(
+                            onTap: () async {
+                              // SharedPreferences prefs =
+                              //     await SharedPreferences.getInstance();
+                              // print(prefs.getString('registeredCarId'));
+                              // print(prefs.getString('registeredDriverId'));
+                            },
+                            child: Text(
+                              'ประจำเดือน: ',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Palette.theGrey),
+                            ),
                           ),
                           Text(
                             state.dateMonth,
@@ -79,12 +90,28 @@ class Monthly_Not extends StatelessWidget {
                               padding: const EdgeInsets.only(bottom: 10),
                               child: GestureDetector(
                                 onTap: () {
-                                  print(state.all_monthly_list[index]
-                                      .registeredDriverId
-                                      .toString());
-                                  print(state
-                                      .all_monthly_list[index].registeredCarId
-                                      .toString());
+                                  // context.read<EmployeeCheckMonthlyBloc>().add(
+                                  //     GetCheckList_ByIndex(getIndex: index));
+
+                                  Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        duration:
+                                            const Duration(milliseconds: 300),
+                                        type: PageTransitionType.rightToLeft,
+                                        child: Employee_Check_Topics(
+                                          index: index,
+                                        )),
+                                  );
+
+                                  // print(state.all_monthly_list[index]
+                                  //     .registeredDriverId
+                                  //     .toString());
+                                  // print(state
+                                  //     .all_monthly_list[index].registeredCarId
+                                  //     .toString());
+
+                                  // print(index);
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -190,11 +217,11 @@ class Monthly_Not extends StatelessWidget {
                                                       .secondaryPlateNumber
                                                       .toString(),
                                                   style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: (index % 2 == 0)
-                                              ? Palette.thisBlue
-                                              : Palette.theGreen,),
+                                                    fontWeight: FontWeight.bold,
+                                                    color: (index % 2 == 0)
+                                                        ? Palette.thisBlue
+                                                        : Palette.theGreen,
+                                                  ),
                                                 ),
                                               ],
                                             ),

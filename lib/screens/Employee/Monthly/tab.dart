@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Employee%20Monthly/employee_check_monthly_bloc.dart';
-import 'package:meechoke_project/screens/Employee/Monthly/checked.dart';
-import 'package:meechoke_project/screens/Employee/Monthly/not.dart';
+import 'package:meechoke_project/screens/Employee/Monthly/done_check.dart';
+import 'package:meechoke_project/screens/Employee/Monthly/not_check.dart';
 
 class Check_Montly extends StatefulWidget {
   @override

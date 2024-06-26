@@ -13,6 +13,12 @@ class Load_CheckList extends CarCheckEvent {
   Load_CheckList({required this.getCheckType});
 }
 
+class Test_Employee extends CarCheckEvent {
+  int getIndex;
+  String getCheckType;
+  Test_Employee({required this.getCheckType, required this.getIndex});
+}
+
 class Load_CheckList2 extends CarCheckEvent {}
 
 class Count_PlusIndex extends CarCheckEvent {
@@ -47,7 +53,7 @@ class AddItem_Bloc extends CarCheckEvent {
 class CountDown_RemainingTime extends CarCheckEvent {
   Duration getTime;
 
-  CountDown_RemainingTime({ required this.getTime});
+  CountDown_RemainingTime({required this.getTime});
 }
 
 class Daily_Check extends CarCheckEvent {}
@@ -60,4 +66,15 @@ class AddEachItem_Bloc extends CarCheckEvent {
   AddEachItem_Bloc({this.fileImage});
 }
 
-class Submit_AllCheckings extends CarCheckEvent {}
+class Submit_AllCheckings extends CarCheckEvent {
+  String? getCheckupID;
+  String? getCarID;
+  String? getDriverID;
+  var context;
+
+  Submit_AllCheckings(
+      {this.getCheckupID,
+      this.getCarID,
+      this.getDriverID,
+      required this.context});
+}

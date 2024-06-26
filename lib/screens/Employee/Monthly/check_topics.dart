@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, must_be_immutable
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -9,23 +9,24 @@ import 'package:image_picker/image_picker.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/Car_Check/car_check_bloc.dart';
-import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
+import 'package:meechoke_project/bloc/Employee%20Monthly/employee_check_monthly_bloc.dart';
 import 'package:meechoke_project/screens/Checking/Checking_Screen.dart';
 import 'package:page_transition/page_transition.dart';
 
-class Check_Daily extends StatefulWidget {
+class Employee_Check_Topics extends StatefulWidget {
+  int index;
+
+  Employee_Check_Topics({required this.index});
   @override
-  _Check_DailyState createState() => _Check_DailyState();
+  _Employee_Check_TopicsState createState() => _Employee_Check_TopicsState();
 }
 
-class _Check_DailyState extends State<Check_Daily> {
+class _Employee_Check_TopicsState extends State<Employee_Check_Topics> {
   List<File> selectedImages = [];
   final picker = ImagePicker();
 
   @override
   void initState() {
-    context.read<CarCheckBloc>().add(Daily_Check());
-    context.read<ProfileBloc>().add(Load_Profile());
     super.initState();
   }
 
@@ -47,7 +48,7 @@ class _Check_DailyState extends State<Check_Daily> {
           ),
         ),
         title: const Text(
-          'ตรวจเช็ครถประจำวัน',
+          'ตรวจเช็ครถประจำเดือน',
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
         ),
@@ -63,146 +64,16 @@ class _Check_DailyState extends State<Check_Daily> {
                     painter: ShapesPainter(),
                     child: Container(height: 160),
                   ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(15, 20, 15, 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        BlocBuilder<ProfileBloc, ProfileState>(
-                          builder: (context, state) {
-                            if (state.loading == true) {
-                              return Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(25))),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                          color: Color.fromARGB(
-                                              255, 238, 246, 255),
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(25),
-                                              topRight: Radius.circular(25))),
-                                      child: const Padding(
-                                        padding:
-                                            EdgeInsets.only(top: 8, bottom: 8),
-                                        child: Center(
-                                          child: Text(
-                                            'บันทึกตรวจสภาพรถประจำวัน',
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                color: Palette.thisBlue,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.fromLTRB(20, 15, 0, 15),
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 90,
-                                                child: Text(
-                                                  'ชื่อพขร. :',
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      color: Color.fromARGB(
-                                                          255, 66, 66, 66),
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                '.....',
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    color: Palette.thisBlue,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 90,
-                                                child: Text(
-                                                  'ทะเบียนแม่ :',
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      color: Color.fromARGB(
-                                                          255, 66, 66, 66),
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                '.....',
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    color: Palette.thisBlue,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 90,
-                                                child: Text(
-                                                  'ทะเบียนลูก :',
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      color: Color.fromARGB(
-                                                          255, 66, 66, 66),
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                '.....',
-                                                style: TextStyle(
-                                                    fontSize: 15,
-                                                    color: Palette.thisBlue,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              );
-                            }
-                            return Container(
+                  BlocBuilder<EmployeeCheckMonthlyBloc,
+                      EmployeeCheckMonthlyState>(
+                    builder: (context, state1) {
+                      return Padding(
+                        padding: EdgeInsets.fromLTRB(15, 20, 15, 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
                               width: double.infinity,
                               decoration: BoxDecoration(
                                   color: Colors.white,
@@ -224,7 +95,7 @@ class _Check_DailyState extends State<Check_Daily> {
                                           EdgeInsets.only(top: 8, bottom: 8),
                                       child: Center(
                                         child: Text(
-                                          'บันทึกตรวจสภาพรถประจำวัน',
+                                          'บันทึกตรวจสภาพรถประจำเดือน',
                                           style: TextStyle(
                                               fontSize: 18,
                                               color: Palette.thisBlue,
@@ -255,7 +126,10 @@ class _Check_DailyState extends State<Check_Daily> {
                                               width: 10,
                                             ),
                                             Text(
-                                              state.profile_data.name,
+                                              state1
+                                                  .all_monthly_list[
+                                                      widget.index]
+                                                  .name,
                                               style: TextStyle(
                                                   fontSize: 15,
                                                   color: Palette.thisBlue,
@@ -284,7 +158,10 @@ class _Check_DailyState extends State<Check_Daily> {
                                               width: 10,
                                             ),
                                             Text(
-                                              state.profile_data.plateNumber,
+                                              state1
+                                                  .all_monthly_list[
+                                                      widget.index]
+                                                  .primaryPlateNumber,
                                               style: TextStyle(
                                                   fontSize: 15,
                                                   color: Palette.thisBlue,
@@ -292,7 +169,7 @@ class _Check_DailyState extends State<Check_Daily> {
                                             ),
                                           ],
                                         ),
-                                        const SizedBox(
+                                        SizedBox(
                                           height: 5,
                                         ),
                                         Row(
@@ -313,8 +190,10 @@ class _Check_DailyState extends State<Check_Daily> {
                                               width: 10,
                                             ),
                                             Text(
-                                              state.profile_data
-                                                  .trailerPlateNumber,
+                                              state1
+                                                  .all_monthly_list[
+                                                      widget.index]
+                                                  .secondaryPlateNumber,
                                               style: TextStyle(
                                                   fontSize: 15,
                                                   color: Palette.thisBlue,
@@ -327,76 +206,16 @@ class _Check_DailyState extends State<Check_Daily> {
                                   )
                                 ],
                               ),
-                            );
-                          },
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        //* เริ่มส่วนที่เช็ค
-                        BlocBuilder<CarCheckBloc, CarCheckState>(
-                          builder: (context, state) {
-                            // if (state.twty4Check == true) {
-                            //   return Column(
-                            //     children: [
-                            //       SizedBox(
-                            //         height: 20,
-                            //       ),
-                            //       Center(
-                            //         child: Text(
-                            //           'ไม่มีรายการตรวจเช็คประจำวัน',
-                            //           style: TextStyle(
-                            //               fontWeight: FontWeight.bold,
-                            //               color: Palette.thisBlue,
-                            //               fontSize: 23),
-                            //         ),
-                            //       ),
-                            //       SizedBox(
-                            //         height: 10,
-                            //       ),
-                            //       Center(
-                            //         child: Text(
-                            //           '- ตรวจเช็คได้อีกครั้งหลังครบ 24 ชั่วโมง -',
-                            //           style: TextStyle(
-                            //               fontWeight: FontWeight.bold,
-                            //               color: Palette.theGrey,
-                            //               fontSize: 15),
-                            //         ),
-                            //       ),
-                            //       SizedBox(
-                            //         height: 10,
-                            //       ),
-                            //       Icon(
-                            //         Icons.access_time,
-                            //         size: 80,
-                            //         color: Palette.thisBlue,
-                            //       ),
-                            //     ],
-                            //   );
-                            // }
-                            if (state.checkEmpty == 'empty') {
-                              return Column(
-                                children: [
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'ไม่มีรายการตรวจเช็คประจำวัน',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Palette.thisBlue,
-                                          fontSize: 23),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            }
-                            return Column(
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            //* เริ่มส่วนที่เช็ค
+                            Column(
                               children: [
                                 Center(
                                   child: Text(
-                                    'รายการตรวจเช็ค',
+                                    'หัวข้อตรวจเช็ค',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Palette.thisBlue,
@@ -411,9 +230,10 @@ class _Check_DailyState extends State<Check_Daily> {
                                       (state.storedExtCheckupList1.length == 0)
                                           ? () {
                                               context.read<CarCheckBloc>().add(
-                                                  Load_CheckList(
+                                                  Test_Employee(
                                                       getCheckType:
-                                                          'extCheckupList'));
+                                                          'extCheckupList',
+                                                      getIndex: widget.index));
 
                                               Navigator.push(
                                                 context,
@@ -503,9 +323,10 @@ class _Check_DailyState extends State<Check_Daily> {
                                           0)
                                       ? () {
                                           context.read<CarCheckBloc>().add(
-                                              Load_CheckList(
+                                              Test_Employee(
                                                   getCheckType:
-                                                      'extCheckupEquipment'));
+                                                      'extCheckupEquipment',
+                                                  getIndex: widget.index));
 
                                           Navigator.push(
                                             context,
@@ -596,9 +417,10 @@ class _Check_DailyState extends State<Check_Daily> {
                                           0)
                                       ? () {
                                           context.read<CarCheckBloc>().add(
-                                              Load_CheckList(
+                                              Test_Employee(
                                                   getCheckType:
-                                                      'extCheckupSafetyList'));
+                                                      'extCheckupSafetyList',
+                                                  getIndex: widget.index));
 
                                           Navigator.push(
                                             context,
@@ -613,23 +435,6 @@ class _Check_DailyState extends State<Check_Daily> {
                                           );
                                         }
                                       : null,
-                                  // onTap: () {
-                                  //   context.read<CarCheckBloc>().add(
-                                  //       Load_CheckList(
-                                  //           getCheckType:
-                                  //               'extCheckupSafetyList'));
-
-                                  //   Navigator.push(
-                                  //     context,
-                                  //     PageTransition(
-                                  //         duration:
-                                  //             const Duration(milliseconds: 300),
-                                  //         type: PageTransitionType.rightToLeft,
-                                  //         child: Check_Screen(
-                                  //           checkingType: 'ความปลอดภัย',
-                                  //         )),
-                                  //   );
-                                  // },
                                   child: Container(
                                     width: double.infinity,
                                     decoration: BoxDecoration(
@@ -731,7 +536,21 @@ class _Check_DailyState extends State<Check_Daily> {
                                       : () {
                                           context
                                               .read<CarCheckBloc>()
-                                              .add(Submit_AllCheckings(context: context));
+                                              .add(Submit_AllCheckings(
+                                                context: context,
+                                                getCheckupID: state1
+                                                    .all_monthly_list[
+                                                        widget.index]
+                                                    .checkupId,
+                                                getCarID: state1
+                                                    .all_monthly_list[
+                                                        widget.index]
+                                                    .registeredCarId,
+                                                getDriverID: state1
+                                                    .all_monthly_list[
+                                                        widget.index]
+                                                    .registeredDriverId,
+                                              ));
                                         },
                                   child: Padding(
                                     padding: const EdgeInsets.all(15.0),
@@ -749,11 +568,11 @@ class _Check_DailyState extends State<Check_Daily> {
                                   ),
                                 ),
                               ],
-                            );
-                          },
+                            )
+                          ],
                         ),
-                      ],
-                    ),
+                      );
+                    },
                   )
                 ],
               ),

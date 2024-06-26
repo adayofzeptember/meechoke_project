@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Car_Check/car_check_bloc.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
-import 'package:meechoke_project/bloc/login/login_bloc.dart';
 import 'package:meechoke_project/screens/Employee/Monthly/tab.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainMenu_Employee extends StatefulWidget {
   const MainMenu_Employee({super.key});
@@ -346,7 +347,11 @@ class _MainMenu_EmployeeState extends State<MainMenu_Employee> {
                     TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
               ),
               onPressed: () async {
-                context.read<LoginBloc>().add(Logout_Auth(context: context));
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+
+                prefs.clear();
+                Phoenix.rebirth(context);
+                // context.read<LoginBloc>().add(Logout_Auth(context: context));
               },
             ),
           ],

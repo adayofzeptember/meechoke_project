@@ -88,13 +88,13 @@ class _Check_ScreenState extends State<Check_Screen> {
                 padding: EdgeInsets.fromLTRB(15, 10, 15, 15),
                 child: BlocBuilder<CarCheckBloc, CarCheckState>(
                   builder: (context, state) {
-                    if (state.fetched_checkList1.length == 0) {
-                      return Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                        ),
-                      );
-                    }
+                    // if (state.isLoading == true) {
+                    //   return Center(
+                    //     child: CircularProgressIndicator(
+                    //       color: Colors.white,
+                    //     ),
+                    //   );
+                    // }
                     return ListView.builder(
                         primary: true,
                         itemCount: 1,

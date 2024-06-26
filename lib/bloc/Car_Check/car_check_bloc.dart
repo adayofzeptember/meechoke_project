@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meechoke_project/ETC/api_url.dart';
+import 'package:meechoke_project/ETC/success_dialog.dart';
 import 'package:meechoke_project/bloc/Car_Check/model.dart';
 import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupEquipment_addMethod.dart';
 import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupList_addMethod.dart';
@@ -114,6 +115,8 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
       try {
+        emit(state.copyWith(isLoading: true));
+
         final response = await dio.get(
           api_url_v1 + "checkup-car",
           options: Options(headers: {
@@ -139,14 +142,120 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
             }
           }
           // print('--------' + dataExtCheckupList[2].name.toString());
-          emit(state.copyWith(fetched_checkList1: dataExtCheckupList));
+          emit(state.copyWith(
+              fetched_checkList1: dataExtCheckupList, isLoading: false));
         } else {
+          emit(state.copyWith(isLoading: false));
+
           print('error status != 200');
         }
       } catch (e) {
+        emit(state.copyWith(isLoading: false));
+
         print(e);
       }
     });
+
+    on<Test_Employee>((event, emit) async {
+      String sysVehicleType;
+      if (event.getCheckType == 'extCheckupList') {
+        sysVehicleType = 'sysVehicleChecklist';
+      } else if (event.getCheckType == 'extCheckupEquipment') {
+        sysVehicleType = 'sysVehicleEquipment';
+      } else {
+        sysVehicleType = 'sysVehicleSafetyList';
+      }
+      emit(state.copyWith(
+          typeCheckState: event.getCheckType,
+          countIndexCheck: 0,
+          toCheckChecklist1: 0));
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? tokenAuth = prefs.getString('userToken');
+      try {
+        emit(state.copyWith(isLoading: true));
+        final response = await dio.get(
+          api_url_v1 + "monthly-car-checkup-list?hasChecked=false",
+          options: Options(headers: {
+            "Authorization": "Bearer $tokenAuth",
+          }),
+        );
+
+        dynamic nestedData = response.data['data']['content'][event.getIndex]
+            ['checklist'][event.getCheckType];
+        List<ExtCheckupList> dataExtCheckupList = [];
+
+        if (response.statusCode == 200) {
+          for (var elements in nestedData) {
+            dataExtCheckupList.add(ExtCheckupList(
+                id: elements['${sysVehicleType}']['id'].toString(),
+                name: elements['${sysVehicleType}']['name'].toString()));
+          }
+
+          emit(state.copyWith(fetched_checkList1: dataExtCheckupList, isLoading: false));
+        } else {
+          print('error status != 200');
+          emit(state.copyWith(isLoading: false));
+        }
+      } catch (e) {
+          emit(state.copyWith(isLoading: false));
+
+        print(e);
+      }
+    });
+
+    //!-----------------------------------------------------------------
+
+    // on<Load_CheckList>((event, emit) async {
+    //   String sysVehicleType;
+    //   if (event.getCheckType == 'extCheckupList') {
+    //     sysVehicleType = 'sysVehicleChecklist';
+    //   } else if (event.getCheckType == 'extCheckupEquipment') {
+    //     sysVehicleType = 'sysVehicleEquipment';
+    //   } else {
+    //     sysVehicleType = 'sysVehicleSafetyList';
+    //   }
+    //   emit(state.copyWith(
+    //       typeCheckState: event.getCheckType,
+    //       countIndexCheck: 0,
+    //       toCheckChecklist1: 0));
+
+    //   SharedPreferences prefs = await SharedPreferences.getInstance();
+    //   String? tokenAuth = prefs.getString('userToken');
+    //   try {
+    //     final response = await dio.get(
+    //       api_url_v1 + "checkup-car",
+    //       options: Options(headers: {
+    //         "Authorization": "Bearer $tokenAuth",
+    //       }),
+    //     );
+
+    //     // var x = response.data['data'];
+    //     // print(response.data['data'][0]['extCheckupList'][0]['sysVehicleChecklist']['name'].toString());
+
+    //     List<ExtCheckupList> dataExtCheckupList = [];
+    //     if (response.statusCode == 200) {
+    //       for (var elements in response.data['data']) {
+    //         List<dynamic> extCheckupList = elements[event.getCheckType];
+    //         for (var extCheckupListLoop in extCheckupList) {
+    //           // print(extCheckupListLoop['sysVehicleChecklist']['name']);
+    //           // print(extCheckupListLoop['sysVehicleChecklistId']['name']);
+    //           dataExtCheckupList.add(ExtCheckupList(
+    //               id: extCheckupListLoop[sysVehicleType.toString()]['id']
+    //                   .toString(),
+    //               name: extCheckupListLoop[sysVehicleType.toString()]['name']
+    //                   .toString()));
+    //         }
+    //       }
+    //       // print('--------' + dataExtCheckupList[2].name.toString());
+    //       emit(state.copyWith(fetched_checkList1: dataExtCheckupList));
+    //     } else {
+    //       print('error status != 200');
+    //     }
+    //   } catch (e) {
+    //     print(e);
+    //   }
+    // });
 
     on<AddEachItem_Bloc>((event, emit) async {
       emit(state.copyWith(isLoading: true));
@@ -311,14 +420,31 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
       String? tokenAuth = prefs.getString('userToken');
 
       try {
-        Map<String, dynamic> checkingJsonData = {
-          "checkupCarId": 1,
-          "registeredCarId": prefs.getString('registeredCarId'),
-          "registeredDriverId": prefs.getString('registeredDriverId'),
-          "checkupResult": state.storedExtCheckupList1,
-          "equipmentResult": state.storedExtCheckupEquipment2,
-          "safetyResult": state.storedExtCheckupSafety3,
-        };
+        Map<String, dynamic> checkingJsonData;
+        if (prefs.getString('loginType').toString() == 'employee') {
+          print('employee sends');
+          checkingJsonData = {
+            "checkupCarId": event.getCheckupID,
+            //* registered driver
+            "registeredCarId": event.getCarID,
+            "registeredDriverId": event.getDriverID,
+            "checkupResult": state.storedExtCheckupList1,
+            "equipmentResult": state.storedExtCheckupEquipment2,
+            "safetyResult": state.storedExtCheckupSafety3,
+          };
+        } else {
+          print('register driver sends');
+          checkingJsonData = {
+            "checkupCarId": 1,
+            //* registered driver
+            "registeredCarId": prefs.getString('registeredCarId'),
+            "registeredDriverId": prefs.getString('registeredDriverId'),
+            "checkupResult": state.storedExtCheckupList1,
+            "equipmentResult": state.storedExtCheckupEquipment2,
+            "safetyResult": state.storedExtCheckupSafety3,
+          };
+        }
+
         final response = await dio.post(api_url_v1 + "checkup-car",
             options: Options(
               headers: {
@@ -332,11 +458,11 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
           emit(state.copyWith(isLoading: false));
           print(
               '--------------------SEND CHECKINGS: OK----------------------------------');
-          var sendResponse = response.data['data'];
-          print(sendResponse.toString());
+
           ExtCheckupList_Item.checklist.clear();
           ExtCheckupEquipment_Item.checklistEquipment.clear();
           ExtCheckupSafety_Item.checklistExtCheckupSafety_Item.clear();
+          SuccessMessage_Dialog(event.context, 'ส่งแบบตรวจเช็คแล้ว', 'เช็ครถ2');
           emit(state.copyWith(
               storedExtCheckupList1: [],
               storedExtCheckupEquipment2: [],

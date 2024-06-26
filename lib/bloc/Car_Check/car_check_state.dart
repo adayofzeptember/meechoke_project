@@ -16,6 +16,7 @@ class CarCheckState extends Equatable {
   List<ExtCheckupSafety_Item> storedExtCheckupSafety3;
   int countIndexCheck;
   String typeCheckState;
+ 
   CarCheckState(
       {required this.fetched_checkList1,
       required this.twty4Check,
