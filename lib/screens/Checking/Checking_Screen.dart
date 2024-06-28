@@ -34,18 +34,18 @@ class _Check_ScreenState extends State<Check_Screen> {
     super.initState();
   }
 
-  Widget build(BuildContext context) {
-    return BlocBuilder<CarCheckBloc, CarCheckState>(
-      builder: (context, state) {
-        return ProgressHUD(
-            child: _uiChecking(context),
-            inAsyncCall: state.isLoading,
-            opacity: 0.3);
-      },
-    );
-  }
+  // Widget build(BuildContext context) {
+  //   return BlocBuilder<CarCheckBloc, CarCheckState>(
+  //     builder: (context, state) {
+  //       return ProgressHUD(
+  //           child: _uiChecking(context),
+  //           inAsyncCall: state.isLoading,
+  //           opacity: 0.3);
+  //     },
+  //   );
+  // }
 
-  Widget _uiChecking(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -95,6 +95,13 @@ class _Check_ScreenState extends State<Check_Screen> {
                     //     ),
                     //   );
                     // }
+                    if (state.checkLoadItems == true) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                      );
+                    } 
                     return ListView.builder(
                         primary: true,
                         itemCount: 1,
@@ -148,8 +155,7 @@ class _Check_ScreenState extends State<Check_Screen> {
                                               Padding(
                                                 padding:
                                                     const EdgeInsets.all(8.0),
-                                                child: 
-                                                Row(
+                                                child: Row(
                                                   children: [
                                                     Expanded(
                                                       child: ElevatedButton(

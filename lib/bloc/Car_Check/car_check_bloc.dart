@@ -27,6 +27,7 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
             storedExtCheckupEquipment2: [],
             storedExtCheckupSafety3: [],
             toCheckChecklist1: 0,
+            checkLoadItems: false,
             fetched_checkList1: [],
             typeCheckState: '',
             countIndexCheck: 0,
@@ -110,13 +111,12 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
       emit(state.copyWith(
           typeCheckState: event.getCheckType,
           countIndexCheck: 0,
+          checkLoadItems: true,
           toCheckChecklist1: 0));
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
       try {
-        emit(state.copyWith(isLoading: true));
-
         final response = await dio.get(
           api_url_v1 + "checkup-car",
           options: Options(headers: {
@@ -143,14 +143,15 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
           }
           // print('--------' + dataExtCheckupList[2].name.toString());
           emit(state.copyWith(
-              fetched_checkList1: dataExtCheckupList, isLoading: false));
+              fetched_checkList1: dataExtCheckupList, checkLoadItems: false));
+          print('done load');
         } else {
-          emit(state.copyWith(isLoading: false));
+          emit(state.copyWith(checkLoadItems: false));
 
           print('error status != 200');
         }
       } catch (e) {
-        emit(state.copyWith(isLoading: false));
+        emit(state.copyWith(checkLoadItems: false));
 
         print(e);
       }
@@ -168,6 +169,7 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
       emit(state.copyWith(
           typeCheckState: event.getCheckType,
           countIndexCheck: 0,
+          checkLoadItems: true,
           toCheckChecklist1: 0));
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -192,13 +194,14 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
                 name: elements['${sysVehicleType}']['name'].toString()));
           }
 
-          emit(state.copyWith(fetched_checkList1: dataExtCheckupList, isLoading: false));
+          emit(state.copyWith(
+              fetched_checkList1: dataExtCheckupList, checkLoadItems: false));
         } else {
           print('error status != 200');
-          emit(state.copyWith(isLoading: false));
+          emit(state.copyWith(checkLoadItems: false));
         }
       } catch (e) {
-          emit(state.copyWith(isLoading: false));
+        emit(state.copyWith(checkLoadItems: false));
 
         print(e);
       }
@@ -206,59 +209,9 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
 
     //!-----------------------------------------------------------------
 
-    // on<Load_CheckList>((event, emit) async {
-    //   String sysVehicleType;
-    //   if (event.getCheckType == 'extCheckupList') {
-    //     sysVehicleType = 'sysVehicleChecklist';
-    //   } else if (event.getCheckType == 'extCheckupEquipment') {
-    //     sysVehicleType = 'sysVehicleEquipment';
-    //   } else {
-    //     sysVehicleType = 'sysVehicleSafetyList';
-    //   }
-    //   emit(state.copyWith(
-    //       typeCheckState: event.getCheckType,
-    //       countIndexCheck: 0,
-    //       toCheckChecklist1: 0));
-
-    //   SharedPreferences prefs = await SharedPreferences.getInstance();
-    //   String? tokenAuth = prefs.getString('userToken');
-    //   try {
-    //     final response = await dio.get(
-    //       api_url_v1 + "checkup-car",
-    //       options: Options(headers: {
-    //         "Authorization": "Bearer $tokenAuth",
-    //       }),
-    //     );
-
-    //     // var x = response.data['data'];
-    //     // print(response.data['data'][0]['extCheckupList'][0]['sysVehicleChecklist']['name'].toString());
-
-    //     List<ExtCheckupList> dataExtCheckupList = [];
-    //     if (response.statusCode == 200) {
-    //       for (var elements in response.data['data']) {
-    //         List<dynamic> extCheckupList = elements[event.getCheckType];
-    //         for (var extCheckupListLoop in extCheckupList) {
-    //           // print(extCheckupListLoop['sysVehicleChecklist']['name']);
-    //           // print(extCheckupListLoop['sysVehicleChecklistId']['name']);
-    //           dataExtCheckupList.add(ExtCheckupList(
-    //               id: extCheckupListLoop[sysVehicleType.toString()]['id']
-    //                   .toString(),
-    //               name: extCheckupListLoop[sysVehicleType.toString()]['name']
-    //                   .toString()));
-    //         }
-    //       }
-    //       // print('--------' + dataExtCheckupList[2].name.toString());
-    //       emit(state.copyWith(fetched_checkList1: dataExtCheckupList));
-    //     } else {
-    //       print('error status != 200');
-    //     }
-    //   } catch (e) {
-    //     print(e);
-    //   }
-    // });
-
     on<AddEachItem_Bloc>((event, emit) async {
-      emit(state.copyWith(isLoading: true));
+      //* เพิ่มทีละอย่าง
+      emit(state.copyWith(checkLoadItems: true));
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
@@ -300,7 +253,7 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
                     ? 1
                     : state.toCheckChecklist1,
             indexButtonSelect: 0,
-            isLoading: false));
+            checkLoadItems: false));
       } else {
         //? มีรูป
         String imgType;
@@ -385,11 +338,12 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
                     ? 1
                     : state.toCheckChecklist1,
             indexButtonSelect: 0,
-            isLoading: false));
+            checkLoadItems: false));
       }
     });
 
     on<CheckupList_BlocAdd>((event, emit) async {
+      //* ตอนเช็คหมด หน้าสรุป
       // emit(state.copyWith(storedExtCheckupList1: event.getExtCheckup_List));
       // print('from bloc1....' + jsonEncode(state.storedExtCheckupList1));
       if (event.getTypeCheckToStore == 'extCheckupList') {
@@ -422,7 +376,7 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
       try {
         Map<String, dynamic> checkingJsonData;
         if (prefs.getString('loginType').toString() == 'employee') {
-          print('employee sends');
+          print('employee sends ');
           checkingJsonData = {
             "checkupCarId": event.getCheckupID,
             //* registered driver
@@ -441,6 +395,7 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
             "registeredDriverId": prefs.getString('registeredDriverId'),
             "checkupResult": state.storedExtCheckupList1,
             "equipmentResult": state.storedExtCheckupEquipment2,
+
             "safetyResult": state.storedExtCheckupSafety3,
           };
         }

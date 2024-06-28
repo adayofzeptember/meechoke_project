@@ -58,10 +58,15 @@ class _Check_DailyState extends State<Check_Daily> {
           builder: (context, state) {
             return Column(children: [
               Stack(
+                alignment: Alignment.topCenter,
                 children: [
                   CustomPaint(
                     painter: ShapesPainter(),
-                    child: Container(height: 160),
+                    child: Container(
+                      height: 150,
+                      padding: EdgeInsets.zero,
+                      margin: EdgeInsets.zero,
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(15, 20, 15, 15),
@@ -729,9 +734,9 @@ class _Check_DailyState extends State<Check_Daily> {
                                           state.storedExtCheckupSafety3.isEmpty)
                                       ? null
                                       : () {
-                                          context
-                                              .read<CarCheckBloc>()
-                                              .add(Submit_AllCheckings(context: context));
+                                          context.read<CarCheckBloc>().add(
+                                              Submit_AllCheckings(
+                                                  context: context));
                                         },
                                   child: Padding(
                                     padding: const EdgeInsets.all(15.0),
