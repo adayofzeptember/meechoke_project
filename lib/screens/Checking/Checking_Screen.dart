@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:meechoke_project/ETC/ProgressHUD.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/ETC/success_dialog.dart';
@@ -18,7 +17,6 @@ import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupSafety_a
 
 class Check_Screen extends StatefulWidget {
   final String checkingType;
-
   Check_Screen({Key? key, required this.checkingType}) : super(key: key);
 
   @override
@@ -30,6 +28,7 @@ class _Check_ScreenState extends State<Check_Screen> {
   final picker = ImagePicker();
 
   @override
+
   void initState() {
     super.initState();
   }

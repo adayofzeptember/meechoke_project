@@ -1,5 +1,4 @@
 // ignore_for_file: must_be_immutable
-
 part of 'car_check_bloc.dart';
 
 class CarCheckState extends Equatable {
@@ -34,8 +33,10 @@ class CarCheckState extends Equatable {
       required this.countIndexCheck,
       required this.indexButtonSelect});
 
-  CarCheckState copyWith(
-      {List? fetched_checkList1,
+  CarCheckState copyWith
+  (
+      {
+      List? fetched_checkList1,
       int? indexButtonSelect,
       int? countIndexCheck,
       String? typeCheckState,
@@ -49,7 +50,10 @@ class CarCheckState extends Equatable {
       List<ExtCheckupList_Item>? storedExtCheckupList1,
       List<ExtCheckupEquipment_Item>? storedExtCheckupEquipment2,
       List<ExtCheckupSafety_Item>? storedExtCheckupSafety3,
-      List? test}) {
+      List? test
+      }
+      ) 
+      {
     return CarCheckState(
       twty4Check: twty4Check ?? this.twty4Check,
       isLoading: isLoading ?? this.isLoading,

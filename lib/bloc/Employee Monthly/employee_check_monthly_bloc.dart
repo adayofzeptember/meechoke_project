@@ -5,7 +5,6 @@ import 'package:meechoke_project/ETC/api_url.dart';
 import 'package:meechoke_project/bloc/Car_Check/model.dart';
 import 'package:meechoke_project/bloc/Employee%20Monthly/model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 part 'employee_check_monthly_event.dart';
 part 'employee_check_monthly_state.dart';
 
@@ -73,7 +72,8 @@ class EmployeeCheckMonthlyBloc
             isLoading: false,
           ));
         }
-      } catch (e) {
+      } 
+      catch (e) {
         print("Exception Try: $e");
         emit(state.copyWith(
           isLoading: false,
