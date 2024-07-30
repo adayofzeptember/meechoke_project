@@ -11,7 +11,7 @@ class NewJobs_Screen extends StatelessWidget {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 228, 237, 240),
         body: RawScrollbar(
-          thickness: 3,
+          thickness: 8,
           thumbColor: Palette.thisBlue,
           radius: Radius.circular(20),
           child: SingleChildScrollView(

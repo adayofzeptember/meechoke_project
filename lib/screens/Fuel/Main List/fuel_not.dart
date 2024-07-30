@@ -49,10 +49,8 @@ class Fuel_NotDone extends StatelessWidget {
                       ],
                     ),
                   );
-                } else if (state.status1 == 1 &&
-                    state.fuel_notYet_list.isEmpty) {
-                  return 
-                  Center(
+                } else if (state.status1 == 1 && state.fuel_notYet_list.length == 0) {
+                  return Center(
                       child: Column(
                     children: [
                       SizedBox(
@@ -70,9 +68,8 @@ class Fuel_NotDone extends StatelessWidget {
                       )
                     ],
                   ));
-                } else
-                  return 
-                  ListView.builder(
+                } 
+                  return ListView.builder(
                     primary: true,
                     itemCount: state.fuel_notYet_list.length,
                     shrinkWrap: true,
@@ -82,41 +79,15 @@ class Fuel_NotDone extends StatelessWidget {
                         onTap: () {
                           print(state.fuel_notYet_list[index].id);
                           context.read<FuelBloc>().add(Load_Fuel_Info(
-                            checkPage: 'notfill',
-                            context: context,
-                              joNumber:
-                                  state.fuel_notYet_list[index].id));
+                              checkPage: 'notfill',
+                              context: context,
+                              joNumber: state.fuel_notYet_list[index].id));
                         },
                         child: Container(
                           child: Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
+                            padding: const EdgeInsets.only(bottom: 5),
                             child: Column(
                               children: <Widget>[
-                                Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                      'assets/images/icon_job.svg',
-                                      fit: BoxFit.contain,
-                                    ),
-                                    SizedBox(
-                                      width: 3,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'วันที่สั่งเติม ',
-                                          style: TextStyle(),
-                                        ),
-                                        Text(
-                                          state.fuel_notYet_list[index].date,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Palette.thisBlue),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
                                 SizedBox(
                                   height: 8,
                                 ),
@@ -127,25 +98,36 @@ class Fuel_NotDone extends StatelessWidget {
                                           Radius.circular(20))),
                                   child: Padding(
                                     padding: const EdgeInsets.fromLTRB(
-                                        15, 15, 15, 20),
+                                        15, 15, 15, 5),
                                     child: Column(
                                       children: [
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              state.fuel_notYet_list[index]
-                                                  .jo_number,
-                                              style: TextStyle(
-                                                  color: (state
-                                                              .fuel_notYet_list[
-                                                                  index]
-                                                              .jo_number ==
-                                                          'ไม่มี JO')
-                                                      ? Palette.someRed
-                                                      : Palette.thisBlue,
-                                                  fontWeight: FontWeight.bold),
+                                            Row(
+                                              children: [
+                                                SvgPicture.asset(
+                                                  'assets/images/icon_job.svg',
+                                                  fit: BoxFit.contain,
+                                                ),
+                                                SizedBox(
+                                                  width: 3,
+                                                ),
+                                                Text(
+                                                  state.fuel_notYet_list[index]
+                                                      .jo_number,
+                                                  style: TextStyle(
+                                                      color: (state
+                                                                  .fuel_notYet_list[
+                                                                      index]
+                                                                  .jo_number ==
+                                                              'ไม่มี JO')
+                                                          ? Palette.someRed
+                                                          : Palette.thisBlue,
+                                                      fontWeight: FontWeight.bold),
+                                                ),
+                                              ],
                                             ),
                                             Container(
                                               decoration: BoxDecoration(
@@ -181,18 +163,44 @@ class Fuel_NotDone extends StatelessWidget {
                                         Row(
                                           children: [
                                             SizedBox(
-                                                width: 130,
-                                                child:
-                                                    Text('เลขที่ใบสั่งเติม :')),
-                                            SizedBox(
-                                              width: 50,
-                                            ),
+                                                child: Text(
+                                                    'เลขที่ใบสั่งเติม : ')),
                                             Text(
                                               state.fuel_notYet_list[index]
                                                   .doc_number,
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Palette.thisBlue),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          children: [
+                                            // SvgPicture.asset(
+                                            //   'assets/images/icon_job.svg',
+                                            //   fit: BoxFit.contain,
+                                            // ),
+                                            // SizedBox(
+                                            //   width: 3,
+                                            // ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  'วันที่สั่งเติม: ',
+                                                  style: TextStyle(),
+                                                ),
+                                                Text(
+                                                  state.fuel_notYet_list[index]
+                                                      .date,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Palette.thisBlue),
+                                                ),
+                                              ],
                                             )
                                           ],
                                         ),
@@ -208,10 +216,10 @@ class Fuel_NotDone extends StatelessWidget {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                  SvgPicture.asset(
-                                                    'assets/images/fuel.svg',
-                                                    fit: BoxFit.fill,
-                                                  ),
+                                                SvgPicture.asset(
+                                                  'assets/images/fuel.svg',
+                                                  fit: BoxFit.fill,
+                                                ),
                                                 SizedBox(
                                                   width: 5,
                                                 ),

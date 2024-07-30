@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/ETC/curency.dart';
 import 'package:meechoke_project/bloc/ReportAccident/report_accident_bloc.dart';
 
 class Docs_Screen extends StatefulWidget {
@@ -24,13 +25,9 @@ class _Docs_ScreenState extends State<Docs_Screen> {
           thumbColor: Palette.thisBlue,
           radius: Radius.circular(20),
           child: SingleChildScrollView(
-            child: 
-            BlocBuilder<ReportAccidentBloc, ReportAccidentState>(
+            child: BlocBuilder<ReportAccidentBloc, ReportAccidentState>(
                 builder: (context, state) {
-              return 
-              Column(
-                children: [
-                  
+              return Column(children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(5, 0, 5, 15),
                   child: Column(
@@ -216,9 +213,10 @@ class _Docs_ScreenState extends State<Docs_Screen> {
                                                   width: 10,
                                                 ),
                                                 Text(
-                                                  state.vehicle_Docs[index]
+                                                  formatNumber(state
+                                                      .vehicle_Docs[index]
                                                       .creditLimit
-                                                      .toString(),
+                                                      .toString()),
                                                   style: TextStyle(
                                                       fontSize: 15,
                                                       color: Color.fromARGB(

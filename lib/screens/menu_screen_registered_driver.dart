@@ -118,6 +118,7 @@ class _MainMenu_RegisteredDriverState extends State<MainMenu_RegisteredDriver> {
                 children: <Widget>[
                   InkWell(
                     onTap: () {
+                    
                       Navigator.push(
                         context,
                         PageTransition(
@@ -530,7 +531,7 @@ class _MainMenu_RegisteredDriverState extends State<MainMenu_RegisteredDriver> {
               ),
               onPressed: () async {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
-               
+
                 prefs.clear();
                 Phoenix.rebirth(context);
                 // context.read<LoginBloc>().add(Logout_Auth(context: context));

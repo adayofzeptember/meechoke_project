@@ -62,6 +62,7 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
           }
 
           emit(state.copyWith(fuel_notYet_list: data, status1: 1));
+          // emit(state.copyWith(status1: 1));
         } else {
           emit(state.copyWith(
             status1: 2,
@@ -74,7 +75,6 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
         ));
         print(e);
       }
-     
     });
     on<Load_Filled>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -162,7 +162,8 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
                   : await nestedData['jobOrderNumber']['joNumber'].toString(),
               doc_number: nestedData['documentNumber'].toString(),
               // status: 'ยังไม่ได้เติม',
-             status: (event.checkPage == 'notfill') ? 'ยังไม่เติม' : 'เติมแล้ว',
+              status:
+                  (event.checkPage == 'notfill') ? 'ยังไม่เติม' : 'เติมแล้ว',
               location_name:
                   nestedData['location']['locationFullName'].toString(),
               fuelType: nestedData['4mChange']['details']['primaryFuelType']
@@ -174,9 +175,18 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
               volum: nestedData['detailFuelVolumeNormalType'].toString(),
               totalprice: nestedData['detailFuelOrderTotalPrice'].toString(),
               paymentMethod: nestedData['paymentMethod'].toString(),
-              cardNumber: nestedData['currentCard']['cardNumber'].toString(),
-              creditRemains:
-                  nestedData['currentCard']['creditRemains'].toString(),
+              cardNumber: (await nestedData['currentCard']) == null ||
+                      (await nestedData['currentCard']).isEmpty
+                  ? '-'
+                  : await nestedData['currentCard']['cardNumber'].toString(),
+              creditRemains: (await nestedData['currentCard']) == null ||
+                      (await nestedData['currentCard']).isEmpty
+                  ? '-'
+                  : await nestedData['currentCard']['creditRemains'].toString(),
+
+              // cardNumber: nestedData['currentCard']['cardNumber'].toString(),
+              // creditRemains:
+              //     nestedData['currentCard']['creditRemains'].toString(),
               remark: nestedData['remark'].toString());
 
           emit(state.copyWith(fuelInfo: fetchedDataInfo, status2_info: 1));

@@ -142,7 +142,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
         ));
       }
     });
-
+//*--------------------------------------------------------------------------------------------------------------------------
     on<Load_Job_Info>((event, emit) async {
       if (event.checkPage == 'new_job') {
         Navigator.push(
@@ -226,8 +226,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 weight: nestedData['totalWeight'].toString(),
                 amounts: nestedData['transportAmount'].toString(),
                 pallet: nestedData['palletAmount'].toString(),
-                detail: nestedData['saleOrderOrdinary']['priceData']
-                        ['unitSelector']
+                detail: nestedData['saleOrderOrdinary']['priceData']['unitSelector']
                     .toString(),
                 contactName: nestedData['saleOrderOrdinary']['customer']
                         ['contactPoint'][0]['name']
@@ -237,13 +236,21 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                     .toString(),
                 inTheNameOf:
                     nestedData['saleOrderOrdinary']['customerName'].toString(),
-                collectMoney: nestedData['saleOrderOrdinary']['optionalData']
-                        ['sourcePayment']
+                collectMoney: nestedData['saleOrderOrdinary']['optionalData']['sourcePayment']
                     .toString(),
-                distance: nestedData['route']['distance'].toString(),
-                remark:
-                    nestedData['saleOrderOrdinary']['remark']['so'].toString(),
-                dod: nestedData['saleOrderOrdinary']['remark']['dod'].toString());
+                // distance: nestedData['route']['distance'].toString() ,
+
+                distance: (await nestedData['route']) == null || (await nestedData['route']).isEmpty
+                    ? 'ไม่ได้ระบุ'
+                    : await nestedData['route']['distance'].toString(),
+                remark: (await nestedData['saleOrderOrdinary']['remark']['so']) == null ||
+                        (await nestedData['saleOrderOrdinary']['remark']['so'] == "null")
+                    ? '-'
+                    : await nestedData['saleOrderOrdinary']['remark']['so'].toString(),
+
+                //remark: nestedData['saleOrderOrdinary']['remark']['so'].toString(),
+                               dod: (await nestedData['saleOrderOrdinary']['remark']['dod']) == null || (await nestedData['saleOrderOrdinary']['remark']['dod'] == "null") ? '-' : await nestedData['saleOrderOrdinary']['remark']['dod'].toString());
+
           } else {
             print('งานตู้');
 
@@ -288,8 +295,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 weight: nestedData['totalWeight'].toString(),
                 amounts: nestedData['transportAmount'].toString(),
                 pallet: nestedData['palletAmount'].toString(),
-                detail: nestedData['saleOrderContainer']['priceData']
-                        ['unitSelector']
+                detail: nestedData['saleOrderContainer']['priceData']['unitSelector']
                     .toString(),
                 contactName: nestedData['saleOrderContainer']['customer']
                         ['contactPoint'][0]['name']
@@ -302,10 +308,11 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 collectMoney: nestedData['saleOrderContainer']['optionalData']
                         ['sourcePayment']
                     .toString(),
-                distance: nestedData['route']['distance'].toString(),
-                remark:
-                    nestedData['saleOrderContainer']['remark']['so'].toString(),
-                dod: nestedData['saleOrderContainer']['remark']['dod'].toString());
+                distance: (await nestedData['route']) == null || (await nestedData['route']).isEmpty
+                    ? 'ไม่ได้ระบุ'
+                    : await nestedData['route']['distance'].toString(),
+                remark: (await nestedData['saleOrderContainer']['remark']['so']) == null || (await nestedData['saleOrderOrdinary']['remark']['so'] == "null") ? '-' : await nestedData['saleOrderOrdinary']['remark']['so'].toString(),
+                dod: (await nestedData['saleOrderContainer']['remark']['dod']) == null || (await nestedData['saleOrderContainer']['remark']['dod'] == "null") ? '-' : await nestedData['saleOrderContainer']['remark']['dod'].toString());
           }
 
           emit(state.copyWith(job_info: fetchedDataInfo, status3Detail: 1));

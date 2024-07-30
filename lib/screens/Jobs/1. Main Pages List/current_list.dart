@@ -2,8 +2,10 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
+import 'package:meechoke_project/screens/Jobs/c.dart';
 import 'package:meechoke_project/test/thai_date_converter.dart';
 
 class CurrentJobs_Screen extends StatelessWidget {
@@ -11,7 +13,7 @@ class CurrentJobs_Screen extends StatelessWidget {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 228, 237, 240),
         body: RawScrollbar(
-          thickness: 3,
+          thickness: 8,
           thumbColor: Palette.thisBlue,
           radius: Radius.circular(20),
           child: SingleChildScrollView(
@@ -49,9 +51,8 @@ class CurrentJobs_Screen extends StatelessWidget {
                     )),
                   );
                 } else if (state.status2 == 1 &&
-                    state.currentjobs_list.isEmpty) {
-                  return 
-                  Center(
+                    state.currentjobs_list.length == 0) {
+                  return Center(
                       child: Column(
                     children: [
                       SizedBox(
@@ -73,8 +74,7 @@ class CurrentJobs_Screen extends StatelessWidget {
                 //?  โหลดได้ปกติ
                 return Padding(
                   padding: const EdgeInsets.all(5),
-                  child: 
-                  ListView.builder(
+                  child: ListView.builder(
                     primary: true,
                     itemCount: state.currentjobs_list.length,
                     shrinkWrap: true,
@@ -106,11 +106,19 @@ class CurrentJobs_Screen extends StatelessWidget {
                                       width: 3,
                                     ),
                                     Text(
-                                     
-                                      state.currentjobs_list[index].checkin_location[0].date,
+                                      splitDateToThaiMonth(state
+                                          .currentjobs_list[index]
+                                          .checkin_location[0]
+                                          .date)
+                                      // convertDateToThaiYearFormat(state
+                                      //     .currentjobs_list[index]
+                                      //     .checkin_location[0]
+                                      //     .date)
+                                          
+                                          ,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold),
-                                    )
+                                    ),
                                   ],
                                 ),
                                 SizedBox(
@@ -142,59 +150,75 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                   color: Palette.thisBlue,
                                                   fontWeight: FontWeight.bold),
                                             ),
-                                            (state.currentjobs_list[index].currentStatus == 'เสร็จงาน')
-                                            ?     Container(
-                                              decoration: const BoxDecoration(
-                                                  color: Palette.theGreen,
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(20))),
-                                              child: Padding(
-                                                padding: EdgeInsets.fromLTRB(
-                                                    15, 8, 15, 8),
-                                                child: Row(
-                                                  children: [
-                                                    SizedBox(
-                                                  
-                                                      child: Text(
-                                                        'งานเสร็จสิ้นแล้ว',
-                                                        textAlign: TextAlign.center,
-                                                        style: TextStyle(
+                                            (state.currentjobs_list[index]
+                                                        .currentStatus ==
+                                                    'เสร็จงาน')
+                                                ? Container(
+                                                    decoration: const BoxDecoration(
+                                                        color: Palette.theGreen,
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    20))),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsets.fromLTRB(
+                                                              15, 8, 15, 8),
+                                                      child: Row(
+                                                        children: [
+                                                          SizedBox(
+                                                            child: Text(
+                                                              'งานเสร็จสิ้นแล้ว',
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                          ),
+                                                          Icon(
+                                                            Icons.check,
                                                             color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight.bold),
+                                                          )
+                                                        ],
                                                       ),
                                                     ),
-                                                    Icon(Icons.check, color: Colors.white,)
-                                                  ],
-                                                ),
-                                              ),
-                                            )
-                                            :Container(
-                                              decoration: const BoxDecoration(
-                                                  color: Palette.thisBlue,
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(20))),
-                                              child: Padding(
-                                                padding: EdgeInsets.fromLTRB(
-                                                    12, 8, 12, 8),
-                                                child: SizedBox(
-                                                  width: 120,
-                                                  child: Text(
-                                                    state
-                                                        .currentjobs_list[index]
-                                                        .jobStatus
-                                                        .toString(),
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                                  )
+                                                : Container(
+                                                    decoration: const BoxDecoration(
+                                                        color: Palette.thisBlue,
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    20))),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsets.fromLTRB(
+                                                              12, 8, 12, 8),
+                                                      child: SizedBox(
+                                                        width: 120,
+                                                        child: Text(
+                                                          state
+                                                              .currentjobs_list[
+                                                                  index]
+                                                              .jobStatus
+                                                              .toString(),
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),
-                                              ),
-                                            ),
                                           ],
                                         ),
                                         const SizedBox(
@@ -224,9 +248,10 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                 physics:
                                                     const ClampingScrollPhysics(),
                                                 itemBuilder: (context, index2) {
-                                                     DateTime dateTime =
+                                                  DateTime dateTime =
                                                       DateTime.parse(state
-                                                          .newjobs_list[index]
+                                                          .currentjobs_list[
+                                                              index]
                                                           .checkin_location[
                                                               index2]
                                                           .date

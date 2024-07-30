@@ -424,7 +424,7 @@ class Current_JobDetail extends StatelessWidget {
                                               255, 234, 240, 255)),
                                       child: Padding(
                                         padding: const EdgeInsets.fromLTRB(
-                                            15, 20, 15, 25),
+                                            15, 20, 15, 20),
                                         child: (state
                                                     .job_info
                                                     .checkInLocation_Info
@@ -440,8 +440,12 @@ class Current_JobDetail extends StatelessWidget {
                                                 physics:
                                                     const ClampingScrollPhysics(),
                                                 itemBuilder: (context, index) {
-                                                     DateTime dateTime =
-                                                      DateTime.parse(state.job_info.checkInLocation_Info[index].date);
+                                                  DateTime dateTime =
+                                                      DateTime.parse(state
+                                                          .job_info
+                                                          .checkInLocation_Info[
+                                                              index]
+                                                          .date);
 
                                                   String formattedDate =
                                                       ThaiDateFormat(
@@ -694,7 +698,8 @@ class Current_JobDetail extends StatelessWidget {
                         showCustomDialog(context, state.job_info.docNumber);
                         //
                       } else {
-                        if (state.job_info.currentLocation.currentLocation_id == 0) {
+                        if (state.job_info.currentLocation.currentLocation_id ==
+                            0) {
                           Navigator.push(
                             context,
                             PageTransition(

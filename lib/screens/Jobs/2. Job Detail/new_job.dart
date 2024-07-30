@@ -377,7 +377,7 @@ class New_JobDetail extends StatelessWidget {
                                               Color.fromARGB(255, 234, 240, 255)),
                                       child: Padding(
                                         padding: const EdgeInsets.fromLTRB(
-                                            15, 20, 15, 25),
+                                            15, 20, 15, 20),
                                         child: (state
                                                     .job_info
                                                     .checkInLocation_Info

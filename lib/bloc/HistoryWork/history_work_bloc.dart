@@ -68,11 +68,6 @@ class HistoryWorkBloc extends Bloc<HistoryWorkEvent, HistoryWorkState> {
           }),
         );
 
-        //  var count = response.data['count'].toString();
-        //  var allowanceTotal = response.data['count'].toString();
-        // print(state.month+state.year);
-        // print(x);
-
         var data = [];
         if (response.statusCode == 200) {
           for (var elements in response.data['driverFinanceSummary']) {
@@ -92,7 +87,8 @@ class HistoryWorkBloc extends Bloc<HistoryWorkEvent, HistoryWorkState> {
               count: response.data['count'].toString(),
               total: response.data['allowanceTotal'].toString()));
         } else {
-          emit(state.copyWith(status: 'error', errorMsg: response.statusMessage));
+          emit(state.copyWith(
+              status: 'error', errorMsg: response.statusMessage));
           print('error status != 200');
         }
       } catch (e) {

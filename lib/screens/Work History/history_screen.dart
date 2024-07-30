@@ -315,7 +315,7 @@ class _History_PageState extends State<History_Page> {
                       ),
                       Center(
                         child: Text(
-                          'เกิดข้อผิดพลาดม ลองใหม่',
+                          'เกิดข้อผิดพลาด',
                           style: TextStyle(
                               fontSize: 20,
                               color: Palette.someRed,
