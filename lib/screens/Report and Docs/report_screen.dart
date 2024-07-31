@@ -56,7 +56,7 @@ class _Report_ScreenState extends State<Report_Screen> {
                     height: 10,
                   ),
                   Text(
-                    'กำลังหาค้นหาตำแหน่ง',
+                    'กำลังระบุตำแหน่งปัจจุบัน',
                     style: TextStyle(
                         color: Palette.thisBlue, fontWeight: FontWeight.bold),
                   )
@@ -122,7 +122,7 @@ class _Report_ScreenState extends State<Report_Screen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        Text('รายละเอียดการแจ้ง'),
+                        Text('รายละเอียดการแจ้ง', style: TextStyle(fontWeight: FontWeight.bold),),
                          const SizedBox(
                           height: 5,
                         ),

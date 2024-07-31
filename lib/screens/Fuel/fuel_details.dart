@@ -55,21 +55,21 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                 ));
               } else if (state.status2_info == 2) {
                 return Center(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          'เกิดข้อผิดพลาด',
-                          style: TextStyle(
-                              color: Palette.someRed,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
-                        )
-                      ],
-                    ),
-                  );
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'เกิดข้อผิดพลาด',
+                        style: TextStyle(
+                            color: Palette.someRed,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      )
+                    ],
+                  ),
+                );
               }
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,14 +118,10 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                               ),
                               Container(
                                 decoration: BoxDecoration(
-                                    color: (state.fuelInfo.status == 'ยังไม่เติม')
-                                    
-                                    ? Color.fromARGB(255, 233, 196, 0)
-
-                                    : Colors.green
-                                    
-                                    
-                                    ,
+                                    color:
+                                        (state.fuelInfo.status == 'ยังไม่เติม')
+                                            ? Color.fromARGB(255, 233, 196, 0)
+                                            : Colors.green,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20))),
                                 child: Padding(
@@ -137,11 +133,10 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                       state.fuelInfo.status,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                         color: (state.fuelInfo.status == 'ยังไม่เติม')
-                                    
-                                    ? Colors.black
-
-                                    : Colors.white,
+                                          color: (state.fuelInfo.status ==
+                                                  'ยังไม่เติม')
+                                              ? Colors.black
+                                              : Colors.white,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
@@ -182,15 +177,16 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                         width: double.infinity,
                         height: MediaQuery.of(context).size.height * 0.32,
                         decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topRight,
-                              end: Alignment.topLeft,
-                              colors: [
-                                Palette.thisBlue,
-                                Palette.thisBlue,
-                                Color.fromARGB(238, 4, 75, 163),
-                              ],
-                            ),
+                          color: Palette.thisBlue,
+                            // gradient: LinearGradient(
+                            //   begin: Alignment.topRight,
+                            //   end: Alignment.topLeft,
+                            //   colors: [
+                            //     Palette.thisBlue,
+                            //     Palette.thisBlue,
+                            //     Color.fromARGB(238, 4, 75, 163),
+                            //   ],
+                            // ),
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(30),
                                 topRight: Radius.circular(30))),
@@ -203,7 +199,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                 'สถานที่เติม:',
                                 style: TextStyle(
                                     fontSize: 15,
-                                    color: Color.fromARGB(255, 190, 190, 190)),
+                                    color: Colors.white),
                               ),
                               SizedBox(
                                 height: 10,
@@ -259,12 +255,11 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                         width: 30,
                                       ),
                                       SizedBox(
-                                        width: MediaQuery.of(context).size.width * 0.23,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.23,
                                         child: Text(
                                           state.fuelInfo.fuelType,
-                                         
-                                          
-                                          
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -338,7 +333,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                         width: 30,
                                       ),
                                       SizedBox(
-                                        width:80,
+                                        width: 80,
                                         child: Text(
                                           state.fuelInfo.cardNumber,
                                           style: TextStyle(
@@ -381,8 +376,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                         width: 30,
                                       ),
                                       SizedBox(
-                                        width:
-                                            80,
+                                        width: 80,
                                         child: Text(
                                           'นครราชสีมา',
                                           overflow: TextOverflow.clip,
@@ -406,8 +400,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                         width: 30,
                                       ),
                                       SizedBox(
-                                        width:
-                                            80,
+                                        width: 80,
                                         child: Text(
                                           'นครราชสีมา',
                                           overflow: TextOverflow.fade,
@@ -426,12 +419,12 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
-                                          "*"+state.fuelInfo.remark,
-                                          textAlign: TextAlign.start,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.red),
-                                        ),
+                                      "*" + state.fuelInfo.remark,
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.red),
+                                    ),
                                   )
                                 ],
                               ),
@@ -445,49 +438,39 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                     height: 20,
                   ),
                   (state.fuelInfo.status == 'ยังไม่เติม')
-
-                  ?
-                       ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: Palette.thisBlue,
-                        elevation: 0,
-                        // side: BorderSide(color: Colors.white),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        )),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                            duration: const Duration(milliseconds: 500),
-                            type: PageTransitionType.fade,
-                            child: Fuel_fillForm()),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Container(
-                        width: double.infinity,
-                        alignment: Alignment.center,
-                        child: const Text(
-                          "เติมเชื้อเพลิง",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 15),
-                        ),
-                      ),
-                    ),
-                  )
-
-
-
-
-
-                  : Container()
-                 
-              
-             
+                      ? ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: Palette.thisBlue,
+                              elevation: 0,
+                              // side: BorderSide(color: Colors.white),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              )),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              PageTransition(
+                                  duration: const Duration(milliseconds: 500),
+                                  type: PageTransitionType.fade,
+                                  child: Fuel_fillForm()),
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Container(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              child: const Text(
+                                "เติมเชื้อเพลิง",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontSize: 15),
+                              ),
+                            ),
+                          ),
+                        )
+                      : Container()
                 ],
               );
             },

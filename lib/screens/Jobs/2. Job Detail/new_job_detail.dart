@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/ProgressHUD.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/ETC/curency.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 import 'package:meechoke_project/test/thai_date_converter.dart';
@@ -49,7 +50,7 @@ class New_JobDetail extends StatelessWidget {
             ),
           ),
           title: const Text(
-            'ใบสั่งงานทั่วไป',
+            'ใบสั่งงาน',
             style: TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
           ),
@@ -346,7 +347,7 @@ class New_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              state.job_info.collectMoney,
+                                              formatNumber(state.job_info.collectMoney),
                                               style: TextStyle(
                                                   color: Colors.red,
                                                   fontWeight: FontWeight.bold),
@@ -450,24 +451,30 @@ class New_JobDetail extends StatelessWidget {
                                                                   SizedBox(
                                                                     width: 5,
                                                                   ),
-                                                                  Text(
-                                                                    state
-                                                                        .job_info
-                                                                        .checkInLocation_Info[
-                                                                            index]
-                                                                        .point,
-                                                                    style: TextStyle(
-                                                                        decoration:
-                                                                            TextDecoration
-                                                                                .underline,
-                                                                        decorationColor:
-                                                                            Colors
-                                                                                .blue,
-                                                                        color: Colors
-                                                                            .blue,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .bold),
+                                                               SizedBox(
+                                                                     width: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width *
+                                                                        0.5,
+                                                                    child: Text(
+                                                                      state
+                                                                          .job_info
+                                                                          .checkInLocation_Info[
+                                                                              index]
+                                                                          .point,
+                                                                          
+                                                                      style: TextStyle(
+                                                                          decoration:
+                                                                              TextDecoration
+                                                                                  .underline,
+                                                                          decorationColor:
+                                                                              Colors
+                                                                                  .blue,
+                                                                          color: Colors
+                                                                              .blue,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
+                                                                    ),
                                                                   )
                                                                 ],
                                                               ),

@@ -7,8 +7,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meechoke_project/ETC/api_url.dart';
 import 'package:meechoke_project/ETC/success_dialog.dart';
 import 'package:meechoke_project/bloc/Jobs/model.dart';
-import 'package:meechoke_project/screens/Jobs/2.%20Job%20Detail/current_job.dart';
-import 'package:meechoke_project/screens/Jobs/2.%20Job%20Detail/new_job.dart';
+import 'package:meechoke_project/screens/Jobs/2.%20Job%20Detail/current_job_detail.dart';
+import 'package:meechoke_project/screens/Jobs/2.%20Job%20Detail/new_job_detail.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'jobs_event.dart';
@@ -247,10 +247,9 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                         (await nestedData['saleOrderOrdinary']['remark']['so'] == "null")
                     ? '-'
                     : await nestedData['saleOrderOrdinary']['remark']['so'].toString(),
+                dod: (await nestedData['saleOrderOrdinary']['remark']['dod']) == null || (await nestedData['saleOrderOrdinary']['remark']['dod'] == "null") ? '-' : await nestedData['saleOrderOrdinary']['remark']['dod'].toString());
 
-                //remark: nestedData['saleOrderOrdinary']['remark']['so'].toString(),
-                               dod: (await nestedData['saleOrderOrdinary']['remark']['dod']) == null || (await nestedData['saleOrderOrdinary']['remark']['dod'] == "null") ? '-' : await nestedData['saleOrderOrdinary']['remark']['dod'].toString());
-
+            ;
           } else {
             print('งานตู้');
 
@@ -267,6 +266,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             }
 
             if (nestedData['currentLocation'] != null) {
+              print('all locations not done');
               dataCurrentLocation = Current_Location(
                   currentLocation_id: nestedData['currentLocation']['id'] ?? '',
                   currentLocation_checkinCategory:
@@ -276,7 +276,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                   currentLocation_point:
                       nestedData['currentLocation']['locationCode'] ?? '');
             } else {
-              print('all location done');
+              print('all locations done');
               dataCurrentLocation = Current_Location(
                   currentLocation_id: 0,
                   currentLocation_checkinCategory: '',
@@ -313,6 +313,8 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                     : await nestedData['route']['distance'].toString(),
                 remark: (await nestedData['saleOrderContainer']['remark']['so']) == null || (await nestedData['saleOrderOrdinary']['remark']['so'] == "null") ? '-' : await nestedData['saleOrderOrdinary']['remark']['so'].toString(),
                 dod: (await nestedData['saleOrderContainer']['remark']['dod']) == null || (await nestedData['saleOrderContainer']['remark']['dod'] == "null") ? '-' : await nestedData['saleOrderContainer']['remark']['dod'].toString());
+
+            ;
           }
 
           emit(state.copyWith(job_info: fetchedDataInfo, status3Detail: 1));
@@ -490,7 +492,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             fontSize: 20);
       }
     });
-
+//! รับงาน ออกรถ
     on<Action_Status>((event, emit) async {
       emit(state.copyWith(
         isLoading: true,

@@ -66,7 +66,34 @@ class _Financial_ListState extends State<Financial_List> {
                                 ));
                               } else if (state.status1 == 1 &&
                                   state.financial_list.isEmpty) {
-                                return Container();
+                                return Center(
+                                    child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.error,
+                                          color: Palette.someRed,
+                                        ),
+                                         SizedBox(
+                                      width: 5,
+                                    ),
+                                        Container(
+                                          child: Text(
+                                            'ยังไม่มีประวัติการเงิน',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ));
                               } else if (state.status1 == 2) {
                                 return GestureDetector(
                                   onTap: () {},
@@ -108,10 +135,7 @@ class _Financial_ListState extends State<Financial_List> {
                                             Radius.circular(25))),
                                     child: Padding(
                                       padding: const EdgeInsets.all(10),
-                                      child: 
-                                      
-                                      
-                                      ListView.builder(
+                                      child: ListView.builder(
                                           primary: true,
                                           itemCount:
                                               state.financial_list.length,
@@ -123,8 +147,7 @@ class _Financial_ListState extends State<Financial_List> {
                                               title: Container(
                                                 child: Column(
                                                   crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .start,
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Row(
                                                       mainAxisAlignment:
@@ -152,8 +175,8 @@ class _Financial_ListState extends State<Financial_List> {
                                                               .toString()),
                                                           style: TextStyle(
                                                               fontSize: 20,
-                                                              color: Colors
-                                                                  .green,
+                                                              color:
+                                                                  Colors.green,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold),
@@ -165,16 +188,14 @@ class _Financial_ListState extends State<Financial_List> {
                                                     ),
                                                     Text(
                                                       state
-                                                          .financial_list[
-                                                              index]
+                                                          .financial_list[index]
                                                           .clearingDate
                                                           .toString(),
                                                       style: TextStyle(
                                                           fontSize: 15,
                                                           color: Colors.grey,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .bold),
+                                                              FontWeight.bold),
                                                     ),
                                                     SizedBox(height: 5),
                                                   ],
@@ -199,12 +220,10 @@ class _Financial_ListState extends State<Financial_List> {
                                                                 left: 10,
                                                                 right: 10,
                                                                 bottom: 5),
-                                                        child:
-                                                            GestureDetector(
+                                                        child: GestureDetector(
                                                           onTap: () {
                                                             showDialog(
-                                                              context:
-                                                                  context,
+                                                              context: context,
                                                               barrierDismissible:
                                                                   true, //* user must tap button!
                                                               builder:
@@ -219,8 +238,12 @@ class _Financial_ListState extends State<Financial_List> {
                                                                         Column(
                                                                       children: [
                                                                         Center(
-                                                                            child: Text(
-                                                                          state.financial_list[index].expanded_list[index2].documentNumber,
+                                                                            child:
+                                                                                Text(
+                                                                          state
+                                                                              .financial_list[index]
+                                                                              .expanded_list[index2]
+                                                                              .documentNumber,
                                                                           style: TextStyle(
                                                                               color: Palette.thisBlue,
                                                                               fontWeight: FontWeight.bold,
@@ -231,12 +254,15 @@ class _Financial_ListState extends State<Financial_List> {
                                                                               10,
                                                                         ),
                                                                         Container(
-                                                                          decoration:
-                                                                              BoxDecoration(color: const Color.fromARGB(255, 191, 191, 191), borderRadius: BorderRadius.all(Radius.circular(20))),
+                                                                          decoration: BoxDecoration(
+                                                                              color: const Color.fromARGB(255, 191, 191, 191),
+                                                                              borderRadius: BorderRadius.all(Radius.circular(20))),
                                                                           child:
                                                                               Padding(
-                                                                            padding: const EdgeInsets.all(8),
-                                                                            child: Row(
+                                                                            padding:
+                                                                                const EdgeInsets.all(8),
+                                                                            child:
+                                                                                Row(
                                                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                               children: [
                                                                                 Text(
@@ -260,7 +286,8 @@ class _Financial_ListState extends State<Financial_List> {
                                                                           child:
                                                                               Text(
                                                                             'รายละเอียดยอดเงินรับในเที่ยวนี้',
-                                                                            style: const TextStyle(color: Palette.thisBlue, fontWeight: FontWeight.bold),
+                                                                            style:
+                                                                                const TextStyle(color: Palette.thisBlue, fontWeight: FontWeight.bold),
                                                                           ),
                                                                         ),
                                                                         const SizedBox(
@@ -326,7 +353,8 @@ class _Financial_ListState extends State<Financial_List> {
                                                                           child:
                                                                               Text(
                                                                             'รายการที่หักในเที่ยววิ่งนี้',
-                                                                            style: const TextStyle(color: Palette.thisBlue, fontWeight: FontWeight.bold),
+                                                                            style:
+                                                                                const TextStyle(color: Palette.thisBlue, fontWeight: FontWeight.bold),
                                                                           ),
                                                                         ),
                                                                         const SizedBox(
@@ -399,17 +427,22 @@ class _Financial_ListState extends State<Financial_List> {
                                                                             )),
                                                                         onPressed:
                                                                             () {
-                                                                          Navigator.pop(context);
+                                                                          Navigator.pop(
+                                                                              context);
                                                                         },
                                                                         child:
                                                                             Padding(
-                                                                          padding:
-                                                                              const EdgeInsets.all(10.0),
+                                                                          padding: const EdgeInsets
+                                                                              .all(
+                                                                              10.0),
                                                                           child:
                                                                               Container(
-                                                                            width: double.infinity,
-                                                                            alignment: Alignment.center,
-                                                                            child: Text(
+                                                                            width:
+                                                                                double.infinity,
+                                                                            alignment:
+                                                                                Alignment.center,
+                                                                            child:
+                                                                                Text(
                                                                               "ปิด",
                                                                               style: TextStyle(fontWeight: FontWeight.bold, color: Palette.thisBlue, fontSize: 15),
                                                                             ),
@@ -433,44 +466,49 @@ class _Financial_ListState extends State<Financial_List> {
                                                                 crossAxisAlignment:
                                                                     CrossAxisAlignment
                                                                         .center, // Align children vertically centered
-                
+
                                                                 children: [
                                                                   Expanded(
-                                                                    child:
-                                                                        Text(
+                                                                    child: Text(
                                                                       state
-                                                                          .financial_list[index]
-                                                                          .expanded_list[index2]
+                                                                          .financial_list[
+                                                                              index]
+                                                                          .expanded_list[
+                                                                              index2]
                                                                           .documentNumber,
                                                                       style: TextStyle(
                                                                           fontSize:
                                                                               15,
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                          color: Colors.black),
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          color:
+                                                                              Colors.black),
                                                                     ),
                                                                   ),
                                                                   Expanded(
-                                                                    child:
-                                                                        Text(
+                                                                    child: Text(
                                                                       formatNumber(state
-                                                                          .financial_list[index]
-                                                                          .expanded_list[index2]
+                                                                          .financial_list[
+                                                                              index]
+                                                                          .expanded_list[
+                                                                              index2]
                                                                           .jobTotal),
                                                                       style: TextStyle(
                                                                           fontSize:
                                                                               15,
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                          color: Palette.thisBlue),
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          color:
+                                                                              Palette.thisBlue),
                                                                     ),
                                                                   ),
                                                                   Expanded(
-                                                                    child:
-                                                                        Text(
+                                                                    child: Text(
                                                                       state
-                                                                          .financial_list[index]
-                                                                          .expanded_list[index2]
+                                                                          .financial_list[
+                                                                              index]
+                                                                          .expanded_list[
+                                                                              index2]
                                                                           .jobStatus,
                                                                       style:
                                                                           TextStyle(
@@ -490,24 +528,22 @@ class _Financial_ListState extends State<Financial_List> {
                                                     })
                                               ],
                                             );
-                
+
                                             // );
                                           }),
                                     ),
                                   ),
-                                  
                                 ],
                               );
                             },
                           ),
-                         
                         ],
                       ),
                     ),
                   ],
                 )
               ],
-            ),  
+            ),
           ]),
         ));
   }

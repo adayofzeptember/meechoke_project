@@ -49,7 +49,8 @@ class _Job_ProcessState extends State<Job_Process> {
               ),
             ),
             title: Text(
-              state.job_info.currentLocation.currentLocation_id.toString(),
+              'id location: ' +
+                  state.job_info.currentLocation.currentLocation_id.toString(),
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -306,7 +307,7 @@ class _Job_ProcessState extends State<Job_Process> {
                                     } else {
                                       null;
                                     }
-
+                                    //! ส่งเปลี่ยนสถานะ
                                     context.read<JobsBloc>().add(
                                         Upload_Pics_Jobs(
                                             getCurrentLocationID: state
@@ -373,7 +374,7 @@ class _Job_ProcessState extends State<Job_Process> {
               children: [
                 Center(
                   child: Text(
-                    'รูป',
+                    'ภาพถ่ายยืนยัน',
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -398,7 +399,7 @@ class _Job_ProcessState extends State<Job_Process> {
                             height: 5,
                           ),
                           const Text(
-                            'ถ่ายภาพ',
+                            'กล้อง',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           )
                         ],
@@ -419,7 +420,7 @@ class _Job_ProcessState extends State<Job_Process> {
                             height: 5,
                           ),
                           const Text(
-                            'แกลอรี่',
+                            'อัลบั้ม',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           )
                         ],

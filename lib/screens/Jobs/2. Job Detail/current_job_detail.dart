@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/ProgressHUD.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/ETC/curency.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 import 'package:meechoke_project/screens/Jobs/3.%20Process%20-%20Finish/finish_job.dart';
@@ -393,7 +394,7 @@ class Current_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              state.job_info.collectMoney,
+                                              formatNumber(state.job_info.collectMoney),
                                               style: TextStyle(
                                                   color: Colors.red,
                                                   fontWeight: FontWeight.bold),
@@ -501,23 +502,30 @@ class Current_JobDetail extends StatelessWidget {
                                                                   SizedBox(
                                                                     width: 5,
                                                                   ),
-                                                                  Text(
-                                                                    state
-                                                                        .job_info
-                                                                        .checkInLocation_Info[
-                                                                            index]
-                                                                        .point,
-                                                                    style: TextStyle(
-                                                                        decoration:
-                                                                            TextDecoration
-                                                                                .underline,
-                                                                        decorationColor:
-                                                                            Colors
-                                                                                .blue,
-                                                                        color: Colors
-                                                                            .blue,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
+                                                                  SizedBox(
+                                                                     width: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width *
+                                                                        0.5,
+                                                                    child: Text(
+                                                                      state
+                                                                          .job_info
+                                                                          .checkInLocation_Info[
+                                                                              index]
+                                                                          .point,
+                                                                          
+                                                                      style: TextStyle(
+                                                                          decoration:
+                                                                              TextDecoration
+                                                                                  .underline,
+                                                                          decorationColor:
+                                                                              Colors
+                                                                                  .blue,
+                                                                          color: Colors
+                                                                              .blue,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
+                                                                    ),
                                                                   )
                                                                 ],
                                                               ),
@@ -716,25 +724,6 @@ class Current_JobDetail extends StatelessWidget {
                                 child: Job_Process()),
                           );
                         }
-
-                        // if (state.count < state.job_info.checkInLocation_Info.length) {
-                        // Navigator.push(
-                        //   context,
-                        //   PageTransition(
-                        //       duration: const Duration(milliseconds: 300),
-                        //       type: PageTransitionType.rightToLeft,
-                        //       child: Job_Process()),
-                        // );
-
-                        // } else {
-                        // Navigator.push(
-                        //   context,
-                        //   PageTransition(
-                        //       duration: const Duration(milliseconds: 300),
-                        //       type: PageTransitionType.rightToLeft,
-                        //       child: FinishJob_Screen()),
-                        // );
-                        // }
                       }
                     },
                     child: Padding(

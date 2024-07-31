@@ -2,10 +2,9 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:intl/intl.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
-import 'package:meechoke_project/screens/Jobs/c.dart';
+import 'package:meechoke_project/ETC/dateConvert.dart';
 import 'package:meechoke_project/test/thai_date_converter.dart';
 
 class CurrentJobs_Screen extends StatelessWidget {
@@ -114,8 +113,8 @@ class CurrentJobs_Screen extends StatelessWidget {
                                       //     .currentjobs_list[index]
                                       //     .checkin_location[0]
                                       //     .date)
-                                          
-                                          ,
+
+                                      ,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -313,44 +312,64 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                                   SizedBox(
                                                                     width: 5,
                                                                   ),
-                                                                  Text(
-                                                                    state
-                                                                        .currentjobs_list[
-                                                                            index]
-                                                                        .checkin_location[
-                                                                            index2]
-                                                                        .point,
-                                                                    style: TextStyle(
-                                                                        decoration:
-                                                                            TextDecoration
-                                                                                .underline,
-                                                                        decorationColor:
-                                                                            Colors
-                                                                                .blue,
-                                                                        color: Colors
-                                                                            .blue,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
+                                                                  SizedBox(
+                                                                    width: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width *
+                                                                        0.5,
+                                                                    child: Text(
+                                                                      state
+                                                                          .currentjobs_list[
+                                                                              index]
+                                                                          .checkin_location[
+                                                                              index2]
+                                                                          .point,
+                                                                      overflow:
+                                                                          TextOverflow
+                                                                              .ellipsis,
+                                                                      style: TextStyle(
+                                                                          decoration: TextDecoration
+                                                                              .underline,
+                                                                          decorationColor: Colors
+                                                                              .blue,
+                                                                          color: Colors
+                                                                              .blue,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
+                                                                    ),
                                                                   )
                                                                 ],
                                                               ),
                                                               SizedBox(
                                                                 height: 5,
                                                               ),
-                                                              Text(
-                                                                  '[ ${formattedDate} ]',
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .fade,
-                                                                  style: TextStyle(
+                                                              Row(
+                                                                children: [
+                                                                  Icon(
+                                                                      Icons
+                                                                          .calendar_month,
                                                                       color: Color.fromARGB(
                                                                           255,
                                                                           133,
                                                                           133,
-                                                                          133),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold)),
+                                                                          133)),
+                                                                  SizedBox(
+                                                                      width: 2),
+                                                                  Text(
+                                                                      '${formattedDate}',
+                                                                      overflow:
+                                                                          TextOverflow
+                                                                              .fade,
+                                                                      style: TextStyle(
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              133,
+                                                                              133,
+                                                                              133),
+                                                                          fontWeight:
+                                                                              FontWeight.bold)),
+                                                                ],
+                                                              ),
                                                             ],
                                                           )
                                                         ],
