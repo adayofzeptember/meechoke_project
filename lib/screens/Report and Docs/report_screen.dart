@@ -63,13 +63,13 @@ class _Report_ScreenState extends State<Report_Screen> {
                 ],
               ));
             }
-           
+
             context.read<ReportAccidentBloc>().add(GetLocationName());
             return Column(children: [
               Stack(
                 children: [
-                  Padding(  
-                    padding: const EdgeInsets.fromLTRB( 0, 0, 5, 15),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 5, 15),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -79,22 +79,24 @@ class _Report_ScreenState extends State<Report_Screen> {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            color: Palette.thisBlue,
-                            // border: Border.all(),
-                            borderRadius: BorderRadius.all(Radius.circular(10))
-                          ),
+                              color: Palette.thisBlue,
+                              // border: Border.all(),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Column(
-                               mainAxisAlignment: MainAxisAlignment.center,
-                               crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Row(
-                               crossAxisAlignment: CrossAxisAlignment.center,
-                            
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(Icons.location_on, color: Palette.someRed,),
+                                    Icon(
+                                      Icons.location_on,
+                                      color: Palette.someRed,
+                                    ),
                                     // Text(
                                     //   'ตำแหน่งปัจจุบัน',
                                     //   style: TextStyle(
@@ -104,7 +106,9 @@ class _Report_ScreenState extends State<Report_Screen> {
                                     // ),
                                   ],
                                 ),
-                                SizedBox(height: 5,),
+                                SizedBox(
+                                  height: 5,
+                                ),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5),
                                   child: Text(
@@ -122,8 +126,11 @@ class _Report_ScreenState extends State<Report_Screen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        Text('รายละเอียดการแจ้ง', style: TextStyle(fontWeight: FontWeight.bold),),
-                         const SizedBox(
+                        Text(
+                          'รายละเอียดการแจ้ง',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(
                           height: 5,
                         ),
                         Container(
@@ -195,7 +202,6 @@ class _Report_ScreenState extends State<Report_Screen> {
                                 child: SizedBox(
                                   height: 50,
                                   child: ElevatedButton(
-                                    
                                     style: ElevatedButton.styleFrom(
                                         primary: const Color.fromARGB(
                                             255, 238, 246, 255),
@@ -212,9 +218,6 @@ class _Report_ScreenState extends State<Report_Screen> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(15.0),
                                       child: Container(
-                                       
-                                       
-                                       
                                         width: double.infinity,
                                         alignment: Alignment.center,
                                         child: const Text(
@@ -245,8 +248,8 @@ class _Report_ScreenState extends State<Report_Screen> {
                                             return Center(
                                                 child: GestureDetector(
                                               onTap: () {
-                                                _showImageDialog(context, selectedImages[index].path);
-                                    
+                                                _showImageDialog(context,
+                                                    selectedImages[index].path);
                                               },
                                               child: Card(
                                                 child: SizedBox(
@@ -282,14 +285,13 @@ class _Report_ScreenState extends State<Report_Screen> {
                               : () {
                                   context.read<ReportAccidentBloc>().add(
                                       Upload_Pics_andReport(
-                                        
                                           context: context,
                                           getRemark:
                                               reportRemark_Controller.text,
                                           type: 'image',
                                           collection: 'true',
                                           files: selectedImages));
-                        
+
                                   selectedImages = [];
                                   reportRemark_Controller.text = '';
                                 },
@@ -378,25 +380,22 @@ class _Report_ScreenState extends State<Report_Screen> {
         });
   }
 
-
-static void _showImageDialog(BuildContext context, String imagePath) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Center(
-          child: Image.file(
-            File(imagePath),
-            fit: BoxFit.fill,
+  static void _showImageDialog(BuildContext context, String imagePath) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Center(
+            child: Image.file(
+              File(imagePath),
+              fit: BoxFit.fill,
+            ),
           ),
-        ),
-      );
-    },
-  );
-}
-
-
+        );
+      },
+    );
+  }
 
   Future<void> _getToCamera() async {
     final picker = ImagePicker();
@@ -427,4 +426,3 @@ static void _showImageDialog(BuildContext context, String imagePath) {
     );
   }
 }
-

@@ -223,16 +223,22 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 checkInLocation_Info: dataCheckinInfo,
                 customerName:
                     nestedData['saleOrderOrdinary']['customerName'].toString(),
-                weight: nestedData['totalWeight'].toString(),
-                amounts: nestedData['transportAmount'].toString(),
-                pallet: nestedData['palletAmount'].toString(),
+                // ignore: unnecessary_null_comparison
+                weight: (nestedData['totalWeight'] == null)
+                    ? '0'
+                    : nestedData['totalWeight'].toString(),
+                amounts: (nestedData['transportAmount'] == null)
+                    ? '0'
+                    : nestedData['transportAmount'].toString(),
+                     pallet: (nestedData['palletAmount'] == null)
+                    ? '0'
+                    : nestedData['palletAmount'].toString(),
                 detail: nestedData['saleOrderOrdinary']['priceData']['unitSelector']
                     .toString(),
                 contactName: nestedData['saleOrderOrdinary']['customer']
                         ['contactPoint'][0]['name']
                     .toString(),
-                contactTel: nestedData['saleOrderOrdinary']['customer']
-                        ['contactPoint'][0]['contact']
+                contactTel: nestedData['saleOrderOrdinary']['customer']['contactPoint'][0]['contact']
                     .toString(),
                 inTheNameOf:
                     nestedData['saleOrderOrdinary']['customerName'].toString(),
@@ -292,21 +298,25 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 checkInLocation_Info: dataCheckinInfo,
                 customerName:
                     nestedData['saleOrderContainer']['customerName'].toString(),
-                weight: nestedData['totalWeight'].toString(),
-                amounts: nestedData['transportAmount'].toString(),
-                pallet: nestedData['palletAmount'].toString(),
+                weight: (nestedData['totalWeight'] == null)
+                    ? '0'
+                    : nestedData['totalWeight'].toString(),
+                amounts: (nestedData['transportAmount'] == null)
+                    ? '0'
+                    : nestedData['transportAmount'].toString(),
+                pallet: (nestedData['palletAmount'] == null)
+                    ? '0'
+                    : nestedData['palletAmount'].toString(),
                 detail: nestedData['saleOrderContainer']['priceData']['unitSelector']
                     .toString(),
                 contactName: nestedData['saleOrderContainer']['customer']
                         ['contactPoint'][0]['name']
                     .toString(),
-                contactTel: nestedData['saleOrderContainer']['customer']
-                        ['contactPoint'][0]['contact']
+                contactTel: nestedData['saleOrderContainer']['customer']['contactPoint'][0]['contact']
                     .toString(),
                 inTheNameOf:
                     nestedData['saleOrderContainer']['customerName'].toString(),
-                collectMoney: nestedData['saleOrderContainer']['optionalData']
-                        ['sourcePayment']
+                collectMoney: nestedData['saleOrderContainer']['optionalData']['sourcePayment']
                     .toString(),
                 distance: (await nestedData['route']) == null || (await nestedData['route']).isEmpty
                     ? 'ไม่ได้ระบุ'
@@ -380,7 +390,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             "jobOrderNumber": event.getJoNumber,
             "type": event.type,
             "additionalStatus": {
-              "hasFinished": event.hasFinished,
+              "hasFinished": false,
               "hasPickedOverTime": event.hasPickedOverTime,
               "hasDeliveredOverTime": event.hasDeliveredOverTime
             },

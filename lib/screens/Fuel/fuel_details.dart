@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/ETC/curency.dart';
 import 'package:meechoke_project/bloc/Fuel/fuel_bloc.dart';
 import 'package:meechoke_project/screens/Fuel/fill_form.dart';
 import 'package:page_transition/page_transition.dart';
@@ -354,7 +355,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                         width: 30,
                                       ),
                                       Text(
-                                        state.fuelInfo.creditRemains,
+                                        formatNumber(state.fuelInfo.creditRemains),
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       )

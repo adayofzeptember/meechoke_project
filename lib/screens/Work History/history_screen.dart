@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/ETC/curency.dart';
 import 'package:meechoke_project/bloc/HistoryWork/history_work_bloc.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 
@@ -400,7 +401,7 @@ class _History_PageState extends State<History_Page> {
                                                     const EdgeInsets.fromLTRB(
                                                         12, 8, 12, 8),
                                                 child: Text(
-                                                  '${state.workhistory_list[index].allowance} บาท',
+                                                  '${formatNumber(state.workhistory_list[index].allowance)} บาท',
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       color: Colors.green,
