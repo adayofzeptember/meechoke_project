@@ -212,7 +212,7 @@ void showFinishDialog(BuildContext context, String joNumber) {
             onPressed: () {
               // Navigator.pop(context);
               context.read<JobsBloc>().add(Action_Status(
-                  getStatus: 'เสร็จงาน',
+                  getStatus: 'จบงาน',
                   context: context,
                   getJONumber: joNumber));
               // context.read<JobsBloc>().add(FinishTheJob(
