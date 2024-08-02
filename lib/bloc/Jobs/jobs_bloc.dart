@@ -38,7 +38,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
           status: 0,
         ));
         final response = await dio.get(
-          api_url_v1 + "get-driver-job/new",
+          api_url_v1 + "get-driver-job/new?isMobile=true",
           options: Options(headers: {
             "Authorization": "Bearer $tokenAuth",
           }),
@@ -97,7 +97,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
           status2: 0,
         ));
         final response = await dio.get(
-          api_url_v1 + "get-driver-job/current",
+          api_url_v1 + "get-driver-job/current?isMobile=true",
           options: Options(headers: {
             "Authorization": "Bearer $tokenAuth",
           }),
@@ -119,6 +119,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 ));
               }
             }
+
             dataCurrentJobs.add(
               Jobs_List_Data(
                 currentStatus: await elements['currentStatus'] ?? '',

@@ -28,7 +28,7 @@ Future<void> SuccessMessage_Dialog(
                   Text(
                     message,
                     style: TextStyle(
-                        color: Colors.green,
+                        color: const Color.fromARGB(255, 107, 201, 110),
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   )

@@ -233,7 +233,7 @@ class NewJobs_Screen extends StatelessWidget {
                                                                   'assets/images/pick_up.svg',
                                                                 )
                                                               : SvgPicture
-                                                                  .asset(
+                                                                  .asset( 
                                                                   'assets/images/drop.svg',
                                                                 ),
                                                           SizedBox(
@@ -260,7 +260,7 @@ class NewJobs_Screen extends StatelessWidget {
                                                                   SizedBox(
                                                                     width: 5,
                                                                   ),
-                                                                    SizedBox(
+                                                                  SizedBox(
                                                                     width: MediaQuery.of(context)
                                                                             .size
                                                                             .width *
@@ -272,16 +272,14 @@ class NewJobs_Screen extends StatelessWidget {
                                                                           .checkin_location[
                                                                               indexLocation]
                                                                           .point,
-                                                                          overflow:
+                                                                      overflow:
                                                                           TextOverflow
                                                                               .ellipsis,
                                                                       style: TextStyle(
-                                                                          decoration:
-                                                                              TextDecoration
-                                                                                  .underline,
-                                                                          decorationColor:
-                                                                              Colors
-                                                                                  .blue,
+                                                                          decoration: TextDecoration
+                                                                              .underline,
+                                                                          decorationColor: Colors
+                                                                              .blue,
                                                                           color: Colors
                                                                               .blue,
                                                                           fontWeight:
