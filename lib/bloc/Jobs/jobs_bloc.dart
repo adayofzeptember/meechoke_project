@@ -455,54 +455,6 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
       }
     });
 
-    on<FinishTheJob>((event, emit) async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? tokenAuth = prefs.getString('userToken');
-
-      Map<String, dynamic> reportJsonData = {
-        "jobOrderNumber": event.getJoNumber,
-        "type": event.type,
-        "additionalStatus": {
-          "hasFinished": true,
-          "hasPickedOverTime": false,
-          "hasDeliveredOverTime": false
-        },
-      };
-
-      try {
-        final response = await dio.patch(api_url_v1 + "job-action-checkpoint",
-            options: Options(headers: {
-              "Authorization": "Bearer $tokenAuth",
-            }),
-            data: reportJsonData);
-
-        if (response.statusCode == 200) {
-          emit(state.copyWith(
-            count: 0,
-          ));
-          SuccessMessage_Dialog(event.context, 'จบงานแล้ว', 'จบงาน');
-        } else {
-          Fluttertoast.showToast(
-              msg: "เกิดข้อผิดพลาด",
-              toastLength: Toast.LENGTH_LONG,
-              gravity: ToastGravity.SNACKBAR,
-              timeInSecForIosWeb: 2,
-              backgroundColor: const Color.fromARGB(255, 133, 133, 133),
-              textColor: Colors.white,
-              fontSize: 20);
-        }
-      } catch (e) {
-        Fluttertoast.showToast(
-            msg: "${e}",
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.SNACKBAR,
-            timeInSecForIosWeb: 2,
-            backgroundColor: const Color.fromARGB(255, 133, 133, 133),
-            textColor: Colors.white,
-            fontSize: 20);
-      }
-    });
-
     // on<FinishTheJob>((event, emit) async {
     //   SharedPreferences prefs = await SharedPreferences.getInstance();
     //   String? tokenAuth = prefs.getString('userToken');
@@ -550,6 +502,44 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
     //         fontSize: 20);
     //   }
     // });
+    on<Action_Finish>((event, emit) async {
+      emit(state.copyWith(
+        isLoading: true,
+      ));
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? tokenAuth = prefs.getString('userToken');
+
+      try {
+        final response = await dio.patch(
+          api_url_v1 +
+              "job-action-status?status=${event.getStatus}&jobOrderNumber=${event.getJONumber}",
+          options: Options(headers: {
+            "Authorization": "Bearer $tokenAuth",
+          }),
+        );
+
+        var responsePrint = response.data['data'];
+        print(responsePrint.toString());
+
+        if (response.statusCode == 200) {
+          emit(state.copyWith(
+            isLoading: false,
+          ));
+          SuccessMessage_Dialog(event.context, 'จบงานแล้ว', 'จบงาน');
+          print('ok');
+        } else {
+          emit(state.copyWith(
+            isLoading: false,
+          ));
+          print('error status != 200');
+        }
+      } catch (e) {
+        emit(state.copyWith(
+          isLoading: false,
+        ));
+        print("Exception Try: $e");
+      }
+    });
 //! รับงาน ออกรถ
     on<Action_Status>((event, emit) async {
       emit(state.copyWith(
@@ -575,7 +565,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             isLoading: false,
           ));
           Fluttertoast.showToast(
-              msg: "${event.getStatus} หมายเลข: ${event.getJONumber} แล้ว",
+              msg: "${event.getStatus} งานหมายเลข: ${event.getJONumber} แล้ว",
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.SNACKBAR,
               timeInSecForIosWeb: 2,

@@ -260,24 +260,33 @@ class NewJobs_Screen extends StatelessWidget {
                                                                   SizedBox(
                                                                     width: 5,
                                                                   ),
-                                                                  Text(
-                                                                    state
-                                                                        .newjobs_list[
-                                                                            index]
-                                                                        .checkin_location[
-                                                                            indexLocation]
-                                                                        .point,
-                                                                    style: TextStyle(
-                                                                        decoration:
-                                                                            TextDecoration
-                                                                                .underline,
-                                                                        decorationColor:
-                                                                            Colors
-                                                                                .blue,
-                                                                        color: Colors
-                                                                            .blue,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
+                                                                    SizedBox(
+                                                                    width: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width *
+                                                                        0.5,
+                                                                    child: Text(
+                                                                      state
+                                                                          .newjobs_list[
+                                                                              index]
+                                                                          .checkin_location[
+                                                                              indexLocation]
+                                                                          .point,
+                                                                          overflow:
+                                                                          TextOverflow
+                                                                              .ellipsis,
+                                                                      style: TextStyle(
+                                                                          decoration:
+                                                                              TextDecoration
+                                                                                  .underline,
+                                                                          decorationColor:
+                                                                              Colors
+                                                                                  .blue,
+                                                                          color: Colors
+                                                                              .blue,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
+                                                                    ),
                                                                   )
                                                                 ],
                                                               ),
