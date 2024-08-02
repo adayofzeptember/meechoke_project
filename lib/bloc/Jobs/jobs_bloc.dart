@@ -230,7 +230,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 amounts: (nestedData['transportAmount'] == null)
                     ? '0'
                     : nestedData['transportAmount'].toString(),
-                     pallet: (nestedData['palletAmount'] == null)
+                pallet: (nestedData['palletAmount'] == null)
                     ? '0'
                     : nestedData['palletAmount'].toString(),
                 detail: nestedData['saleOrderOrdinary']['priceData']['unitSelector']
@@ -321,7 +321,10 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 distance: (await nestedData['route']) == null || (await nestedData['route']).isEmpty
                     ? 'ไม่ได้ระบุ'
                     : await nestedData['route']['distance'].toString(),
-                remark: (await nestedData['saleOrderContainer']['remark']['so']) == null || (await nestedData['saleOrderOrdinary']['remark']['so'] == "null") ? '-' : await nestedData['saleOrderOrdinary']['remark']['so'].toString(),
+                 remark: (await nestedData['saleOrderContainer']['remark']['so']) == null ||
+                        (await nestedData['saleOrderContainer']['remark']['so'] == "null")
+                    ? '-'
+                    : await nestedData['saleOrderContainer']['remark']['so'].toString(),
                 dod: (await nestedData['saleOrderContainer']['remark']['dod']) == null || (await nestedData['saleOrderContainer']['remark']['dod'] == "null") ? '-' : await nestedData['saleOrderContainer']['remark']['dod'].toString());
 
             ;

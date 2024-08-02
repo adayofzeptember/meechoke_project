@@ -236,7 +236,7 @@ class _Job_ProcessState extends State<Job_Process> {
                           ),
                         ),
                         onPressed: () {
-                          print(state.job_info.current_status);
+                     
                           openImageDialog(context);
                         },
                         child: Padding(
@@ -308,6 +308,13 @@ class _Job_ProcessState extends State<Job_Process> {
                                       null;
                                     }
                                     //! ส่งเปลี่ยนสถานะ
+                                    // print(state
+                                    //     .job_info
+                                    //     .checkInLocation_Info[state.count]
+                                    //     .checkinCategory);
+
+                                    print('new '+state.job_info.currentLocation
+                                        .currentLocation_checkinCategory);
                                     context.read<JobsBloc>().add(
                                         Upload_Pics_Jobs(
                                             getCurrentLocationID: state
@@ -318,13 +325,8 @@ class _Job_ProcessState extends State<Job_Process> {
                                             hasFinished: false,
                                             hasDeliveredOverTime: false,
                                             hasPickedOverTime: false,
-                                            type:
-                                                state
-                                                    .job_info
-                                                    .checkInLocation_Info[
-                                                        state.count]
-                                                    .checkinCategory
-                                                    .toString(),
+                                            type: state.job_info.currentLocation
+                                                .currentLocation_checkinCategory,
                                             context: context,
                                             getJoNumber: state
                                                 .job_info.docNumber
