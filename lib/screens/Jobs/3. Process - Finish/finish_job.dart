@@ -86,7 +86,7 @@ class FinishJob_Screen extends StatelessWidget {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(5))),
                               child: Padding(
-                                padding: const EdgeInsets.fromLTRB(7,3,7,3),
+                                padding: const EdgeInsets.fromLTRB(7, 3, 7, 3),
                                 child: Text(
                                   "จบงาน",
                                   style: TextStyle(
@@ -211,11 +211,15 @@ void showFinishDialog(BuildContext context, String joNumber) {
             ),
             onPressed: () {
               // Navigator.pop(context);
-              context.read<JobsBloc>().add(FinishTheJob(
-                  check: '',
-                  type: 'เสร็จงาน',
+              context.read<JobsBloc>().add(Action_Status(
+                  getStatus: 'เสร็จงาน',
                   context: context,
-                  getJoNumber: joNumber));
+                  getJONumber: joNumber));
+              // context.read<JobsBloc>().add(FinishTheJob(
+              //     check: '',
+              //     type: 'เสร็จงาน',
+              //     context: context,
+              //     getJoNumber: joNumber));
             },
             child: Text(
               'ยืนยัน',
