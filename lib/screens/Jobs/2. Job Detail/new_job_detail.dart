@@ -138,7 +138,8 @@ class New_JobDetail extends StatelessWidget {
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                     color: Colors.white,
-                                                    fontWeight: FontWeight.bold),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
                                             ),
                                           ),
@@ -276,7 +277,8 @@ class New_JobDetail extends StatelessWidget {
                                                 overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                     color: Colors.black,
-                                                    fontWeight: FontWeight.bold),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
                                             ),
                                             SizedBox(
@@ -311,7 +313,12 @@ class New_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              state.job_info.detail,
+                                                         (state.job_info.detail
+                                                          .toString() ==
+                                                      'null'
+                                                  ? '-'
+                                                  : state.job_info.detail
+                                                      .toString()),
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),
@@ -320,7 +327,12 @@ class New_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              state.job_info.contactName,
+                                              (state.job_info.contactName
+                                                          .toString() ==
+                                                      'null'
+                                                  ? '-'
+                                                  : state.job_info.contactName
+                                                      .toString()),
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),
@@ -329,7 +341,12 @@ class New_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              state.job_info.contactTel,
+                                              (state.job_info.contactTel
+                                                          .toString() ==
+                                                      'null'
+                                                  ? '-'
+                                                  : state.job_info.contactTel
+                                                      .toString()),
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),
@@ -347,7 +364,8 @@ class New_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              formatNumber(state.job_info.collectMoney),
+                                              formatNumber(
+                                                  state.job_info.collectMoney),
                                               style: TextStyle(
                                                   color: Colors.red,
                                                   fontWeight: FontWeight.bold),
@@ -368,14 +386,14 @@ class New_JobDetail extends StatelessWidget {
                                     SizedBox(
                                       height: 30,
                                     ),
-          
+
                                     //?
                                     Container(
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(20)),
-                                          color:
-                                              Color.fromARGB(255, 234, 240, 255)),
+                                          color: Color.fromARGB(
+                                              255, 234, 240, 255)),
                                       child: Padding(
                                         padding: const EdgeInsets.fromLTRB(
                                             15, 20, 15, 20),
@@ -386,14 +404,20 @@ class New_JobDetail extends StatelessWidget {
                                                 0)
                                             ? ListView.builder(
                                                 primary: true,
-                                                itemCount: state.job_info
-                                                    .checkInLocation_Info.length,
+                                                itemCount: state
+                                                    .job_info
+                                                    .checkInLocation_Info
+                                                    .length,
                                                 shrinkWrap: true,
                                                 physics:
                                                     const ClampingScrollPhysics(),
                                                 itemBuilder: (context, index) {
-                                                     DateTime dateTime =
-                                                      DateTime.parse(state.job_info.checkInLocation_Info[index].date);
+                                                  DateTime dateTime =
+                                                      DateTime.parse(state
+                                                          .job_info
+                                                          .checkInLocation_Info[
+                                                              index]
+                                                          .date);
 
                                                   String formattedDate =
                                                       ThaiDateFormat(
@@ -417,10 +441,12 @@ class New_JobDetail extends StatelessWidget {
                                                                               index]
                                                                           .checkinCategory ==
                                                                       "จุดรับตู้")
-                                                              ? SvgPicture.asset(
+                                                              ? SvgPicture
+                                                                  .asset(
                                                                   'assets/images/pick_up.svg',
                                                                 )
-                                                              : SvgPicture.asset(
+                                                              : SvgPicture
+                                                                  .asset(
                                                                   'assets/images/drop.svg',
                                                                 ),
                                                           SizedBox(
@@ -437,11 +463,7 @@ class New_JobDetail extends StatelessWidget {
                                                               Row(
                                                                 children: [
                                                                   Text(
-                                                                      state
-                                                                              .job_info
-                                                                              .checkInLocation_Info[
-                                                                                  index]
-                                                                              .checkinCategory +
+                                                                      state.job_info.checkInLocation_Info[index].checkinCategory +
                                                                           ":",
                                                                       style: TextStyle(
                                                                           color: Palette
@@ -451,8 +473,8 @@ class New_JobDetail extends StatelessWidget {
                                                                   SizedBox(
                                                                     width: 5,
                                                                   ),
-                                                               SizedBox(
-                                                                     width: MediaQuery.of(context)
+                                                                  SizedBox(
+                                                                    width: MediaQuery.of(context)
                                                                             .size
                                                                             .width *
                                                                         0.5,
@@ -462,14 +484,11 @@ class New_JobDetail extends StatelessWidget {
                                                                           .checkInLocation_Info[
                                                                               index]
                                                                           .point,
-                                                                          
                                                                       style: TextStyle(
-                                                                          decoration:
-                                                                              TextDecoration
-                                                                                  .underline,
-                                                                          decorationColor:
-                                                                              Colors
-                                                                                  .blue,
+                                                                          decoration: TextDecoration
+                                                                              .underline,
+                                                                          decorationColor: Colors
+                                                                              .blue,
                                                                           color: Colors
                                                                               .blue,
                                                                           fontWeight:
@@ -487,12 +506,11 @@ class New_JobDetail extends StatelessWidget {
                                                                       TextOverflow
                                                                           .fade,
                                                                   style: TextStyle(
-                                                                      color: Color
-                                                                          .fromARGB(
-                                                                              255,
-                                                                              133,
-                                                                              133,
-                                                                              133),
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          133,
+                                                                          133,
+                                                                          133),
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .bold)),
@@ -507,10 +525,11 @@ class New_JobDetail extends StatelessWidget {
                                     SizedBox(
                                       height: 30,
                                     ),
-          
+
                                     //*
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         Column(
                                           crossAxisAlignment:
@@ -553,7 +572,7 @@ class New_JobDetail extends StatelessWidget {
                                         SizedBox(
                                           width: 65,
                                         ),
-          
+
                                         //!
                                         Column(
                                           crossAxisAlignment:
@@ -593,7 +612,7 @@ class New_JobDetail extends StatelessWidget {
                                     SizedBox(
                                       height: 10,
                                     ),
-          
+
                                     Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,

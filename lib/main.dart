@@ -111,7 +111,6 @@ class _StartPageState extends State<StartPage> {
   void initState() {
     _Permission();
     _Pause_And_Go();
-
     super.initState();
   }
 
