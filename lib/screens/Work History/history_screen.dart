@@ -154,7 +154,8 @@ class _History_PageState extends State<History_Page> {
                     child: DropdownButtonFormField2<String>(
                       isExpanded: false,
                       decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 16),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                         ),
@@ -222,10 +223,11 @@ class _History_PageState extends State<History_Page> {
                       value: DateTime.now()
                           .year
                           .toString(), // Set default value to current year
-        
+
                       isExpanded: false,
                       decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 16),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                         ),
@@ -259,7 +261,7 @@ class _History_PageState extends State<History_Page> {
                             .add(GetDate(getYear: value.toString()));
                         context.read<HistoryWorkBloc>().add(LoadHistoryWorks());
                       },
-        
+
                       buttonStyleData: const ButtonStyleData(
                         padding: EdgeInsets.only(right: 8),
                       ),
@@ -308,6 +310,14 @@ class _History_PageState extends State<History_Page> {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
+                } else if (state.workhistory_list.length == 0) {
+                  return Center(
+                      child: Text(
+                    'ไม่มีข้อมูลประจำเดือน ${state.month}/${state.year}',
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: const Color.fromARGB(255, 62, 62, 62)),
+                  ));
                 } else if (state.status == 'error') {
                   return Column(
                     children: [
@@ -326,7 +336,7 @@ class _History_PageState extends State<History_Page> {
                     ],
                   );
                 }
-        
+
                 return ListView.builder(
                   primary: true,
                   itemCount: state.workhistory_list.length,
@@ -359,7 +369,8 @@ class _History_PageState extends State<History_Page> {
                             context.read<JobsBloc>().add(Load_Job_Info(
                                 checkPage: 'cuurent_job',
                                 context: context,
-                                joNumber: state.workhistory_list[index].doc_number
+                                joNumber: state
+                                    .workhistory_list[index].doc_number
                                     .toString()));
                           },
                           child: Stack(
@@ -372,12 +383,14 @@ class _History_PageState extends State<History_Page> {
                                 top: 10,
                                 left: 25,
                                 child: Container(
-                                  width: MediaQuery.of(context).size.width * 0.8,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.8,
                                   child: Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 15, 10, 15),
+                                    padding: const EdgeInsets.fromLTRB(
+                                        10, 15, 10, 15),
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
@@ -394,8 +407,9 @@ class _History_PageState extends State<History_Page> {
                                             ),
                                             Container(
                                               decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(20))),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(20))),
                                               child: Padding(
                                                 padding:
                                                     const EdgeInsets.fromLTRB(
