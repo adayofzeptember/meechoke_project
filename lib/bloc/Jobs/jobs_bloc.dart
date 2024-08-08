@@ -222,6 +222,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 docNumber: nestedData['documentNumber'].toString(),
                 docStatus: nestedData['documentStatus'].toString(),
                 checkInLocation_Info: dataCheckinInfo,
+                productName: nestedData['saleOrderOrdinary']['productName'],
                 customerName:
                     nestedData['saleOrderOrdinary']['customerName'].toString(),
                 // ignore: unnecessary_null_comparison
@@ -239,21 +240,22 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 contactName: nestedData['saleOrderOrdinary']['customer']
                         ['contactPoint'][0]['name']
                     .toString(),
-                contactTel: nestedData['saleOrderOrdinary']['customer']['contactPoint'][0]['contact']
+                contactTel: nestedData['saleOrderOrdinary']['customer']
+                        ['contactPoint'][0]['contact']
                     .toString(),
                 inTheNameOf:
                     nestedData['saleOrderOrdinary']['customerName'].toString(),
-                collectMoney: nestedData['saleOrderOrdinary']['optionalData']['sourcePayment']
+                collectMoney: nestedData['saleOrderOrdinary']['optionalData']
+                        ['sourcePayment']
                     .toString(),
                 // distance: nestedData['route']['distance'].toString() ,
 
-                distance: (await nestedData['route']) == null || (await nestedData['route']).isEmpty
-                    ? 'ไม่ได้ระบุ'
-                    : await nestedData['route']['distance'].toString(),
-                remark: (await nestedData['saleOrderOrdinary']['remark']['so']) == null ||
-                        (await nestedData['saleOrderOrdinary']['remark']['so'] == "null")
-                    ? '-'
-                    : await nestedData['saleOrderOrdinary']['remark']['so'].toString(),
+                allowanceDriver: (await nestedData['allowanceRate']) == null ||
+                        (await nestedData['allowanceRate']== [])
+                    ? '0.00'
+                    : await nestedData['allowanceRate']['mainDriverFee'].toString(),
+                distance: (await nestedData['route']) == null || (await nestedData['route']).isEmpty ? 'ไม่ได้ระบุ' : await nestedData['route']['distance'].toString(),
+                remark: (await nestedData['saleOrderOrdinary']['remark']['so']) == null || (await nestedData['saleOrderOrdinary']['remark']['so'] == "null") ? '-' : await nestedData['saleOrderOrdinary']['remark']['so'].toString(),
                 dod: (await nestedData['saleOrderOrdinary']['remark']['dod']) == null || (await nestedData['saleOrderOrdinary']['remark']['dod'] == "null") ? '-' : await nestedData['saleOrderOrdinary']['remark']['dod'].toString());
 
             ;
@@ -297,6 +299,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 docNumber: nestedData['documentNumber'].toString(),
                 docStatus: nestedData['documentStatus'].toString(),
                 checkInLocation_Info: dataCheckinInfo,
+                productName: nestedData['saleOrderContainer']['productName'],
                 customerName:
                     nestedData['saleOrderContainer']['customerName'].toString(),
                 weight: (nestedData['totalWeight'] == null)
@@ -313,12 +316,18 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 contactName: nestedData['saleOrderContainer']['customer']
                         ['contactPoint'][0]['name']
                     .toString(),
-                contactTel: nestedData['saleOrderContainer']['customer']['contactPoint'][0]['contact']
+                contactTel: nestedData['saleOrderContainer']['customer']
+                        ['contactPoint'][0]['contact']
                     .toString(),
                 inTheNameOf:
                     nestedData['saleOrderContainer']['customerName'].toString(),
                 collectMoney: nestedData['saleOrderContainer']['optionalData']['sourcePayment']
                     .toString(),
+
+                allowanceDriver: (await nestedData['allowanceRate']) == null ||
+                        (await nestedData['allowanceRate']== [])
+                    ? '0.00'
+                    : await nestedData['allowanceRate']['mainDriverFee'].toString(),
                 distance: (await nestedData['route']) == null || (await nestedData['route']).isEmpty
                     ? 'ไม่ได้ระบุ'
                     : await nestedData['route']['distance'].toString(),

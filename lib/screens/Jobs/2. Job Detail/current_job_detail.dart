@@ -330,7 +330,7 @@ class Current_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              '- on hold -',
+                                              state.job_info.productName,
                                               overflow: TextOverflow.fade,
                                               style: TextStyle(
                                                   color: Colors.black,
@@ -394,7 +394,8 @@ class Current_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              formatNumber(state.job_info.collectMoney),
+                                              formatNumber(
+                                                  state.job_info.collectMoney),
                                               style: TextStyle(
                                                   color: Colors.red,
                                                   fontWeight: FontWeight.bold),
@@ -503,7 +504,7 @@ class Current_JobDetail extends StatelessWidget {
                                                                     width: 5,
                                                                   ),
                                                                   SizedBox(
-                                                                     width: MediaQuery.of(context)
+                                                                    width: MediaQuery.of(context)
                                                                             .size
                                                                             .width *
                                                                         0.5,
@@ -513,14 +514,11 @@ class Current_JobDetail extends StatelessWidget {
                                                                           .checkInLocation_Info[
                                                                               index]
                                                                           .point,
-                                                                          
                                                                       style: TextStyle(
-                                                                          decoration:
-                                                                              TextDecoration
-                                                                                  .underline,
-                                                                          decorationColor:
-                                                                              Colors
-                                                                                  .blue,
+                                                                          decoration: TextDecoration
+                                                                              .underline,
+                                                                          decorationColor: Colors
+                                                                              .blue,
                                                                           color: Colors
                                                                               .blue,
                                                                           fontWeight:
@@ -622,7 +620,7 @@ class Current_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              '0.00',
+                                              formatNumber(state.job_info.allowanceDriver),
                                               overflow: TextOverflow.fade,
                                               style: TextStyle(
                                                   color: Colors.black,

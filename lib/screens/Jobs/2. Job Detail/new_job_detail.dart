@@ -285,7 +285,7 @@ class New_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              '- on hold -',
+                                              state.job_info.productName,
                                               overflow: TextOverflow.fade,
                                               style: TextStyle(
                                                   color: Colors.black,
@@ -313,7 +313,7 @@ class New_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                                         (state.job_info.detail
+                                              (state.job_info.detail
                                                           .toString() ==
                                                       'null'
                                                   ? '-'
@@ -590,7 +590,7 @@ class New_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              '0.00',
+                                              formatNumber(state.job_info.allowanceDriver),
                                               overflow: TextOverflow.fade,
                                               style: TextStyle(
                                                   color: Colors.black,

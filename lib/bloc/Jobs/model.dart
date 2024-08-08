@@ -19,6 +19,7 @@ class Job_Detail {
   String? docStatus;
   String? customerName;
   String? weight;
+  String? productName;
   String? amounts;
   String? pallet;
   String? detail;
@@ -27,6 +28,7 @@ class Job_Detail {
   String? inTheNameOf;
   String? collectMoney;
   String? distance;
+  String? allowanceDriver;
   String? remark;
   String? dod;
   int? checkLocationID;
@@ -38,9 +40,11 @@ class Job_Detail {
       {this.currentLocation,
       //*
       this.docNumber,
+      this.allowanceDriver,
       this.docStatus,
       this.customerName,
       this.weight,
+      this.productName,
       this.amounts,
       this.pallet,
       this.detail,
