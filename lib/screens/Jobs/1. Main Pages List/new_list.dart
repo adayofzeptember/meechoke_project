@@ -86,6 +86,11 @@ class NewJobs_Screen extends StatelessWidget {
                               context: context,
                               joNumber: state.newjobs_list[index].jobNumber
                                   .toString()));
+
+                          context.read<JobsBloc>().add(Get_Allowance(
+                              context: context,
+                              getJONumber: state.newjobs_list[index].jobNumber
+                                  .toString()));
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(bottom: 10),
@@ -233,7 +238,7 @@ class NewJobs_Screen extends StatelessWidget {
                                                                   'assets/images/pick_up.svg',
                                                                 )
                                                               : SvgPicture
-                                                                  .asset( 
+                                                                  .asset(
                                                                   'assets/images/drop.svg',
                                                                 ),
                                                           SizedBox(

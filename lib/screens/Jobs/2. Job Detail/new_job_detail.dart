@@ -590,7 +590,7 @@ class New_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              formatNumber(state.job_info.allowanceDriver),
+                                              formatNumber(state.allowance.toString()),
                                               overflow: TextOverflow.fade,
                                               style: TextStyle(
                                                   color: Colors.black,
@@ -600,7 +600,7 @@ class New_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              '0.00',
+                                               formatNumber(state.advance.toString()),
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),

@@ -25,6 +25,8 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             currentjobs_list: [],
             status: 0,
             status2: 0,
+            advance: '',
+            allowance: '',
             count: 0,
             status3Detail: 0,
           ),
@@ -243,19 +245,19 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 contactTel: nestedData['saleOrderOrdinary']['customer']
                         ['contactPoint'][0]['contact']
                     .toString(),
-                inTheNameOf:
-                    nestedData['saleOrderOrdinary']['customerName'].toString(),
-                collectMoney: nestedData['saleOrderOrdinary']['optionalData']
-                        ['sourcePayment']
+                inTheNameOf: nestedData['saleOrderOrdinary']['basicData']['remark']
                     .toString(),
+                collectMoney: (nestedData['saleOrderOrdinary']['optionalData']
+                            ['sourcePayment']) ==
+                        null
+                    ? nestedData['saleOrderOrdinary']['optionalData']['destinationPayment']
+                        .toString()
+                    : nestedData['saleOrderOrdinary']['optionalData']['sourcePayment'].toString(),
                 // distance: nestedData['route']['distance'].toString() ,
 
                 //allowanceDriver:response.data['allowanceRate'][0]['mainDriverFee'].toString(),
 
-                allowanceDriver: (await response.data['allowanceRate']) == null ||
-                        (await response.data['allowanceRate'] == [])
-                    ? '0'
-                    : await response.data['allowanceRate'][0]['mainDriverFee'].toString(),
+                allowanceDriver: (await response.data['allowanceRate']) == null || (await response.data['allowanceRate'] == []) ? '0' : await response.data['allowanceRate'][0]['mainDriverFee'].toString(),
                 distance: (await nestedData['route']) == null || (await nestedData['route']).isEmpty ? 'ไม่ได้ระบุ' : await nestedData['route']['distance'].toString(),
                 remark: (await nestedData['saleOrderOrdinary']['remark']['so']) == null || (await nestedData['saleOrderOrdinary']['remark']['so'] == "null") ? '-' : await nestedData['saleOrderOrdinary']['remark']['so'].toString(),
                 dod: (await nestedData['saleOrderOrdinary']['remark']['dod']) == null || (await nestedData['saleOrderOrdinary']['remark']['dod'] == "null") ? '-' : await nestedData['saleOrderOrdinary']['remark']['dod'].toString());
@@ -313,7 +315,8 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 pallet: (nestedData['palletAmount'] == null)
                     ? '0'
                     : nestedData['palletAmount'].toString(),
-                detail: nestedData['saleOrderContainer']['priceData']['unitSelector']
+                detail: nestedData['saleOrderContainer']['priceData']
+                        ['unitSelector']
                     .toString(),
                 contactName: nestedData['saleOrderContainer']['customer']
                         ['contactPoint'][0]['name']
@@ -321,14 +324,14 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 contactTel: nestedData['saleOrderContainer']['customer']
                         ['contactPoint'][0]['contact']
                     .toString(),
-                inTheNameOf:
-                    nestedData['saleOrderContainer']['customerName'].toString(),
-                collectMoney: nestedData['saleOrderContainer']['optionalData']['sourcePayment']
+                inTheNameOf: nestedData['saleOrderContainer']['basicData']['remark']
                     .toString(),
-                allowanceDriver: (await response.data['allowanceRate']) == null ||
-                        (await response.data['allowanceRate'] == [])
-                    ? '0'
-                    : await response.data['allowanceRate'][0]['mainDriverFee'].toString(),
+                collectMoney: (nestedData['saleOrderContainer']['optionalData']
+                            ['sourcePayment']) ==
+                        null
+                    ? nestedData['saleOrderContainer']['optionalData']['destinationPayment'].toString()
+                    : nestedData['saleOrderContainer']['optionalData']['sourcePayment'].toString(),
+                allowanceDriver: (await response.data['allowanceRate']) == null || (await response.data['allowanceRate'] == []) ? '0' : await response.data['allowanceRate'][0]['mainDriverFee'].toString(),
 
                 // allowanceDriver: (await nestedData['allowanceRate']) == [] ||
                 //         (await nestedData['allowanceRate']== [])
@@ -353,6 +356,51 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
         emit(state.copyWith(
           status3Detail: 2,
         ));
+      }
+    });
+
+    on<Get_Allowance>((event, emit) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? tokenAuth = prefs.getString('userToken');
+      String? driverID = prefs.getString('registeredDriverId');
+
+      try {
+        final responseAllowance = await dio.get(
+          //api_url_v1 + "get-allowance?jobOrderNumber=JO67/000101&registeredDriverId=323&isMobile=true",
+
+          api_url_v1 +
+              "get-allowance?jobOrderNumber=${event.getJONumber}&registeredDriverId=${driverID}&isMobile=true",
+          options: Options(
+            headers: {
+              "Authorization": "Bearer $tokenAuth",
+            },
+          ),
+        );
+        final responseAdvance = await dio.get(
+          //api_url_v1 + "get-allowance?jobOrderNumber=JO67/000101&registeredDriverId=323&isMobile=true",
+
+          api_url_v1 +
+              "get-advance?jobOrderNumber=${event.getJONumber}&registeredDriverId=${driverID}&isMobile=true",
+          options: Options(
+            headers: {
+              "Authorization": "Bearer $tokenAuth",
+            },
+          ),
+        );
+        // var x = response.data['data'];
+        // print(x.toString());
+        emit(state.copyWith(
+          allowance:
+              (responseAllowance.data['data']['allowance'].toString()) == 'null'
+                  ? '0'
+                  : responseAllowance.data['data']['allowance'].toString(),
+          advance:
+              (responseAdvance.data['data']['advance'].toString()) == 'null'
+                  ? '0'
+                  : responseAdvance.data['data']['advance'].toString(),
+        ));
+      } catch (e) {
+        print(e);
       }
     });
 

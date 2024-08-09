@@ -24,6 +24,13 @@ class Load_Job_Info extends JobsEvent {
       {required this.context, required this.joNumber, required this.checkPage});
 }
 
+class Get_Allowance extends JobsEvent {
+  var context;
+  String getJONumber;
+
+  Get_Allowance({this.context,required  this.getJONumber});
+}
+
 class Action_Finish extends JobsEvent {
   String getJONumber;
   String getStatus;
@@ -32,7 +39,6 @@ class Action_Finish extends JobsEvent {
   Action_Finish(
       {this.context, required this.getJONumber, required this.getStatus});
 }
-
 
 class Action_Status extends JobsEvent {
   String getJONumber;
@@ -48,16 +54,17 @@ class FinishTheJob extends JobsEvent {
   var context;
 
   FinishTheJob(
-      {required this.context, required this.getJoNumber, required this.type, required this.check});
+      {required this.context,
+      required this.getJoNumber,
+      required this.type,
+      required this.check});
 }
-
 
 class Process_Page extends JobsEvent {
   String getJoNumber;
   var context;
 
-  Process_Page(
-      {required this.context, required this.getJoNumber });
+  Process_Page({required this.context, required this.getJoNumber});
 }
 
 class Upload_Pics_Jobs extends JobsEvent {
@@ -67,15 +74,14 @@ class Upload_Pics_Jobs extends JobsEvent {
   List<File>? files;
   bool? hasDeliveredOverTime, hasPickedOverTime, hasFinished;
 
-  Upload_Pics_Jobs({
-    required this.getJoNumber,
-    required this.files,
-    required this.type,
-    required this.getCurrentLocationID,
-    required this.imageFileName,
-    required this.context,
-    this.hasDeliveredOverTime,
-    this.hasPickedOverTime,
-    this.hasFinished
-  });
+  Upload_Pics_Jobs(
+      {required this.getJoNumber,
+      required this.files,
+      required this.type,
+      required this.getCurrentLocationID,
+      required this.imageFileName,
+      required this.context,
+      this.hasDeliveredOverTime,
+      this.hasPickedOverTime,
+      this.hasFinished});
 }
