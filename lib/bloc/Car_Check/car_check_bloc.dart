@@ -19,6 +19,7 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
   CarCheckBloc()
       : super(CarCheckState(
             checkEmpty: '',
+            checkupID: '',
             remainingTime: Duration.zero,
             checkLoad: 0,
             isLoading: false,
@@ -143,7 +144,9 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
           }
           // print('--------' + dataExtCheckupList[2].name.toString());
           emit(state.copyWith(
-              fetched_checkList1: dataExtCheckupList, checkLoadItems: false));
+              fetched_checkList1: dataExtCheckupList,
+              checkLoadItems: false,
+              checkupID: response.data['data'][0]['id'].toString()));
           print('done load');
         } else {
           emit(state.copyWith(checkLoadItems: false));
@@ -349,20 +352,20 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
       if (event.getTypeCheckToStore == 'extCheckupList') {
         emit(state.copyWith(storedExtCheckupList1: event.getExtCheckup_List));
         print(
-            '----------------------CheckupList1-----------------------------');
+            '----------------------CheckupList 1-----------------------------');
         print(jsonEncode(state.storedExtCheckupList1));
         print('-------------------------------------------------------------');
       } else if (event.getTypeCheckToStore == 'extCheckupEquipment') {
         emit(state.copyWith(
             storedExtCheckupEquipment2: event.getExtEqipment_List));
         print(
-            '----------------------CheckupEquipment-----------------------------');
+            '----------------------CheckupEquipment 2-----------------------------');
         print(jsonEncode(state.storedExtCheckupEquipment2));
         print('-------------------------------------------------------------');
       } else {
         emit(state.copyWith(storedExtCheckupSafety3: event.getExtSafety_List));
         print(
-            '----------------------CheckupSafety3-----------------------------');
+            '----------------------CheckupSafety 3-----------------------------');
         print(jsonEncode(state.storedExtCheckupSafety3));
         print('-------------------------------------------------------------');
       }
@@ -370,6 +373,8 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
 
     on<Submit_AllCheckings>((event, emit) async {
       emit(state.copyWith(isLoading: true));
+      print(event.getCheckupID);
+
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
 
@@ -379,9 +384,8 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
           print('employee sends ');
           checkingJsonData = {
             "checkupCarId": event.getCheckupID,
-            //* registered driver
-            "registeredCarId": event.getCarID,
-            "registeredDriverId": event.getDriverID,
+            "registeredCarId": prefs.getString('registeredCarId'),
+            "registeredDriverId": prefs.getString('registeredDriverId'),
             "checkupResult": state.storedExtCheckupList1,
             "equipmentResult": state.storedExtCheckupEquipment2,
             "safetyResult": state.storedExtCheckupSafety3,
@@ -389,13 +393,11 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
         } else {
           print('register driver sends');
           checkingJsonData = {
-            "checkupCarId": 1,
-            //* registered driver
+            "checkupCarId": event.getCheckupID,
             "registeredCarId": prefs.getString('registeredCarId'),
             "registeredDriverId": prefs.getString('registeredDriverId'),
             "checkupResult": state.storedExtCheckupList1,
             "equipmentResult": state.storedExtCheckupEquipment2,
-
             "safetyResult": state.storedExtCheckupSafety3,
           };
         }

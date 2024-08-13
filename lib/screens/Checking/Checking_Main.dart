@@ -93,7 +93,7 @@ class _Check_DailyState extends State<Check_Daily> {
                                               255, 238, 246, 255),
                                           borderRadius: BorderRadius.only(
                                               topLeft: Radius.circular(25),
-                                              topRight: Radius.circular(25))),
+                                              topRight: Radius.circular(25))), 
                                       child: const Padding(
                                         padding:
                                             EdgeInsets.only(top: 8, bottom: 8),
@@ -707,6 +707,7 @@ class _Check_DailyState extends State<Check_Daily> {
                                 ),
                                 GestureDetector(
                                     onTap: () {
+                                      print(state.checkupID.toString());
                                       print('----------------------------');
                                       print(jsonEncode(
                                           state.storedExtCheckupList1));
@@ -736,6 +737,7 @@ class _Check_DailyState extends State<Check_Daily> {
                                       : () {
                                           context.read<CarCheckBloc>().add(
                                               Submit_AllCheckings(
+                                                getCheckupID: state.checkupID.toString(),
                                                   context: context));
                                         },
                                   child: Padding(

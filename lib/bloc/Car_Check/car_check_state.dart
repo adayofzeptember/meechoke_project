@@ -16,6 +16,7 @@ class CarCheckState extends Equatable {
   List<ExtCheckupSafety_Item> storedExtCheckupSafety3;
   int countIndexCheck;
   String typeCheckState;
+  String checkupID;
 
   CarCheckState(
       {required this.fetched_checkList1,
@@ -29,6 +30,7 @@ class CarCheckState extends Equatable {
       required this.typeCheckState,
       required this.checkEmpty,
       required this.isLoading,
+      required this.checkupID,
       required this.storedExtCheckupList1,
       required this.countIndexCheck,
       required this.indexButtonSelect});
@@ -47,6 +49,8 @@ class CarCheckState extends Equatable {
       bool? twty4Check,
       Duration? remainingTime,
       int? toCheckChecklist1,
+        String? checkupID,
+
       List<ExtCheckupList_Item>? storedExtCheckupList1,
       List<ExtCheckupEquipment_Item>? storedExtCheckupEquipment2,
       List<ExtCheckupSafety_Item>? storedExtCheckupSafety3,
@@ -57,6 +61,7 @@ class CarCheckState extends Equatable {
     return CarCheckState(
       twty4Check: twty4Check ?? this.twty4Check,
       isLoading: isLoading ?? this.isLoading,
+      checkupID: checkupID ?? this.checkupID,
       checkLoadItems: checkLoadItems ?? this.checkLoadItems,
       checkEmpty: checkEmpty ?? this.checkEmpty,
       remainingTime: remainingTime ?? this.remainingTime,
@@ -87,6 +92,7 @@ class CarCheckState extends Equatable {
         storedExtCheckupEquipment2,
         storedExtCheckupList1,
         countIndexCheck,
+        checkupID,
         indexButtonSelect,
         remainingTime,
         toCheckChecklist1,
