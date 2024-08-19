@@ -92,8 +92,10 @@ class _Check_ScreenState extends State<Check_Screen> {
                     //     child: CircularProgressIndicator(
                     //       color: Colors.white,
                     //     ),
+                    
                     //   );
                     // }
+              
                     if (state.checkLoadItems == true) {
                       return Center(
                         child: CircularProgressIndicator(

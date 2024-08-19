@@ -34,6 +34,7 @@ class Job_Detail {
   int? checkLocationID;
   String? current_status;
   List<Checkin_Location>? checkInLocation_Info;
+  List<Location_Images>? img_info;
   //*
   Current_Location? currentLocation;
   Job_Detail(
@@ -45,6 +46,7 @@ class Job_Detail {
       this.customerName,
       this.weight,
       this.productName,
+      this.img_info,
       this.amounts,
       this.pallet,
       this.detail,
@@ -60,10 +62,21 @@ class Job_Detail {
       this.remark});
 }
 
+class Location_Images {
+  String? checkinCategory;
+  String? imgURL;
+
+  Location_Images({
+    this.checkinCategory,
+    this.imgURL,
+  });
+}
+
 class Checkin_Location {
   String? point;
   String? date;
   String? checkinCategory;
+
   Checkin_Location({
     this.checkinCategory,
     this.point,

@@ -403,11 +403,16 @@ class Current_JobDetail extends StatelessWidget {
                                             SizedBox(
                                               height: 15,
                                             ),
-                                            Text(
-                                              state.job_info.distance,
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold),
+                                            SizedBox(
+                                              width: 90,
+                                              child: Text(
+                                                state.job_info.distance
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
                                             ),
                                           ],
                                         )
@@ -418,138 +423,288 @@ class Current_JobDetail extends StatelessWidget {
                                     ),
 
                                     //?
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20)),
-                                          color: Color.fromARGB(
-                                              255, 234, 240, 255)),
-                                      child: Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            15, 20, 15, 20),
-                                        child: (state
-                                                    .job_info
-                                                    .checkInLocation_Info
-                                                    .length !=
-                                                0)
-                                            ? ListView.builder(
+                                    InkWell(
+                                      onTap: () {
+                                        showDialog(
+                                          context: context,
+                                          barrierDismissible:
+                                              true, //* user must tap button!
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              backgroundColor: Colors.white,
+                                              content: SingleChildScrollView(
                                                 primary: true,
-                                                itemCount: state
-                                                    .job_info
-                                                    .checkInLocation_Info
-                                                    .length,
-                                                shrinkWrap: true,
-                                                physics:
-                                                    const ClampingScrollPhysics(),
-                                                itemBuilder: (context, index) {
-                                                  DateTime dateTime =
-                                                      DateTime.parse(state
-                                                          .job_info
-                                                          .checkInLocation_Info[
-                                                              index]
-                                                          .date);
-
-                                                  String formattedDate =
-                                                      ThaiDateFormat(
-                                                              'd MMMM y', 'th')
-                                                          .format(dateTime);
-                                                  return Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              bottom: 15),
-                                                      child: Row(
-                                                        children: [
-                                                          (state
-                                                                          .job_info
-                                                                          .checkInLocation_Info[
-                                                                              index]
-                                                                          .checkinCategory ==
-                                                                      "จุดรับสินค้า" ||
-                                                                  state
-                                                                          .job_info
-                                                                          .checkInLocation_Info[
-                                                                              index]
-                                                                          .checkinCategory ==
-                                                                      "จุดรับตู้")
-                                                              ? SvgPicture
-                                                                  .asset(
-                                                                  'assets/images/pick_up.svg',
-                                                                )
-                                                              : SvgPicture
-                                                                  .asset(
-                                                                  'assets/images/drop.svg',
-                                                                ),
-                                                          SizedBox(
-                                                            width: 10,
-                                                          ),
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Row(
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                      width: 300,
+                                                      height: 300,
+                                                      child: ListView.builder(
+                                                          itemCount: state
+                                                              .job_info
+                                                              .img_info
+                                                              .length,
+                                                          shrinkWrap: true,
+                                                          itemBuilder:
+                                                              (context, index) {
+                                                            return Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      bottom:
+                                                                          10),
+                                                              child: Row(
                                                                 children: [
-                                                                  Text(
-                                                                      state.job_info.checkInLocation_Info[index].checkinCategory +
-                                                                          ":",
-                                                                      style: TextStyle(
-                                                                          color: Palette
-                                                                              .thisBlue,
-                                                                          fontWeight:
-                                                                              FontWeight.bold)),
-                                                                  SizedBox(
-                                                                    width: 5,
-                                                                  ),
-                                                                  SizedBox(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.5,
-                                                                    child: Text(
+                                                                  GestureDetector(
+                                                                    onTap: () {
+                                                                      showDialog(
+                                                                        context:
+                                                                            context,
+                                                                        builder:
+                                                                            (context) {
+                                                                          return Dialog(
+                                                                            child:
+                                                                                InteractiveViewer(
+                                                                              child: Image.network(state
+                                                                          .job_info
+                                                                          .img_info[
+                                                                              index]
+                                                                          .imgURL
+                                                                          .toString()),
+                                                                            ),
+                                                                          );
+                                                                        },
+                                                                      );
+                                                                    },
+                                                                    child: Image
+                                                                        .network(
                                                                       state
                                                                           .job_info
-                                                                          .checkInLocation_Info[
+                                                                          .img_info[
                                                                               index]
-                                                                          .point,
-                                                                      style: TextStyle(
-                                                                          decoration: TextDecoration
-                                                                              .underline,
-                                                                          decorationColor: Colors
-                                                                              .blue,
-                                                                          color: Colors
-                                                                              .blue,
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
+                                                                          .imgURL
+                                                                          .toString(),
+                                                                      height:
+                                                                          100,
                                                                     ),
-                                                                  )
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: 20,
+                                                                  ),
+                                                                  Text(
+                                                                    state
+                                                                        .job_info
+                                                                        .img_info[
+                                                                            index]
+                                                                        .checkinCategory
+                                                                        .toString(),
+                                                                    style: TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                  ),
                                                                 ],
                                                               ),
-                                                              SizedBox(
-                                                                height: 5,
-                                                              ),
-                                                              Text(
-                                                                  '[ ${formattedDate} ]',
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .fade,
-                                                                  style: TextStyle(
-                                                                      color: Color.fromARGB(
-                                                                          255,
-                                                                          133,
-                                                                          133,
-                                                                          133),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold)),
-                                                            ],
-                                                          )
-                                                        ],
-                                                      ));
-                                                })
-                                            : Text('ไม่ได้ระบุ'),
+                                                            );
+                                                          }),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              actions: <Widget>[
+                                                Center(
+                                                  child: ElevatedButton(
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                            primary: const Color
+                                                                .fromARGB(255,
+                                                                234, 240, 255),
+                                                            elevation: 0,
+                                                            side: const BorderSide(
+                                                                color: Palette
+                                                                    .thisBlue),
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                            )),
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10.0),
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: Text(
+                                                          "ปิด",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color: Palette
+                                                                  .thisBlue,
+                                                              fontSize: 15),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+
+                                        // ListView.builder(
+                                        //     primary: true,
+                                        //     itemCount:
+                                        //         state.job_info.img_info.length,
+                                        //     shrinkWrap: true,
+                                        //     physics:
+                                        //         const ClampingScrollPhysics(),
+                                        //     itemBuilder: (context, index) {
+                                        //       return Text(state
+                                        //           .job_info
+                                        //           .img_info[index]
+                                        //           .checkinCategory
+                                        //           .toString());
+                                        //     });
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(20)),
+                                            color: Color.fromARGB(
+                                                255, 234, 240, 255)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              15, 20, 15, 20),
+                                          child: (state
+                                                      .job_info
+                                                      .checkInLocation_Info
+                                                      .length !=
+                                                  0)
+                                              ? ListView.builder(
+                                                  primary: true,
+                                                  itemCount: state
+                                                      .job_info
+                                                      .checkInLocation_Info
+                                                      .length,
+                                                  shrinkWrap: true,
+                                                  physics:
+                                                      const ClampingScrollPhysics(),
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    DateTime dateTime =
+                                                        DateTime.parse(state
+                                                            .job_info
+                                                            .checkInLocation_Info[
+                                                                index]
+                                                            .date);
+
+                                                    String formattedDate =
+                                                        ThaiDateFormat(
+                                                                'd MMMM y',
+                                                                'th')
+                                                            .format(dateTime);
+                                                    return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                bottom: 15),
+                                                        child: Row(
+                                                          children: [
+                                                            (state.job_info.checkInLocation_Info[index].checkinCategory ==
+                                                                        "จุดรับสินค้า" ||
+                                                                    state
+                                                                            .job_info
+                                                                            .checkInLocation_Info[
+                                                                                index]
+                                                                            .checkinCategory ==
+                                                                        "จุดรับตู้")
+                                                                ? SvgPicture
+                                                                    .asset(
+                                                                    'assets/images/pick_up.svg',
+                                                                  )
+                                                                : SvgPicture
+                                                                    .asset(
+                                                                    'assets/images/drop.svg',
+                                                                  ),
+                                                            SizedBox(
+                                                              width: 10,
+                                                            ),
+                                                            Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Row(
+                                                                  children: [
+                                                                    Text(
+                                                                        state.job_info.checkInLocation_Info[index].checkinCategory +
+                                                                            ":",
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                Palette.thisBlue,
+                                                                            fontWeight: FontWeight.bold)),
+                                                                    SizedBox(
+                                                                      width: 5,
+                                                                    ),
+                                                                    SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          0.5,
+                                                                      child:
+                                                                          Text(
+                                                                        state
+                                                                            .job_info
+                                                                            .checkInLocation_Info[index]
+                                                                            .point,
+                                                                        style: TextStyle(
+                                                                            decoration:
+                                                                                TextDecoration.underline,
+                                                                            decorationColor: Colors.blue,
+                                                                            color: Colors.blue,
+                                                                            fontWeight: FontWeight.bold),
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                                SizedBox(
+                                                                  height: 5,
+                                                                ),
+                                                                Text(
+                                                                    '[ ${formattedDate} ]',
+                                                                    overflow:
+                                                                        TextOverflow
+                                                                            .fade,
+                                                                    style: TextStyle(
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            133,
+                                                                            133,
+                                                                            133),
+                                                                        fontWeight:
+                                                                            FontWeight.bold)),
+                                                              ],
+                                                            )
+                                                          ],
+                                                        ));
+                                                  })
+                                              : Text('ไม่ได้ระบุ'),
+                                        ),
                                       ),
                                     ),
                                     SizedBox(
@@ -749,6 +904,29 @@ class Current_JobDetail extends StatelessWidget {
           ]),
         ));
   }
+}
+
+void showDataImagesDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    barrierDismissible: true, //* user must tap button!
+    builder: (context) {
+      return AlertDialog(
+          backgroundColor: Colors.white,
+          content: SingleChildScrollView(child:
+              BlocBuilder<JobsBloc, JobsState>(builder: (context, state) {
+            return ListView.builder(
+                primary: true,
+                itemCount: state.job_info.img_info.length,
+                shrinkWrap: true,
+                physics: const ClampingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return Text(state.job_info.img_info[index].checkinCategory
+                      .toString());
+                });
+          })));
+    },
+  );
 }
 
 void showCustomDialog(BuildContext context, String joNumber) {

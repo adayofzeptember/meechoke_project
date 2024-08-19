@@ -11,7 +11,7 @@ class JobsState extends Equatable {
   dynamic job_info;
   bool isLoading;
   int count;
-  String allowance,advance;
+  String allowance, advance;
 
   JobsState(
       {required this.newjobs_list,
@@ -40,9 +40,7 @@ class JobsState extends Equatable {
     return JobsState(
       status2: status2 ?? this.status2,
       allowance: allowance ?? this.allowance,
-
       advance: advance ?? this.advance,
-
       newjobs_list: newjobs_list ?? this.newjobs_list,
       status: status ?? this.status,
       isLoading: isLoading ?? this.isLoading,
@@ -59,7 +57,8 @@ class JobsState extends Equatable {
         count,
         status,
         currentjobs_list,
-        advance, allowance,
+        advance,
+        allowance,
         status2,
         job_info,
         status3Detail,

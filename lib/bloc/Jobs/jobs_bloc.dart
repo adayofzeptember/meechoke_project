@@ -14,6 +14,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 part 'jobs_event.dart';
 part 'jobs_state.dart';
 
+// for (var locationImages in checkinLocationList) {
+//   for (var imageKey in locationImages['image'].keys) {
+//     previewUrls.add(locationImages['image'][imageKey]
+//             ['preview_url']
+//         .toString());
+//   }
+// }
+// print('-----------' + previewUrls.length.toString());
 class JobsBloc extends Bloc<JobsEvent, JobsState> {
   final dio = Dio();
   JobsBloc()
@@ -183,6 +191,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
         Current_Location dataCurrentLocation;
         List<dynamic> checkinLocationList = nestedData['checkinLocation'];
         List<Checkin_Location> dataCheckinInfo = [];
+        List<Location_Images> dataIMG = [];
 
         if (response.statusCode == 200) {
           if (nestedData["saleOrderOrdinary"] != null) {
@@ -190,6 +199,37 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
 
             if (nestedData['checkinLocation'] != null &&
                 nestedData['checkinLocation'] is List) {
+              //*----------------------------------------------------------------------------------------------------
+
+        
+
+              for (var locationImages in checkinLocationList) {
+                String checkinCategory =
+                    locationImages['checkinCategory'].toString();
+
+                // Check if 'image' is not null before accessing its keys
+                var imageMap = locationImages['image'];
+                if (imageMap != null || imageMap == []) {
+                  for (var imageKey in imageMap.keys) {
+                    String previewUrl =
+                        imageMap[imageKey]['preview_url'].toString();
+
+                    dataIMG.add(Location_Images(
+                      checkinCategory: checkinCategory,
+                      imgURL: previewUrl,
+                    ));
+                  }
+                } else {
+                 
+                    dataIMG.add(Location_Images(
+                      checkinCategory: '',
+                      imgURL: '',
+                    ));
+                }
+              }
+
+//*------------------------------------------------------------------------------------------------------------------------
+
               for (var checkinLocation in checkinLocationList) {
                 dataCheckinInfo.add(Checkin_Location(
                   checkinCategory:
@@ -219,6 +259,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             }
 
             fetchedDataInfo = Job_Detail(
+                img_info: dataIMG,
                 currentLocation: dataCurrentLocation,
                 current_status: nestedData['currentStatus'].toString(),
                 docNumber: nestedData['documentNumber'].toString(),
@@ -268,6 +309,37 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
 
             if (nestedData['checkinLocation'] != null &&
                 nestedData['checkinLocation'] is List) {
+
+                                //*----------------------------------------------------------------------------------------------------
+
+        
+
+              for (var locationImages in checkinLocationList) {
+                String checkinCategory =
+                    locationImages['checkinCategory'].toString();
+
+                // Check if 'image' is not null before accessing its keys
+                var imageMap = locationImages['image'];
+                if (imageMap != null || imageMap == []) {
+                  for (var imageKey in imageMap.keys) {
+                    String previewUrl =
+                        imageMap[imageKey]['preview_url'].toString();
+
+                    dataIMG.add(Location_Images(
+                      checkinCategory: checkinCategory,
+                      imgURL: previewUrl,
+                    ));
+                  }
+                } else {
+                 
+                    dataIMG.add(Location_Images(
+                      checkinCategory: '',
+                      imgURL: '',
+                    ));
+                }
+              }
+
+//*------------------------------------------------------------------------------------------------------------------------
               for (var checkinLocation in checkinLocationList) {
                 dataCheckinInfo.add(Checkin_Location(
                   checkinCategory:

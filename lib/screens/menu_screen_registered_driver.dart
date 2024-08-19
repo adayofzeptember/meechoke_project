@@ -49,7 +49,8 @@ class _MainMenu_RegisteredDriverState extends State<MainMenu_RegisteredDriver> {
     final double w = size.width / 2;
     //*
     return Scaffold(
-      appBar: AppBar(
+      appBar:
+       AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         centerTitle: true,
@@ -272,7 +273,8 @@ class _MainMenu_RegisteredDriverState extends State<MainMenu_RegisteredDriver> {
   }
 
   Future showProfile(var context) async {
-    return showDialog(
+    return 
+    showDialog(
       context: context,
       barrierDismissible: true, //* user must tap button!
       builder: (context) {

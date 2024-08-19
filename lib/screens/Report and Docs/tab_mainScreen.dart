@@ -28,7 +28,6 @@ class _ReportDocs_MainState extends State<ReportDocs_Main>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       
         backgroundColor: Palette.thisBlue,
         automaticallyImplyLeading: false,
         centerTitle: true,
@@ -48,7 +47,8 @@ class _ReportDocs_MainState extends State<ReportDocs_Main>
         ),
       ),
       backgroundColor: Palette.mainBackgroud,
-      body: Padding(
+      body: 
+      Padding(
         padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
         child: Column(
           children: [
