@@ -460,8 +460,13 @@ class Current_JobDetail extends StatelessWidget {
                                                               child: Row(
                                                                 children: [
                                                                   GestureDetector(
-                                                                    onTap: () {
-                                                                      showDialog(
+                                                                onTap: () {
+
+                                                                      (state.job_info.img_info[index].imgURL.toString() ==
+                                                                            '')
+                                                                        ? Text(
+                                                                            'ไม่พบรูป')
+                                                                        :   showDialog(
                                                                         context:
                                                                             context,
                                                                         builder:
@@ -469,28 +474,23 @@ class Current_JobDetail extends StatelessWidget {
                                                                           return Dialog(
                                                                             child:
                                                                                 InteractiveViewer(
-                                                                              child: Image.network(state
-                                                                          .job_info
-                                                                          .img_info[
-                                                                              index]
-                                                                          .imgURL
-                                                                          .toString()),
+                                                                              child: Image.network(state.job_info.img_info[index].imgURL.toString()),
                                                                             ),
                                                                           );
                                                                         },
                                                                       );
+                                                                      
                                                                     },
-                                                                    child: Image
-                                                                        .network(
-                                                                      state
-                                                                          .job_info
-                                                                          .img_info[
-                                                                              index]
-                                                                          .imgURL
-                                                                          .toString(),
-                                                                      height:
-                                                                          100,
-                                                                    ),
+                                                                    child: (state.job_info.img_info[index].imgURL.toString() ==
+                                                                            '')
+                                                                        ? Text(
+                                                                            'ไม่พบรูป')
+                                                                        : Image
+                                                                            .network(
+                                                                            state.job_info.img_info[index].imgURL.toString(),
+                                                                            height:
+                                                                                100,
+                                                                          ),
                                                                   ),
                                                                   SizedBox(
                                                                     width: 20,

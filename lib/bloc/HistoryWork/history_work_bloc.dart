@@ -67,8 +67,8 @@ class HistoryWorkBloc extends Bloc<HistoryWorkEvent, HistoryWorkState> {
             "Authorization": "Bearer $tokenAuth",
           }),
         );
-        var x = response.data;
-        print(x);
+        // var x = response.data;
+        // print(x);
 
         var data = [];
         if (response.statusCode == 200) {
@@ -98,5 +98,7 @@ class HistoryWorkBloc extends Bloc<HistoryWorkEvent, HistoryWorkState> {
         print("Exception Try: $e");
       }
     });
+
+
   }
 }

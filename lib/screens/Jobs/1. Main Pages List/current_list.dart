@@ -90,10 +90,9 @@ class CurrentJobs_Screen extends StatelessWidget {
                               joNumber: state.currentjobs_list[index].jobNumber
                                   .toString()));
 
-
-                                    context.read<JobsBloc>().add(Get_Allowance(
+                          context.read<JobsBloc>().add(Get_Allowance(
                               context: context,
-                              getJONumber: state.newjobs_list[index].jobNumber
+                              getJONumber: state.currentjobs_list[index].jobNumber
                                   .toString()));
                         },
                         child: Padding(

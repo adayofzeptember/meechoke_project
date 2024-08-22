@@ -24,7 +24,6 @@ import 'package:page_transition/page_transition.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 // gradient: LinearGradient(colors: [
 //                     Palette.thisBlue,
 //                     const Color.fromARGB(255, 214, 77, 77)

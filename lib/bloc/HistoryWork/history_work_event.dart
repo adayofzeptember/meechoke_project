@@ -13,10 +13,19 @@ class GetDate extends HistoryWorkEvent {
   String? getMonth;
   String? getYear;
 
-  GetDate(
-      {this.getMonth, this.getYear});
+  GetDate({this.getMonth, this.getYear});
 }
 
 class LoadHistoryWorks extends HistoryWorkEvent {
 
+}
+
+
+class Load_HistoryJob_Info extends HistoryWorkEvent {
+ 
+  String joNumber;
+  var context;
+
+  Load_HistoryJob_Info(
+      {required this.context, required this.joNumber});
 }

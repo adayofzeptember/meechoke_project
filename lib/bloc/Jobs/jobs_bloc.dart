@@ -9,6 +9,7 @@ import 'package:meechoke_project/ETC/success_dialog.dart';
 import 'package:meechoke_project/bloc/Jobs/model.dart';
 import 'package:meechoke_project/screens/Jobs/2.%20Job%20Detail/current_job_detail.dart';
 import 'package:meechoke_project/screens/Jobs/2.%20Job%20Detail/new_job_detail.dart';
+import 'package:meechoke_project/screens/Work%20History/history_detail.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'jobs_event.dart';
@@ -162,6 +163,13 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 duration: const Duration(milliseconds: 500),
                 type: PageTransitionType.fade,
                 child: New_JobDetail()));
+      } else if (event.checkPage == 'history') {
+        Navigator.push(
+            event.context,
+            PageTransition(
+                duration: const Duration(milliseconds: 500),
+                type: PageTransitionType.fade,
+                child: HistoryJob_Detail()));
       } else {
         Navigator.push(
             event.context,
@@ -201,15 +209,19 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 nestedData['checkinLocation'] is List) {
               //*----------------------------------------------------------------------------------------------------
 
-        
-
-              for (var locationImages in checkinLocationList) {
+                    for (var locationImages in checkinLocationList) {
                 String checkinCategory =
                     locationImages['checkinCategory'].toString();
 
-                // Check if 'image' is not null before accessing its keys
                 var imageMap = locationImages['image'];
-                if (imageMap != null || imageMap == []) {
+                if (imageMap == null || imageMap == [] || imageMap.isEmpty) {
+             
+                  dataIMG.add(Location_Images(
+                    checkinCategory: checkinCategory,
+                    imgURL: '',
+                  ));
+                } else {
+        
                   for (var imageKey in imageMap.keys) {
                     String previewUrl =
                         imageMap[imageKey]['preview_url'].toString();
@@ -219,12 +231,6 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                       imgURL: previewUrl,
                     ));
                   }
-                } else {
-                 
-                    dataIMG.add(Location_Images(
-                      checkinCategory: '',
-                      imgURL: '',
-                    ));
                 }
               }
 
@@ -294,11 +300,6 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                     ? nestedData['saleOrderOrdinary']['optionalData']['destinationPayment']
                         .toString()
                     : nestedData['saleOrderOrdinary']['optionalData']['sourcePayment'].toString(),
-                // distance: nestedData['route']['distance'].toString() ,
-
-                //allowanceDriver:response.data['allowanceRate'][0]['mainDriverFee'].toString(),
-
-                allowanceDriver: (await response.data['allowanceRate']) == null || (await response.data['allowanceRate'] == []) ? '0' : await response.data['allowanceRate'][0]['mainDriverFee'].toString(),
                 distance: (await nestedData['route']) == null || (await nestedData['route']).isEmpty ? 'ไม่ได้ระบุ' : await nestedData['route']['distance'].toString(),
                 remark: (await nestedData['saleOrderOrdinary']['remark']['so']) == null || (await nestedData['saleOrderOrdinary']['remark']['so'] == "null") ? '-' : await nestedData['saleOrderOrdinary']['remark']['so'].toString(),
                 dod: (await nestedData['saleOrderOrdinary']['remark']['dod']) == null || (await nestedData['saleOrderOrdinary']['remark']['dod'] == "null") ? '-' : await nestedData['saleOrderOrdinary']['remark']['dod'].toString());
@@ -309,18 +310,21 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
 
             if (nestedData['checkinLocation'] != null &&
                 nestedData['checkinLocation'] is List) {
+              //*----------------------------------------------------------------------------------------------------
 
-                                //*----------------------------------------------------------------------------------------------------
-
-        
-
-              for (var locationImages in checkinLocationList) {
+                for (var locationImages in checkinLocationList) {
                 String checkinCategory =
                     locationImages['checkinCategory'].toString();
 
-                // Check if 'image' is not null before accessing its keys
                 var imageMap = locationImages['image'];
-                if (imageMap != null || imageMap == []) {
+                if (imageMap == null || imageMap == [] || imageMap.isEmpty) {
+             
+                  dataIMG.add(Location_Images(
+                    checkinCategory: checkinCategory,
+                    imgURL: '',
+                  ));
+                } else {
+        
                   for (var imageKey in imageMap.keys) {
                     String previewUrl =
                         imageMap[imageKey]['preview_url'].toString();
@@ -330,12 +334,6 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                       imgURL: previewUrl,
                     ));
                   }
-                } else {
-                 
-                    dataIMG.add(Location_Images(
-                      checkinCategory: '',
-                      imgURL: '',
-                    ));
                 }
               }
 
@@ -370,6 +368,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             }
 
             fetchedDataInfo = Job_Detail(
+                img_info: dataIMG,
                 currentLocation: dataCurrentLocation,
                 current_status: nestedData['currentStatus'].toString(),
                 docNumber: nestedData['documentNumber'].toString(),
@@ -387,8 +386,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 pallet: (nestedData['palletAmount'] == null)
                     ? '0'
                     : nestedData['palletAmount'].toString(),
-                detail: nestedData['saleOrderContainer']['priceData']
-                        ['unitSelector']
+                detail: nestedData['saleOrderContainer']['priceData']['unitSelector']
                     .toString(),
                 contactName: nestedData['saleOrderContainer']['customer']
                         ['contactPoint'][0]['name']
@@ -398,17 +396,10 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                     .toString(),
                 inTheNameOf: nestedData['saleOrderContainer']['basicData']['remark']
                     .toString(),
-                collectMoney: (nestedData['saleOrderContainer']['optionalData']
-                            ['sourcePayment']) ==
-                        null
-                    ? nestedData['saleOrderContainer']['optionalData']['destinationPayment'].toString()
+                collectMoney: (nestedData['saleOrderContainer']['optionalData']['sourcePayment']) == null
+                    ? nestedData['saleOrderContainer']['optionalData']['destinationPayment']
+                        .toString()
                     : nestedData['saleOrderContainer']['optionalData']['sourcePayment'].toString(),
-                allowanceDriver: (await response.data['allowanceRate']) == null || (await response.data['allowanceRate'] == []) ? '0' : await response.data['allowanceRate'][0]['mainDriverFee'].toString(),
-
-                // allowanceDriver: (await nestedData['allowanceRate']) == [] ||
-                //         (await nestedData['allowanceRate']== [])
-                //     ? '0.00'
-                //     : await nestedData['allowanceRate']['mainDriverFee'].toString(),
                 distance: (await nestedData['route']) == null || (await nestedData['route']).isEmpty ? 'ไม่ได้ระบุ' : await nestedData['route']['distance'].toString(),
                 remark: (await nestedData['saleOrderContainer']['remark']['so']) == null || (await nestedData['saleOrderContainer']['remark']['so'] == "null") ? '-' : await nestedData['saleOrderContainer']['remark']['so'].toString(),
                 dod: (await nestedData['saleOrderContainer']['remark']['dod']) == null || (await nestedData['saleOrderContainer']['remark']['dod'] == "null") ? '-' : await nestedData['saleOrderContainer']['remark']['dod'].toString());

@@ -366,8 +366,11 @@ class _History_PageState extends State<History_Page> {
                         ),
                         GestureDetector(
                           onTap: () {
+                            print(state
+                                    .workhistory_list[index].doc_number
+                                    .toString());
                             context.read<JobsBloc>().add(Load_Job_Info(
-                                checkPage: 'cuurent_job',
+                                checkPage: 'history',
                                 context: context,
                                 joNumber: state
                                     .workhistory_list[index].doc_number

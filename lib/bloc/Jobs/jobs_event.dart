@@ -24,6 +24,17 @@ class Load_Job_Info extends JobsEvent {
       {required this.context, required this.joNumber, required this.checkPage});
 }
 
+class Load_Job_Info2 extends JobsEvent {
+  String checkPage;
+  String joNumber;
+  var context;
+
+  Load_Job_Info2(
+      {required this.context, required this.joNumber, required this.checkPage});
+}
+
+
+
 class Get_Allowance extends JobsEvent {
   var context;
   String getJONumber;
