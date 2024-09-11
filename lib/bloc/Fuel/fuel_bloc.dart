@@ -166,7 +166,7 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
               source: (await nestedData['jobOrderNumber']) == null ||
                       (await nestedData['jobOrderNumber']['jobRoute']).isEmpty
                   ? '-'
-                  : await nestedData['jobOrderNumber']['jobRoute']['destination']
+                  : await nestedData['jobOrderNumber']['jobRoute']['source']
                       .toString(),
 
               //!-
