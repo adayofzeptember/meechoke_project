@@ -122,7 +122,7 @@ class _StartPageState extends State<StartPage> {
     } else {
       Fluttertoast.showToast(
           msg: "อนุญาติการเข้าถึงในภายหลังได้ที่ การตั้งค่าแอป",
-          toastLength: Toast.LENGTH_LONG,
+          toastLength: Toast.LENGTH_LONG, 
           gravity: ToastGravity.SNACKBAR,
           timeInSecForIosWeb: 2,
           backgroundColor: const Color.fromARGB(255, 133, 133, 133),

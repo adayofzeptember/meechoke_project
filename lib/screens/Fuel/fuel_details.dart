@@ -298,7 +298,12 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                         width: 30,
                                       ),
                                       Text(
-                                        state.fuelInfo.volum,
+                                        (state.fuelInfo.volum.toString() == 'null')
+                                        ? '-'
+
+                                        : state.fuelInfo.volum.toString()
+                                        
+                                        ,
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       )
@@ -336,7 +341,13 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                       SizedBox(
                                         width: 80,
                                         child: Text(
-                                          state.fuelInfo.cardNumber,
+                                          (state.fuelInfo.cardNumber == 'null')
+                                          
+                                          ? '-'
+
+
+                                          :state.fuelInfo.cardNumber 
+                                          ,
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -379,7 +390,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                       SizedBox(
                                         width: 80,
                                         child: Text(
-                                          'นครราชสีมา',
+                                           state.fuelInfo.source.toString(),
                                           overflow: TextOverflow.clip,
                                           maxLines: 3,
                                           style: TextStyle(
@@ -390,7 +401,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 8,
+                                    height: 20,
                                   ),
                                   Row(
                                     children: [
@@ -403,7 +414,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                       SizedBox(
                                         width: 80,
                                         child: Text(
-                                          'นครราชสีมา',
+                                           state.fuelInfo.destination.toString(),
                                           overflow: TextOverflow.fade,
                                           maxLines: 3,
                                           style: TextStyle(

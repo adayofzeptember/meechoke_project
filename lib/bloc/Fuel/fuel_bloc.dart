@@ -126,7 +126,7 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
         print(e);
       }
     });
-    //*
+    //*----------------------
     on<Load_Fuel_Info>((event, emit) async {
       Navigator.push(
           event.context,
@@ -154,6 +154,22 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
 
         if (response.statusCode == 200) {
           fetchedDataInfo = Fuel_Info(
+              // source: nestedData['jobOrderNumber']['jobRoute']['destination'],
+              // destination: nestedData['jobOrderNumber']['jobRoute']
+              //     ['destination'],
+
+              destination: (await nestedData['jobOrderNumber']) == null ||
+                      (await nestedData['jobOrderNumber']['jobRoute']).isEmpty
+                  ? '-'
+                  : await nestedData['jobOrderNumber']['jobRoute']['destination']
+                      .toString(),
+              source: (await nestedData['jobOrderNumber']) == null ||
+                      (await nestedData['jobOrderNumber']['jobRoute']).isEmpty
+                  ? '-'
+                  : await nestedData['jobOrderNumber']['jobRoute']['destination']
+                      .toString(),
+
+              //!-
               id: nestedData['id'].toString(),
               date: nestedData['fuelOrderDate']['date'].toString(),
               jo_number: (await nestedData['jobOrderNumber']) == null ||
@@ -166,23 +182,15 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
                   (event.checkPage == 'notfill') ? 'ยังไม่เติม' : 'เติมแล้ว',
               location_name:
                   nestedData['location']['locationFullName'].toString(),
-              fuelType: nestedData['4mChange']['details']['primaryFuelType']
-                      ['name']
+              fuelType: nestedData['4mChange']['details']['primaryFuelType']['name']
                   .toString(),
-              fuelGroup: nestedData['4mChange']['details']['primaryFuelGroup']
-                      ['name']
-                  .toString(),
-              volum: nestedData['detailFuelVolumeNormalType'].toString(),
+              fuelGroup:
+                  nestedData['4mChange']['details']['primaryFuelGroup']['name'].toString(),
+              volum: nestedData['detailFuelVolumeSummary'].toString(),
               totalprice: nestedData['detailFuelOrderTotalPrice'].toString(),
               paymentMethod: nestedData['paymentMethod'].toString(),
-              cardNumber: (await nestedData['currentCard']) == null ||
-                      (await nestedData['currentCard']).isEmpty
-                  ? '-'
-                  : await nestedData['currentCard']['cardNumber'].toString(),
-              creditRemains: (await nestedData['currentCard']) == null ||
-                      (await nestedData['currentCard']).isEmpty
-                  ? '-'
-                  : await nestedData['currentCard']['creditRemains'].toString(),
+              cardNumber: (await nestedData['currentCard']) == null || (await nestedData['currentCard']).isEmpty ? '-' : await nestedData['currentCard']['cardNumber'].toString(),
+              creditRemains: (await nestedData['currentCard']) == null || (await nestedData['currentCard']).isEmpty ? '-' : await nestedData['currentCard']['creditRemains'].toString(),
 
               // cardNumber: nestedData['currentCard']['cardNumber'].toString(),
               // creditRemains:

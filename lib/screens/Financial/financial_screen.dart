@@ -73,15 +73,16 @@ class _Financial_ListState extends State<Financial_List> {
                                       height: 20,
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Icon(
                                           Icons.error,
                                           color: Palette.someRed,
                                         ),
-                                         SizedBox(
-                                      width: 5,
-                                    ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
                                         Container(
                                           child: Text(
                                             'ยังไม่มีประวัติการเงิน',
@@ -225,7 +226,7 @@ class _Financial_ListState extends State<Financial_List> {
                                                             showDialog(
                                                               context: context,
                                                               barrierDismissible:
-                                                                  true, //* user must tap button!
+                                                                  false, //* user must tap button!
                                                               builder:
                                                                   (context) {
                                                                 return AlertDialog(

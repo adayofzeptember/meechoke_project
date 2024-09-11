@@ -36,6 +36,9 @@ class Fuel_Info {
   String? creditRemains;
   String? remark;
 
+  String? source;
+  String? destination;
+
   Fuel_Info({
     this.id,
     this.date,
@@ -45,6 +48,8 @@ class Fuel_Info {
     this.location_name,
     this.fuelGroup,
     this.fuelType,
+    this.source,
+    this.destination,
     this.totalprice,
     this.paymentMethod,
     this.cardNumber,
