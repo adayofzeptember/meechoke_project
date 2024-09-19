@@ -337,7 +337,7 @@ class _Report_ScreenState extends State<Report_Screen> {
               children: [
                 InkWell(
                   onTap: () {
-                    _getToCamera();
+                    _getCamera();
                     Navigator.pop(context);
                   },
                   child: Column(
@@ -397,14 +397,42 @@ class _Report_ScreenState extends State<Report_Screen> {
     );
   }
 
-  Future<void> _getToCamera() async {
-    final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(source: ImageSource.camera);
+  // Future _getToCamera() async {
+  //   final picker = ImagePicker();
+  //   final pickedImage = await picker.pickImage(source: ImageSource.camera);
 
-    if (pickedImage != null) {
-      setState(() {
-        selectedImages.add(File(pickedImage.path));
-      });
+  //   if (pickedImage != null) {
+  //     setState(() {
+  //       selectedImages.add(File(pickedImage.path));
+  //     });
+  //   }
+  // }
+  Future _getCamera() async {
+    try {
+      // Pick an image from the camera
+      final pickedFile = await picker.pickImage(
+        source: ImageSource.camera,
+        imageQuality: 100, // You can adjust quality
+        maxHeight: 1000,
+        maxWidth: 1000,
+      );
+
+      // If an image is selected, store it in the selectedImages list
+      if (pickedFile != null) {
+        setState(() {
+          selectedImages.add(File(pickedFile.path));
+        });
+      } else {
+        // If no image is picked, show a message
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('No image selected from camera')),
+        );
+      }
+    } catch (e) {
+      // Handle any errors that might occur
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to pick image: $e')),
+      );
     }
   }
 

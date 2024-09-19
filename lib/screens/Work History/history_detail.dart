@@ -226,6 +226,24 @@ class HistoryJob_Detail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
+                                              'จำนวนที่สินค้า : ',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 66, 66, 66)),
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            Text(
+                                              'จำนวนที่สินค้า : ',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 66, 66, 66)),
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            Text(
                                               'จำนวนพาเลท : ',
                                               style: TextStyle(
                                                   color: Color.fromARGB(
@@ -325,7 +343,23 @@ class HistoryJob_Detail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              state.job_info.weight,
+                                              state.job_info.weight +
+                                                  ' กิโลกรัม',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            Text(
+                                              (state.job_info.transportAmount
+                                                          .toString() ==
+                                                      'null')
+                                                  ? '-'
+                                                  : state
+                                                      .job_info.transportAmount
+                                                      .toString(),
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),
@@ -352,7 +386,12 @@ class HistoryJob_Detail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              state.job_info.contactName,
+                                              (state.job_info.contactName
+                                                          .toString() ==
+                                                      'null')
+                                                  ? '-'
+                                                  : state.job_info.contactName
+                                                      .toString(),
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),
@@ -361,7 +400,12 @@ class HistoryJob_Detail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              state.job_info.contactTel,
+                                              (state.job_info.contactTel
+                                                          .toString() ==
+                                                      'null')
+                                                  ? '-'
+                                                  : state.job_info.contactTel
+                                                      .toString(),
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),
@@ -446,24 +490,20 @@ class HistoryJob_Detail extends StatelessWidget {
                                                                 children: [
                                                                   GestureDetector(
                                                                     onTap: () {
-
                                                                       (state.job_info.img_info[index].imgURL.toString() ==
-                                                                            '')
-                                                                        ? Text(
-                                                                            'ไม่พบรูป')
-                                                                        :   showDialog(
-                                                                        context:
-                                                                            context,
-                                                                        builder:
-                                                                            (context) {
-                                                                          return Dialog(
-                                                                            child:
-                                                                                InteractiveViewer(
-                                                                              child: Image.network(state.job_info.img_info[index].imgURL.toString()),
-                                                                            ),
-                                                                          );
-                                                                        },
-                                                                      );
+                                                                              '')
+                                                                          ? Text(
+                                                                              'ไม่พบรูป')
+                                                                          : showDialog(
+                                                                              context: context,
+                                                                              builder: (context) {
+                                                                                return Dialog(
+                                                                                  child: InteractiveViewer(
+                                                                                    child: Image.network(state.job_info.img_info[index].imgURL.toString()),
+                                                                                  ),
+                                                                                );
+                                                                              },
+                                                                            );
                                                                       // showDialog(
                                                                       //   context:
                                                                       //       context,
@@ -667,19 +707,43 @@ class HistoryJob_Detail extends StatelessWidget {
                                                                 SizedBox(
                                                                   height: 5,
                                                                 ),
-                                                                Text(
-                                                                    '[ ${formattedDate} ]',
-                                                                    overflow:
-                                                                        TextOverflow
-                                                                            .fade,
-                                                                    style: TextStyle(
-                                                                        color: Color.fromARGB(
-                                                                            255,
-                                                                            133,
-                                                                            133,
-                                                                            133),
-                                                                        fontWeight:
-                                                                            FontWeight.bold)),
+                                                                Row(
+                                                                  children: [
+                                                                    Text(
+                                                                        '${formattedDate}',
+                                                                        overflow:
+                                                                            TextOverflow
+                                                                                .fade,
+                                                                        style: TextStyle(
+                                                                            color: Color.fromARGB(
+                                                                                255,
+                                                                                133,
+                                                                                133,
+                                                                                133),
+                                                                            fontWeight:
+                                                                                FontWeight.bold)),
+                                                                    SizedBox(
+                                                                      width: 10,
+                                                                    ),
+                                                                    Text(
+                                                                        state
+                                                                            .job_info
+                                                                            .checkInLocation_Info[
+                                                                                index]
+                                                                            .time,
+                                                                        overflow:
+                                                                            TextOverflow
+                                                                                .fade,
+                                                                        style: TextStyle(
+                                                                            color: Color.fromARGB(
+                                                                                255,
+                                                                                133,
+                                                                                133,
+                                                                                133),
+                                                                            fontWeight:
+                                                                                FontWeight.bold)),
+                                                                  ],
+                                                                ),
                                                               ],
                                                             )
                                                           ],

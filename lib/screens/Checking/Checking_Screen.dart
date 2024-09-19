@@ -28,7 +28,6 @@ class _Check_ScreenState extends State<Check_Screen> {
   final picker = ImagePicker();
 
   @override
-
   void initState() {
     super.initState();
   }
@@ -92,17 +91,17 @@ class _Check_ScreenState extends State<Check_Screen> {
                     //     child: CircularProgressIndicator(
                     //       color: Colors.white,
                     //     ),
-                    
+
                     //   );
                     // }
-              
+
                     if (state.checkLoadItems == true) {
                       return Center(
                         child: CircularProgressIndicator(
                           color: Colors.white,
                         ),
                       );
-                    } 
+                    }
                     return ListView.builder(
                         primary: true,
                         itemCount: 1,
@@ -967,12 +966,30 @@ class _Check_ScreenState extends State<Check_Screen> {
         });
   }
 
+  // Future<void> _getToCamera() async {
+  //   final pickedImage = await picker.pickImage(source: ImageSource.camera);
+  //   if (pickedImage != null) {
+  //     setState(() {
+  //       selectedImage = File(pickedImage.path);
+  //     });
+  //   }
+  // }
+
   Future<void> _getToCamera() async {
-    final pickedImage = await picker.pickImage(source: ImageSource.camera);
-    if (pickedImage != null) {
+    final pickedFile = await picker.pickImage(
+      source: ImageSource.camera,
+      imageQuality: 100, // Adjust image quality as needed
+      maxHeight: 1000,
+      maxWidth: 1000,
+    );
+
+    if (pickedFile != null) {
       setState(() {
-        selectedImage = File(pickedImage.path);
+        selectedImage = File(pickedFile.path);
       });
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('ยังไม่ได้เลือกภาพ')));
     }
   }
 
@@ -985,7 +1002,7 @@ class _Check_ScreenState extends State<Check_Screen> {
       });
     } else {
       ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('No image selected')));
+          .showSnackBar(const SnackBar(content: Text('ยังไม่ได้เลือกภาพ')));
     }
   }
 }

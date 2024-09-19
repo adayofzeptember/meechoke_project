@@ -295,7 +295,22 @@ class New_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              state.job_info.weight,
+                                              state.job_info.weight + 'กก.',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            SizedBox(
+                                              height: 15,
+                                            ),
+                                            Text(
+                                              (state.job_info.transportAmount
+                                                          .toString() ==
+                                                      'null')
+                                                  ? '-'
+                                                  : state
+                                                      .job_info.transportAmount
+                                                      .toString(),
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),
@@ -354,8 +369,13 @@ class New_JobDetail extends StatelessWidget {
                                             SizedBox(
                                               height: 15,
                                             ),
-                                            Text(
-                                              state.job_info.inTheNameOf,
+                                             Text(
+                                              (state.job_info.inTheNameOf
+                                                          .toString() ==
+                                                      'null')
+                                                  ? '-'
+                                                  : state.job_info.inTheNameOf
+                                                      .toString(),
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),
@@ -590,7 +610,8 @@ class New_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              formatNumber(state.allowance.toString()),
+                                              formatNumber(
+                                                  state.allowance.toString()),
                                               overflow: TextOverflow.fade,
                                               style: TextStyle(
                                                   color: Colors.black,
@@ -600,7 +621,8 @@ class New_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                               formatNumber(state.advance.toString()),
+                                              formatNumber(
+                                                  state.advance.toString()),
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),

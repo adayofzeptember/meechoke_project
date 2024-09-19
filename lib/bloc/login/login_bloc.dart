@@ -72,54 +72,56 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         } else {
           prefs.setString('registeredCarId', 'null');
         }
+        //!
 
-        if (response.statusCode == 200) {
-          if (response.data['loginType'].toString() == 'employee') {
-            Navigator.pushReplacement(
-              event.context,
-              PageTransition(
-                  duration: const Duration(milliseconds: 500),
-                  type: PageTransitionType.fade,
-                  child: const MainMenu_Employee()),
-            );
-          } else {
-            Navigator.pushReplacement(
-              event.context,
-              PageTransition(
-                  duration: const Duration(milliseconds: 500),
-                  type: PageTransitionType.fade,
-                  child: MainMenu_RegisteredDriver()),
-            );
-          }
-          Fluttertoast.showToast(
-              msg: "เข้าสู่ระบบแล้ว",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 2,
-              backgroundColor: Palette.theGreen,
-              textColor: Colors.white,
-              fontSize: 15);
+        if (response.data['loginType'].toString() == 'employee') {
+          Navigator.pushReplacement(
+            event.context,
+            PageTransition(
+                duration: const Duration(milliseconds: 500),
+                type: PageTransitionType.fade,
+                child: const MainMenu_Employee()),
+          );
         } else {
-          emit(state.copyWith(loading: false));
+          Navigator.pushReplacement(
+            event.context,
+            PageTransition(
+                duration: const Duration(milliseconds: 500),
+                type: PageTransitionType.fade,
+                child: MainMenu_RegisteredDriver()),
+          );
+        }
+        Fluttertoast.showToast(
+            msg: "เข้าสู่ระบบแล้ว",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 2,
+            backgroundColor: Palette.theGreen,
+            textColor: Colors.white,
+            fontSize: 15);
+      }on DioException catch (e) {
+        emit(state.copyWith(loading: false));
+        print(e);
+
+        if (e.toString().contains('422')) {
           Fluttertoast.showToast(
-              msg: "ไม่พอข้อมูล, ตรวจสอบชื่อผู้ใช้หรือรหัสผ่านอีกครั้ง",
+              msg: "ชื่อผู้่ใช้หรือรหัสผ่านไม่ถูกต้อง",
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.SNACKBAR,
               timeInSecForIosWeb: 2,
               backgroundColor: const Color.fromARGB(255, 133, 133, 133),
-              textColor: Colors.white,
+              textColor: const Color.fromARGB(255, 200, 110, 110),
+              fontSize: 15);
+        } else {
+          Fluttertoast.showToast(
+              msg: "ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้, โปรดลองใหม่อีกครั้ง",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.SNACKBAR,
+              timeInSecForIosWeb: 2,
+              backgroundColor: const Color.fromARGB(255, 133, 133, 133),
+              textColor: const Color.fromARGB(255, 200, 110, 110),
               fontSize: 15);
         }
-      } catch (e) {
-        emit(state.copyWith(loading: false));
-        Fluttertoast.showToast(
-            msg: "ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้, โปรดลองใหม่อีกครั้ง",
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.SNACKBAR,
-            timeInSecForIosWeb: 2,
-            backgroundColor: const Color.fromARGB(255, 133, 133, 133),
-            textColor: Colors.white,
-            fontSize: 15);
       }
     });
 

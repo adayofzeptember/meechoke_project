@@ -23,6 +23,7 @@ class Job_Detail {
   String? amounts;
   String? pallet;
   String? detail;
+  String? transportAmount;
   String? contactName;
   String? contactTel;
   String? inTheNameOf;
@@ -44,6 +45,7 @@ class Job_Detail {
       this.allowanceDriver,
       this.docStatus,
       this.customerName,
+      this.transportAmount,
       this.weight,
       this.productName,
       this.img_info,
@@ -76,11 +78,13 @@ class Checkin_Location {
   String? point;
   String? date;
   String? checkinCategory;
+  String? time;
 
   Checkin_Location({
     this.checkinCategory,
     this.point,
     this.date,
+    this.time
   });
 }
 

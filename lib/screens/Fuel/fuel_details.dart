@@ -178,7 +178,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                         width: double.infinity,
                         height: MediaQuery.of(context).size.height * 0.32,
                         decoration: BoxDecoration(
-                          color: Palette.thisBlue,
+                            color: Palette.thisBlue,
                             // gradient: LinearGradient(
                             //   begin: Alignment.topRight,
                             //   end: Alignment.topLeft,
@@ -199,8 +199,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                               Text(
                                 'สถานที่เติม:',
                                 style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.white),
+                                    fontSize: 15, color: Colors.white),
                               ),
                               SizedBox(
                                 height: 10,
@@ -298,12 +297,10 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                         width: 30,
                                       ),
                                       Text(
-                                        (state.fuelInfo.volum.toString() == 'null')
-                                        ? '-'
-
-                                        : state.fuelInfo.volum.toString()
-                                        
-                                        ,
+                                        (state.fuelInfo.volum.toString() ==
+                                                'null')
+                                            ? '-'
+                                            : state.fuelInfo.volum.toString(),
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       )
@@ -342,12 +339,8 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                         width: 80,
                                         child: Text(
                                           (state.fuelInfo.cardNumber == 'null')
-                                          
-                                          ? '-'
-
-
-                                          :state.fuelInfo.cardNumber 
-                                          ,
+                                              ? '-'
+                                              : state.fuelInfo.cardNumber,
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -366,7 +359,8 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                         width: 30,
                                       ),
                                       Text(
-                                        formatNumber(state.fuelInfo.creditRemains),
+                                        formatNumber(
+                                            state.fuelInfo.creditRemains),
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       )
@@ -390,7 +384,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                       SizedBox(
                                         width: 80,
                                         child: Text(
-                                           state.fuelInfo.source.toString(),
+                                          state.fuelInfo.source.toString(),
                                           overflow: TextOverflow.clip,
                                           maxLines: 3,
                                           style: TextStyle(
@@ -414,7 +408,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                       SizedBox(
                                         width: 80,
                                         child: Text(
-                                           state.fuelInfo.destination.toString(),
+                                          state.fuelInfo.destination.toString(),
                                           overflow: TextOverflow.fade,
                                           maxLines: 3,
                                           style: TextStyle(

@@ -87,9 +87,8 @@ class ReportAccidentBloc
       String? tokenAuth = prefs.getString('userToken');
       List<MultipartFile> multipleImages = [];
 
-      print(state.lat.toString() + " " + state.lng.toString());
+      //print(state.lat.toString() + " " + state.lng.toString());
 
- 
       for (final imageFiles in event.files!) {
         String fileName = imageFiles.path.split('/').last;
 
@@ -99,6 +98,7 @@ class ReportAccidentBloc
         multipleImages.add(file);
       }
       print("image(s) count: " + multipleImages.length.toString());
+      print("image path name: " + multipleImages[0].filename.toString());
 
       final formData;
       formData = FormData.fromMap({
@@ -153,11 +153,11 @@ class ReportAccidentBloc
           if (response2.statusCode == 200) {
             emit(state.copyWith(isLoading: false));
             print(response2.data['data']);
-            SuccessMessage_Dialog(
-                event.context, 'ส่งแจ้งเสร็จสิ้น', 'ส่งแจ้ง');
+            SuccessMessage_Dialog(event.context, 'ส่งแจ้งเสร็จสิ้น', 'ส่งแจ้ง');
           } else {
             emit(state.copyWith(isLoading: false));
             print('error: ' + response2.data['data']);
+            print('1');
             Fluttertoast.showToast(
                 msg: "เกิดข้อผิดพลาด, โปรดลองใหม่อีกครั้ง",
                 toastLength: Toast.LENGTH_LONG,
@@ -169,6 +169,8 @@ class ReportAccidentBloc
           }
         } else {
           emit(state.copyWith(isLoading: false));
+          print('2');
+           print('error: ' + response.data['data']);
           Fluttertoast.showToast(
               msg: "เกิดข้อผิดพลาด, โปรดลองใหม่อีกครั้ง",
               toastLength: Toast.LENGTH_LONG,
@@ -180,6 +182,7 @@ class ReportAccidentBloc
         }
       } catch (e) {
         emit(state.copyWith(isLoading: false));
+        print('error: ' + e.toString());
         Fluttertoast.showToast(
             msg: "เกิดข้อผิดพลาด, โปรดลองใหม่อีกครั้ง",
             toastLength: Toast.LENGTH_LONG,
@@ -192,8 +195,6 @@ class ReportAccidentBloc
       }
     });
 
-
-    
 //*-------------------------------------------------------------------------
     on<GetLocationName>((event, emit) async {
       print('LOCATE');
@@ -216,7 +217,7 @@ class ReportAccidentBloc
             responseType: ResponseType.json,
           ),
         );
-        print(response.data);
+        //print(response.data);
         if (response.statusCode == 200) {
           emit(state.copyWith(
               locationName: response.data['data']['location']['subdistrict']
@@ -229,21 +230,21 @@ class ReportAccidentBloc
           emit(state.copyWith(locationName: ''));
         }
 
-        print(state.locationName);
+       // print(state.locationName);
       } catch (e) {
         emit(state.copyWith(locationName: ''));
-        print('error: ' + e.toString());
+       // print('error: ' + e.toString());
       }
     });
 
     on<EmitLatLng>((event, emit) async {
       try {
-        print('locating...');
+     //   print('locating...');
         Position position = await Geolocator.getCurrentPosition(
             desiredAccuracy: LocationAccuracy.high);
 
-        print(
-            position.latitude.toString() + " " + position.longitude.toString());
+        // print(
+        //     position.latitude.toString() + " " + position.longitude.toString());
 
         emit(state.copyWith(lat: position.latitude, lng: position.longitude));
       } catch (e) {}

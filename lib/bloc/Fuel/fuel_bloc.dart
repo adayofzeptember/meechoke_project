@@ -170,6 +170,7 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
                       .toString(),
 
               //!-
+
               id: nestedData['id'].toString(),
               date: nestedData['fuelOrderDate']['date'].toString(),
               jo_number: (await nestedData['jobOrderNumber']) == null ||
@@ -284,7 +285,7 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
           print('---------> upload image status: ' +
               response2.statusMessage.toString());
 
-          //หลีง upload
+          // response หลัง upload
           if (response2.statusCode == 200) {
             emit(state.copyWith(isLoading: false));
 

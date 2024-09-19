@@ -156,10 +156,17 @@ class _Financial_ListState extends State<Financial_List> {
                                                               .spaceBetween,
                                                       children: [
                                                         Text(
-                                                          state
-                                                              .financial_list[
-                                                                  index]
-                                                              .transferMethod,
+                                                          (state
+                                                                      .financial_list[
+                                                                          index]
+                                                                      .transferMethod ==
+                                                                  'null')
+                                                              ? '-'
+                                                              : state
+                                                                  .financial_list[
+                                                                      index]
+                                                                  .transferMethod
+                                                                  .toString(),
                                                           style: TextStyle(
                                                               fontSize: 20,
                                                               color: Palette
@@ -176,8 +183,17 @@ class _Financial_ListState extends State<Financial_List> {
                                                               .toString()),
                                                           style: TextStyle(
                                                               fontSize: 20,
-                                                              color:
-                                                                  Colors.green,
+                                                              color: (int.parse(state
+                                                                          .financial_list[
+                                                                              index]
+                                                                          .total
+                                                                          .toString()) <
+                                                                      0)
+                                                                  ? Colors.red
+                                                                  : Colors
+                                                                      .green,
+                                                              // color:
+                                                              //     Colors.green,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold),

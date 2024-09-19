@@ -209,19 +209,17 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 nestedData['checkinLocation'] is List) {
               //*----------------------------------------------------------------------------------------------------
 
-                    for (var locationImages in checkinLocationList) {
+              for (var locationImages in checkinLocationList) {
                 String checkinCategory =
                     locationImages['checkinCategory'].toString();
 
                 var imageMap = locationImages['image'];
                 if (imageMap == null || imageMap == [] || imageMap.isEmpty) {
-             
                   dataIMG.add(Location_Images(
                     checkinCategory: checkinCategory,
                     imgURL: '',
                   ));
                 } else {
-        
                   for (var imageKey in imageMap.keys) {
                     String previewUrl =
                         imageMap[imageKey]['preview_url'].toString();
@@ -241,6 +239,9 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                   checkinCategory:
                       checkinLocation['checkinCategory'].toString(),
                   date: checkinLocation['meetingDate'].toString(),
+                   time: (checkinLocation['meetingTime'].toString() == 'null')
+                    ? '00.00'
+                    : checkinLocation['meetingTime'].toString() ,
                   point: checkinLocation['locationCode'].toString(),
                 ));
               }
@@ -274,6 +275,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 productName: nestedData['saleOrderOrdinary']['productName'],
                 customerName:
                     nestedData['saleOrderOrdinary']['customerName'].toString(),
+                transportAmount: nestedData['transportAmount'].toString(),
                 // ignore: unnecessary_null_comparison
                 weight: (nestedData['totalWeight'] == null)
                     ? '0'
@@ -312,19 +314,17 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 nestedData['checkinLocation'] is List) {
               //*----------------------------------------------------------------------------------------------------
 
-                for (var locationImages in checkinLocationList) {
+              for (var locationImages in checkinLocationList) {
                 String checkinCategory =
                     locationImages['checkinCategory'].toString();
 
                 var imageMap = locationImages['image'];
                 if (imageMap == null || imageMap == [] || imageMap.isEmpty) {
-             
                   dataIMG.add(Location_Images(
                     checkinCategory: checkinCategory,
                     imgURL: '',
                   ));
                 } else {
-        
                   for (var imageKey in imageMap.keys) {
                     String previewUrl =
                         imageMap[imageKey]['preview_url'].toString();
@@ -343,6 +343,10 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                   checkinCategory:
                       checkinLocation['checkinCategory'].toString(),
                   date: checkinLocation['meetingDate'].toString(),
+                  // time: checkinLocation['meetingTime'].toString(),
+                  time: (checkinLocation['meetingTime'].toString() == 'null')
+                    ? '00.00'
+                    : checkinLocation['meetingTime'].toString() ,
                   point: checkinLocation['locationCode'].toString(),
                 ));
               }
@@ -375,6 +379,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 docStatus: nestedData['documentStatus'].toString(),
                 checkInLocation_Info: dataCheckinInfo,
                 productName: nestedData['saleOrderContainer']['productName'],
+                transportAmount: nestedData['transportAmount'].toString(),
                 customerName:
                     nestedData['saleOrderContainer']['customerName'].toString(),
                 weight: (nestedData['totalWeight'] == null)
