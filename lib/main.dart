@@ -39,7 +39,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 //               type: PageTransitionType.fade,
 //               child: Job_OnGoing()),
 //         );
-
 //  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
 //     statusBarColor: Colors.white, // Background color
 //     statusBarIconBrightness: Brightness.light, // Icon color

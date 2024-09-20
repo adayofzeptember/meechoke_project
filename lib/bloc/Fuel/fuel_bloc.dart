@@ -56,7 +56,7 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
               status: 'ยังไม่ได้เติม',
               location_name:
                   await elements['location']['locationFullName'].toString(),
-              volum: await elements['detailFuelVolumeNormalType'].toString(),
+              volum: await elements['detailFuelVolumeSummary'].toString(),
               remark: await elements['remark'].toString(),
             ));
           }
@@ -107,7 +107,7 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
               status: 'เติมแล้ว',
               location_name:
                   await elements['location']['locationFullName'].toString(),
-              volum: await elements['detailFuelVolumeNormalType'].toString(),
+              volum: await elements['detailFuelVolumeSummary'].toString(),
               remark: await elements['remark'].toString(),
             ));
           }

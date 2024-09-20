@@ -295,7 +295,8 @@ class New_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              state.job_info.weight + 'กก.',
+                                             state.job_info.weight +' '+
+                                                                    state.job_info.unitType,
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),

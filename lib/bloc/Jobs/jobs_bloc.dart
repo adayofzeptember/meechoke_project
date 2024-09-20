@@ -239,9 +239,9 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                   checkinCategory:
                       checkinLocation['checkinCategory'].toString(),
                   date: checkinLocation['meetingDate'].toString(),
-                   time: (checkinLocation['meetingTime'].toString() == 'null')
-                    ? '00.00'
-                    : checkinLocation['meetingTime'].toString() ,
+                  time: (checkinLocation['meetingTime'].toString() == 'null')
+                      ? '00.00'
+                      : checkinLocation['meetingTime'].toString(),
                   point: checkinLocation['locationCode'].toString(),
                 ));
               }
@@ -302,6 +302,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                     ? nestedData['saleOrderOrdinary']['optionalData']['destinationPayment']
                         .toString()
                     : nestedData['saleOrderOrdinary']['optionalData']['sourcePayment'].toString(),
+                unitType: (await nestedData['sysPrimaryUnitOfMeasurement']['unitName']) == null || (await nestedData['sysPrimaryUnitOfMeasurement']['unitName']).isEmpty ? '' : await nestedData['sysPrimaryUnitOfMeasurement']['unitName'].toString(),
                 distance: (await nestedData['route']) == null || (await nestedData['route']).isEmpty ? 'ไม่ได้ระบุ' : await nestedData['route']['distance'].toString(),
                 remark: (await nestedData['saleOrderOrdinary']['remark']['so']) == null || (await nestedData['saleOrderOrdinary']['remark']['so'] == "null") ? '-' : await nestedData['saleOrderOrdinary']['remark']['so'].toString(),
                 dod: (await nestedData['saleOrderOrdinary']['remark']['dod']) == null || (await nestedData['saleOrderOrdinary']['remark']['dod'] == "null") ? '-' : await nestedData['saleOrderOrdinary']['remark']['dod'].toString());
@@ -345,8 +346,8 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                   date: checkinLocation['meetingDate'].toString(),
                   // time: checkinLocation['meetingTime'].toString(),
                   time: (checkinLocation['meetingTime'].toString() == 'null')
-                    ? '00.00'
-                    : checkinLocation['meetingTime'].toString() ,
+                      ? '00.00'
+                      : checkinLocation['meetingTime'].toString(),
                   point: checkinLocation['locationCode'].toString(),
                 ));
               }
@@ -391,7 +392,8 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 pallet: (nestedData['palletAmount'] == null)
                     ? '0'
                     : nestedData['palletAmount'].toString(),
-                detail: nestedData['saleOrderContainer']['priceData']['unitSelector']
+                detail: nestedData['saleOrderContainer']['priceData']
+                        ['unitSelector']
                     .toString(),
                 contactName: nestedData['saleOrderContainer']['customer']
                         ['contactPoint'][0]['name']
@@ -401,10 +403,13 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                     .toString(),
                 inTheNameOf: nestedData['saleOrderContainer']['basicData']['remark']
                     .toString(),
-                collectMoney: (nestedData['saleOrderContainer']['optionalData']['sourcePayment']) == null
-                    ? nestedData['saleOrderContainer']['optionalData']['destinationPayment']
-                        .toString()
+                collectMoney: (nestedData['saleOrderContainer']['optionalData']
+                            ['sourcePayment']) ==
+                        null
+                    ? nestedData['saleOrderContainer']['optionalData']['destinationPayment'].toString()
                     : nestedData['saleOrderContainer']['optionalData']['sourcePayment'].toString(),
+                //unitType: nestedData['sysPrimaryUnitOfMeasurement']['unitName'],
+                unitType: (await nestedData['sysPrimaryUnitOfMeasurement']['unitName']) == null || (await nestedData['sysPrimaryUnitOfMeasurement']['unitName']).isEmpty ? '' : await nestedData['sysPrimaryUnitOfMeasurement']['unitName'].toString(),
                 distance: (await nestedData['route']) == null || (await nestedData['route']).isEmpty ? 'ไม่ได้ระบุ' : await nestedData['route']['distance'].toString(),
                 remark: (await nestedData['saleOrderContainer']['remark']['so']) == null || (await nestedData['saleOrderContainer']['remark']['so'] == "null") ? '-' : await nestedData['saleOrderContainer']['remark']['so'].toString(),
                 dod: (await nestedData['saleOrderContainer']['remark']['dod']) == null || (await nestedData['saleOrderContainer']['remark']['dod'] == "null") ? '-' : await nestedData['saleOrderContainer']['remark']['dod'].toString());

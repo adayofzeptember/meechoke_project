@@ -318,7 +318,8 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                         width: 30,
                                       ),
                                       Text(
-                                        state.fuelInfo.totalprice,
+                                        formatNumber(state.fuelInfo.totalprice).toString()
+                            ,
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       )

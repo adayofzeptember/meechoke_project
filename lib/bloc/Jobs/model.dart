@@ -38,6 +38,7 @@ class Job_Detail {
   List<Location_Images>? img_info;
   //*
   Current_Location? currentLocation;
+  String? unitType;
   Job_Detail(
       {this.currentLocation,
       //*
@@ -58,6 +59,7 @@ class Job_Detail {
       this.contactTel,
       this.inTheNameOf,
       this.collectMoney,
+      this.unitType,
       this.distance,
       this.current_status,
       this.dod,

@@ -343,8 +343,8 @@ class HistoryJob_Detail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              state.job_info.weight +
-                                                  ' กิโลกรัม',
+                                              state.job_info.weight +' '+
+                                                  state.job_info.unitType,
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),
