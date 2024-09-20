@@ -222,20 +222,12 @@ class HistoryJob_Detail extends StatelessWidget {
                                                   color: Color.fromARGB(
                                                       255, 66, 66, 66)),
                                             ),
+                                          
                                             SizedBox(
                                               height: 15,
                                             ),
                                             Text(
-                                              'จำนวนที่สินค้า : ',
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 66, 66, 66)),
-                                            ),
-                                            SizedBox(
-                                              height: 15,
-                                            ),
-                                            Text(
-                                              'จำนวนที่สินค้า : ',
+                                              'จำนวนสินค้า : ',
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 66, 66, 66)),
@@ -343,8 +335,8 @@ class HistoryJob_Detail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              state.job_info.weight +' '+
-                                                  state.job_info.unitType,
+                                              state.job_info.weight +' ตัน',
+                                                 
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),
@@ -359,7 +351,8 @@ class HistoryJob_Detail extends StatelessWidget {
                                                   ? '-'
                                                   : state
                                                       .job_info.transportAmount
-                                                      .toString(),
+                                                      .toString() +' '+
+                                                  state.job_info.unitType,
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),

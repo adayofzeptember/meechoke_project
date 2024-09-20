@@ -295,8 +295,7 @@ class New_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                             state.job_info.weight +' '+
-                                                                    state.job_info.unitType,
+                                             state.job_info.weight +" ตัน",
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),
@@ -311,7 +310,8 @@ class New_JobDetail extends StatelessWidget {
                                                   ? '-'
                                                   : state
                                                       .job_info.transportAmount
-                                                      .toString(),
+                                                      .toString()+
+                                                                    state.job_info.unitType,
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),

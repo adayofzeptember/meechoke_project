@@ -1,9 +1,11 @@
+//!
 //? ใช้ด้วยกันกับ current jobs
+//*
+//
 class Jobs_List_Data {
   String? jobNumber;
   String? jobStatus;
   String? currentStatus;
-
   List<Checkin_Location>? checkin_location;
 
   Jobs_List_Data({
@@ -82,12 +84,7 @@ class Checkin_Location {
   String? checkinCategory;
   String? time;
 
-  Checkin_Location({
-    this.checkinCategory,
-    this.point,
-    this.date,
-    this.time
-  });
+  Checkin_Location({this.checkinCategory, this.point, this.date, this.time});
 }
 
 class Current_Location {
