@@ -149,14 +149,15 @@ class New_JobDetail extends StatelessWidget {
                                     SizedBox(
                                       height: 10,
                                     ),
-                                    DottedLine(
-                                      dashGradient: [
-                                        Colors.red,
-                                        Colors.blue,
-                                      ],
-                                      dashLength: 10,
-                                      lineThickness: 2,
-                                    ),
+                                     DottedLine(
+                                          dashColor: Palette.thisBlue,
+                                          // dashGradient: const [
+                                          //   Palette.thisBlue,
+                                          //   Palette.someRed
+                                          // ],
+                                          dashLength: 10,
+                                          lineThickness: 1,
+                                        ),
                                     SizedBox(
                                       height: 15,
                                     ),
@@ -310,7 +311,7 @@ class New_JobDetail extends StatelessWidget {
                                                   ? '-'
                                                   : state
                                                       .job_info.transportAmount
-                                                      .toString()+
+                                                      .toString()+' ' +
                                                                     state.job_info.unitType,
                                               style: TextStyle(
                                                   color: Colors.black,

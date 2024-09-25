@@ -173,14 +173,14 @@ class NewJobs_Screen extends StatelessWidget {
                                         const SizedBox(
                                           height: 10,
                                         ),
-                                        DottedLine(
+                                      DottedLine(
                                           dashColor: Palette.thisBlue,
                                           // dashGradient: const [
                                           //   Palette.thisBlue,
                                           //   Palette.someRed
                                           // ],
-                                          // dashLength: 10,
-                                          // lineThickness: 1,
+                                          dashLength: 10,
+                                          lineThickness: 1,
                                         ),
                                         const SizedBox(
                                           height: 15,
@@ -242,7 +242,7 @@ class NewJobs_Screen extends StatelessWidget {
                                                                   'assets/images/drop.svg',
                                                                 ),
                                                           SizedBox(
-                                                            width: 5,
+                                                            width: 10,
                                                           ),
                                                           Column(
                                                             crossAxisAlignment:
@@ -294,7 +294,7 @@ class NewJobs_Screen extends StatelessWidget {
                                                                 ],
                                                               ),
                                                               SizedBox(
-                                                                height: 5,
+                                                                height: 8,
                                                               ),
                                                               Row(
                                                                 children: [

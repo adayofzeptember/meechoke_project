@@ -195,13 +195,14 @@ class Current_JobDetail extends StatelessWidget {
                                       height: 10,
                                     ),
                                     DottedLine(
-                                      dashGradient: [
-                                        Colors.red,
-                                        Colors.blue,
-                                      ],
-                                      dashLength: 10,
-                                      lineThickness: 2,
-                                    ),
+                                          dashColor: Palette.thisBlue,
+                                          // dashGradient: const [
+                                          //   Palette.thisBlue,
+                                          //   Palette.someRed
+                                          // ],
+                                          dashLength: 10,
+                                          lineThickness: 1,
+                                        ),
                                     SizedBox(
                                       height: 15,
                                     ),

@@ -44,7 +44,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 //     statusBarIconBrightness: Brightness.light, // Icon color
 //     statusBarBrightness: Brightness.light, // For iOS
 //   ));
-
 void main() async {
   Intl.defaultLocale = 'th';
   initializeDateFormatting('th');
@@ -123,9 +122,6 @@ class _StartPageState extends State<StartPage> {
           msg: "อนุญาติการเข้าถึงในภายหลังได้ที่ การตั้งค่าแอป",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.SNACKBAR,
-
-
-          
           timeInSecForIosWeb: 2,
           backgroundColor: const Color.fromARGB(255, 133, 133, 133),
           textColor: Colors.white,
@@ -147,7 +143,8 @@ class _StartPageState extends State<StartPage> {
               type: PageTransitionType.fade,
               child: Login_Screen()),
         );
-      } else {
+      } 
+      else {
         if (prefs.getString('loginType').toString() == 'employee') {
           Navigator.pushReplacement(
             context,

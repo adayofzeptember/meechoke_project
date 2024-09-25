@@ -71,10 +71,14 @@ class Job_Detail {
 class Location_Images {
   String? checkinCategory;
   String? imgURL;
+  String? timeStamp;
+
 
   Location_Images({
     this.checkinCategory,
     this.imgURL,
+
+    this.timeStamp
   });
 }
 

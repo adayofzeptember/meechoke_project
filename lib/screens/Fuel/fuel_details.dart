@@ -170,7 +170,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Stack(
                     children: [
@@ -179,15 +179,6 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                         height: MediaQuery.of(context).size.height * 0.32,
                         decoration: BoxDecoration(
                             color: Palette.thisBlue,
-                            // gradient: LinearGradient(
-                            //   begin: Alignment.topRight,
-                            //   end: Alignment.topLeft,
-                            //   colors: [
-                            //     Palette.thisBlue,
-                            //     Palette.thisBlue,
-                            //     Color.fromARGB(238, 4, 75, 163),
-                            //   ],
-                            // ),
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(30),
                                 topRight: Radius.circular(30))),
@@ -234,13 +225,14 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                       Column(
                         children: [
                           SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.15,
+                            height: MediaQuery.of(context).size.height * 0.13,
                           ),
                           Container(
                             decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30))),
+                                borderRadius: BorderRadius.only(
+                                    bottomRight: Radius.circular(30),
+                                    bottomLeft: Radius.circular(30))),
                             width: double.infinity,
                             child: Padding(
                               padding: const EdgeInsets.all(20.0),
@@ -318,8 +310,8 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                         width: 30,
                                       ),
                                       Text(
-                                        formatNumber(state.fuelInfo.totalprice).toString()
-                            ,
+                                        formatNumber(state.fuelInfo.totalprice)
+                                            .toString(),
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       )
@@ -375,19 +367,16 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                     height: 5,
                                   ),
                                   Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
+                                      Text('จุดรับสินค้า: '),
                                       SizedBox(
-                                          width: 180,
-                                          child: Text('จุดรับสินค้า:')),
-                                      SizedBox(
-                                        width: 30,
-                                      ),
-                                      SizedBox(
-                                        width: 80,
+                                        width: 250,
                                         child: Text(
                                           state.fuelInfo.source.toString(),
                                           overflow: TextOverflow.clip,
-                                          maxLines: 3,
+                                          maxLines: 2,
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold),
@@ -399,19 +388,16 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                                     height: 20,
                                   ),
                                   Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
+                                      Text('จุดส่งสินค้า: '),
                                       SizedBox(
-                                          width: 180,
-                                          child: Text('จุดส่งสินค้า:')),
-                                      SizedBox(
-                                        width: 30,
-                                      ),
-                                      SizedBox(
-                                        width: 80,
+                                        width: 250,
                                         child: Text(
                                           state.fuelInfo.destination.toString(),
-                                          overflow: TextOverflow.fade,
-                                          maxLines: 3,
+                                          overflow: TextOverflow.clip,
+                                          maxLines: 2,
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold),
@@ -442,7 +428,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                     ],
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   (state.fuelInfo.status == 'ยังไม่เติม')
                       ? ElevatedButton(
@@ -451,7 +437,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                               elevation: 0,
                               // side: BorderSide(color: Colors.white),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(10),
                               )),
                           onPressed: () {
                             Navigator.push(
@@ -463,7 +449,7 @@ class _Fuel_DetailState extends State<Fuel_Detail> {
                             );
                           },
                           child: Padding(
-                            padding: const EdgeInsets.all(20.0),
+                            padding: const EdgeInsets.all(15.0),
                             child: Container(
                               width: double.infinity,
                               alignment: Alignment.center,

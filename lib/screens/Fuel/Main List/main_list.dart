@@ -99,7 +99,7 @@ class _Fuel_ListsState extends State<Fuel_Lists>
               ),
             ),
             SizedBox(
-              height: 8,
+              height: 5,
             ),
             // tab bar view here
             Expanded(

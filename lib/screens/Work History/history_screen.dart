@@ -433,10 +433,11 @@ class _History_PageState extends State<History_Page> {
                                           height: 10,
                                         ),
                                         DottedLine(
-                                          dashGradient: [
-                                            Colors.red,
-                                            Colors.blue,
-                                          ],
+                                          dashColor: Palette.thisBlue,
+                                          // dashGradient: [
+                                          //   Colors.red,
+                                          //   Colors.blue,
+                                          // ],
                                           dashLength: 10,
                                           lineThickness: 2,
                                         ),

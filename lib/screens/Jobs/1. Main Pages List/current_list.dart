@@ -229,10 +229,11 @@ class CurrentJobs_Screen extends StatelessWidget {
                                           height: 10,
                                         ),
                                         DottedLine(
-                                          dashGradient: const [
-                                            Palette.thisBlue,
-                                            Palette.someRed
-                                          ],
+                                          dashColor: Palette.thisBlue,
+                                          // dashGradient: const [
+                                          //   Palette.thisBlue,
+                                          //   Palette.someRed
+                                          // ],
                                           dashLength: 10,
                                           lineThickness: 1,
                                         ),
@@ -294,7 +295,7 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                                   'assets/images/drop.svg',
                                                                 ),
                                                           SizedBox(
-                                                            width: 5,
+                                                            width: 10,
                                                           ),
                                                           Column(
                                                             crossAxisAlignment:
@@ -345,8 +346,8 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                                   )
                                                                 ],
                                                               ),
-                                                              SizedBox(
-                                                                height: 5,
+                                                             SizedBox(
+                                                                height: 8,
                                                               ),
                                                               Row(
                                                                 children: [

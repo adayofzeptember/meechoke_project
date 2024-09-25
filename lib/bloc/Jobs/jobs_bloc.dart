@@ -217,6 +217,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 if (imageMap == null || imageMap == [] || imageMap.isEmpty) {
                   dataIMG.add(Location_Images(
                     checkinCategory: checkinCategory,
+                    timeStamp: locationImages['meetingTime'].toString(),
                     imgURL: '',
                   ));
                 } else {
@@ -225,9 +226,9 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                         imageMap[imageKey]['preview_url'].toString();
 
                     dataIMG.add(Location_Images(
-                      checkinCategory: checkinCategory,
-                      imgURL: previewUrl,
-                    ));
+                        checkinCategory: checkinCategory,
+                        imgURL: previewUrl,
+                        timeStamp: locationImages['meetingTime'].toString()));
                   }
                 }
               }
@@ -323,6 +324,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 if (imageMap == null || imageMap == [] || imageMap.isEmpty) {
                   dataIMG.add(Location_Images(
                     checkinCategory: checkinCategory,
+                    timeStamp: locationImages['meetingTime'].toString(),
                     imgURL: '',
                   ));
                 } else {
@@ -332,6 +334,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
 
                     dataIMG.add(Location_Images(
                       checkinCategory: checkinCategory,
+                      timeStamp: locationImages['meetingTime'].toString(),
                       imgURL: previewUrl,
                     ));
                   }

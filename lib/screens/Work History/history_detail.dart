@@ -180,12 +180,13 @@ class HistoryJob_Detail extends StatelessWidget {
                                       height: 10,
                                     ),
                                     DottedLine(
-                                      dashGradient: [
-                                        Colors.red,
-                                        Colors.blue,
-                                      ],
+                                      dashColor: Palette.thisBlue,
+                                      // dashGradient: const [
+                                      //   Palette.thisBlue,
+                                      //   Palette.someRed
+                                      // ],
                                       dashLength: 10,
-                                      lineThickness: 2,
+                                      lineThickness: 1,
                                     ),
                                     SizedBox(
                                       height: 15,
@@ -222,7 +223,6 @@ class HistoryJob_Detail extends StatelessWidget {
                                                   color: Color.fromARGB(
                                                       255, 66, 66, 66)),
                                             ),
-                                          
                                             SizedBox(
                                               height: 15,
                                             ),
@@ -335,8 +335,7 @@ class HistoryJob_Detail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              state.job_info.weight +' ตัน',
-                                                 
+                                              state.job_info.weight + ' ตัน',
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),
@@ -349,10 +348,11 @@ class HistoryJob_Detail extends StatelessWidget {
                                                           .toString() ==
                                                       'null')
                                                   ? '-'
-                                                  : state
-                                                      .job_info.transportAmount
-                                                      .toString() +' '+
-                                                  state.job_info.unitType,
+                                                  : state.job_info
+                                                          .transportAmount
+                                                          .toString() +
+                                                      ' ' +
+                                                      state.job_info.unitType,
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),
@@ -407,7 +407,12 @@ class HistoryJob_Detail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              state.job_info.inTheNameOf,
+                                              (state.job_info.inTheNameOf
+                                                          .toString() ==
+                                                      'null')
+                                                  ? '-'
+                                                  : state.job_info.inTheNameOf
+                                                      .toString(),
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),
@@ -525,16 +530,35 @@ class HistoryJob_Detail extends StatelessWidget {
                                                                   SizedBox(
                                                                     width: 20,
                                                                   ),
-                                                                  Text(
-                                                                    state
-                                                                        .job_info
-                                                                        .img_info[
-                                                                            index]
-                                                                        .checkinCategory
-                                                                        .toString(),
-                                                                    style: TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
+                                                                  Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        state
+                                                                            .job_info
+                                                                            .img_info[index]
+                                                                            .checkinCategory
+                                                                            .toString(),
+                                                                        style: TextStyle(
+                                                                            fontWeight:
+                                                                                FontWeight.bold),
+                                                                      ),
+                                                                      Text(
+                                                                        state
+                                                                            .job_info
+                                                                            .img_info[index]
+                                                                            .timeStamp
+                                                                            .toString(),
+                                                                        style: TextStyle(
+                                                                            fontWeight:
+                                                                                FontWeight.bold),
+                                                                      ),
+                                                                    ],
                                                                   ),
                                                                 ],
                                                               ),
