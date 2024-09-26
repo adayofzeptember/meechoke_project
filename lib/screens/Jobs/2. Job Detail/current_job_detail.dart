@@ -870,7 +870,41 @@ class Current_JobDetail extends StatelessWidget {
                   child: (state.job_info.checkInLocation_Info[1]
                               .checkinCategory ==
                           'ปลายทางรอแจ้ง')
-                      ? Container()
+                      ? Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('*รอแจ้งปลายทางก่อนดำเนินการขั้นต่อไป', style: TextStyle(color: Palette.someRed, fontWeight: FontWeight.bold),),
+                          SizedBox(height: 5,),
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  primary:
+                                      (state.job_info.current_status == 'เสร็จงาน')
+                                          ? Palette.theGreen
+                                          : Palette.thisBlue,
+                                  elevation: 0,
+                                  // side: BorderSide(color: Colors.white),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  )),
+                              onPressed: null,
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Container(
+                                  width: double.infinity,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'ดำเนินการ',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontSize: 20),
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
+                      )
                       : ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               primary:
@@ -916,7 +950,7 @@ class Current_JobDetail extends StatelessWidget {
                             }
                           },
                           child: Padding(
-                            padding: const EdgeInsets.all(15.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: Container(
                               width: double.infinity,
                               alignment: Alignment.center,

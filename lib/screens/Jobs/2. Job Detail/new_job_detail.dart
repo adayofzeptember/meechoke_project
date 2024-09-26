@@ -75,6 +75,8 @@ class New_JobDetail extends StatelessWidget {
                       height: MediaQuery.of(context).size.height * 0.79,
                       child: RawScrollbar(
                         thickness: 5,
+
+
                         radius: Radius.circular(15),
                         child: SingleChildScrollView(
                           child: Padding(
@@ -149,20 +151,22 @@ class New_JobDetail extends StatelessWidget {
                                     SizedBox(
                                       height: 10,
                                     ),
-                                     DottedLine(
-                                          dashColor: Palette.thisBlue,
-                                          // dashGradient: const [
-                                          //   Palette.thisBlue,
-                                          //   Palette.someRed
-                                          // ],
-                                          dashLength: 10,
-                                          lineThickness: 1,
-                                        ),
+                                    DottedLine(
+                                      dashColor: Palette.thisBlue,
+                                      // dashGradient: const [
+                                      //   Palette.thisBlue,
+                                      //   Palette.someRed
+                                      // ],
+                                      dashLength: 10,
+                                      lineThickness: 1,
+                                    ),
+                                    
                                     SizedBox(
                                       height: 15,
                                     ),
                                     Row(
                                       children: [
+                                        
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -295,8 +299,9 @@ class New_JobDetail extends StatelessWidget {
                                             SizedBox(
                                               height: 15,
                                             ),
+                                            
                                             Text(
-                                             state.job_info.weight +" ตัน",
+                                              state.job_info.weight + " ตัน",
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),
@@ -309,10 +314,11 @@ class New_JobDetail extends StatelessWidget {
                                                           .toString() ==
                                                       'null')
                                                   ? '-'
-                                                  : state
-                                                      .job_info.transportAmount
-                                                      .toString()+' ' +
-                                                                    state.job_info.unitType,
+                                                  : state.job_info
+                                                          .transportAmount
+                                                          .toString() +
+                                                      ' ' +
+                                                      state.job_info.unitType,
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),
@@ -321,7 +327,7 @@ class New_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              state.job_info.pallet,
+                                              state.job_info.pallet.toString(),
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.bold),
@@ -371,7 +377,7 @@ class New_JobDetail extends StatelessWidget {
                                             SizedBox(
                                               height: 15,
                                             ),
-                                             Text(
+                                            Text(
                                               (state.job_info.inTheNameOf
                                                           .toString() ==
                                                       'null')
@@ -485,7 +491,11 @@ class New_JobDetail extends StatelessWidget {
                                                               Row(
                                                                 children: [
                                                                   Text(
-                                                                      state.job_info.checkInLocation_Info[index].checkinCategory,
+                                                                      state
+                                                                          .job_info
+                                                                          .checkInLocation_Info[
+                                                                              index]
+                                                                          .checkinCategory,
                                                                       style: TextStyle(
                                                                           color: Palette
                                                                               .thisBlue,
@@ -500,7 +510,7 @@ class New_JobDetail extends StatelessWidget {
                                                                             .width *
                                                                         0.5,
                                                                     child: Text(
-                                                                        (state.job_info.checkInLocation_Info[index].checkinCategory ==
+                                                                      (state.job_info.checkInLocation_Info[index].checkinCategory ==
                                                                               'ปลายทางรอแจ้ง')
                                                                           ? ''
                                                                           : state
@@ -525,9 +535,9 @@ class New_JobDetail extends StatelessWidget {
                                                               ),
                                                               Text(
                                                                   (state.job_info.checkInLocation_Info[index].checkinCategory ==
-                                                                            'ปลายทางรอแจ้ง')
-                                                                        ? 'วันที่รอแจ้ง'
-                                                                        : '${formattedDate}',
+                                                                          'ปลายทางรอแจ้ง')
+                                                                      ? 'วันที่รอแจ้ง'
+                                                                      : '${formattedDate}',
                                                                   overflow:
                                                                       TextOverflow
                                                                           .fade,
