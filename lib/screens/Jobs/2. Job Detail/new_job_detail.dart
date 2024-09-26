@@ -485,8 +485,7 @@ class New_JobDetail extends StatelessWidget {
                                                               Row(
                                                                 children: [
                                                                   Text(
-                                                                      state.job_info.checkInLocation_Info[index].checkinCategory +
-                                                                          ":",
+                                                                      state.job_info.checkInLocation_Info[index].checkinCategory,
                                                                       style: TextStyle(
                                                                           color: Palette
                                                                               .thisBlue,
@@ -501,11 +500,13 @@ class New_JobDetail extends StatelessWidget {
                                                                             .width *
                                                                         0.5,
                                                                     child: Text(
-                                                                      state
-                                                                          .job_info
-                                                                          .checkInLocation_Info[
-                                                                              index]
-                                                                          .point,
+                                                                        (state.job_info.checkInLocation_Info[index].checkinCategory ==
+                                                                              'ปลายทางรอแจ้ง')
+                                                                          ? ''
+                                                                          : state
+                                                                              .job_info
+                                                                              .checkInLocation_Info[index]
+                                                                              .point,
                                                                       style: TextStyle(
                                                                           decoration: TextDecoration
                                                                               .underline,
@@ -523,7 +524,10 @@ class New_JobDetail extends StatelessWidget {
                                                                 height: 5,
                                                               ),
                                                               Text(
-                                                                  '[ ${formattedDate} ]',
+                                                                  (state.job_info.checkInLocation_Info[index].checkinCategory ==
+                                                                            'ปลายทางรอแจ้ง')
+                                                                        ? 'วันที่รอแจ้ง'
+                                                                        : '${formattedDate}',
                                                                   overflow:
                                                                       TextOverflow
                                                                           .fade,
@@ -695,7 +699,7 @@ class New_JobDetail extends StatelessWidget {
                         width: double.infinity,
                         alignment: Alignment.center,
                         child: const Text(
-                          "รับงานนี้",
+                          "รับงาน",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,

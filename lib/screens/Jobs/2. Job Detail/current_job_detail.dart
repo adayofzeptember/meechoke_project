@@ -867,70 +867,74 @@ class Current_JobDetail extends StatelessWidget {
                 }
                 return Padding(
                   padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                  child: 
-                  (state.job_info.checkInLocation_Info[1].checkinCategory ==
-                                                                            'ปลายทางรอแจ้ง')
-
-
-                                                                            ? Container()
-                  :ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: (state.job_info.current_status == 'เสร็จงาน')
-                            ? Palette.theGreen
-                            : Palette.thisBlue,
-                        elevation: 0,
-                        // side: BorderSide(color: Colors.white),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        )),
-                    onPressed: () {
-                      if (state.status3Detail != 1 ||
-                          state.job_info.current_status == 'เสร็จงาน') {
-                        null;
-                      } else if (state.job_info.current_status ==
-                          'รับงานแล้ว') {
-                        showCustomDialog(context, state.job_info.docNumber);
-                        //
-                      } else {
-                        if (state.job_info.currentLocation.currentLocation_id ==
-                            0) {
-                          Navigator.push(
-                            context,
-                            PageTransition(
-                                duration: const Duration(milliseconds: 300),
-                                type: PageTransitionType.rightToLeft,
-                                child: FinishJob_Screen()),
-                          );
-                        } else {
-                          Navigator.push(
-                            context,
-                            PageTransition(
-                                duration: const Duration(milliseconds: 300),
-                                type: PageTransitionType.rightToLeft,
-                                child: Job_Process()),
-                          );
-                        }
-                      }
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Container(
-                        width: double.infinity,
-                        alignment: Alignment.center,
-                        child: Text(
-                          (state.job_info.current_status == 'เสร็จงาน')
-                              ? 'เสร็จงานแล้ว'
-                              : (state.job_info.docStatus == 'กำลังดำเนินการ')
-                                  ? 'ดำเนินการ'
-                                  : 'ออกรถ',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 20),
+                  child: (state.job_info.checkInLocation_Info[1]
+                              .checkinCategory ==
+                          'ปลายทางรอแจ้ง')
+                      ? Container()
+                      : ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary:
+                                  (state.job_info.current_status == 'เสร็จงาน')
+                                      ? Palette.theGreen
+                                      : Palette.thisBlue,
+                              elevation: 0,
+                              // side: BorderSide(color: Colors.white),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              )),
+                          onPressed: () {
+                            if (state.status3Detail != 1 ||
+                                state.job_info.current_status == 'เสร็จงาน') {
+                              null;
+                            } else if (state.job_info.current_status ==
+                                'รับงานแล้ว') {
+                              showCustomDialog(
+                                  context, state.job_info.docNumber);
+                              //
+                            } else {
+                              if (state.job_info.currentLocation
+                                      .currentLocation_id ==
+                                  0) {
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      type: PageTransitionType.rightToLeft,
+                                      child: FinishJob_Screen()),
+                                );
+                              } else {
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      type: PageTransitionType.rightToLeft,
+                                      child: Job_Process()),
+                                );
+                              }
+                            }
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Container(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              child: Text(
+                                (state.job_info.current_status == 'เสร็จงาน')
+                                    ? 'เสร็จงานแล้ว'
+                                    : (state.job_info.docStatus ==
+                                            'กำลังดำเนินการ')
+                                        ? 'ดำเนินการ'
+                                        : 'ออกรถ',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontSize: 20),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
                 );
               },
             )

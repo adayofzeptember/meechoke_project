@@ -173,7 +173,7 @@ class NewJobs_Screen extends StatelessWidget {
                                         const SizedBox(
                                           height: 10,
                                         ),
-                                      DottedLine(
+                                        DottedLine(
                                           dashColor: Palette.thisBlue,
                                           // dashGradient: const [
                                           //   Palette.thisBlue,
@@ -255,8 +255,12 @@ class NewJobs_Screen extends StatelessWidget {
                                                               Row(
                                                                 children: [
                                                                   Text(
-                                                                      state.newjobs_list[index].checkin_location[indexLocation].checkinCategory +
-                                                                          ":",
+                                                                      state
+                                                                          .newjobs_list[
+                                                                              index]
+                                                                          .checkin_location[
+                                                                              indexLocation]
+                                                                          .checkinCategory,
                                                                       style: TextStyle(
                                                                           color: Palette
                                                                               .thisBlue,
@@ -271,12 +275,13 @@ class NewJobs_Screen extends StatelessWidget {
                                                                             .width *
                                                                         0.5,
                                                                     child: Text(
-                                                                      state
-                                                                          .newjobs_list[
-                                                                              index]
-                                                                          .checkin_location[
-                                                                              indexLocation]
-                                                                          .point,
+                                                                      (state.newjobs_list[index].checkin_location[indexLocation].checkinCategory.toString() ==
+                                                                              'ปลายทางรอแจ้ง')
+                                                                          ? ''
+                                                                          : state
+                                                                              .newjobs_list[index]
+                                                                              .checkin_location[indexLocation]
+                                                                              .point,
                                                                       overflow:
                                                                           TextOverflow
                                                                               .ellipsis,
@@ -307,7 +312,10 @@ class NewJobs_Screen extends StatelessWidget {
                                                                   //       .thisBlue,
                                                                   // ),
                                                                   Text(
-                                                                      '[ ${formattedDate} ] ',
+                                                                      (state.newjobs_list[index].checkin_location[indexLocation].checkinCategory.toString() ==
+                                                                              'ปลายทางรอแจ้ง')
+                                                                          ? '- รอแจ้ง -'
+                                                                          : formattedDate,
                                                                       overflow:
                                                                           TextOverflow
                                                                               .fade,
