@@ -125,6 +125,7 @@ class _Job_ProcessState extends State<Job_Process> {
                                 ),
                                 SizedBox(height: 5),
                                 Text(
+                                  
                                   state.job_info.currentLocation
                                       .currentLocation_date,
                                   style: TextStyle(

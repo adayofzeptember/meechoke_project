@@ -195,14 +195,14 @@ class Current_JobDetail extends StatelessWidget {
                                       height: 10,
                                     ),
                                     DottedLine(
-                                          dashColor: Palette.thisBlue,
-                                          // dashGradient: const [
-                                          //   Palette.thisBlue,
-                                          //   Palette.someRed
-                                          // ],
-                                          dashLength: 10,
-                                          lineThickness: 1,
-                                        ),
+                                      dashColor: Palette.thisBlue,
+                                      // dashGradient: const [
+                                      //   Palette.thisBlue,
+                                      //   Palette.someRed
+                                      // ],
+                                      dashLength: 10,
+                                      lineThickness: 1,
+                                    ),
                                     SizedBox(
                                       height: 15,
                                     ),
@@ -599,21 +599,6 @@ class Current_JobDetail extends StatelessWidget {
                                             );
                                           },
                                         );
-
-                                        // ListView.builder(
-                                        //     primary: true,
-                                        //     itemCount:
-                                        //         state.job_info.img_info.length,
-                                        //     shrinkWrap: true,
-                                        //     physics:
-                                        //         const ClampingScrollPhysics(),
-                                        //     itemBuilder: (context, index) {
-                                        //       return Text(state
-                                        //           .job_info
-                                        //           .img_info[index]
-                                        //           .checkinCategory
-                                        //           .toString());
-                                        //     });
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
@@ -689,8 +674,11 @@ class Current_JobDetail extends StatelessWidget {
                                                                 Row(
                                                                   children: [
                                                                     Text(
-                                                                        state.job_info.checkInLocation_Info[index].checkinCategory +
-                                                                            ":",
+                                                                        state
+                                                                            .job_info
+                                                                            .checkInLocation_Info[
+                                                                                index]
+                                                                            .checkinCategory,
                                                                         style: TextStyle(
                                                                             color:
                                                                                 Palette.thisBlue,
@@ -698,24 +686,23 @@ class Current_JobDetail extends StatelessWidget {
                                                                     SizedBox(
                                                                       width: 5,
                                                                     ),
-                                                                    SizedBox(
-                                                                      width: MediaQuery.of(context)
-                                                                              .size
-                                                                              .width *
-                                                                          0.5,
-                                                                      child:
-                                                                          Text(
-                                                                        state
-                                                                            .job_info
-                                                                            .checkInLocation_Info[index]
-                                                                            .point,
-                                                                        style: TextStyle(
-                                                                            decoration:
-                                                                                TextDecoration.underline,
-                                                                            decorationColor: Colors.blue,
-                                                                            color: Colors.blue,
-                                                                            fontWeight: FontWeight.bold),
-                                                                      ),
+                                                                    Text(
+                                                                      (state.job_info.checkInLocation_Info[index].checkinCategory ==
+                                                                              'ปลายทางรอแจ้ง')
+                                                                          ? ''
+                                                                          : state
+                                                                              .job_info
+                                                                              .checkInLocation_Info[index]
+                                                                              .point,
+                                                                      style: TextStyle(
+                                                                          decoration: TextDecoration
+                                                                              .underline,
+                                                                          decorationColor: Colors
+                                                                              .blue,
+                                                                          color: Colors
+                                                                              .blue,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
                                                                     )
                                                                   ],
                                                                 ),
@@ -723,7 +710,10 @@ class Current_JobDetail extends StatelessWidget {
                                                                   height: 5,
                                                                 ),
                                                                 Text(
-                                                                    '[ ${formattedDate} ]',
+                                                                    (state.job_info.checkInLocation_Info[index].checkinCategory ==
+                                                                            'ปลายทางรอแจ้ง')
+                                                                        ? 'วันที่รอแจ้ง'
+                                                                        : '${formattedDate}',
                                                                     overflow:
                                                                         TextOverflow
                                                                             .fade,
@@ -877,7 +867,13 @@ class Current_JobDetail extends StatelessWidget {
                 }
                 return Padding(
                   padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                  child: ElevatedButton(
+                  child: 
+                  (state.job_info.checkInLocation_Info[1].checkinCategory ==
+                                                                            'ปลายทางรอแจ้ง')
+
+
+                                                                            ? Container()
+                  :ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         primary: (state.job_info.current_status == 'เสร็จงาน')
                             ? Palette.theGreen

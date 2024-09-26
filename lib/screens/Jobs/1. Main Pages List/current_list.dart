@@ -92,7 +92,8 @@ class CurrentJobs_Screen extends StatelessWidget {
 
                           context.read<JobsBloc>().add(Get_Allowance(
                               context: context,
-                              getJONumber: state.currentjobs_list[index].jobNumber
+                              getJONumber: state
+                                  .currentjobs_list[index].jobNumber
                                   .toString()));
                         },
                         child: Padding(
@@ -308,8 +309,8 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                               Row(
                                                                 children: [
                                                                   Text(
-                                                                      state.currentjobs_list[index].checkin_location[index2].checkinCategory +
-                                                                          ":",
+                                                                      state.currentjobs_list[index].checkin_location[index2].checkinCategory
+                                                                       ,
                                                                       style: TextStyle(
                                                                           color: Palette
                                                                               .thisBlue,
@@ -324,7 +325,9 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                                             .width *
                                                                         0.5,
                                                                     child: Text(
-                                                                      state
+                                                                      (state.currentjobs_list[index].checkin_location[index2].checkinCategory.toString() == 'ปลายทางรอแจ้ง')
+                                                                      ? ''
+                                                                      :state
                                                                           .currentjobs_list[
                                                                               index]
                                                                           .checkin_location[
@@ -346,7 +349,7 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                                   )
                                                                 ],
                                                               ),
-                                                             SizedBox(
+                                                              SizedBox(
                                                                 height: 8,
                                                               ),
                                                               Row(
@@ -362,7 +365,9 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                                   SizedBox(
                                                                       width: 2),
                                                                   Text(
-                                                                      '${formattedDate}',
+                                                                          (state.currentjobs_list[index].checkin_location[index2].checkinCategory.toString() == 'ปลายทางรอแจ้ง')
+                                                                      ? '- รอแจ้ง -'
+                                                                      :formattedDate,
                                                                       overflow:
                                                                           TextOverflow
                                                                               .fade,

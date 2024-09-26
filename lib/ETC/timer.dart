@@ -7,7 +7,6 @@ import 'package:meechoke_project/ETC/curency.dart';
 import 'package:meechoke_project/bloc/Fuel/fuel_bloc.dart';
 import 'package:meechoke_project/screens/Fuel/fill_form.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:quiver/collection.dart';
 
 class Fuel_Detail extends StatefulWidget {
   @override
