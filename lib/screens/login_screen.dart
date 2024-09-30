@@ -208,20 +208,13 @@ class Login_Screen extends StatelessWidget {
                                               BorderRadius.circular(30),
                                         )),
                                     onPressed: () {
-                                      // Navigator.pushReplacement(
-                                      //   context,
-                                      //   PageTransition(
-                                      //       duration: const Duration(
-                                      //           milliseconds: 500),
-                                      //       type: PageTransitionType.fade,
-                                      //       child: MainMenu_Allience()),
-                                      // );
+                                    
                                       if (_formKey.currentState!.validate()) {
                                         // If the form is valid, display a snackbar or perform any action
-                                        // ScaffoldMessenger.of(context)
-                                        //     .showSnackBar(
-                                        //   SnackBar(content: Text('Valid!')),
-                                        // );
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(content: Text('กรอกข้อมูลให้ถูกต้อง')),
+                                        );
                                       }
 
                                       context.read<LoginBloc>().add(

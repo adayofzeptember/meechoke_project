@@ -40,7 +40,7 @@ Future<void> SuccessMessage_Dialog(
   Future.delayed(const Duration(seconds: 1), () {
     if (check == 'ส่งแจ้ง') {
       Navigator.of(context).pop();
-      Navigator.of(context).pop();
+      // Navigator.of(context).pop();
     } else if (check == 'เชื้อเพลิง') {
       context.read<FuelBloc>().add(Load_FuelNotYet());
       context.read<FuelBloc>().add(Load_Filled());

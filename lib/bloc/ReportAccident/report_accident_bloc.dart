@@ -42,8 +42,6 @@ class ReportAccidentBloc
           ),
         );
 
-        print("docs fetch status: " + response.statusCode.toString());
-
         var fetchedDocs = [];
 
         if (response.statusCode == 200) {
@@ -68,8 +66,6 @@ class ReportAccidentBloc
           emit(state.copyWith(
             vehicle_Docs: fetchedDocs,
           ));
-
-          print('docs count: ' + fetchedDocs.length.toString());
         } else {
           print('status code != 200: ' + response.toString());
         }
@@ -151,9 +147,9 @@ class ReportAccidentBloc
           print('---------> upload image status: ' +
               response2.statusMessage.toString());
           if (response2.statusCode == 200) {
+            SuccessMessage_Dialog(event.context, 'ส่งแจ้งเสร็จสิ้น', 'ส่งแจ้ง');
             emit(state.copyWith(isLoading: false));
             print(response2.data['data']);
-            SuccessMessage_Dialog(event.context, 'ส่งแจ้งเสร็จสิ้น', 'ส่งแจ้ง');
           } else {
             emit(state.copyWith(isLoading: false));
             print('error: ' + response2.data['data']);
@@ -170,7 +166,7 @@ class ReportAccidentBloc
         } else {
           emit(state.copyWith(isLoading: false));
           print('2');
-           print('error: ' + response.data['data']);
+          print('error: ' + response.data['data']);
           Fluttertoast.showToast(
               msg: "เกิดข้อผิดพลาด, โปรดลองใหม่อีกครั้ง",
               toastLength: Toast.LENGTH_LONG,
@@ -230,16 +226,16 @@ class ReportAccidentBloc
           emit(state.copyWith(locationName: ''));
         }
 
-       // print(state.locationName);
+        // print(state.locationName);
       } catch (e) {
         emit(state.copyWith(locationName: ''));
-       // print('error: ' + e.toString());
+        // print('error: ' + e.toString());
       }
     });
 
     on<EmitLatLng>((event, emit) async {
       try {
-     //   print('locating...');
+        //   print('locating...');
         Position position = await Geolocator.getCurrentPosition(
             desiredAccuracy: LocationAccuracy.high);
 
