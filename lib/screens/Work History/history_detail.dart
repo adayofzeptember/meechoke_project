@@ -8,7 +8,7 @@ import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/curency.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
-import 'package:meechoke_project/test/thai_date_converter.dart';
+import 'package:meechoke_project/ETC/thai_date_converter.dart';
 
 class HistoryJob_Detail extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -281,7 +281,7 @@ class HistoryJob_Detail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              'เก็บเงินสดจากลููกค้า : ',
+                                              'เก็บเงินสดจากลูกค้า : ',
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 66, 66, 66)),

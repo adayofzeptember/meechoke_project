@@ -10,7 +10,7 @@ import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 import 'package:meechoke_project/screens/Jobs/3.%20Process%20-%20Finish/finish_job.dart';
 import 'package:meechoke_project/screens/Jobs/3.%20Process%20-%20Finish/process.dart';
-import 'package:meechoke_project/test/thai_date_converter.dart';
+import 'package:meechoke_project/ETC/thai_date_converter.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Current_JobDetail extends StatelessWidget {
@@ -296,7 +296,7 @@ class Current_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              'เก็บเงินสดจากลููกค้า : ',
+                                              'เก็บเงินสดจากลูกค้า : ',
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 66, 66, 66)),

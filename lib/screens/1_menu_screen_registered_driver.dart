@@ -9,7 +9,7 @@ import 'package:meechoke_project/bloc/Fuel/fuel_bloc.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/screens/Checking/Checking_Main.dart';
-import 'package:meechoke_project/screens/Fuel/Main%20List/main_list.dart';
+import 'package:meechoke_project/screens/Fuel/Main%20List/fuel_main_list.dart';
 import 'package:meechoke_project/screens/Jobs/1.%20Main%20Pages%20List/tab_main.dart';
 import 'package:meechoke_project/screens/Financial/financial_screen.dart';
 import 'package:page_transition/page_transition.dart';
@@ -34,7 +34,8 @@ class _MainMenu_RegisteredDriverState extends State<MainMenu_RegisteredDriver> {
     context.read<JobsBloc>().add(Load_CurrentJobs());
     context.read<FuelBloc>().add(Load_FuelNotYet());
     context.read<FuelBloc>().add(Load_Filled());
-
+    context.read<FinancialBloc>().add(Load_Financial());
+    context.read<ReportAccidentBloc>().add(Load_VehicleDocs());
     super.initState();
   }
 
@@ -49,8 +50,7 @@ class _MainMenu_RegisteredDriverState extends State<MainMenu_RegisteredDriver> {
     final double w = size.width / 2;
     //*
     return Scaffold(
-      appBar:
-       AppBar(
+      appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         centerTitle: true,
@@ -65,15 +65,10 @@ class _MainMenu_RegisteredDriverState extends State<MainMenu_RegisteredDriver> {
                   'assets/images/oct.png',
                   color: Colors.white,
                   height: 30,
-                )
-                // Icon(
-                //   Icons.person,
-                //   color: Colors.white,
-                // ),
-                ),
+                )),
           ),
         ],
-        title: const Text(
+        title: Text(
           'พนักงานบริการลูกค้า',
           style:
               TextStyle(color: Palette.thisBlue, fontWeight: FontWeight.bold),
@@ -119,7 +114,6 @@ class _MainMenu_RegisteredDriverState extends State<MainMenu_RegisteredDriver> {
                 children: <Widget>[
                   InkWell(
                     onTap: () {
-                    
                       Navigator.push(
                         context,
                         PageTransition(
@@ -195,8 +189,6 @@ class _MainMenu_RegisteredDriverState extends State<MainMenu_RegisteredDriver> {
                   ),
                   InkWell(
                     onTap: () {
-                      context.read<FinancialBloc>().add(Load_Financial());
-
                       Navigator.push(
                         context,
                         PageTransition(
@@ -225,10 +217,6 @@ class _MainMenu_RegisteredDriverState extends State<MainMenu_RegisteredDriver> {
                 children: <Widget>[
                   InkWell(
                     onTap: () {
-                      context
-                          .read<ReportAccidentBloc>()
-                          .add(Load_VehicleDocs());
-
                       Navigator.push(
                         context,
                         PageTransition(
@@ -273,8 +261,7 @@ class _MainMenu_RegisteredDriverState extends State<MainMenu_RegisteredDriver> {
   }
 
   Future showProfile(var context) async {
-    return 
-    showDialog(
+    return showDialog(
       context: context,
       barrierDismissible: true, //* user must tap button!
       builder: (context) {

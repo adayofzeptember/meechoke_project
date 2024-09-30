@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/test/thai_date_converter.dart';
+import 'package:meechoke_project/ETC/thai_date_converter.dart';
 import '../../../bloc/Jobs/jobs_bloc.dart';
 
 class NewJobs_Screen extends StatelessWidget {
@@ -138,15 +138,14 @@ class NewJobs_Screen extends StatelessWidget {
                                             Text(
                                               state
                                                   .newjobs_list[index].jobNumber
-                                                  .toString(),
+                                                    .toString(),
                                               style: TextStyle(
                                                   color: Palette.thisBlue,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                             Container(
                                               decoration: const BoxDecoration(
-                                                  color: Color.fromARGB(
-                                                      255, 193, 193, 193),
+                                                  color: Palette.thisBlue,
                                                   borderRadius:
                                                       BorderRadius.all(
                                                           Radius.circular(20))),

@@ -425,13 +425,13 @@ class _Report_ScreenState extends State<Report_Screen> {
       } else {
         // If no image is picked, show a message
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No image selected from camera')),
+          const SnackBar(content: Text('ไม่ได้เลือกรูป')),
         );
       }
     } catch (e) {
       // Handle any errors that might occur
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to pick image: $e')),
+        SnackBar(content: Text('เกิดข้อผิดพลาด: $e')),
       );
     }
   }
@@ -448,7 +448,7 @@ class _Report_ScreenState extends State<Report_Screen> {
           }
         } else {
           ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text(' ')));
+              .showSnackBar(const SnackBar(content: Text('ไม่ได้เลือกรูป')));
         }
       },
     );

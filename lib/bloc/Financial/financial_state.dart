@@ -21,5 +21,5 @@ class FinancialState extends Equatable {
   }
 
   @override
-  List<Object> get props => [financial_list];
+  List<Object> get props => [financial_list, status1];
 }

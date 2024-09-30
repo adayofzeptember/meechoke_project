@@ -319,7 +319,7 @@ class _Fuel_fillFormState extends State<Fuel_fillForm> {
               children: [
                 InkWell(
                   onTap: () {
-                    _getToCamera();
+                    _getCamera();
                     Navigator.pop(context);
                   },
                   child: Column(
@@ -379,14 +379,43 @@ class _Fuel_fillFormState extends State<Fuel_fillForm> {
     );
   }
 
-  Future<void> _getToCamera() async {
-    final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(source: ImageSource.camera);
+  // Future<void> _getToCamera() async {
+  //   final picker = ImagePicker();
+  //   final pickedImage = await picker.pickImage(source: ImageSource.camera);
 
-    if (pickedImage != null) {
-      setState(() {
-        selectedImages.add(File(pickedImage.path));
-      });
+  //   if (pickedImage != null) {
+  //     setState(() {
+  //       selectedImages.add(File(pickedImage.path));
+  //     });
+  //   }
+  // }
+
+  Future _getCamera() async {
+    try {
+      // Pick an image from the camera
+      final pickedFile = await picker.pickImage(
+        source: ImageSource.camera,
+        imageQuality: 100, // You can adjust quality
+        maxHeight: 1000,
+        maxWidth: 1000,
+      );
+
+      // If an image is selected, store it in the selectedImages list
+      if (pickedFile != null) {
+        setState(() {
+          selectedImages.add(File(pickedFile.path));
+        });
+      } else {
+        // If no image is picked, show a message
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('ไม่ได้เลือกรูป')),
+        );
+      }
+    } catch (e) {
+      // Handle any errors that might occur
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('เกิดข้อผิดพลาด: $e')),
+      );
     }
   }
 

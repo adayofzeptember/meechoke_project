@@ -4,8 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
-import 'package:meechoke_project/ETC/dateConvert.dart';
-import 'package:meechoke_project/test/thai_date_converter.dart';
+import 'package:meechoke_project/ETC/thai_date_converter.dart';
 
 class CurrentJobs_Screen extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -115,10 +114,7 @@ class CurrentJobs_Screen extends StatelessWidget {
                                           .currentjobs_list[index]
                                           .checkin_location[0]
                                           .date)
-                                      // convertDateToThaiYearFormat(state
-                                      //     .currentjobs_list[index]
-                                      //     .checkin_location[0]
-                                      //     .date)
+                             
 
                                       ,
                                       style: TextStyle(

@@ -921,7 +921,7 @@ class _Check_ScreenState extends State<Check_Screen> {
                   children: [
                     InkWell(
                       onTap: () {
-                        _getToCamera();
+                        _getCamera();
                         Navigator.pop(context);
                       },
                       child: Column(
@@ -975,7 +975,7 @@ class _Check_ScreenState extends State<Check_Screen> {
   //   }
   // }
 
-  Future<void> _getToCamera() async {
+  Future<void> _getCamera() async {
     final pickedFile = await picker.pickImage(
       source: ImageSource.camera,
       imageQuality: 100, // Adjust image quality as needed

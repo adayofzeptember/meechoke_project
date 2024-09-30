@@ -12,6 +12,9 @@ class FinancialBloc extends Bloc<FinancialEvent, FinancialState> {
   FinancialBloc() : super(FinancialState(financial_list: [], status1: 0)) {
     //?
     on<Load_Financial>((event, emit) async {
+      emit(state.copyWith(
+        status1: 0,
+      ));
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
       try {
@@ -58,6 +61,7 @@ class FinancialBloc extends Bloc<FinancialEvent, FinancialState> {
           }
 
           emit(state.copyWith(financial_list: data, status1: 1));
+
         } else {
           emit(state.copyWith(
             status1: 2,

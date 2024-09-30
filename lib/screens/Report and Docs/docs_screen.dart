@@ -39,13 +39,7 @@ class _Docs_ScreenState extends State<Docs_Screen> {
                           height: 15,
                         ),
                         if (state.vehicle_Docs.isEmpty)
-                          GestureDetector(
-                              onTap: () {
-                                context
-                                    .read<ReportAccidentBloc>()
-                                    .add(Load_VehicleDocs());
-                              },
-                              child: Center(child: Text('ไม่มีข้อมูล')))
+                          Center(child: Text('ไม่มีข้อมูล'))
                         else
                           ListView.builder(
                             primary: true,
@@ -217,7 +211,7 @@ class _Docs_ScreenState extends State<Docs_Screen> {
                                                   formatNumber(state
                                                       .vehicle_Docs[index]
                                                       .creditLimit
-                                                      .toString()),
+                                                      .toString() ) + ' บาท',
                                                   style: TextStyle(
                                                       fontSize: 15,
                                                       color: Color.fromARGB(

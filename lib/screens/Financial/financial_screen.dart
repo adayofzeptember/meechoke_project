@@ -11,7 +11,25 @@ class Financial_List extends StatefulWidget {
   _Financial_ListState createState() => _Financial_ListState();
 }
 
-class _Financial_ListState extends State<Financial_List> {
+class _Financial_ListState extends State<Financial_List>with TickerProviderStateMixin  {
+  late AnimationController _animationController;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+ 
+    _animationController =
+        AnimationController(duration: Duration(milliseconds: 500), vsync: this);
+    _animation = Tween<double>(begin: 0, end: 1).animate(_animationController);
+    super.initState();
+  }
+
+  void _handleRefresh() {
+    _animationController.repeat();
+    Future.delayed(Duration(milliseconds: 500), () {
+      _animationController.stop();
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +47,23 @@ class _Financial_ListState extends State<Financial_List> {
               color: Colors.white,
             ),
           ),
+             actions: [
+          RotationTransition(
+            turns: _animation,
+            child: IconButton(
+              icon: Icon(
+                Icons.refresh,
+                color: Colors.white,
+                size: MediaQuery.of(context).size.height * 0.04,
+              ),
+              onPressed: () {
+                _handleRefresh();
+                                  context.read<FinancialBloc>().add(Load_Financial());
+            
+              },
+            ),
+          ),
+        ],
           title: Text(
             'ประวัติการเงิน',
             style: TextStyle(

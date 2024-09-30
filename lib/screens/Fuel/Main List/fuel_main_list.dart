@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
+import 'package:meechoke_project/bloc/Fuel/fuel_bloc.dart';
 import 'package:meechoke_project/screens/Fuel/Main%20List/fuel_done.dart';
 import 'package:meechoke_project/screens/Fuel/Main%20List/fuel_not.dart';
 
@@ -9,14 +11,26 @@ class Fuel_Lists extends StatefulWidget {
   _Fuel_ListsState createState() => _Fuel_ListsState();
 }
 
-class _Fuel_ListsState extends State<Fuel_Lists>
-    with SingleTickerProviderStateMixin {
+class _Fuel_ListsState extends State<Fuel_Lists> with TickerProviderStateMixin {
   late TabController _tabController;
+  late AnimationController _animationController;
+  late Animation<double> _animation;
 
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
+    _animationController =
+        AnimationController(duration: Duration(milliseconds: 500), vsync: this);
+    _animation = Tween<double>(begin: 0, end: 1).animate(_animationController);
     super.initState();
+    super.initState();
+  }
+
+  void _handleRefresh() {
+    _animationController.repeat();
+    Future.delayed(Duration(milliseconds: 500), () {
+      _animationController.stop();
+    });
   }
 
   @override
@@ -46,6 +60,23 @@ class _Fuel_ListsState extends State<Fuel_Lists>
             color: Colors.white,
           ),
         ),
+        actions: [
+          RotationTransition(
+            turns: _animation,
+            child: IconButton(
+              icon: Icon(
+                Icons.refresh,
+                color: Colors.white,
+                size: MediaQuery.of(context).size.height * 0.04,
+              ),
+              onPressed: () {
+                _handleRefresh();
+                context.read<FuelBloc>().add(Load_FuelNotYet());
+                context.read<FuelBloc>().add(Load_Filled());
+              },
+            ),
+          ),
+        ],
         title: const Text(
           'เติมเชื้อเพลิง',
           style: TextStyle(
@@ -67,14 +98,13 @@ class _Fuel_ListsState extends State<Fuel_Lists>
               ),
               child: Padding(
                 padding: const EdgeInsets.all(2.0),
-                child: 
-                TabBar(
-                  
+                child: TabBar(
                   controller: _tabController,
                   dividerColor: Colors.transparent,
                   indicatorColor: Colors.transparent,
                   labelColor: Colors.white,
-                  labelStyle: TextStyle(fontWeight: FontWeight.bold,  fontFamily: 'Sarabun'),
+                  labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold, fontFamily: 'Sarabun'),
                   unselectedLabelColor: Colors.grey,
                   indicatorSize: TabBarIndicatorSize.tab,
                   indicator: BoxDecoration(
@@ -88,8 +118,6 @@ class _Fuel_ListsState extends State<Fuel_Lists>
                   tabs: [
                     Tab(
                       text: 'ยังไม่ได้เติม',
-                      
-                      
                     ),
                     Tab(
                       text: 'เติมแล้ว',

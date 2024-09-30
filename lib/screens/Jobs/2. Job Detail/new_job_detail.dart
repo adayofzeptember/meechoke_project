@@ -8,7 +8,7 @@ import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/curency.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
-import 'package:meechoke_project/test/thai_date_converter.dart';
+import 'package:meechoke_project/ETC/thai_date_converter.dart';
 
 class New_JobDetail extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -126,8 +126,7 @@ class New_JobDetail extends StatelessWidget {
                                         ),
                                         Container(
                                           decoration: BoxDecoration(
-                                              color: Color.fromARGB(
-                                                  255, 193, 193, 193),
+                                              color: Palette.thisBlue,
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(20))),
                                           child: Padding(
@@ -197,6 +196,15 @@ class New_JobDetail extends StatelessWidget {
                                                   color: Color.fromARGB(
                                                       255, 66, 66, 66)),
                                             ),
+                                              SizedBox(
+                                              height: 15,
+                                            ),
+                                            Text(
+                                              'จำนวนที่สินค้า : ',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 66, 66, 66)),
+                                            ),
                                             SizedBox(
                                               height: 15,
                                             ),
@@ -246,7 +254,7 @@ class New_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              'เก็บเงินสดจากลููกค้า : ',
+                                              'เก็บเงินสดจากลูกค้า : ',
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 66, 66, 66)),
@@ -704,7 +712,7 @@ class New_JobDetail extends StatelessWidget {
                             showCustomDialog(context, state.job_info.docNumber);
                           },
                     child: Padding(
-                      padding: const EdgeInsets.all(15.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Container(
                         width: double.infinity,
                         alignment: Alignment.center,
