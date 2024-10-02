@@ -23,6 +23,8 @@ class _Job_ListsState extends State<Job_Lists> with TickerProviderStateMixin {
 
   @override
   void initState() {
+    context.read<JobsBloc>().add(Load_NewJobs());
+    context.read<JobsBloc>().add(Load_CurrentJobs());
     _tabController = TabController(
       length: 2,
       vsync: this,
@@ -30,8 +32,10 @@ class _Job_ListsState extends State<Job_Lists> with TickerProviderStateMixin {
     _animationController =
         AnimationController(duration: Duration(milliseconds: 500), vsync: this);
     _animation = Tween<double>(begin: 0, end: 1).animate(_animationController);
+
     super.initState();
   }
+  
 
   void _handleRefresh() {
     _animationController.repeat();

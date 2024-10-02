@@ -5,4 +5,4 @@ String formatNumber(String numberStr) {
 
   final NumberFormat numberFormat = NumberFormat('##,##0.00', 'en_US');
   return numberFormat.format(number);
-}
+}      

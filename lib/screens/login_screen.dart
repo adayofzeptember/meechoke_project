@@ -55,8 +55,7 @@ class Login_Screen extends StatelessWidget {
                       ),
                       width: double.infinity,
                       height: MediaQuery.of(context).size.height * 1,
-                      child: 
-                      Form(
+                      child: Form(
                         key: _formKey,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 10, right: 10),
@@ -208,14 +207,13 @@ class Login_Screen extends StatelessWidget {
                                               BorderRadius.circular(30),
                                         )),
                                     onPressed: () {
-                                    
-                                      if (_formKey.currentState!.validate()) {
-                                        // If the form is valid, display a snackbar or perform any action
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(content: Text('กรอกข้อมูลให้ถูกต้อง')),
-                                        );
-                                      }
+                                      // if (_formKey.currentState!.validate()) {
+                                      //   // // If the form is valid, display a snackbar or perform any action
+                                      //   // ScaffoldMessenger.of(context)
+                                      //   //     .showSnackBar(
+                                      //   //   SnackBar(content: Text('กรอกข้อมูลให้ถูกต้อง')),
+                                      //   // );
+                                      // }
 
                                       context.read<LoginBloc>().add(
                                           Login_Casual(
@@ -224,7 +222,6 @@ class Login_Screen extends StatelessWidget {
                                                   usernameController.text,
                                               getPassword:
                                                   passwordController.text));
-                                      // //NotificationService().scheduleNotifications();
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(15.0),
@@ -257,12 +254,7 @@ class Login_Screen extends StatelessWidget {
   }
 }
 
-//*clersr 
-
-
-
-
-
+//*clersr
 
 class MyApp extends StatelessWidget {
   @override
@@ -293,8 +285,7 @@ class _ButtonSelectionState extends State<ButtonSelection> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: 
-      Column(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(

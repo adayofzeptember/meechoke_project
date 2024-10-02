@@ -75,8 +75,6 @@ class New_JobDetail extends StatelessWidget {
                       height: MediaQuery.of(context).size.height * 0.79,
                       child: RawScrollbar(
                         thickness: 5,
-
-
                         radius: Radius.circular(15),
                         child: SingleChildScrollView(
                           child: Padding(
@@ -156,16 +154,15 @@ class New_JobDetail extends StatelessWidget {
                                       //   Palette.thisBlue,
                                       //   Palette.someRed
                                       // ],
-                                      dashLength: 10,
+                                      dashLength: 5,
                                       lineThickness: 1,
                                     ),
-                                    
+
                                     SizedBox(
                                       height: 15,
                                     ),
                                     Row(
                                       children: [
-                                        
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -196,7 +193,7 @@ class New_JobDetail extends StatelessWidget {
                                                   color: Color.fromARGB(
                                                       255, 66, 66, 66)),
                                             ),
-                                              SizedBox(
+                                            SizedBox(
                                               height: 15,
                                             ),
                                             Text(
@@ -307,7 +304,6 @@ class New_JobDetail extends StatelessWidget {
                                             SizedBox(
                                               height: 15,
                                             ),
-                                            
                                             Text(
                                               state.job_info.weight + " ตัน",
                                               style: TextStyle(

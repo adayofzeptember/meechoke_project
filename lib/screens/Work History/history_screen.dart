@@ -87,7 +87,7 @@ class _History_PageState extends State<History_Page> {
                             height: 15,
                           ),
                           Text(
-                            'รายได้เดือน ${state.month}',
+                            'รายได้เดือน ${state.month} ${state.year}',
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -307,8 +307,15 @@ class _History_PageState extends State<History_Page> {
                     ],
                   );
                 } else if (state.status == 'loading') {
-                  return Center(
-                    child: CircularProgressIndicator(),
+                  return Column(
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ],
                   );
                 } else if (state.workhistory_list.length == 0) {
                   return Center(
@@ -366,9 +373,8 @@ class _History_PageState extends State<History_Page> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            print(state
-                                    .workhistory_list[index].doc_number
-                                    .toString());
+                            print(state.workhistory_list[index].doc_number
+                                .toString());
                             context.read<JobsBloc>().add(Load_Job_Info(
                                 checkPage: 'history',
                                 context: context,

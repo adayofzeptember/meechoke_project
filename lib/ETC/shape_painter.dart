@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 
-
 const double _kCurveHeight = 50;
 
 class ShapesPainter extends CustomPainter {

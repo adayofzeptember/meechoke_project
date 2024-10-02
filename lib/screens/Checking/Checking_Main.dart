@@ -93,7 +93,7 @@ class _Check_DailyState extends State<Check_Daily> {
                                               255, 238, 246, 255),
                                           borderRadius: BorderRadius.only(
                                               topLeft: Radius.circular(25),
-                                              topRight: Radius.circular(25))), 
+                                              topRight: Radius.circular(25))),
                                       child: const Padding(
                                         padding:
                                             EdgeInsets.only(top: 8, bottom: 8),
@@ -397,15 +397,31 @@ class _Check_DailyState extends State<Check_Daily> {
                                 ],
                               );
                             }
+                        
                             return Column(
                               children: [
-                                Center(
-                                  child: Text(
-                                    'รายการตรวจเช็ค',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Palette.thisBlue,
-                                        fontSize: 23),
+                                GestureDetector(
+                                  onTap: () {
+                                    print(state.checkupID.toString());
+                                    print('----------------------------');
+                                    print(jsonEncode(
+                                        state.storedExtCheckupList1));
+
+                                    print(jsonEncode(
+                                        state.storedExtCheckupEquipment2));
+
+                                    print(jsonEncode(
+                                        state.storedExtCheckupSafety3));
+                                    print('----------------------------');
+                                  },
+                                  child: Center(
+                                    child: Text(
+                                      'รายการตรวจเช็ค',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Palette.thisBlue,
+                                          fontSize: 23),
+                                    ),
                                   ),
                                 ),
                                 SizedBox(
@@ -705,21 +721,6 @@ class _Check_DailyState extends State<Check_Daily> {
                                 SizedBox(
                                   height: 10,
                                 ),
-                                GestureDetector(
-                                    onTap: () {
-                                      print(state.checkupID.toString());
-                                      print('----------------------------');
-                                      print(jsonEncode(
-                                          state.storedExtCheckupList1));
-
-                                      print(jsonEncode(
-                                          state.storedExtCheckupEquipment2));
-
-                                      print(jsonEncode(
-                                          state.storedExtCheckupSafety3));
-                                      print('----------------------------');
-                                    },
-                                    child: Text('for dev')),
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                       primary: Palette.theGreen,
@@ -737,7 +738,8 @@ class _Check_DailyState extends State<Check_Daily> {
                                       : () {
                                           context.read<CarCheckBloc>().add(
                                               Submit_AllCheckings(
-                                                getCheckupID: state.checkupID.toString(),
+                                                  getCheckupID: state.checkupID
+                                                      .toString(),
                                                   context: context));
                                         },
                                   child: Padding(

@@ -26,6 +26,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // gradient: LinearGradient(colors: [
+
 //                     Palette.thisBlue,
 //                     const Color.fromARGB(255, 214, 77, 77)
 //                   ]),
@@ -63,7 +64,7 @@ void main() async {
 
 class StarterWidget extends StatelessWidget {
   const StarterWidget({super.key});
-  @override
+  @override     
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
@@ -116,9 +117,7 @@ class _StartPageState extends State<StartPage> {
   Future<void> _Permission() async {
     var status = await Permission.location.request();
     if (status == PermissionStatus.granted) {
-      {
-        print('อนุญาติการเข้าถึงพื้นที่แล้ว');
-      }
+      print('อนุญาติการเข้าถึงพื้นที่แล้ว');
     } else {
       Fluttertoast.showToast(
           msg: "อนุญาติการเข้าถึงในภายหลังได้ที่ การตั้งค่าแอป",
@@ -177,7 +176,7 @@ class _StartPageState extends State<StartPage> {
           SizedBox(height: 10),
           Center(
             child: Text(
-              'Meechoke Mobile',
+              'Meechoke',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,
