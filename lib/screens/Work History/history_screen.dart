@@ -97,7 +97,7 @@ class _History_PageState extends State<History_Page> {
                             height: 15,
                           ),
                           Text(
-                            '${state.total} บาท',
+                            '${formatNumber(state.total)} บาท',
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -297,7 +297,7 @@ class _History_PageState extends State<History_Page> {
                       ),
                       Center(
                         child: Text(
-                          'เลือกเดือนและปี',
+                          ' ',
                           style: TextStyle(
                               fontSize: 20,
                               color: Palette.thisBlue,
@@ -318,13 +318,22 @@ class _History_PageState extends State<History_Page> {
                     ],
                   );
                 } else if (state.workhistory_list.length == 0) {
-                  return Center(
-                      child: Text(
-                    'ไม่มีข้อมูลประจำเดือน ${state.month}/${state.year}',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: const Color.fromARGB(255, 62, 62, 62)),
-                  ));
+                  return 
+                  Column(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/images/nojob.svg',
+                      ),
+                      Center(
+                          child: Text(
+                        'ไม่พบประวัติงานเดือน ${state.month}/${state.year}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: const Color.fromARGB(255, 62, 62, 62)),
+                      )),
+                    ],
+                  );
                 } else if (state.status == 'error') {
                   return Column(
                     children: [

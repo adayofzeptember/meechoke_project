@@ -69,7 +69,7 @@ class _Check_DailyState extends State<Check_Daily> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(15, 20, 15, 15),
+                    padding: EdgeInsets.fromLTRB(15,  10, 15, 15),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,

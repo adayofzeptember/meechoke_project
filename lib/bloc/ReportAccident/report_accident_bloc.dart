@@ -62,6 +62,7 @@ class ReportAccidentBloc
               }
             }
           });
+          print('docs: '+fetchedDocs.length.toString());
 
           emit(state.copyWith(
             vehicle_Docs: fetchedDocs,

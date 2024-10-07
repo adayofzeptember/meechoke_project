@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/curency.dart';
 
@@ -36,10 +37,24 @@ class _Docs_ScreenState extends State<Docs_Screen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         const SizedBox(
-                          height: 15,
+                          height: 10,
                         ),
                         if (state.vehicle_Docs.isEmpty)
-                          Center(child: Text('ไม่มีข้อมูล'))
+                          Column(
+                            children: [
+                              SvgPicture.asset(
+                                'assets/images/nojob.svg',
+                              ),
+                              Center(
+                                  child: Text(
+                                'ไม่พบข้อมูลกรมธรรม์',
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color:
+                                        const Color.fromARGB(255, 62, 62, 62)),
+                              )),
+                            ],
+                          )
                         else
                           ListView.builder(
                             primary: true,
@@ -63,7 +78,7 @@ class _Docs_ScreenState extends State<Docs_Screen> {
                                         width: double.infinity,
                                         decoration: BoxDecoration(
                                             color: Color.fromARGB(
-                                                255, 238, 246, 255),
+                                                255, 205, 229, 255),
                                             borderRadius: BorderRadius.only(
                                                 topLeft: Radius.circular(25),
                                                 topRight: Radius.circular(25))),
@@ -190,7 +205,7 @@ class _Docs_ScreenState extends State<Docs_Screen> {
                                               height: 5,
                                             ),
                                             Row(
-                                              mainAxisAlignment:
+                                              mainAxisAlignment: 
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
@@ -209,9 +224,10 @@ class _Docs_ScreenState extends State<Docs_Screen> {
                                                 ),
                                                 Text(
                                                   formatNumber(state
-                                                      .vehicle_Docs[index]
-                                                      .creditLimit
-                                                      .toString() ) + ' บาท',
+                                                          .vehicle_Docs[index]
+                                                          .creditLimit
+                                                          .toString()) +
+                                                      ' บาท',
                                                   style: TextStyle(
                                                       fontSize: 15,
                                                       color: Color.fromARGB(

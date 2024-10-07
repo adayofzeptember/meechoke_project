@@ -24,26 +24,24 @@ import 'package:page_transition/page_transition.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 // gradient: LinearGradient(colors: [
-
 //                     Palette.thisBlue,
 //                     const Color.fromARGB(255, 214, 77, 77)
 //                   ]),
-
 // MediaQuery.of(context).size.width * 0.04
-
 //  Navigator.push(
 //           context,
 //           PageTransition(
 //               duration: const Duration
 // (milliseconds: 500),
 //               type: PageTransitionType.fade,
-//               child: Job_OnGoing()),
+//    child: Job_OnGoing()),
 //         );
+//
 //  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
 //     statusBarColor: Colors.white, // Background color
 //     statusBarIconBrightness: Brightness.light, // Icon color
+
 //     statusBarBrightness: Brightness.light, // For iOS
 //   ));
 
@@ -64,7 +62,7 @@ void main() async {
 
 class StarterWidget extends StatelessWidget {
   const StarterWidget({super.key});
-  @override     
+  @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
@@ -77,7 +75,7 @@ class StarterWidget extends StatelessWidget {
         BlocProvider(create: (context) => EmployeeCheckMonthlyBloc()),
         BlocProvider(create: (context) => FinancialBloc()),
         BlocProvider(create: (context) => HistoryWorkBloc()),
-        BlocProvider(create: (context) => ReportAccidentBloc()),
+        BlocProvider(create: (context) => ReportAccidentBloc())
       ],
       child: MaterialApp(
         builder: (context, child) => ResponsiveBreakpoints.builder(

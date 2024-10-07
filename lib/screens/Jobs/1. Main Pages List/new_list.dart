@@ -138,7 +138,7 @@ class NewJobs_Screen extends StatelessWidget {
                                             Text(
                                               state
                                                   .newjobs_list[index].jobNumber
-                                                    .toString(),
+                                                  .toString(),
                                               style: TextStyle(
                                                   color: Palette.thisBlue,
                                                   fontWeight: FontWeight.bold),

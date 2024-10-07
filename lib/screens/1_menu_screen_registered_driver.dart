@@ -35,8 +35,7 @@ class _MainMenu_RegisteredDriverState extends State<MainMenu_RegisteredDriver> {
     context.read<FuelBloc>().add(Load_FuelNotYet());
     context.read<FuelBloc>().add(Load_Filled());
     context.read<FinancialBloc>().add(Load_Financial());
-    context.read<ReportAccidentBloc>().add(Load_VehicleDocs());
-    super.initState();
+     super.initState();
   }
 
   Widget build(BuildContext context) {
@@ -217,6 +216,8 @@ class _MainMenu_RegisteredDriverState extends State<MainMenu_RegisteredDriver> {
                 children: <Widget>[
                   InkWell(
                     onTap: () {
+                          context.read<ReportAccidentBloc>().add(Load_VehicleDocs());
+
                       Navigator.push(
                         context,
                         PageTransition(

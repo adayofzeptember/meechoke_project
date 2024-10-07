@@ -94,7 +94,6 @@ class _Check_ScreenState extends State<Check_Screen> {
 
                     //   );
                     // }
-
                     if (state.checkLoadItems == true) {
                       return Center(
                         child: CircularProgressIndicator(
@@ -748,7 +747,6 @@ class _Check_ScreenState extends State<Check_Screen> {
                                 height: 10,
                               ),
                               SizedBox(
-                                height: 60,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                       primary: (state.toCheckChecklist1 == 0)
@@ -818,7 +816,7 @@ class _Check_ScreenState extends State<Check_Screen> {
                                       alignment: Alignment.center,
                                       child: Text(
                                         (state.toCheckChecklist1 == 0)
-                                            ? 'ต่อไป'
+                                            ? 'ต่อไป > '
                                             : 'บันทึกผล',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
