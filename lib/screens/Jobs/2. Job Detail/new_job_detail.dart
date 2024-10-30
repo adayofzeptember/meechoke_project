@@ -9,6 +9,7 @@ import 'package:meechoke_project/ETC/curency.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 import 'package:meechoke_project/ETC/thai_date_converter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class New_JobDetail extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -508,28 +509,44 @@ class New_JobDetail extends StatelessWidget {
                                                                   SizedBox(
                                                                     width: 5,
                                                                   ),
-                                                                  SizedBox(
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.5,
-                                                                    child: Text(
-                                                                      (state.job_info.checkInLocation_Info[index].checkinCategory ==
-                                                                              'ปลายทางรอแจ้ง')
-                                                                          ? ''
-                                                                          : state
-                                                                              .job_info
-                                                                              .checkInLocation_Info[index]
-                                                                              .point,
-                                                                      style: TextStyle(
-                                                                          decoration: TextDecoration
-                                                                              .underline,
-                                                                          decorationColor: Colors
-                                                                              .blue,
-                                                                          color: Colors
-                                                                              .blue,
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
+                                                                  GestureDetector(
+                                                                    onTap:
+                                                                        () async {
+                                                                      print(state
+                                                                          .job_info
+                                                                          .checkInLocation_Info[
+                                                                              index]
+                                                                          .lat);
+
+                                                                      final Uri
+                                                                          url =
+                                                                          Uri.parse(
+                                                                              'https://www.google.com/maps/search/?api=1&query=${state.job_info.checkInLocation_Info[index].lat},${state.job_info.checkInLocation_Info[index].lng}');
+                                                                      if (!await launchUrl(
+                                                                          url)) {
+                                                                        throw Exception(
+                                                                            'Could not launch $url');
+                                                                      }
+                                                                    },
+                                                                    child:
+                                                                        SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          0.5,
+                                                                      child:
+                                                                          Text(
+                                                                        (state.job_info.checkInLocation_Info[index].checkinCategory ==
+                                                                                'ปลายทางรอแจ้ง')
+                                                                            ? ''
+                                                                            : state.job_info.checkInLocation_Info[index].point,
+                                                                        style: TextStyle(
+                                                                            decoration:
+                                                                                TextDecoration.underline,
+                                                                            decorationColor: Colors.blue,
+                                                                            color: Colors.blue,
+                                                                            fontWeight: FontWeight.bold),
+                                                                      ),
                                                                     ),
                                                                   )
                                                                 ],
@@ -615,16 +632,21 @@ class New_JobDetail extends StatelessWidget {
 
                                         //!
                                         Column(
-                                          crossAxisAlignment:
+                                          crossAxisAlignment:                                  
                                               CrossAxisAlignment.start,
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
-                                            Text(
-                                              state.job_info.remark,
-                                              style: TextStyle(
-                                                  color: Colors.red,
-                                                  fontWeight: FontWeight.bold),
+                                            SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              child: Text(
+                                                state.job_info.remark,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
                                             ),
                                             SizedBox(
                                               height: 15,

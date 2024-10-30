@@ -14,6 +14,7 @@ import 'package:meechoke_project/screens/Jobs/1.%20Main%20Pages%20List/tab_main.
 import 'package:meechoke_project/screens/Financial/financial_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../bloc/ReportAccident/report_accident_bloc.dart';
 import 'Report and Docs/tab_mainScreen.dart';
 import 'Work History/history_screen.dart';
@@ -35,7 +36,7 @@ class _MainMenu_RegisteredDriverState extends State<MainMenu_RegisteredDriver> {
     context.read<FuelBloc>().add(Load_FuelNotYet());
     context.read<FuelBloc>().add(Load_Filled());
     context.read<FinancialBloc>().add(Load_Financial());
-     super.initState();
+    super.initState();
   }
 
   Widget build(BuildContext context) {
@@ -216,7 +217,9 @@ class _MainMenu_RegisteredDriverState extends State<MainMenu_RegisteredDriver> {
                 children: <Widget>[
                   InkWell(
                     onTap: () {
-                          context.read<ReportAccidentBloc>().add(Load_VehicleDocs());
+                      context
+                          .read<ReportAccidentBloc>()
+                          .add(Load_VehicleDocs());
 
                       Navigator.push(
                         context,
@@ -239,10 +242,18 @@ class _MainMenu_RegisteredDriverState extends State<MainMenu_RegisteredDriver> {
                       // SharedPreferences prefrences =
                       //     await SharedPreferences.getInstance();
                       // prefrences.clear();
-                      // Phoenix.rebirth(context);
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("ฟังก์ชันยังไม่พร้อมใช้งาน"),
-                      ));
+                      // Phoenix.rebirth(context);ง
+                      // double x = 40.6892;
+                      // double y = -74.0445;
+                      // final Uri url = Uri.parse(
+                      //     'https://www.google.com/maps/search/?api=1&query=${x},${y}');
+                      // if (!await launchUrl(url)) {
+                      //   throw Exception('Could not launch $url');
+                      // }
+
+                      // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      //   content: Text("ฟังก์ชันยังไม่พร้อมใช้งาน"),
+                      // ));
                     },
                     child: Container(
                       width: double.infinity,

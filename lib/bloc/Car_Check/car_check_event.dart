@@ -1,5 +1,4 @@
 // ignore_for_file: must_be_immutable
-
 part of 'car_check_bloc.dart';
 
 sealed class CarCheckEvent extends Equatable {
@@ -33,7 +32,6 @@ class Swap_Index_forButtones extends CarCheckEvent {
 
 class CheckupList_BlocAdd extends CarCheckEvent {
   List<ExtCheckupList_Item>? getExtCheckup_List;
-
   List<ExtCheckupEquipment_Item>? getExtEqipment_List;
   List<ExtCheckupSafety_Item>? getExtSafety_List;
   String? getTypeCheckToStore;

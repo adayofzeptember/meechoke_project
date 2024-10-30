@@ -73,6 +73,7 @@ class CarCheckBloc extends Bloc<CarCheckEvent, CarCheckState> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? tokenAuth = prefs.getString('userToken');
       // print(prefs.get('registeredDriverId'));
+
       // print(prefs.get('registeredCarId'));
       try {
         final response = await dio.get(

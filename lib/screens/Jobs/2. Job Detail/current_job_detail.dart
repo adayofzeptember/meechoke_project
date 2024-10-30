@@ -12,6 +12,7 @@ import 'package:meechoke_project/screens/Jobs/3.%20Process%20-%20Finish/finish_j
 import 'package:meechoke_project/screens/Jobs/3.%20Process%20-%20Finish/process.dart';
 import 'package:meechoke_project/ETC/thai_date_converter.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Current_JobDetail extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -194,7 +195,7 @@ class Current_JobDetail extends StatelessWidget {
                                     SizedBox(
                                       height: 10,
                                     ),
-                                     DottedLine(
+                                    DottedLine(
                                       dashColor: Palette.thisBlue,
                                       // dashGradient: const [
                                       //   Palette.thisBlue,
@@ -463,12 +464,12 @@ class Current_JobDetail extends StatelessWidget {
                                     SizedBox(
                                       height: 30,
                                     ),
-
                                     //?
                                     InkWell(
                                       onTap: () {
                                         showDialog(
                                           context: context,
+                                          
                                           barrierDismissible:
                                               true, //* user must tap button!
                                           builder: (context) {
@@ -493,10 +494,9 @@ class Current_JobDetail extends StatelessWidget {
                                                           shrinkWrap: true,
                                                           itemBuilder:
                                                               (context, index) {
-                                                            return Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .only(
+                                                            Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
                                                                       bottom:
                                                                           10),
                                                               child: Row(
@@ -573,7 +573,7 @@ class Current_JobDetail extends StatelessWidget {
                                                     onPressed: () {
                                                       Navigator.pop(context);
                                                     },
-                                                    child: Padding(
+                                                    child: Padding(       
                                                       padding:
                                                           const EdgeInsets.all(
                                                               10.0),
@@ -686,23 +686,36 @@ class Current_JobDetail extends StatelessWidget {
                                                                     SizedBox(
                                                                       width: 5,
                                                                     ),
-                                                                    Text(
-                                                                      (state.job_info.checkInLocation_Info[index].checkinCategory ==
-                                                                              'ปลายทางรอแจ้ง')
-                                                                          ? ''
-                                                                          : state
-                                                                              .job_info
-                                                                              .checkInLocation_Info[index]
-                                                                              .point,
-                                                                      style: TextStyle(
-                                                                          decoration: TextDecoration
-                                                                              .underline,
-                                                                          decorationColor: Colors
-                                                                              .blue,
-                                                                          color: Colors
-                                                                              .blue,
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
+                                                                    GestureDetector(
+                                                                      onTap:
+                                                                          () async {
+                                                                        print(state
+                                                                            .job_info
+                                                                            .checkInLocation_Info[index]
+                                                                            .lat);
+
+                                                                        final Uri
+                                                                            url =
+                                                                            Uri.parse('https://www.google.com/maps/search/?api=1&query=${state.job_info.checkInLocation_Info[index].lat},${state.job_info.checkInLocation_Info[index].lng}');
+                                                                        if (!await launchUrl(
+                                                                            url)) {
+                                                                          throw Exception(
+                                                                              'Could not launch $url');
+                                                                        }
+                                                                      },
+                                                                      child:
+                                                                          Text(
+                                                                        (state.job_info.checkInLocation_Info[index].checkinCategory ==
+                                                                                'ปลายทางรอแจ้ง')
+                                                                            ? ''
+                                                                            : state.job_info.checkInLocation_Info[index].point,
+                                                                        style: TextStyle(
+                                                                            decoration:
+                                                                                TextDecoration.underline,
+                                                                            decorationColor: Colors.blue,
+                                                                            color: Colors.blue,
+                                                                            fontWeight: FontWeight.bold),
+                                                                      ),
                                                                     )
                                                                   ],
                                                                 ),
@@ -871,17 +884,24 @@ class Current_JobDetail extends StatelessWidget {
                               .checkinCategory ==
                           'ปลายทางรอแจ้ง')
                       ? Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('*รอแจ้งปลายทางก่อนดำเนินการขั้นต่อไป', style: TextStyle(color: Palette.someRed, fontWeight: FontWeight.bold),),
-                          SizedBox(height: 5,),
-                          ElevatedButton(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '*รอแจ้งปลายทางก่อนดำเนินการขั้นต่อไป',
+                              style: TextStyle(
+                                  color: Palette.someRed,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  primary:
-                                      (state.job_info.current_status == 'เสร็จงาน')
-                                          ? Palette.theGreen
-                                          : Palette.thisBlue,
+                                  primary: (state.job_info.current_status ==
+                                          'เสร็จงาน')
+                                      ? Palette.theGreen
+                                      : Palette.thisBlue,
                                   elevation: 0,
                                   // side: BorderSide(color: Colors.white),
                                   shape: RoundedRectangleBorder(
@@ -903,8 +923,8 @@ class Current_JobDetail extends StatelessWidget {
                                 ),
                               ),
                             ),
-                        ],
-                      )
+                          ],
+                        )
                       : ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               primary:

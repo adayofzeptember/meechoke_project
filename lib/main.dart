@@ -41,13 +41,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 //  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
 //     statusBarColor: Colors.white, // Background color
 //     statusBarIconBrightness: Brightness.light, // Icon color
-
 //     statusBarBrightness: Brightness.light, // For iOS
 //   ));
 
 void main() async {
   Intl.defaultLocale = 'th';
   initializeDateFormatting('th');
+
   GeolocatorPlatform.instance;
   WidgetsFlutterBinding.ensureInitialized();
   SystemUiOverlayStyle(statusBarColor: Colors.transparent);
@@ -128,7 +128,7 @@ class _StartPageState extends State<StartPage> {
     }
   }
 
-  Future<void> _Pause_And_Go() async {
+  Future _Pause_And_Go() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? tokenAuth = prefs.getString('userToken').toString();
     print('stored token: ' + tokenAuth);

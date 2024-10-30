@@ -87,8 +87,9 @@ class Checkin_Location {
   String? date;
   String? checkinCategory;
   String? time;
+  String? lat,lng;
 
-  Checkin_Location({this.checkinCategory, this.point, this.date, this.time});
+  Checkin_Location({this.checkinCategory, this.point, this.date, this.time, this.lat, this.lng});
 }
 
 class Current_Location {

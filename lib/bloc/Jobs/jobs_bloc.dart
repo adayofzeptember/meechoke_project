@@ -13,6 +13,7 @@ import 'package:meechoke_project/screens/Work%20History/history_detail.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'jobs_event.dart';
+
 part 'jobs_state.dart';
 
 // for (var locationImages in checkinLocationList) {
@@ -235,6 +236,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
 
 //*------------------------------------------------------------------------------------------------------------------------
 
+              // แสดงตำแหน่ง
               for (var checkinLocation in checkinLocationList) {
                 dataCheckinInfo.add(Checkin_Location(
                   checkinCategory:
@@ -244,6 +246,8 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                       ? '00.00'
                       : checkinLocation['meetingTime'].toString(),
                   point: checkinLocation['locationCode'].toString(),
+                  lat: checkinLocation['position']['latitude'].toString(),
+                  lng: checkinLocation['position']['longitude'].toString(),
                 ));
               }
             }
