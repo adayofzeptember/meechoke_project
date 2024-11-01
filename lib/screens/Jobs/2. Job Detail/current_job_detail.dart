@@ -1,3 +1,5 @@
+// ignore_for_file: body_might_complete_normally_nullable
+
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,7 +35,7 @@ class Current_JobDetail extends StatelessWidget {
           // flexibleSpace: Container(
           //   decoration: const BoxDecoration(
           //     gradient: LinearGradient(
-          //         begin: Alignment.centerLeft,
+          //         begin: Alignment.centerLeft,asda asd sdfr     c
           //         end: Alignment.centerRight,
           //         colors: <Color>[
           //           Color.fromARGB(236, 233, 65, 65),
@@ -42,6 +44,7 @@ class Current_JobDetail extends StatelessWidget {
           //         ]),
           //   ),
           // ),
+
           automaticallyImplyLeading: false,
           centerTitle: true,
           leading: IconButton(
@@ -195,6 +198,7 @@ class Current_JobDetail extends StatelessWidget {
                                     SizedBox(
                                       height: 10,
                                     ),
+
                                     DottedLine(
                                       dashColor: Palette.thisBlue,
                                       // dashGradient: const [
@@ -449,8 +453,12 @@ class Current_JobDetail extends StatelessWidget {
                                             SizedBox(
                                               width: 90,
                                               child: Text(
-                                                state.job_info.distance
-                                                    .toString(),
+                                                (state.job_info.distance
+                                                            .toString() ==
+                                                        'null')
+                                                    ? '-'
+                                                    : state.job_info.distance
+                                                        .toString(),
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontWeight:
@@ -464,12 +472,11 @@ class Current_JobDetail extends StatelessWidget {
                                     SizedBox(
                                       height: 30,
                                     ),
-                                    //?
+
                                     InkWell(
                                       onTap: () {
                                         showDialog(
                                           context: context,
-                                          
                                           barrierDismissible:
                                               true, //* user must tap button!
                                           builder: (context) {
@@ -573,7 +580,7 @@ class Current_JobDetail extends StatelessWidget {
                                                     onPressed: () {
                                                       Navigator.pop(context);
                                                     },
-                                                    child: Padding(       
+                                                    child: Padding(
                                                       padding:
                                                           const EdgeInsets.all(
                                                               10.0),

@@ -39,15 +39,20 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
           }),
         );
 
-        //  var x = response.data['data'][1]['jobOrderNumber'][0]['joNumber'].toString();
-        // print('sdfsdfsdfsdf'+x);
+        var x = response.data['data'][1]['jobOrderNumber'][0]['joNumber']
+            .toString();
+        print('response jo number' + x);
+        
 
         var data = [];
         if (response.statusCode == 200) {
           for (var elements in response.data['data']) {
             data.add(Fuel_Model(
               id: await elements['id'].toString(),
-              date: await elements['fuelOrderDate']['date'].toString(),
+              date: (await elements['fuelOrderDate']['date']) == null ||
+                      (await elements['fuelOrderDate']['date']).isEmpty
+                  ? 'ไม่ระบุวันที่'
+                  : await elements['fuelOrderDate']['date'].toString(),
               jo_number: (await elements['jobOrderNumber']) == null ||
                       (await elements['jobOrderNumber']).isEmpty
                   ? 'ไม่มี JO'
@@ -57,7 +62,10 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
               location_name:
                   await elements['location']['locationFullName'].toString(),
               volum: await elements['detailFuelVolumeSummary'].toString(),
-              remark: await elements['remark'].toString(),
+              remark: (await elements['remark']) == null ||
+                      (await elements['remark']).isEmpty
+                  ? 'ไม่มี JO'
+                  : await elements['remark'].toString(),
             ));
           }
 
@@ -158,13 +166,11 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
               // destination: nestedData['jobOrderNumber']['jobRoute']
               //     ['destination'],
 
-              destination: (await nestedData['jobOrderNumber']) == null ||
-                      (await nestedData['jobOrderNumber']['jobRoute']).isEmpty
+              destination: (await nestedData['jobOrderNumber']) == null || (await nestedData['jobOrderNumber']['jobRoute']).isEmpty
                   ? '-'
                   : await nestedData['jobOrderNumber']['jobRoute']['destination']
                       .toString(),
-              source: (await nestedData['jobOrderNumber']) == null ||
-                      (await nestedData['jobOrderNumber']['jobRoute']).isEmpty
+              source: (await nestedData['jobOrderNumber']) == null || (await nestedData['jobOrderNumber']['jobRoute']).isEmpty
                   ? '-'
                   : await nestedData['jobOrderNumber']['jobRoute']['source']
                       .toString(),
@@ -173,8 +179,7 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
 
               id: nestedData['id'].toString(),
               date: nestedData['fuelOrderDate']['date'].toString(),
-              jo_number: (await nestedData['jobOrderNumber']) == null ||
-                      (await nestedData['jobOrderNumber']).isEmpty
+              jo_number: (await nestedData['jobOrderNumber']) == null || (await nestedData['jobOrderNumber']).isEmpty
                   ? 'ไม่มี JO'
                   : await nestedData['jobOrderNumber']['joNumber'].toString(),
               doc_number: nestedData['documentNumber'].toString(),
@@ -185,13 +190,17 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
                   nestedData['location']['locationFullName'].toString(),
               fuelType: nestedData['4mChange']['details']['primaryFuelType']['name']
                   .toString(),
-              fuelGroup:
-                  nestedData['4mChange']['details']['primaryFuelGroup']['name'].toString(),
+              fuelGroup: nestedData['4mChange']['details']['primaryFuelGroup']['name']
+                  .toString(),
               volum: nestedData['detailFuelVolumeSummary'].toString(),
               totalprice: nestedData['detailFuelOrderTotalPrice'].toString(),
               paymentMethod: nestedData['paymentMethod'].toString(),
-              cardNumber: (await nestedData['currentCard']) == null || (await nestedData['currentCard']).isEmpty ? '-' : await nestedData['currentCard']['cardNumber'].toString(),
-              creditRemains: (await nestedData['currentCard']) == null || (await nestedData['currentCard']).isEmpty ? '-' : await nestedData['currentCard']['creditRemains'].toString(),
+              cardNumber: (await nestedData['currentCard']) == null || (await nestedData['currentCard']).isEmpty
+                  ? '-'
+                  : await nestedData['currentCard']['cardNumber'].toString(),
+              creditRemains: (await nestedData['currentCard']) == null || (await nestedData['currentCard']).isEmpty
+                  ? '-'
+                  : await nestedData['currentCard']['creditRemains'].toString(),
 
               // cardNumber: nestedData['currentCard']['cardNumber'].toString(),
               // creditRemains:

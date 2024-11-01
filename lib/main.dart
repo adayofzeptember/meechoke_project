@@ -47,7 +47,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
   Intl.defaultLocale = 'th';
   initializeDateFormatting('th');
-
   GeolocatorPlatform.instance;
   WidgetsFlutterBinding.ensureInitialized();
   SystemUiOverlayStyle(statusBarColor: Colors.transparent);
@@ -135,6 +134,9 @@ class _StartPageState extends State<StartPage> {
     print('logintype: ' + prefs.getString('loginType').toString());
     await Future.delayed(const Duration(seconds: 2), () {
       if (tokenAuth == '' || tokenAuth == 'null') {
+
+          
+
         Navigator.pushReplacement(
           context,
           PageTransition(

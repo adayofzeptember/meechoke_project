@@ -62,16 +62,20 @@ class Login_Screen extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const SizedBox(
                                   height: 30,
                                 ),
-                                const Text(
-                                  'เข้าสู่ระบบ',
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                      color: Palette.thisBlue),
+                                Center(
+                                  child: const Text(
+                                    'เข้าสู่ระบบ',
+                                    style: TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold,
+                                        color: Palette.thisBlue),
+                                  ),
                                 ),
                                 const SizedBox(
                                   height: 30,
@@ -191,6 +195,30 @@ class Login_Screen extends StatelessWidget {
                                                   255, 211, 211, 211)),
                                           borderRadius:
                                               BorderRadius.circular(10))),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    //                            Icon(
+                                    //   isChecked ? Icons.check_box : Icons.check_box_outline_blank,
+                                    //   color: Colors.blue,
+                                    // ),
+                                    // setState(() {
+                                    //   isChecked = !isChecked;
+                                    // });
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.check_box,
+                                        color: Palette.thisBlue,
+                                      ),
+                                      SizedBox(width: 5),
+                                      Text('จำรหัสผ่าน'),
+                                    ],
+                                  ),
                                 ),
                                 const SizedBox(
                                   height: 25,

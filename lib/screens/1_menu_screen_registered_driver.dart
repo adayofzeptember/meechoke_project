@@ -14,7 +14,6 @@ import 'package:meechoke_project/screens/Jobs/1.%20Main%20Pages%20List/tab_main.
 import 'package:meechoke_project/screens/Financial/financial_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../bloc/ReportAccident/report_accident_bloc.dart';
 import 'Report and Docs/tab_mainScreen.dart';
 import 'Work History/history_screen.dart';
