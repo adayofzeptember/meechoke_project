@@ -414,7 +414,12 @@ class HistoryJob_Detail extends StatelessWidget {
                                         SizedBox(
                                           width: 90,
                                           child: Text(
-                                            state.job_info.distance.toString(),
+                                            (state.job_info.distance
+                                                        .toString() ==
+                                                    'null')
+                                                ? '-'
+                                                : state.job_info.distance
+                                                    .toString(),
                                             style: TextStyle(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.bold),
@@ -733,7 +738,7 @@ class HistoryJob_Detail extends StatelessWidget {
                                                                         fontWeight:
                                                                             FontWeight.bold)),
                                                                 SizedBox(
-                                                                  width: 10,
+                                                                  width: 5,
                                                                 ),
                                                                 Text(
                                                                     state

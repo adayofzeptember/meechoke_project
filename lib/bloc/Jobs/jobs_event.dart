@@ -11,7 +11,11 @@ sealed class JobsEvent extends Equatable {
 
 class TEST extends JobsEvent {}
 
-class Load_NewJobs extends JobsEvent {}
+class Load_NewJobs extends JobsEvent {
+  var context;
+  Load_NewJobs(
+      {required this.context});
+}
 
 class Load_CurrentJobs extends JobsEvent {}
 

@@ -30,7 +30,7 @@ class NewJobs_Screen extends StatelessWidget {
                 else if (state.status == 2) {
                   return GestureDetector(
                     onTap: () {
-                      context.read<JobsBloc>().add(Load_NewJobs());
+                      context.read<JobsBloc>().add(Load_NewJobs(context: context));
                     },
                     child: Center(
                         child: Column(

@@ -30,7 +30,7 @@ class _MainMenu_RegisteredDriverState extends State<MainMenu_RegisteredDriver> {
   @override
   void initState() {
     context.read<ProfileBloc>().add(Load_Profile());
-    context.read<JobsBloc>().add(Load_NewJobs());
+    context.read<JobsBloc>().add(Load_NewJobs(context: context));
     context.read<JobsBloc>().add(Load_CurrentJobs());
     context.read<FuelBloc>().add(Load_FuelNotYet());
     context.read<FuelBloc>().add(Load_Filled());

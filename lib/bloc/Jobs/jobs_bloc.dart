@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meechoke_project/ETC/api_url.dart';
 import 'package:meechoke_project/ETC/success_dialog.dart';
@@ -69,7 +70,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 dataCheckin.add(Checkin_Location(
                   checkinCategory:
                       checkinLocation['checkinCategory'].toString(),
-                  date: checkinLocation['meetingDate'].toString(),
+                  date: checkinLocation['date'].toString(),
                   point: checkinLocation['locationCode'].toString(),
                 ));
               }
@@ -84,6 +85,8 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
 
             //print('have: ' + dataCheckin.length.toString());
           }
+          
+
 
           emit(state.copyWith(newjobs_list: dataNewJobs, status: 1));
         } else {
@@ -91,8 +94,12 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
           emit(state.copyWith(
             status: 2,
           ));
+
         }
-      } catch (e) {
+      } on DioException catch (e) {
+        print('-----------------');
+        print(e.response!.data);
+      
         print("Exception Try: $e");
         emit(state.copyWith(
           status: 2,
@@ -126,7 +133,8 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 dataCheckin.add(Checkin_Location(
                   checkinCategory:
                       checkinLocation['checkinCategory'].toString(),
-                  date: checkinLocation['meetingDate'].toString(),
+                  date: checkinLocation['date'].toString(),
+
                   point: checkinLocation['locationCode'].toString(),
                 ));
               }
@@ -431,9 +439,9 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
             status3Detail: 2,
           ));
         }
-      } catch (e) {
+      } on DioException catch (e) {
         print("Exception Try: $e");
-        emit(state.copyWith(
+        (state.copyWith(
           status3Detail: 2,
         ));
       }

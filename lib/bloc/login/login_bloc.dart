@@ -42,10 +42,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
         print(
             response.statusCode.toString() + response.statusMessage.toString());
+
+        print(response.data);
         emit(state.copyWith(
             loading: false,
             registeredDriverId:
                 response.data['data']['user']['id'].toString()));
+
+        if (response.statusCode != 200) {
+          print('error');
+          print(response.data);
+        }
 
         prefs.setString('registeredDriverId',
             response.data['data']['user']['id'].toString());
@@ -99,11 +106,58 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             backgroundColor: Palette.theGreen,
             textColor: Colors.white,
             fontSize: 15);
-      }on DioException catch (e) {
+      } on DioException catch (e) {
         emit(state.copyWith(loading: false));
-        print(e);
+        print('-------------ERROR--------------');
 
-        if (e.toString().contains('422')) {
+        print(e.response!.data);
+
+        print('--------------------------------');
+
+        if (e.response
+            .toString()
+            .contains('The password field must be at least 8 characters')) {
+          debugPrint("The password field must be at least 8 characters");
+          Fluttertoast.showToast(
+              msg: "รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.SNACKBAR,
+              timeInSecForIosWeb: 2,
+              backgroundColor: const Color.fromARGB(255, 133, 133, 133),
+              textColor: const Color.fromARGB(255, 200, 110, 110),
+              fontSize: 15);
+        } else if (e.response.toString().contains('Wrong password')) {
+          debugPrint("Wrong password");
+          Fluttertoast.showToast(
+              msg: "รหัสผ่านไม่ถูกต้อง",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.SNACKBAR,
+              timeInSecForIosWeb: 2,
+              backgroundColor: const Color.fromARGB(255, 133, 133, 133),
+              textColor: const Color.fromARGB(255, 200, 110, 110),
+              fontSize: 15);
+        } else if (e.response.toString().contains('Already login session')) {
+          debugPrint("Already login session");
+          Fluttertoast.showToast(
+              msg: "มีการเข้าสู่ระบบค้างอยู่",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.SNACKBAR,
+              timeInSecForIosWeb: 2,
+              backgroundColor: const Color.fromARGB(255, 133, 133, 133),
+              textColor: const Color.fromARGB(255, 200, 110, 110),
+              fontSize: 15);
+        } else if (e.response.toString().contains('blocked')) {
+          debugPrint("blocked");
+          Fluttertoast.showToast(
+              msg: "บัญชีของคุณถูกบล็อก กรุณาติดต่อผู้ดูแลระบบ",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.SNACKBAR,
+              timeInSecForIosWeb: 2,
+              backgroundColor: const Color.fromARGB(255, 133, 133, 133),
+              textColor: const Color.fromARGB(255, 200, 110, 110),
+              fontSize: 15);
+        } else if (e.response.toString().contains('422')) {
+          debugPrint("422");
           Fluttertoast.showToast(
               msg: "ชื่อผู้่ใช้หรือรหัสผ่านไม่ถูกต้อง",
               toastLength: Toast.LENGTH_LONG,
@@ -113,6 +167,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
               textColor: const Color.fromARGB(255, 200, 110, 110),
               fontSize: 15);
         } else {
+          debugPrint("ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้, โปรดลองใหม่อีกครั้ง");
           Fluttertoast.showToast(
               msg: "ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้, โปรดลองใหม่อีกครั้ง",
               toastLength: Toast.LENGTH_LONG,

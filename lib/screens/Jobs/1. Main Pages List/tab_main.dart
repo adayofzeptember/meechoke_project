@@ -23,7 +23,7 @@ class _Job_ListsState extends State<Job_Lists> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    context.read<JobsBloc>().add(Load_NewJobs());
+    context.read<JobsBloc>().add(Load_NewJobs(context: context));
     context.read<JobsBloc>().add(Load_CurrentJobs());
     _tabController = TabController(
       length: 2,
@@ -74,7 +74,7 @@ class _Job_ListsState extends State<Job_Lists> with TickerProviderStateMixin {
               ),
               onPressed: () {
                 _handleRefresh();
-                context.read<JobsBloc>().add(Load_NewJobs());
+                context.read<JobsBloc>().add(Load_NewJobs(context: context));
                 context.read<JobsBloc>().add(Load_CurrentJobs());
               },
             ),

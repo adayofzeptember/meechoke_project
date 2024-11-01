@@ -56,7 +56,7 @@ Future<void> SuccessMessage_Dialog(
       context.read<EmployeeCheckMonthlyBloc>().add(Load_All_MonthList());
       context.read<EmployeeCheckMonthlyBloc>().add(Load_Done_MonthList());
     } else {
-      context.read<JobsBloc>().add(Load_NewJobs());
+      context.read<JobsBloc>().add(Load_NewJobs(context: context));
       context.read<JobsBloc>().add(Load_CurrentJobs());
       Navigator.pushReplacement(
         context,

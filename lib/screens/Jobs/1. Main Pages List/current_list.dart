@@ -30,7 +30,9 @@ class CurrentJobs_Screen extends StatelessWidget {
                 else if (state.status2 == 2) {
                   return GestureDetector(
                     onTap: () {
-                      context.read<JobsBloc>().add(Load_NewJobs());
+                      context
+                          .read<JobsBloc>()
+                          .add(Load_NewJobs(context: context));
                     },
                     child: Center(
                         child: Column(
@@ -113,10 +115,7 @@ class CurrentJobs_Screen extends StatelessWidget {
                                       splitDateToThaiMonth(state
                                           .currentjobs_list[index]
                                           .checkin_location[0]
-                                          .date)
-                             
-
-                                      ,
+                                          .date),
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -305,8 +304,12 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                               Row(
                                                                 children: [
                                                                   Text(
-                                                                      state.currentjobs_list[index].checkin_location[index2].checkinCategory
-                                                                       ,
+                                                                      state
+                                                                          .currentjobs_list[
+                                                                              index]
+                                                                          .checkin_location[
+                                                                              index2]
+                                                                          .checkinCategory,
                                                                       style: TextStyle(
                                                                           color: Palette
                                                                               .thisBlue,
@@ -321,14 +324,13 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                                             .width *
                                                                         0.5,
                                                                     child: Text(
-                                                                      (state.currentjobs_list[index].checkin_location[index2].checkinCategory.toString() == 'ปลายทางรอแจ้ง')
-                                                                      ? ''
-                                                                      :state
-                                                                          .currentjobs_list[
-                                                                              index]
-                                                                          .checkin_location[
-                                                                              index2]
-                                                                          .point,
+                                                                      (state.currentjobs_list[index].checkin_location[index2].checkinCategory.toString() ==
+                                                                              'ปลายทางรอแจ้ง')
+                                                                          ? ''
+                                                                          : state
+                                                                              .currentjobs_list[index]
+                                                                              .checkin_location[index2]
+                                                                              .point,
                                                                       overflow:
                                                                           TextOverflow
                                                                               .ellipsis,
@@ -360,10 +362,18 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                                           133)),
                                                                   SizedBox(
                                                                       width: 2),
+
                                                                   Text(
-                                                                          (state.currentjobs_list[index].checkin_location[index2].checkinCategory.toString() == 'ปลายทางรอแจ้ง')
-                                                                      ? '- รอแจ้ง -'
-                                                                      :formattedDate,
+                                                                      (state.currentjobs_list[index].checkin_location[index2].checkinCategory.toString() ==
+                                                                              'ปลายทางรอแจ้ง')
+                                                                          ? '- รอแจ้ง -'
+                                                                          : state
+                                                                              .currentjobs_list[
+                                                                                  index]
+                                                                              .checkin_location[
+                                                                                  index2]
+                                                                              .date
+                                                                              .toString(),
                                                                       overflow:
                                                                           TextOverflow
                                                                               .fade,
@@ -375,6 +385,22 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                                               133),
                                                                           fontWeight:
                                                                               FontWeight.bold)),
+                                                                  // Text(
+                                                                  //     (state.currentjobs_list[index].checkin_location[index2].checkinCategory.toString() ==
+                                                                  //             'ปลายทางรอแจ้ง')
+                                                                  //         ? '- รอแจ้ง -'
+                                                                  //         : formattedDate,
+                                                                  //     overflow:
+                                                                  //         TextOverflow
+                                                                  //             .fade,
+                                                                  //     style: TextStyle(
+                                                                  //         color: Color.fromARGB(
+                                                                  //             255,
+                                                                  //             133,
+                                                                  //             133,
+                                                                  //             133),
+                                                                  //         fontWeight:
+                                                                  //             FontWeight.bold)),
                                                                 ],
                                                               ),
                                                             ],

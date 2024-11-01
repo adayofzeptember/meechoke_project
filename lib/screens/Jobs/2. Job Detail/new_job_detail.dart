@@ -198,7 +198,7 @@ class New_JobDetail extends StatelessWidget {
                                               height: 15,
                                             ),
                                             Text(
-                                              'จำนวนที่สินค้า : ',
+                                              'จำนวนสินค้า : ',
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 66, 66, 66)),
@@ -206,6 +206,7 @@ class New_JobDetail extends StatelessWidget {
                                             SizedBox(
                                               height: 15,
                                             ),
+                                            
                                             Text(
                                               'จำนวนพาเลท : ',
                                               style: TextStyle(
@@ -314,20 +315,19 @@ class New_JobDetail extends StatelessWidget {
                                             SizedBox(
                                               height: 15,
                                             ),
-                                            Text(
-                                              (state.job_info.transportAmount
-                                                          .toString() ==
-                                                      'null')
-                                                  ? '-'
-                                                  : state.job_info
-                                                          .transportAmount
-                                                          .toString() +
-                                                      ' ' +
-                                                      state.job_info.unitType,
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
+                                          Text(
+                                          (state.job_info.transportAmount
+                                                      .toString() ==
+                                                  'null')
+                                              ? '-'
+                                              : state.job_info.transportAmount
+                                                      .toString() +
+                                                  ' ' +
+                                                  state.job_info.unitType,
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                             SizedBox(
                                               height: 15,
                                             ),
@@ -406,12 +406,18 @@ class New_JobDetail extends StatelessWidget {
                                             SizedBox(
                                               height: 15,
                                             ),
-                                            Text(
-                                              state.job_info.distance,
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
+                                           Text(
+                                                (state.job_info.distance
+                                                            .toString() ==
+                                                        'null')
+                                                    ? '-'
+                                                    : state.job_info.distance
+                                                        .toString(),
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
                                           ],
                                         )
                                       ],
@@ -554,23 +560,47 @@ class New_JobDetail extends StatelessWidget {
                                                               SizedBox(
                                                                 height: 5,
                                                               ),
-                                                              Text(
-                                                                  (state.job_info.checkInLocation_Info[index].checkinCategory ==
-                                                                          'ปลายทางรอแจ้ง')
-                                                                      ? 'วันที่รอแจ้ง'
-                                                                      : '${formattedDate}',
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .fade,
-                                                                  style: TextStyle(
-                                                                      color: Color.fromARGB(
-                                                                          255,
-                                                                          133,
-                                                                          133,
-                                                                          133),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold)),
+                                                             Row(
+                                                                  children: [
+                                                                    Text(
+                                                                        (state.job_info.checkInLocation_Info[index].checkinCategory ==
+                                                                                'ปลายทางรอแจ้ง')
+                                                                            ? 'วันที่รอแจ้ง'
+                                                                            : '${formattedDate}',
+                                                                        overflow:
+                                                                            TextOverflow
+                                                                                .fade,
+                                                                        style: TextStyle(
+                                                                            color: Color.fromARGB(
+                                                                                255,
+                                                                                133,
+                                                                                133,
+                                                                                133),
+                                                                            fontWeight:
+                                                                                FontWeight.bold)),
+                                                                    SizedBox(
+                                                                      width: 5,
+                                                                    ),
+                                                                    Text(
+                                                                        state
+                                                                            .job_info
+                                                                            .checkInLocation_Info[
+                                                                                index]
+                                                                            .time,
+                                                                        overflow:
+                                                                            TextOverflow
+                                                                                .fade,
+                                                                        style: TextStyle(
+                                                                            color: Color.fromARGB(
+                                                                                255,
+                                                                                133,
+                                                                                133,
+                                                                                133),
+                                                                            fontWeight:
+                                                                                FontWeight.bold)),
+                                                                  ],
+                                                                ),
+                                                                              
                                                             ],
                                                           )
                                                         ],
@@ -632,7 +662,7 @@ class New_JobDetail extends StatelessWidget {
 
                                         //!
                                         Column(
-                                          crossAxisAlignment:                                  
+                                          crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -772,7 +802,7 @@ void showCustomDialog(BuildContext context, String joNumber) {
             onPressed: () {
               context.read<JobsBloc>().add(
                   Action_Status(getJONumber: joNumber, getStatus: 'รับงาน'));
-              context.read<JobsBloc>().add(Load_NewJobs());
+              context.read<JobsBloc>().add(Load_NewJobs(context: context));
               context.read<JobsBloc>().add(Load_CurrentJobs());
               Navigator.of(context).pop();
               Navigator.of(context).pop();
