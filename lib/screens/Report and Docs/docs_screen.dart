@@ -205,7 +205,7 @@ class _Docs_ScreenState extends State<Docs_Screen> {
                                               height: 5,
                                             ),
                                             Row(
-                                              mainAxisAlignment: 
+                                              mainAxisAlignment:
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [

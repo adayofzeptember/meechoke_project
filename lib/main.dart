@@ -111,7 +111,8 @@ class _StartPageState extends State<StartPage> {
     super.initState();
   }
 
-  Future<void> _Permission() async {
+  Future<void> _Permission() async { 
+     
     var status = await Permission.location.request();
     if (status == PermissionStatus.granted) {
       print('อนุญาติการเข้าถึงพื้นที่แล้ว');
@@ -122,7 +123,7 @@ class _StartPageState extends State<StartPage> {
           gravity: ToastGravity.SNACKBAR,
           timeInSecForIosWeb: 2,
           backgroundColor: const Color.fromARGB(255, 133, 133, 133),
-          textColor: Colors.white,
+          textColor: Colors.white, 
           fontSize: 15);
     }
   }
@@ -134,9 +135,6 @@ class _StartPageState extends State<StartPage> {
     print('logintype: ' + prefs.getString('loginType').toString());
     await Future.delayed(const Duration(seconds: 2), () {
       if (tokenAuth == '' || tokenAuth == 'null') {
-
-          
-
         Navigator.pushReplacement(
           context,
           PageTransition(
