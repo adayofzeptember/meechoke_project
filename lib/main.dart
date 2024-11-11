@@ -75,7 +75,7 @@ class StarterWidget extends StatelessWidget {
         BlocProvider(create: (context) => FinancialBloc()),
         BlocProvider(create: (context) => HistoryWorkBloc()),
         BlocProvider(create: (context) => ReportAccidentBloc())
-      ],
+      ], 
       child: MaterialApp(
         builder: (context, child) => ResponsiveBreakpoints.builder(
           child: child!,
