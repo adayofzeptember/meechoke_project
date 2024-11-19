@@ -276,8 +276,7 @@ class FuelBloc extends Bloc<FuelEvent, FuelState> {
 
           print(fillFuelJsonData);
 
-          final response2 =
-              await dio.patch(api_url_v1 + "fuel-refill/${event.fuel_id}",
+          final response2 =await dio.patch(api_url_v1 + "fuel-refill/${event.fuel_id}",
                   options: Options(
                     headers: {
                       "Authorization": "Bearer $tokenAuth",

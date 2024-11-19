@@ -75,7 +75,7 @@ class StarterWidget extends StatelessWidget {
         BlocProvider(create: (context) => FinancialBloc()),
         BlocProvider(create: (context) => HistoryWorkBloc()),
         BlocProvider(create: (context) => ReportAccidentBloc())
-      ], 
+      ],
       child: MaterialApp(
         builder: (context, child) => ResponsiveBreakpoints.builder(
           child: child!,
@@ -111,8 +111,7 @@ class _StartPageState extends State<StartPage> {
     super.initState();
   }
 
-  Future<void> _Permission() async { 
-     
+  Future<void> _Permission() async {
     var status = await Permission.location.request();
     if (status == PermissionStatus.granted) {
       print('อนุญาติการเข้าถึงพื้นที่แล้ว');
@@ -123,7 +122,7 @@ class _StartPageState extends State<StartPage> {
           gravity: ToastGravity.SNACKBAR,
           timeInSecForIosWeb: 2,
           backgroundColor: const Color.fromARGB(255, 133, 133, 133),
-          textColor: Colors.white, 
+          textColor: Colors.white,
           fontSize: 15);
     }
   }

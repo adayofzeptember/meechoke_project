@@ -12,7 +12,6 @@ import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
 import 'package:meechoke_project/screens/Jobs/3.%20Process%20-%20Finish/finish_job.dart';
 import 'package:meechoke_project/screens/Jobs/3.%20Process%20-%20Finish/process.dart';
-import 'package:meechoke_project/ETC/thai_date_converter.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -363,19 +362,20 @@ class Current_JobDetail extends StatelessWidget {
                                             SizedBox(
                                               height: 15,
                                             ),
-                                         Text(
-                                          (state.job_info.transportAmount
-                                                      .toString() ==
-                                                  'null')
-                                              ? '-'
-                                              : state.job_info.transportAmount
-                                                      .toString() +
-                                                  ' ' +
-                                                  state.job_info.unitType,
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
+                                            Text(
+                                              (state.job_info.transportAmount
+                                                          .toString() ==
+                                                      'null')
+                                                  ? '-'
+                                                  : state.job_info
+                                                          .transportAmount
+                                                          .toString() +
+                                                      ' ' +
+                                                      state.job_info.unitType,
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
                                             SizedBox(
                                               height: 15,
                                             ),
@@ -631,18 +631,20 @@ class Current_JobDetail extends StatelessWidget {
                                                       const ClampingScrollPhysics(),
                                                   itemBuilder:
                                                       (context, index) {
-                                                    DateTime dateTime =
-                                                        DateTime.parse(state
-                                                            .job_info
-                                                            .checkInLocation_Info[
-                                                                index]
-                                                            .date);
+                                                    // Map<String, String> result =
+                                                    //     convertToThaiDateTime(state
+                                                    //         .job_info
+                                                    //         .checkInLocation_Info[
+                                                    //             index]
+                                                    //         .date);
 
-                                                    String formattedDate =
-                                                        ThaiDateFormat(
-                                                                'd MMMM y',
-                                                                'th')
-                                                            .format(dateTime);
+                                                    // DateTime dateTime =
+                                                    //     DateTime.parse(state
+                                                    //         .job_info
+                                                    //         .checkInLocation_Info[
+                                                    //             index]
+                                                    //         .date);
+
                                                     return Padding(
                                                         padding:
                                                             const EdgeInsets
@@ -734,7 +736,14 @@ class Current_JobDetail extends StatelessWidget {
                                                                         (state.job_info.checkInLocation_Info[index].checkinCategory ==
                                                                                 'ปลายทางรอแจ้ง')
                                                                             ? 'วันที่รอแจ้ง'
-                                                                            : '${formattedDate}',
+                                                                            : state
+                                                                                .job_info
+                                                                                .checkInLocation_Info[
+                                                                                    index]
+                                                                                .time,
+                                                                        // : "${result['thaiDate']}" +
+                                                                        //     " | " +
+                                                                        //     "${result['time']}",
                                                                         overflow:
                                                                             TextOverflow
                                                                                 .fade,
@@ -749,23 +758,6 @@ class Current_JobDetail extends StatelessWidget {
                                                                     SizedBox(
                                                                       width: 5,
                                                                     ),
-                                                                    Text(
-                                                                        state
-                                                                            .job_info
-                                                                            .checkInLocation_Info[
-                                                                                index]
-                                                                            .time,
-                                                                        overflow:
-                                                                            TextOverflow
-                                                                                .fade,
-                                                                        style: TextStyle(
-                                                                            color: Color.fromARGB(
-                                                                                255,
-                                                                                133,
-                                                                                133,
-                                                                                133),
-                                                                            fontWeight:
-                                                                                FontWeight.bold)),
                                                                   ],
                                                                 ),
                                                               ],

@@ -3,7 +3,6 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meechoke_project/ETC/api_url.dart';
 import 'package:meechoke_project/ETC/success_dialog.dart';
@@ -14,7 +13,6 @@ import 'package:meechoke_project/screens/Work%20History/history_detail.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'jobs_event.dart';
-
 part 'jobs_state.dart';
 
 // for (var locationImages in checkinLocationList) {
@@ -70,23 +68,27 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 dataCheckin.add(Checkin_Location(
                   checkinCategory:
                       checkinLocation['checkinCategory'].toString(),
-                  date: checkinLocation['date'].toString(),
+                  date: checkinLocation['meetingTime'].toString(),
                   point: checkinLocation['locationCode'].toString(),
                 ));
               }
             }
+            String firstMeetingTime =
+                checkinLocationList.first['meetingTime'].toString();
+            String lastExpectedTime =
+                checkinLocationList.last['expectedTime'].toString();
             dataNewJobs.add(
               Jobs_List_Data(
                 jobNumber: await elements['documentNumber'] ?? '',
                 jobStatus: await elements['documentStatus'] ?? '',
                 checkin_location: dataCheckin,
+                first: firstMeetingTime.toString(),
+                last: lastExpectedTime.toString(),
               ),
             );
 
             //print('have: ' + dataCheckin.length.toString());
           }
-          
-
 
           emit(state.copyWith(newjobs_list: dataNewJobs, status: 1));
         } else {
@@ -94,12 +96,11 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
           emit(state.copyWith(
             status: 2,
           ));
-
         }
       } on DioException catch (e) {
         print('-----------------');
         print(e.response!.data);
-      
+
         print("Exception Try: $e");
         emit(state.copyWith(
           status: 2,
@@ -133,20 +134,23 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 dataCheckin.add(Checkin_Location(
                   checkinCategory:
                       checkinLocation['checkinCategory'].toString(),
-                  date: checkinLocation['date'].toString(),
-
+                  date: checkinLocation['meetingTime'].toString(),
                   point: checkinLocation['locationCode'].toString(),
                 ));
               }
             }
-
+            String firstMeetingTime =
+                checkinLocationList.first['meetingTime'].toString();
+            String lastExpectedTime =
+                checkinLocationList.last['expectedTime'].toString();
             dataCurrentJobs.add(
               Jobs_List_Data(
-                currentStatus: await elements['currentStatus'] ?? '',
-                jobNumber: await elements['documentNumber'] ?? '',
-                jobStatus: await elements['documentStatus'] ?? '',
-                checkin_location: dataCheckin,
-              ),
+                  currentStatus: await elements['currentStatus'] ?? '',
+                  jobNumber: await elements['documentNumber'] ?? '',
+                  jobStatus: await elements['documentStatus'] ?? '',
+                  checkin_location: dataCheckin,
+                  first: firstMeetingTime.toString(),
+                  last: lastExpectedTime.toString()),
             );
           }
           emit(state.copyWith(currentjobs_list: dataCurrentJobs, status2: 1));
@@ -249,7 +253,7 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                 dataCheckinInfo.add(Checkin_Location(
                   checkinCategory:
                       checkinLocation['checkinCategory'].toString(),
-                  date: checkinLocation['meetingDate'].toString(),
+                 date: checkinLocation['meetingDate'].toString(),
                   time: (checkinLocation['meetingTime'].toString() == 'null')
                       ? '00.00'
                       : checkinLocation['meetingTime'].toString(),
@@ -257,6 +261,8 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
                   lat: checkinLocation['position']['latitude'].toString(),
                   lng: checkinLocation['position']['longitude'].toString(),
                 ));
+
+                //  print('-------'+ checkinLocation['position']['longitude'].toString());
               }
             }
 
@@ -354,16 +360,19 @@ class JobsBloc extends Bloc<JobsEvent, JobsState> {
               }
 
 //*------------------------------------------------------------------------------------------------------------------------
+            
               for (var checkinLocation in checkinLocationList) {
                 dataCheckinInfo.add(Checkin_Location(
                   checkinCategory:
                       checkinLocation['checkinCategory'].toString(),
-                  date: checkinLocation['meetingDate'].toString(),
-                  // time: checkinLocation['meetingTime'].toString(),
+                 date: checkinLocation['meetingDate'].toString(),
+     
                   time: (checkinLocation['meetingTime'].toString() == 'null')
                       ? '00.00'
                       : checkinLocation['meetingTime'].toString(),
                   point: checkinLocation['locationCode'].toString(),
+                  lat: checkinLocation['position']['latitude'].toString(),
+                  lng: checkinLocation['position']['longitude'].toString(),
                 ));
               }
             }

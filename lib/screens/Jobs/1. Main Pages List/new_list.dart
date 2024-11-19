@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/ETC/thai_date_converter.dart';
+import 'package:meechoke_project/ETC/meetingTime_converter.dart';
+
 import '../../../bloc/Jobs/jobs_bloc.dart';
 
 class NewJobs_Screen extends StatelessWidget {
@@ -30,7 +31,9 @@ class NewJobs_Screen extends StatelessWidget {
                 else if (state.status == 2) {
                   return GestureDetector(
                     onTap: () {
-                      context.read<JobsBloc>().add(Load_NewJobs(context: context));
+                      context
+                          .read<JobsBloc>()
+                          .add(Load_NewJobs(context: context));
                     },
                     child: Center(
                         child: Column(
@@ -77,6 +80,11 @@ class NewJobs_Screen extends StatelessWidget {
                     shrinkWrap: true,
                     physics: const ClampingScrollPhysics(),
                     itemBuilder: (context, index) {
+                      Map<String, String> result = convertToThaiDateTime(
+                          state.newjobs_list[index].first.toString());
+
+                      Map<String, String> result2 = convertToThaiDateTime(
+                          state.newjobs_list[index].last.toString());
                       return GestureDetector(
                         onTap: () {
                           print('JO number: ' +
@@ -107,11 +115,12 @@ class NewJobs_Screen extends StatelessWidget {
                                       width: 3,
                                     ),
                                     Text(
-                                      '',
-                                      //state.newjobs_list[index].checkin_location[0].date + '-'      +   state.newjobs_list[index].checkin_location[1].date,
+                                      "${result['thaiDate']}" +
+                                          " - " +
+                                          "${result2['thaiDate']}",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold),
-                                    )
+                                    ),
                                   ],
                                 ),
                                 SizedBox(
@@ -198,20 +207,16 @@ class NewJobs_Screen extends StatelessWidget {
                                                     const ClampingScrollPhysics(),
                                                 itemBuilder:
                                                     (context, indexLocation) {
-                                                  //state.newjobs_list[index].checkin_location[indexLocation].date.toString()
+                                                  Map<String, String> result =
+                                                      convertToThaiDateTime(
+                                                          state
+                                                              .newjobs_list[
+                                                                  index]
+                                                              .checkin_location[
+                                                                  indexLocation]
+                                                              .date
+                                                              .toString());
 
-                                                  DateTime dateTime =
-                                                      DateTime.parse(state
-                                                          .newjobs_list[index]
-                                                          .checkin_location[
-                                                              indexLocation]
-                                                          .date
-                                                          .toString());
-
-                                                  String formattedDate =
-                                                      ThaiDateFormat(
-                                                              'd MMMM y', 'th')
-                                                          .format(dateTime);
                                                   return Padding(
                                                       padding:
                                                           const EdgeInsets.only(
@@ -277,10 +282,9 @@ class NewJobs_Screen extends StatelessWidget {
                                                                       (state.newjobs_list[index].checkin_location[indexLocation].checkinCategory.toString() ==
                                                                               'ปลายทางรอแจ้ง')
                                                                           ? ''
-                                                                          : state
-                                                                              .newjobs_list[index]
-                                                                              .checkin_location[indexLocation]
-                                                                              .point,
+                                                                          : "${result['thaiDate']}" +
+                                                                              " | " +
+                                                                              "${result['time']}",
                                                                       overflow:
                                                                           TextOverflow
                                                                               .ellipsis,
@@ -314,7 +318,12 @@ class NewJobs_Screen extends StatelessWidget {
                                                                       (state.newjobs_list[index].checkin_location[indexLocation].checkinCategory.toString() ==
                                                                               'ปลายทางรอแจ้ง')
                                                                           ? '- รอแจ้ง -'
-                                                                          : formattedDate,
+                                                                          : state
+                                                                              .newjobs_list[
+                                                                                  index]
+                                                                              .checkin_location[
+                                                                                  indexLocation]
+                                                                              .point,
                                                                       overflow:
                                                                           TextOverflow
                                                                               .fade,

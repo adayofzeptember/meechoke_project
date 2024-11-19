@@ -3,13 +3,15 @@
 //*
 //
 class Jobs_List_Data {
-  String? jobNumber;
+  String? jobNumber, first, last;
   String? jobStatus;
   String? currentStatus;
   List<Checkin_Location>? checkin_location;
 
   Jobs_List_Data({
     this.jobNumber,
+    this.first,
+    this.last,
     this.jobStatus,
     this.currentStatus,
     this.checkin_location,
@@ -73,13 +75,7 @@ class Location_Images {
   String? imgURL;
   String? timeStamp;
 
-
-  Location_Images({
-    this.checkinCategory,
-    this.imgURL,
-
-    this.timeStamp
-  });
+  Location_Images({this.checkinCategory, this.imgURL, this.timeStamp});
 }
 
 class Checkin_Location {
@@ -87,9 +83,18 @@ class Checkin_Location {
   String? date;
   String? checkinCategory;
   String? time;
-  String? lat,lng;
+  String? lat, lng;
+  String? first, last;
 
-  Checkin_Location({this.checkinCategory, this.point, this.date, this.time, this.lat, this.lng});
+  Checkin_Location(
+      {this.checkinCategory,
+      this.point,
+      this.date,
+      this.time,
+      this.lat,
+      this.first,
+      this.last,
+      this.lng});
 }
 
 class Current_Location {
