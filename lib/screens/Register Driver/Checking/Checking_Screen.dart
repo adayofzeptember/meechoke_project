@@ -11,9 +11,9 @@ import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/ETC/success_dialog.dart';
 import 'package:meechoke_project/bloc/Car_Check/car_check_bloc.dart';
-import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupEquipment_addMethod.dart';
-import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupList_addMethod.dart';
-import 'package:meechoke_project/screens/Checking/CheckMethod/ExtCheckupSafety_addMethod.dart';
+import 'package:meechoke_project/screens/Register%20Driver/Checking/CheckMethod/ExtCheckupEquipment_addMethod.dart';
+import 'package:meechoke_project/screens/Register%20Driver/Checking/CheckMethod/ExtCheckupList_addMethod.dart';
+import 'package:meechoke_project/screens/Register%20Driver/Checking/CheckMethod/ExtCheckupSafety_addMethod.dart';
 
 class Check_Screen extends StatefulWidget {
   final String checkingType;

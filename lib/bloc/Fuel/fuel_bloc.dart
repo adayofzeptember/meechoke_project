@@ -8,7 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meechoke_project/ETC/api_url.dart';
 import 'package:meechoke_project/ETC/success_dialog.dart';
 import 'package:meechoke_project/bloc/Fuel/model.dart';
-import 'package:meechoke_project/screens/Fuel/fuel_details.dart';
+import 'package:meechoke_project/screens/Register%20Driver/Fuel/fuel_details.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'fuel_event.dart';

@@ -10,8 +10,8 @@ import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/curency.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
-import 'package:meechoke_project/screens/Jobs/3.%20Process%20-%20Finish/finish_job.dart';
-import 'package:meechoke_project/screens/Jobs/3.%20Process%20-%20Finish/process.dart';
+import 'package:meechoke_project/screens/Register%20Driver/Jobs/3.%20Process%20-%20Finish/finish_job.dart';
+import 'package:meechoke_project/screens/Register%20Driver/Jobs/3.%20Process%20-%20Finish/process.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:url_launcher/url_launcher.dart';
 

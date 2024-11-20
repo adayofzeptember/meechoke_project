@@ -1,16 +1,16 @@
 // ignore_for_file: unused_local_variable
+import 'package:meechoke_project/screens/Register%20Driver/Checking/CheckMethod/filenames.dart';
 
-import 'package:meechoke_project/screens/Checking/CheckMethod/filenames.dart';
-
-class ExtCheckupList_Item {
-  int sysVehicleChecklistId;
+class ExtCheckupSafety_Item {
+  int sysVehicleSafetyListId;
   String list;
   String result;
-  int order;
   Map<String, List<FileInformation>>? filenames;
 
-  ExtCheckupList_Item(
-      {required this.sysVehicleChecklistId,
+  int order;
+
+  ExtCheckupSafety_Item(
+      {required this.sysVehicleSafetyListId,
       required this.list,
       required this.result,
       this.filenames,
@@ -18,7 +18,7 @@ class ExtCheckupList_Item {
 
   Map<String, dynamic> toJson() {
     return {
-      'sysVehicleChecklistId': sysVehicleChecklistId,
+      'sysVehicleSafetyListId': sysVehicleSafetyListId,
       'list': list,
       'result': result,
       'order': order,
@@ -27,23 +27,25 @@ class ExtCheckupList_Item {
     };
   }
 
-  static List<ExtCheckupList_Item> checklist = [];
-  static void addItem1({
-    required int sysVehicleChecklistId,
+  static List<ExtCheckupSafety_Item> checklistExtCheckupSafety_Item = [];
+  static void addItem3({
+    required int sysVehicleSafetyListId,
     required String list,
     required String result,
     required int order,
     Map<String, List<FileInformation>>? filenames,
   }) {
-    checklist.add(ExtCheckupList_Item(
-        sysVehicleChecklistId: sysVehicleChecklistId,
+    checklistExtCheckupSafety_Item.add(ExtCheckupSafety_Item(
+        sysVehicleSafetyListId: sysVehicleSafetyListId,
         list: list,
         result: result,
         filenames: filenames,
         order: order));
 
-    List<Map<String, dynamic>> jsonList1 =
-        ExtCheckupList_Item.checklist.map((item) => item.toJson()).toList();
+    List<Map<String, dynamic>> jsonList1 = ExtCheckupSafety_Item
+        .checklistExtCheckupSafety_Item
+        .map((item) => item.toJson())
+        .toList();
 
     print(jsonList1);
   }

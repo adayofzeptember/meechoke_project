@@ -17,18 +17,18 @@ class _Allience_DocsState extends State<Allience_Docs> {
 
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color.fromARGB(255, 0, 54, 120),
-                Color.fromARGB(238, 0, 8, 18)
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-        ),
+        // flexibleSpace: Container(
+        //   decoration: BoxDecoration(
+        //     gradient: LinearGradient(
+        //       colors: [
+        //         Color.fromARGB(255, 0, 54, 120),
+        //         Color.fromARGB(238, 0, 8, 18)
+        //       ],
+        //       begin: Alignment.topLeft,
+        //       end: Alignment.bottomRight,
+        //     ),
+        //   ),
+        // ),
         backgroundColor: Palette.thisBlue,
         automaticallyImplyLeading: false,
         centerTitle: true,

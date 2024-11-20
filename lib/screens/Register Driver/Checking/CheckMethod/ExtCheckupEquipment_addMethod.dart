@@ -1,6 +1,6 @@
 // ignore_for_file: unused_local_variable
 
-import 'package:meechoke_project/screens/Checking/CheckMethod/filenames.dart';
+import 'package:meechoke_project/screens/Register%20Driver/Checking/CheckMethod/filenames.dart';
 
 class ExtCheckupEquipment_Item {
   int sysVehicleEquipmentId;

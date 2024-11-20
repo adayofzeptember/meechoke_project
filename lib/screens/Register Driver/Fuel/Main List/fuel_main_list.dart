@@ -1,21 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/screens/Report%20and%20Docs/docs_screen.dart';
-import 'package:meechoke_project/screens/Report%20and%20Docs/report_screen.dart';
+import 'package:meechoke_project/bloc/Fuel/fuel_bloc.dart';
+import 'package:meechoke_project/screens/Register%20Driver/Fuel/Main%20List/fuel_done.dart';
+import 'package:meechoke_project/screens/Register%20Driver/Fuel/Main%20List/fuel_not.dart';
 
-class ReportDocs_Main extends StatefulWidget {
+class Fuel_Lists extends StatefulWidget {
   @override
-  _ReportDocs_MainState createState() => _ReportDocs_MainState();
+  _Fuel_ListsState createState() => _Fuel_ListsState();
 }
 
-class _ReportDocs_MainState extends State<ReportDocs_Main>
-    with SingleTickerProviderStateMixin {
+class _Fuel_ListsState extends State<Fuel_Lists> with TickerProviderStateMixin {
   late TabController _tabController;
+  late AnimationController _animationController;
+  late Animation<double> _animation;
 
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
+    _animationController =
+        AnimationController(duration: Duration(milliseconds: 500), vsync: this);
+    _animation = Tween<double>(begin: 0, end: 1).animate(_animationController);
     super.initState();
+    super.initState();
+  }
+
+  void _handleRefresh() {
+    _animationController.repeat();
+    Future.delayed(Duration(milliseconds: 500), () {
+      _animationController.stop();
+    });
   }
 
   @override
@@ -30,6 +45,11 @@ class _ReportDocs_MainState extends State<ReportDocs_Main>
       appBar: AppBar(
         backgroundColor: Palette.thisBlue,
         automaticallyImplyLeading: false,
+        // shape: RoundedRectangleBorder(
+        //   borderRadius: BorderRadius.vertical(
+        //     bottom: Radius.circular(30),
+        //   ),
+        // ),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -40,15 +60,31 @@ class _ReportDocs_MainState extends State<ReportDocs_Main>
             color: Colors.white,
           ),
         ),
+        actions: [
+          RotationTransition(
+            turns: _animation,
+            child: IconButton(
+              icon: Icon(
+                Icons.refresh,
+                color: Colors.white,
+                size: MediaQuery.of(context).size.height * 0.04,
+              ),
+              onPressed: () {
+                _handleRefresh();
+                context.read<FuelBloc>().add(Load_FuelNotYet());
+                context.read<FuelBloc>().add(Load_Filled());
+              },
+            ),
+          ),
+        ],
         title: const Text(
-          'แจ้งเหตุและข้อมูลกรมธรรม์',
+          'เติมเชื้อเพลิง',
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
         ),
       ),
-      backgroundColor: Palette.mainBackgroud,
-      body: 
-      Padding(
+      backgroundColor: Color.fromARGB(255, 228, 237, 240),
+      body: Padding(
         padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
         child: Column(
           children: [
@@ -67,38 +103,40 @@ class _ReportDocs_MainState extends State<ReportDocs_Main>
                   dividerColor: Colors.transparent,
                   indicatorColor: Colors.transparent,
                   labelColor: Colors.white,
-                  labelStyle: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Sarabun',
-                  ),
+                  labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold, fontFamily: 'Sarabun'),
                   unselectedLabelColor: Colors.grey,
                   indicatorSize: TabBarIndicatorSize.tab,
                   indicator: BoxDecoration(
+
                       // gradient: LinearGradient(colors: [
-                      //   Palette.thisBlue,
-                      //   const Color.fromARGB(255, 214, 77, 77)
+                      //   const Color.fromARGB(255, 226, 62, 62),
+                      //   Color.fromARGB(255, 219, 194, 48)
                       // ]),
                       borderRadius: BorderRadius.circular(40),
                       color: Palette.thisBlue),
-                  tabs: const [
+                  tabs: [
                     Tab(
-                      text: 'ข้อมูลกรมธรรม์',
+                      text: 'ยังไม่ได้เติม',
                     ),
                     Tab(
-                      text: 'แจ้งเหตุ',
+                      text: 'เติมแล้ว',
                     ),
                   ],
                 ),
               ),
             ),
-            const SizedBox(
+            SizedBox(
               height: 5,
             ),
             // tab bar view here
             Expanded(
               child: TabBarView(
                 controller: _tabController,
-                children: [Docs_Screen(), Report_Screen()],
+                children: [
+                  Fuel_NotDone(),
+                  Fuel_Filled(),
+                ],
               ),
             ),
           ],

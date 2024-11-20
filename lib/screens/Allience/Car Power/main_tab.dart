@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
-import 'package:meechoke_project/screens/1_menu_screen_registered_driver.dart';
 import 'package:meechoke_project/screens/Allience/Car%20Power/form.dart';
 import 'package:meechoke_project/screens/Allience/Car%20Power/history.dart';
+import 'package:meechoke_project/screens/Register%20Driver/1_menu_screen_registered_driver.dart';
 import 'package:page_transition/page_transition.dart';
 
 class CarPower_Tab extends StatefulWidget {
@@ -36,18 +36,19 @@ class _CarPower_TabState extends State<CarPower_Tab>
 
     return Scaffold(
       appBar: AppBar(
-         flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color.fromARGB(255, 0, 54, 120),
-                Color.fromARGB(235, 2, 16, 34)
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-        ),
+        backgroundColor: Palette.thisBlue,
+        //  flexibleSpace: Container(
+        //   decoration: BoxDecoration(
+        //     gradient: LinearGradient(
+        //       colors: [
+        //         Color.fromARGB(255, 0, 54, 120),
+        //         Color.fromARGB(235, 2, 16, 34)
+        //       ],
+        //       begin: Alignment.topLeft,
+        //       end: Alignment.bottomRight,
+        //     ),
+        //   ),
+        // ),
         automaticallyImplyLeading: false,
         centerTitle: true,
         leading: IconButton(

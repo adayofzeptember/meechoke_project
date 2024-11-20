@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/ProgressHUD.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
+import 'package:meechoke_project/screens/Allience/menu_screen_allience.dart';
+import 'package:page_transition/page_transition.dart';
 import '../ETC/app_color.dart';
 
 var usernameController = TextEditingController();
@@ -258,6 +260,61 @@ class Login_Screen extends StatelessWidget {
                                         alignment: Alignment.center,
                                         child: const Text(
                                           "เข้าสู่ระบบ",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                              fontSize: 15),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                SizedBox(
+                                  height: 60,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        primary: Palette.thisBlue,
+                                        elevation: 0,
+                                        // side: BorderSide(color: Colors.white),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                        )),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        PageTransition(
+                                            duration: const Duration(
+                                                milliseconds: 500),
+                                            type: PageTransitionType.fade,
+                                            child: MainMenu_Allience()),
+                                      );
+                                      // if (_formKey.currentState!.validate()) {
+                                      //   // // If the form is valid, display a snackbar or perform any action
+                                      //   // ScaffoldMessenger.of(context)
+                                      //   //     .showSnackBar(
+                                      //   //   SnackBar(content: Text('กรอกข้อมูลให้ถูกต้อง')),
+                                      //   // );
+                                      // }
+
+                                      // context.read<LoginBloc>().add(
+                                      //     Login_Casual(
+                                      //         context: context,
+                                      //         getUsername:
+                                      //             usernameController.text,
+                                      //         getPassword:
+                                      //             passwordController.text));
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Container(
+                                        width: double.infinity,
+                                        alignment: Alignment.center,
+                                        child: const Text(
+                                          "เข้าสู่ระบบ (พันธมิตรรถร่วม)",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white,

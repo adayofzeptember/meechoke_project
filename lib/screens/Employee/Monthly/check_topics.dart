@@ -10,7 +10,7 @@ import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/shape_painter.dart';
 import 'package:meechoke_project/bloc/Car_Check/car_check_bloc.dart';
 import 'package:meechoke_project/bloc/Employee%20Monthly/employee_check_monthly_bloc.dart';
-import 'package:meechoke_project/screens/Checking/Checking_Screen.dart';
+import 'package:meechoke_project/screens/Register%20Driver/Checking/Checking_Screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Employee_Check_Topics extends StatefulWidget {

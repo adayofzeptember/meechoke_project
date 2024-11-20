@@ -12,7 +12,6 @@ class CarPower_Form extends StatefulWidget {
 class _CarPower_FormState extends State<CarPower_Form> {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 228, 237, 240),
       body: SingleChildScrollView(
@@ -45,9 +44,10 @@ class _CarPower_FormState extends State<CarPower_Form> {
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 splashFactory: NoSplash.splashFactory,
-                                primary: state.car_group_selectedButtonIndex == 0
-                                    ? Palette.thisBlue
-                                    : Colors.white,
+                                primary:
+                                    state.car_group_selectedButtonIndex == 0
+                                        ? Palette.thisBlue
+                                        : Colors.white,
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
                                   side: BorderSide(
@@ -64,9 +64,10 @@ class _CarPower_FormState extends State<CarPower_Form> {
                               child: Text(
                                 '4 ล้อพ่วง',
                                 style: TextStyle(
-                                  color: state.car_group_selectedButtonIndex == 0
-                                      ? Colors.white
-                                      : Palette.thisBlue,
+                                  color:
+                                      state.car_group_selectedButtonIndex == 0
+                                          ? Colors.white
+                                          : Palette.thisBlue,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15,
                                 ),
@@ -81,9 +82,10 @@ class _CarPower_FormState extends State<CarPower_Form> {
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 splashFactory: NoSplash.splashFactory,
-                                primary: state.car_group_selectedButtonIndex == 1
-                                    ? Palette.thisBlue
-                                    : Colors.white,
+                                primary:
+                                    state.car_group_selectedButtonIndex == 1
+                                        ? Palette.thisBlue
+                                        : Colors.white,
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
                                   side: BorderSide(
@@ -100,9 +102,10 @@ class _CarPower_FormState extends State<CarPower_Form> {
                               child: Text(
                                 '6 ล้อ',
                                 style: TextStyle(
-                                  color: state.car_group_selectedButtonIndex == 1
-                                      ? Colors.white
-                                      : Palette.thisBlue,
+                                  color:
+                                      state.car_group_selectedButtonIndex == 1
+                                          ? Colors.white
+                                          : Palette.thisBlue,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15,
                                 ),
@@ -117,9 +120,10 @@ class _CarPower_FormState extends State<CarPower_Form> {
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 splashFactory: NoSplash.splashFactory,
-                                primary: state.car_group_selectedButtonIndex == 2
-                                    ? Palette.thisBlue
-                                    : Colors.white,
+                                primary:
+                                    state.car_group_selectedButtonIndex == 2
+                                        ? Palette.thisBlue
+                                        : Colors.white,
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
                                   side: BorderSide(
@@ -136,9 +140,10 @@ class _CarPower_FormState extends State<CarPower_Form> {
                               child: Text(
                                 '10 ล้อ',
                                 style: TextStyle(
-                                  color: state.car_group_selectedButtonIndex == 2
-                                      ? Colors.white
-                                      : Palette.thisBlue,
+                                  color:
+                                      state.car_group_selectedButtonIndex == 2
+                                          ? Colors.white
+                                          : Palette.thisBlue,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15,
                                 ),
@@ -158,9 +163,10 @@ class _CarPower_FormState extends State<CarPower_Form> {
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 splashFactory: NoSplash.splashFactory,
-                                primary: state.car_group_selectedButtonIndex == 3
-                                    ? Palette.thisBlue
-                                    : Colors.white,
+                                primary:
+                                    state.car_group_selectedButtonIndex == 3
+                                        ? Palette.thisBlue
+                                        : Colors.white,
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
                                   side: BorderSide(
@@ -177,9 +183,10 @@ class _CarPower_FormState extends State<CarPower_Form> {
                               child: Text(
                                 'พ่วง',
                                 style: TextStyle(
-                                  color: state.car_group_selectedButtonIndex == 3
-                                      ? Colors.white
-                                      : Palette.thisBlue,
+                                  color:
+                                      state.car_group_selectedButtonIndex == 3
+                                          ? Colors.white
+                                          : Palette.thisBlue,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15,
                                 ),
@@ -194,9 +201,10 @@ class _CarPower_FormState extends State<CarPower_Form> {
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 splashFactory: NoSplash.splashFactory,
-                                primary: state.car_group_selectedButtonIndex == 4
-                                    ? Palette.thisBlue
-                                    : Colors.white,
+                                primary:
+                                    state.car_group_selectedButtonIndex == 4
+                                        ? Palette.thisBlue
+                                        : Colors.white,
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
                                   side: BorderSide(
@@ -213,9 +221,10 @@ class _CarPower_FormState extends State<CarPower_Form> {
                               child: Text(
                                 'เทรลเลอร์',
                                 style: TextStyle(
-                                  color: state.car_group_selectedButtonIndex == 4
-                                      ? Colors.white
-                                      : Palette.thisBlue,
+                                  color:
+                                      state.car_group_selectedButtonIndex == 4
+                                          ? Colors.white
+                                          : Palette.thisBlue,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15,
                                 ),
@@ -230,9 +239,10 @@ class _CarPower_FormState extends State<CarPower_Form> {
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 splashFactory: NoSplash.splashFactory,
-                                primary: state.car_group_selectedButtonIndex == 5
-                                    ? Palette.thisBlue
-                                    : Colors.white,
+                                primary:
+                                    state.car_group_selectedButtonIndex == 5
+                                        ? Palette.thisBlue
+                                        : Colors.white,
                                 elevation: 0,
                                 shape: RoundedRectangleBorder(
                                   side: BorderSide(
@@ -249,9 +259,10 @@ class _CarPower_FormState extends State<CarPower_Form> {
                               child: Text(
                                 'ลากตู้',
                                 style: TextStyle(
-                                  color: state.car_group_selectedButtonIndex == 5
-                                      ? Colors.white
-                                      : Palette.thisBlue,
+                                  color:
+                                      state.car_group_selectedButtonIndex == 5
+                                          ? Colors.white
+                                          : Palette.thisBlue,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15,
                                 ),
@@ -263,7 +274,7 @@ class _CarPower_FormState extends State<CarPower_Form> {
                     ),
                   ],
                 ),
-        
+
                 SizedBox(
                   height: 15,
                 ),
@@ -289,8 +300,8 @@ class _CarPower_FormState extends State<CarPower_Form> {
                                 clipBehavior: Clip.none,
                                 children: [
                                   Container(
-                                    height:
-                                        MediaQuery.of(context).size.height * 0.1,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.1,
                                     width: double.infinity,
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
@@ -309,14 +320,15 @@ class _CarPower_FormState extends State<CarPower_Form> {
                                                       color: Colors.transparent,
                                                       width: 2.0,
                                                     ),
-                                          borderRadius: BorderRadius.circular(15),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
                                         ),
                                       ),
                                       onPressed: () {
                                         context.read<CarPowerBloc>().add(
                                             CarType_OnButtonPressedIndex(
                                                 getIndex: 0));
-        
+
                                         showModalBottomSheet(
                                           context: context,
                                           isDismissible:
@@ -406,8 +418,8 @@ class _CarPower_FormState extends State<CarPower_Form> {
                                 clipBehavior: Clip.none,
                                 children: [
                                   Container(
-                                    height:
-                                        MediaQuery.of(context).size.height * 0.1,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.1,
                                     width: double.infinity,
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
@@ -426,14 +438,15 @@ class _CarPower_FormState extends State<CarPower_Form> {
                                                       color: Colors.transparent,
                                                       width: 2.0,
                                                     ),
-                                          borderRadius: BorderRadius.circular(15),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
                                         ),
                                       ),
                                       onPressed: () {
                                         context.read<CarPowerBloc>().add(
                                             CarType_OnButtonPressedIndex(
                                                 getIndex: 1));
-        
+
                                         showModalBottomSheet(
                                           context: context,
                                           isDismissible:

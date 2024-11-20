@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/ETC/meetingTime_converter.dart';
 
-import '../../../bloc/Jobs/jobs_bloc.dart';
+import '../../../../bloc/Jobs/jobs_bloc.dart';
 
 class NewJobs_Screen extends StatelessWidget {
   Widget build(BuildContext context) {
