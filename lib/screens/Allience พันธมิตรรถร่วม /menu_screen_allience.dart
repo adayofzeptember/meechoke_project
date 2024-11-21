@@ -4,10 +4,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Profile/profile_bloc.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
-import 'package:meechoke_project/screens/Allience/Allience%20Jobs/allience_job_tab_main.dart';
-import 'package:meechoke_project/screens/Allience/Car%20Power/main_tab.dart';
-import 'package:meechoke_project/screens/Allience/Docs/allience_docs.dart';
-import 'package:meechoke_project/screens/Allience/Work%20Clarify/clarify_tab_main.dart';
+import 'package:meechoke_project/screens/Allience%20%E0%B8%9E%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B8%A1%E0%B8%B4%E0%B8%95%E0%B8%A3%E0%B8%A3%E0%B8%96%E0%B8%A3%E0%B9%88%E0%B8%A7%E0%B8%A1%20/Allience%20Jobs/allience_job_tab_main.dart';
+import 'package:meechoke_project/screens/Allience%20%E0%B8%9E%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B8%A1%E0%B8%B4%E0%B8%95%E0%B8%A3%E0%B8%A3%E0%B8%96%E0%B8%A3%E0%B9%88%E0%B8%A7%E0%B8%A1%20/Car%20Power/main_tab.dart';
+import 'package:meechoke_project/screens/Allience%20%E0%B8%9E%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B8%A1%E0%B8%B4%E0%B8%95%E0%B8%A3%E0%B8%A3%E0%B8%96%E0%B8%A3%E0%B9%88%E0%B8%A7%E0%B8%A1%20/Docs/allience_docs.dart';
+import 'package:meechoke_project/screens/Allience%20%E0%B8%9E%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B8%A1%E0%B8%B4%E0%B8%95%E0%B8%A3%E0%B8%A3%E0%B8%96%E0%B8%A3%E0%B9%88%E0%B8%A7%E0%B8%A1%20/Work%20Clarify/clarify_tab_main.dart';
 import 'package:page_transition/page_transition.dart';
 
 class MainMenu_Allience extends StatefulWidget {

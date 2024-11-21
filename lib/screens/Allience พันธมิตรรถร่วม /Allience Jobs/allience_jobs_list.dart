@@ -2,7 +2,7 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/screens/Allience/Allience%20Jobs/allience_job_info.dart';
+import 'package:meechoke_project/screens/Allience%20%E0%B8%9E%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B8%A1%E0%B8%B4%E0%B8%95%E0%B8%A3%E0%B8%A3%E0%B8%96%E0%B8%A3%E0%B9%88%E0%B8%A7%E0%B8%A1%20/Allience%20Jobs/allience_job_info.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Allience_Jobs_List extends StatelessWidget {

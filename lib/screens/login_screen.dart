@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/ProgressHUD.dart';
 import 'package:meechoke_project/bloc/login/login_bloc.dart';
-import 'package:meechoke_project/screens/Allience/menu_screen_allience.dart';
+import 'package:meechoke_project/screens/Allience%20%E0%B8%9E%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B8%A1%E0%B8%B4%E0%B8%95%E0%B8%A3%E0%B8%A3%E0%B8%96%E0%B8%A3%E0%B9%88%E0%B8%A7%E0%B8%A1%20/menu_screen_allience.dart';
 import 'package:page_transition/page_transition.dart';
 import '../ETC/app_color.dart';
 

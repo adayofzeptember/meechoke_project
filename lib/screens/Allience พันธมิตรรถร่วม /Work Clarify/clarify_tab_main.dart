@@ -1,19 +1,22 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
-import 'package:meechoke_project/screens/Allience/Allience%20Jobs/allience_jobs_confirm.dart';
-import 'package:meechoke_project/screens/Allience/Allience%20Jobs/allience_jobs_list.dart';
-import 'package:meechoke_project/screens/Allience/menu_screen_allience.dart';
+import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
+import 'package:meechoke_project/screens/Allience%20%E0%B8%9E%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B8%A1%E0%B8%B4%E0%B8%95%E0%B8%A3%E0%B8%A3%E0%B8%96%E0%B8%A3%E0%B9%88%E0%B8%A7%E0%B8%A1%20/Work%20Clarify/allWorks_clarify.dart';
+import 'package:meechoke_project/screens/Allience%20%E0%B8%9E%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B8%A1%E0%B8%B4%E0%B8%95%E0%B8%A3%E0%B8%A3%E0%B8%96%E0%B8%A3%E0%B9%88%E0%B8%A7%E0%B8%A1%20/Work%20Clarify/interestedWorks_clarify.dart';
+import 'package:meechoke_project/screens/Allience%20%E0%B8%9E%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B8%A1%E0%B8%B4%E0%B8%95%E0%B8%A3%E0%B8%A3%E0%B8%96%E0%B8%A3%E0%B9%88%E0%B8%A7%E0%B8%A1%20/menu_screen_allience.dart';
 import 'package:page_transition/page_transition.dart';
 
-class AllienceJob_Lists extends StatefulWidget {
+class AllienceWorkClarify_Lists extends StatefulWidget {
   int? toCheck;
-  AllienceJob_Lists({this.toCheck}) : super();
+  AllienceWorkClarify_Lists({this.toCheck}) : super();
   @override
-  _AllienceJob_ListsState createState() => _AllienceJob_ListsState();
+  _AllienceWorkClarify_ListsState createState() =>
+      _AllienceWorkClarify_ListsState();
 }
 
-class _AllienceJob_ListsState extends State<AllienceJob_Lists>
+class _AllienceWorkClarify_ListsState extends State<AllienceWorkClarify_Lists>
     with TickerProviderStateMixin {
   late TabController _tabController;
   late AnimationController _animationController;
@@ -21,6 +24,8 @@ class _AllienceJob_ListsState extends State<AllienceJob_Lists>
 
   @override
   void initState() {
+    context.read<JobsBloc>().add(Load_NewJobs(context: context));
+    context.read<JobsBloc>().add(Load_CurrentJobs());
     _tabController = TabController(
       length: 2,
       vsync: this,
@@ -97,7 +102,7 @@ class _AllienceJob_ListsState extends State<AllienceJob_Lists>
           ),
         ),
         title: const Text(
-          'งาน',
+          'ประกาศงาน',
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
         ),
@@ -107,45 +112,48 @@ class _AllienceJob_ListsState extends State<AllienceJob_Lists>
         padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
         child: Column(
           children: [
-            Container(
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(
-                  40,
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: TabBar(
-                  controller: _tabController,
-                  dividerColor: Colors.transparent,
-                  indicatorColor: Colors.transparent,
-                  labelColor: Colors.white,
-                  labelStyle: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Sarabun',
+            BlocBuilder<JobsBloc, JobsState>(
+              builder: (context, state) {
+                return Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(
+                      40,
+                    ),
                   ),
-                  unselectedLabelColor: Colors.grey,
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  indicator: BoxDecoration(
-                      // gradient: LinearGradient(colors: [
-                      //   Palette.thisBlue,
-                      //   const Color.fromARGB(255, 214, 77, 77)
-                      // ]),
-
-                      borderRadius: BorderRadius.circular(40),
-                      color: Palette.thisBlue),
-                  tabs: [
-                    Tab(
-                      text: 'รับงาน',
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: TabBar(
+                      controller: _tabController,
+                      dividerColor: Colors.transparent,
+                      indicatorColor: Colors.transparent,
+                      labelColor: Colors.white,
+                      labelStyle: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Sarabun',
+                      ),
+                      unselectedLabelColor: Colors.grey,
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      indicator: BoxDecoration(
+                          // gradient: LinearGradient(colors: [
+                          //   Palette.thisBlue,
+                          //   const Color.fromARGB(255, 214, 77, 77)
+                          // ]),
+                          borderRadius: BorderRadius.circular(40),
+                          color: Palette.thisBlue),
+                      tabs: [
+                        Tab(
+                          text: 'งานทั้งหมด',
+                        ),
+                        Tab(
+                          text: 'งานที่สนใจ',
+                        ),
+                      ],
                     ),
-                    Tab(
-                      text: 'ยืนยันงาน',
-                    ),
-                  ],
-                ),
-              ),
+                  ),
+                );
+              },
             ),
             const SizedBox(
               height: 5,
@@ -154,7 +162,7 @@ class _AllienceJob_ListsState extends State<AllienceJob_Lists>
             Expanded(
               child: TabBarView(
                 controller: _tabController,
-                children: [Allience_Jobs_List(), Allience_Jobs_Confirm()],
+                children: [Allience_All_Works(), Allience_Interested_Works()],
               ),
             ),
           ],

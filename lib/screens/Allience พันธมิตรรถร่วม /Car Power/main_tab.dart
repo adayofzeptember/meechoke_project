@@ -1,85 +1,56 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meechoke_project/ETC/app_color.dart';
 import 'package:meechoke_project/bloc/Jobs/jobs_bloc.dart';
-import 'package:meechoke_project/screens/Allience/Work%20Clarify/allWorks_clarify.dart';
-import 'package:meechoke_project/screens/Allience/Work%20Clarify/interestedWorks_clarify.dart';
-import 'package:meechoke_project/screens/Allience/menu_screen_allience.dart';
+import 'package:meechoke_project/screens/Allience%20%E0%B8%9E%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B8%A1%E0%B8%B4%E0%B8%95%E0%B8%A3%E0%B8%A3%E0%B8%96%E0%B8%A3%E0%B9%88%E0%B8%A7%E0%B8%A1%20/Car%20Power/form.dart';
+import 'package:meechoke_project/screens/Allience%20%E0%B8%9E%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B8%A1%E0%B8%B4%E0%B8%95%E0%B8%A3%E0%B8%A3%E0%B8%96%E0%B8%A3%E0%B9%88%E0%B8%A7%E0%B8%A1%20/Car%20Power/history.dart';
+import 'package:meechoke_project/screens/Register%20Driver/1_menu_screen_registered_driver.dart';
 import 'package:page_transition/page_transition.dart';
 
-class AllienceWorkClarify_Lists extends StatefulWidget {
+class CarPower_Tab extends StatefulWidget {
   int? toCheck;
-  AllienceWorkClarify_Lists({this.toCheck}) : super();
+  CarPower_Tab({this.toCheck}) : super();
   @override
-  _AllienceWorkClarify_ListsState createState() =>
-      _AllienceWorkClarify_ListsState();
+  _CarPower_TabState createState() => _CarPower_TabState();
 }
 
-class _AllienceWorkClarify_ListsState extends State<AllienceWorkClarify_Lists>
+class _CarPower_TabState extends State<CarPower_Tab>
     with TickerProviderStateMixin {
   late TabController _tabController;
-  late AnimationController _animationController;
-  late Animation<double> _animation;
 
   @override
   void initState() {
-    context.read<JobsBloc>().add(Load_NewJobs(context: context));
-    context.read<JobsBloc>().add(Load_CurrentJobs());
     _tabController = TabController(
       length: 2,
       vsync: this,
     );
-    _animationController =
-        AnimationController(duration: Duration(milliseconds: 500), vsync: this);
-    _animation = Tween<double>(begin: 0, end: 1).animate(_animationController);
 
     super.initState();
   }
 
-  void _handleRefresh() {
-    _animationController.repeat();
-    Future.delayed(Duration(milliseconds: 500), () {
-      _animationController.stop();
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _animationController.dispose();
-    _tabController.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
+ 
+
     return Scaffold(
       appBar: AppBar(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30),
-          ),
-        ),
         backgroundColor: Palette.thisBlue,
+        //  flexibleSpace: Container(
+        //   decoration: BoxDecoration(
+        //     gradient: LinearGradient(
+        //       colors: [
+        //         Color.fromARGB(255, 0, 54, 120),
+        //         Color.fromARGB(235, 2, 16, 34)
+        //       ],
+        //       begin: Alignment.topLeft,
+        //       end: Alignment.bottomRight,
+        //     ),
+        //   ),
+        // ),
         automaticallyImplyLeading: false,
         centerTitle: true,
-        actions: [
-          RotationTransition(
-            turns: _animation,
-            child: IconButton(
-              icon: Icon(
-                Icons.refresh,
-                color: Colors.white,
-                size: MediaQuery.of(context).size.height * 0.04,
-              ),
-              onPressed: () {
-                _handleRefresh();
-                // context.read<JobsBloc>().add(Load_NewJobs(context: context));
-                // context.read<JobsBloc>().add(Load_CurrentJobs());
-              },
-            ),
-          ),
-        ],
         leading: IconButton(
           onPressed: () {
             if (widget.toCheck == 0 ||
@@ -92,7 +63,7 @@ class _AllienceWorkClarify_ListsState extends State<AllienceWorkClarify_Lists>
                 PageTransition(
                     duration: const Duration(milliseconds: 500),
                     type: PageTransitionType.leftToRight,
-                    child: MainMenu_Allience()),
+                    child: MainMenu_RegisteredDriver()),
               );
             }
           },
@@ -102,7 +73,7 @@ class _AllienceWorkClarify_ListsState extends State<AllienceWorkClarify_Lists>
           ),
         ),
         title: const Text(
-          'ประกาศงาน',
+          'แจ้งกำลังรถ',
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
         ),
@@ -144,10 +115,10 @@ class _AllienceWorkClarify_ListsState extends State<AllienceWorkClarify_Lists>
                           color: Palette.thisBlue),
                       tabs: [
                         Tab(
-                          text: 'งานทั้งหมด',
+                          text: 'แจ้งกำลังรถ',
                         ),
                         Tab(
-                          text: 'งานที่สนใจ',
+                          text: 'ประวัติการแจ้ง',
                         ),
                       ],
                     ),
@@ -162,7 +133,7 @@ class _AllienceWorkClarify_ListsState extends State<AllienceWorkClarify_Lists>
             Expanded(
               child: TabBarView(
                 controller: _tabController,
-                children: [Allience_All_Works(), Allience_Interested_Works()],
+                children: [CarPower_Form(), CarPower_History()],
               ),
             ),
           ],
