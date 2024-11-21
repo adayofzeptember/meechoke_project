@@ -87,33 +87,7 @@ class Current_JobDetail extends StatelessWidget {
                             padding: const EdgeInsets.all(12.0),
                             child: BlocBuilder<JobsBloc, JobsState>(
                               builder: (context, state) {
-                                if (state.status3Detail == 0) {
-                                  return Center(
-                                      child: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      CircularProgressIndicator(),
-                                    ],
-                                  ));
-                                } else if (state.status3Detail == 2) {
-                                  return Center(
-                                      child: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        'เกิดข้อผิดพลาด',
-                                        style: TextStyle(
-                                            color: Palette.someRed,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20),
-                                      )
-                                    ],
-                                  ));
-                                }
+                              
                                 return Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,

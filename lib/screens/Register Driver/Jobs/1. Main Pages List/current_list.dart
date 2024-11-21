@@ -249,7 +249,8 @@ class CurrentJobs_Screen extends StatelessWidget {
                                         (state.currentjobs_list[index]
                                                     .checkin_location.length !=
                                                 0)
-                                            ? ListView.builder(
+                                            ? 
+                                            ListView.builder(
                                                 primary: true,
                                                 itemCount: state
                                                     .currentjobs_list[index]
@@ -269,20 +270,8 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                               .date
                                                               .toString());
 
-                                                  // DateTime dateTime =
-                                                  //     DateTime.parse(state
-                                                  //         .currentjobs_list[
-                                                  //             index]
-                                                  //         .checkin_location[
-                                                  //             index2]
-                                                  //         .date
-                                                  //         .toString());
-
-                                                  // String formattedDate =
-                                                  //     ThaiDateFormat(
-                                                  //             'd MMMM y', 'th')
-                                                  //         .format(dateTime);
-                                                  return Padding(
+                                                  return 
+                                                  Padding(
                                                       padding:
                                                           const EdgeInsets.only(
                                                               bottom: 20),
@@ -382,7 +371,6 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                                           133)),
                                                                   SizedBox(
                                                                       width: 2),
-
                                                                   Text(
                                                                       (state.currentjobs_list[index].checkin_location[index2].checkinCategory.toString() ==
                                                                               'ปลายทางรอแจ้ง')
@@ -401,22 +389,6 @@ class CurrentJobs_Screen extends StatelessWidget {
                                                                               133),
                                                                           fontWeight:
                                                                               FontWeight.bold)),
-                                                                  // Text(
-                                                                  //     (state.currentjobs_list[index].checkin_location[index2].checkinCategory.toString() ==
-                                                                  //             'ปลายทางรอแจ้ง')
-                                                                  //         ? '- รอแจ้ง -'
-                                                                  //         : formattedDate,
-                                                                  //     overflow:
-                                                                  //         TextOverflow
-                                                                  //             .fade,
-                                                                  //     style: TextStyle(
-                                                                  //         color: Color.fromARGB(
-                                                                  //             255,
-                                                                  //             133,
-                                                                  //             133,
-                                                                  //             133),
-                                                                  //         fontWeight:
-                                                                  //             FontWeight.bold)),
                                                                 ],
                                                               ),
                                                             ],

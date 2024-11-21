@@ -85,7 +85,9 @@ class NewJobs_Screen extends StatelessWidget {
 
                       Map<String, String> result2 = convertToThaiDateTime(
                           state.newjobs_list[index].last.toString());
-                      return GestureDetector(
+                      return 
+                      
+                      GestureDetector(
                         onTap: () {
                           print('JO number: ' +
                               state.newjobs_list[index].jobNumber.toString());
